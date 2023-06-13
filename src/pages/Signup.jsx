@@ -5,7 +5,7 @@ import { AuthApi } from '../shared/api';
 import React from 'react';
 
 // 닉네임 정규식
-const nicknameRegex = /^[A-Za-z0-9]{3,}$/;
+const nicknameRegex = /[^ㄱ-ㅎ가-힣a-zA-Z]/g;
 
 // 이메일 정규식
 const emailRegex = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
@@ -15,7 +15,6 @@ const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
 
 // 오류 메세지
 const alertMessage = {
-    nickErr: '닉네임 규칙에 어긋납니다! (영문과 숫자를 사용하여 3글자 이상)',
     emailErr: '이메일 형식이 올바르지 않습니다.',
     pwErr: '숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!',
     pwMachErr: '패스워드가 불일치합니다.',
@@ -41,12 +40,18 @@ function Signup() {
         value: '',
         err: null,
     });
+
+    const [nicknameMessage, setNicknameMessage] = useState('');
+
     const onNickNameChangeHandler = event => {
         const inputNickName = event.target.value;
-        setNickName(prevNickName => ({
-            ...prevNickName,
-            value: inputNickName,
-        }));
+        setNickName(inputNickName);
+
+        if (inputNickName.length < 4 || inputNickName.length > 9) {
+            setNicknameMessage('닉네임은 4글자 이상 9글자 이하로 입력해주세요!');
+        } else {
+            setNicknameMessage('');
+        }
     };
 
     const onEmailChangeHandler = event => {
@@ -115,7 +120,6 @@ function Signup() {
             } catch (err) {
                 alert(err.response.data.errorMessage);
             }
-
             return;
         } else {
             // 회원가입 부적합으로 함수 종료
@@ -131,6 +135,7 @@ function Signup() {
             <label>이메일</label>
             <input type="text" onChange={onEmailChangeHandler} />
             <button>중복확인</button>
+
             <StAlertBox>{email.err ? alertMessage.emailErr : null}</StAlertBox>
             <label>비밀번호</label>
             <input type="password" placeholder="Password" onChange={onPasswordChangeHandler} />
