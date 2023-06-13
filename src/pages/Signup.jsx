@@ -131,7 +131,7 @@ function Signup() {
             <h1>회원가입</h1>
             <label>닉네임</label>
             <input type="text" onChange={onNickNameChangeHandler} />
-            <StAlertBox>{nickName.err ? alertMessage.nickErr : null}</StAlertBox>
+            <StAlertBox>{nicknameMessage}</StAlertBox>
             <label>이메일</label>
             <input type="text" onChange={onEmailChangeHandler} />
             <button>중복확인</button>
