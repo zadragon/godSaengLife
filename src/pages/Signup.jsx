@@ -43,6 +43,9 @@ function Signup() {
 
     const [nicknameMessage, setNicknameMessage] = useState('');
 
+    //이메일 중복확인용 상태
+    const [emailDuplication, setEmailDuplication] = useState(false);
+
     const onNickNameChangeHandler = event => {
         const inputNickName = event.target.value;
         setNickName(inputNickName);
@@ -54,12 +57,26 @@ function Signup() {
         }
     };
 
-    const onEmailChangeHandler = event => {
+    const onEmailChangeHandler = async event => {
         const inputEmail = event.target.value;
+        const isValidEmail = emailRegex.test(inputEmail);
         setEmail(prevEmail => ({
             ...prevEmail,
             value: inputEmail,
+            err: !isValidEmail,
         }));
+
+        if (isValidEmail) {
+            try {
+                const res = await AuthApi.checkEmailDuplication(inputEmail);
+                setEmailDuplication(res.duplicated);
+            } catch (err) {
+                console.error('Error checking email duplication:', err);
+                // Handle the error as desired
+            }
+        } else {
+            setEmailDuplication(false);
+        }
     };
 
     const onPasswordChangeHandler = event => {
@@ -134,9 +151,17 @@ function Signup() {
             <StAlertBox>{nicknameMessage}</StAlertBox>
             <label>이메일</label>
             <input type="text" onChange={onEmailChangeHandler} />
+
+            <StAlertBox>{email.err ? alertMessage.emailErr : ''}</StAlertBox>
+            <StAlertBox>
+                {email.err
+                    ? alertMessage.emailErr
+                    : emailDuplication
+                    ? '이미 등록된 이메일입니다.'
+                    : '등록 가능한 이메일입니다.'}
+            </StAlertBox>
             <button>중복확인</button>
 
-            <StAlertBox>{email.err ? alertMessage.emailErr : null}</StAlertBox>
             <label>비밀번호</label>
             <input type="password" placeholder="Password" onChange={onPasswordChangeHandler} />
             <StAlertBox>{password.err ? alertMessage.pwErr : null}</StAlertBox>
