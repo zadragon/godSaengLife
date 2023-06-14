@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { AuthApi } from '../shared/api';
+import { AuthApi } from '../../shared/api';
 
 // 닉네임 정규식
 const nicknameRegex = /[^ㄱ-ㅎ가-힣a-zA-Z]/g;
