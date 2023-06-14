@@ -19,4 +19,9 @@ export const AuthApi = {
         const response = await api.post('/login', payload);
         return response.data;
     },
+    checkEmailDuplication: async email => {
+        const url = '/'; // 이메일 중복확인을 위한 끝점이 어딘지 설정해야함
+        const response = await api.post(url, { email });
+        return response.data;
+    },
 };

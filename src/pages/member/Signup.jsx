@@ -30,7 +30,8 @@ function Signup() {
     });
     const [email, setEmail] = useState({
         value: '',
-        err: null,
+        err: false,
+        isDuplicate: false,
     });
     const [password, setPassword] = useState({
         value: '',
@@ -42,6 +43,12 @@ function Signup() {
     });
 
     const [nicknameMessage, setNicknameMessage] = useState('');
+
+    //이메일 중복확인용 상태
+    // const [emailDuplication, setEmailDuplication] = useState(false);
+
+    // 중복확인 버튼 눌렀을때 메세지 상태
+    const [emailDuplicationMessage, setEmailDuplicationMessage] = useState('');
 
     const onNickNameChangeHandler = event => {
         const inputNickName = event.target.value;
@@ -56,10 +63,25 @@ function Signup() {
 
     const onEmailChangeHandler = event => {
         const inputEmail = event.target.value;
-        setEmail(prevEmail => ({
-            ...prevEmail,
-            value: inputEmail,
-        }));
+        const isValidEmail = emailRegex.test(inputEmail);
+        setEmail({ value: inputEmail, err: !isValidEmail, isDuplicate: false });
+        setEmailDuplicationMessage('');
+    };
+
+    const checkEmailDuplication = async () => {
+        try {
+            // Perform email duplication check request asynchronously
+            const res = await AuthApi.checkEmailDuplication(email.value);
+            setEmail({ ...email, isDuplicate: res.duplicated });
+            if (res.duplicated) {
+                setEmailDuplicationMessage('이미 등록된 이메일입니다.');
+            } else {
+                setEmailDuplicationMessage('등록 가능한 이메일입니다.');
+            }
+        } catch (err) {
+            console.error('Error checking email duplication:', err);
+            // Handle the error as desired
+        }
     };
 
     const onPasswordChangeHandler = event => {
@@ -134,9 +156,14 @@ function Signup() {
             <StAlertBox>{nicknameMessage}</StAlertBox>
             <label>이메일</label>
             <input type="text" onChange={onEmailChangeHandler} />
-            <button>중복확인</button>
+            {email.err && <StAlertBox>이메일 형식이 올바르지 않습니다.</StAlertBox>}
+            {!email.err && !email.isDuplicate && email.value.length > 0 && (
+                <StAlertBox>중복확인 버튼을 눌러주세요.</StAlertBox>
+            )}
+            {email.isDuplicate && <StAlertBox>이미 등록된 이메일입니다.</StAlertBox>}
+            <button onClick={checkEmailDuplication}>중복확인</button>
+            <StAlertBox>{emailDuplicationMessage}</StAlertBox>
 
-            <StAlertBox>{email.err ? alertMessage.emailErr : null}</StAlertBox>
             <label>비밀번호</label>
             <input type="password" placeholder="Password" onChange={onPasswordChangeHandler} />
             <StAlertBox>{password.err ? alertMessage.pwErr : null}</StAlertBox>
