@@ -4,6 +4,7 @@ import Signup from '../pages/member/Signup';
 import Login from '../pages/member/Login';
 import Home from '../pages/Home';
 import Layout from '../pages/Layout';
+import WholeFeeds from '../pages/WholeFeeds';
 
 const Routers = () => {
     return (
@@ -17,6 +18,8 @@ const Routers = () => {
 
                     {/* main */}
                     <Route path="/" element={<Home />} />
+
+                    <Route path="post" element={<WholeFeeds />} />
                 </Route>
             </Routes>
         </BrowserRouter>
