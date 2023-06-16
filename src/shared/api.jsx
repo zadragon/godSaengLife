@@ -10,10 +10,15 @@ export const api = axios.create({
 });
 
 export const AuthApi = {
-    signup: async payload => {
+    signup: payload => {
         const url = '/signup';
-        const response = await api.post(url, payload);
-        return response.data;
+        api.post(url, payload)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     },
     signin: async payload => {
         const response = await api.post('/login', payload);

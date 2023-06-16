@@ -16,7 +16,7 @@ const Login = () => {
         // 창이 새로고침되는 것을 막는다.
 
         axios
-            .post('/login', {
+            .post('http://54.180.142.54/login', {
                 email: email,
                 password: password,
             })
