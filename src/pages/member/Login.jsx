@@ -14,6 +14,9 @@ const Login = () => {
     const loginaxios = async e => {
         e.preventDefault();
 
+
+        axios
+            .post('http://54.180.142.54/login', {
         try {
             const payload = {
                 email: email,
