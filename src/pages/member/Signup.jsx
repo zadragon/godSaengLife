@@ -45,7 +45,7 @@ function Signup() {
     const [nicknameMessage, setNicknameMessage] = useState('');
 
     //이메일 중복확인용 상태
-    // const [emailDuplication, setEmailDuplication] = useState(false);
+    const [emailDuplication, setEmailDuplication] = useState(false);
 
     // 중복확인 버튼 눌렀을때 메세지 상태
     const [emailDuplicationMessage, setEmailDuplicationMessage] = useState('');
@@ -54,8 +54,8 @@ function Signup() {
         const inputNickName = event.target.value;
         setNickName(inputNickName);
 
-        if (inputNickName.length < 4 || inputNickName.length > 9) {
-            setNicknameMessage('닉네임은 4글자 이상 9글자 이하로 입력해주세요!');
+        if (inputNickName.length < 4 || inputNickName.length > 20) {
+            setNicknameMessage('닉네임은 4글자 이상 20글자 이하로 입력해주세요!');
         } else {
             setNicknameMessage('');
         }
@@ -134,6 +134,7 @@ function Signup() {
 
             try {
                 const res = await AuthApi.signup({
+                    email: email.value,
                     nickname: nickName.value,
                     password: password.value,
                 });

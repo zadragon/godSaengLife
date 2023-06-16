@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useState } from 'react';
+import { AuthApi } from '../../shared/api';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -11,26 +11,27 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const loginaxios = e => {
+    const loginaxios = async e => {
         e.preventDefault();
-        // 창이 새로고침되는 것을 막는다.
 
-        axios
-            .post('/login', {
+        try {
+            const payload = {
                 email: email,
                 password: password,
-            })
-            .then(response => {
-                localStorage.setItem('Token', response.headers.authorization);
-                console.log(response);
-                if (response.status == 200) {
-                    return navigate('/');
-                }
-            })
-            .catch(err => {
-                setMessage(err.response.data.message);
-                console.log(err);
-            });
+            };
+
+            const response = await AuthApi.signin(payload);
+            console.log(response);
+
+            localStorage.setItem('Token', response.headers.authorization);
+
+            if (response.status === 200) {
+                navigate('/');
+            }
+        } catch (error) {
+            setMessage(error.response.data.message);
+            console.log(error);
+        }
     };
 
     return (

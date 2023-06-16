@@ -40,10 +40,22 @@ function Home() {
                 />
             </div>
 
-            <div className="bg-blue-500"> Tailwind Css 적용 테스트 </div>
-            <div className="bg-blue-500">
-                <div>식단 사진첩</div>
-                <div>전체보기&nbsp;＞</div>
+            <div className="max-w-[500px]">
+                <div className="flex justify-between bg-slate-100 mt-3">
+                    <div>식단 사진첩</div>
+                    <div
+                        onClick={() => {
+                            navigate('/post');
+                        }}
+                    >
+                        전체보기&nbsp;＞
+                    </div>
+                </div>
+                <div className="flex justify-between bg-slate-100 mt-3">
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                </div>
             </div>
         </div>
     );
