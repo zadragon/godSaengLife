@@ -26,8 +26,8 @@ function Join() {
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         payload: {
-            userNickname: '',
-            userEmail: '',
+            nickname: '',
+            email: '',
             password: '',
         },
     });
@@ -46,7 +46,7 @@ function Join() {
     const onChangeHandler = e => {
         const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
 
-        if (name == 'userNickname') {
+        if (name == 'nickname') {
             if (value.length < 4 || value.length > 9) {
                 //console.log('닉네임은 4글자 이상 9글자 이하로 입력해주세요!');
                 setErrMsg({
@@ -56,7 +56,7 @@ function Join() {
             } else {
                 setErrMsg(initErrorMsg);
             }
-        } else if (name == 'userEmail') {
+        } else if (name == 'email') {
             if (!emailRegex.test(value)) {
                 setErrMsg({
                     ...errMsg,
@@ -90,7 +90,7 @@ function Join() {
     const onSubmitHandler = e => {
         AuthApi.signup(inputs.payload);
 
-        navigate('/login');
+        //navigate('/login');
     };
 
     return (
@@ -100,12 +100,12 @@ function Join() {
             <div>
                 <div>
                     <label>닉네임</label>
-                    <input type="text" name="userNickname" onChange={onChangeHandler} />
+                    <input type="text" name="nickname" onChange={onChangeHandler} />
                     <StAlertBox>{nickErrorMsg}</StAlertBox>
                 </div>
                 <div>
                     <label>이메일</label>
-                    <input type="text" name="userEmail" onChange={onChangeHandler} />
+                    <input type="text" name="email" onChange={onChangeHandler} />
                     <StAlertBox>{emailErrorMsg}</StAlertBox>
                 </div>
                 <div>

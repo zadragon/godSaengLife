@@ -11,6 +11,7 @@ export const api = axios.create({
 
 export const AuthApi = {
     signup: payload => {
+        console.log(payload);
         const url = '/signup';
         api.post(url, payload)
             .then(response => {
