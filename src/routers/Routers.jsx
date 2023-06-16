@@ -5,6 +5,7 @@ import Login from '../pages/member/Login';
 import Home from '../pages/Home';
 import Layout from '../pages/Layout';
 import Join from '../pages/member/Join';
+import MyPhotos from '../pages/MyPhotos';
 
 const Routers = () => {
     return (
@@ -19,6 +20,8 @@ const Routers = () => {
 
                     {/* main */}
                     <Route path="/" element={<Home />} />
+
+                    <Route path="/post" element={<MyPhotos />} />
                 </Route>
             </Routes>
         </BrowserRouter>
