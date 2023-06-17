@@ -7,6 +7,7 @@ import './index.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 // import { ReactQueryDevtools } from 'react-query-devtools';
 import { HelmetProvider } from 'react-helmet-async';
+import { CookiesProvider } from 'react-cookie';
 
 const queryClient = new QueryClient();
 
@@ -16,7 +17,9 @@ root.render(
         <QueryClientProvider client={queryClient}>
             {/* <ReactQueryDevtools initialIsOpen={false} /> */}
             <HelmetProvider>
-                <App />
+                <CookiesProvider>
+                    <App />
+                </CookiesProvider>
             </HelmetProvider>
         </QueryClientProvider>
     </Provider>
