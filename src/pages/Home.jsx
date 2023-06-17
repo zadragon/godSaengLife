@@ -5,8 +5,12 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction';
 import { styled } from 'styled-components';
 import { MainApi } from '../shared/api';
+import { useCookies } from 'react-cookie';
 
 function Home() {
+    const [cookies, setCookie, removeCookie] = useCookies();
+
+    console.log(cookies.token);
     const navigate = useNavigate();
 
     const handleClick = (date, jsEvent) => {
@@ -22,7 +26,7 @@ function Home() {
     };
 
     useEffect(() => {
-        const response = MainApi.getMain();
+        const response = MainApi.getMain(cookies.token);
         console.log(response);
     }, []);
     return (
