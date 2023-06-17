@@ -31,16 +31,12 @@ export const AuthApi = {
                 console.log(error);
             });
     },
-    checkEmailDuplication: async email => {
-        const url = '/'; // 이메일 중복확인을 위한 끝점이 어딘지 설정해야함
-        const response = await api.post(url, { email });
-        return response.data;
-    },
 };
 
 export const MainApi = {
     getMain: token => {
-        api.get('/', {
+        console.log(token);
+        api.get('/main', {
             headers: {
                 'Content-Type': 'application/json', // 필요한 헤더를 여기에 추가하세요
                 Authorization: token, // 필요한 인증 헤더를 여기에 추가하세요

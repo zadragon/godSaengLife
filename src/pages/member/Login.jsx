@@ -36,11 +36,12 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div className="loginArea">
+            <h2>로그인</h2>
             <form>
                 <div className="Login">
-                    <div className="inputemail">
-                        <br />
+                    <div className="row inputemail">
+                        <label>이메일 주소</label>
                         <input
                             type="text"
                             onChange={e => {
@@ -50,8 +51,8 @@ const Login = () => {
                             placeholder="이메일 주소를 입력해주세요"
                         />
                     </div>
-                    <div className="inputpassword">
-                        <br />
+                    <div className="row inputpassword">
+                        <label>비밀번호</label>
                         <input
                             type="password"
                             onChange={e => {
@@ -62,18 +63,18 @@ const Login = () => {
                         />
                         <p className="err">{message}</p>
                     </div>
-                    <button className="buttonlogin" onClick={loginaxios}>
-                        시작해볼까요?
-                    </button>
                 </div>
-                <div>
-                    <p>계정이 없다면?</p>
-                    <div
-                        onClick={() => {
-                            navigate('/signup');
-                        }}
-                    >
-                        회원가입
+                <div className="loginUtil">
+                    <div>
+                        <button className="buttonlogin" onClick={loginaxios}>
+                            시작해볼까요? 🥰
+                        </button>
+                    </div>
+                    <div>
+                        <p>계정이 없다면?</p>
+                        <a to="/signup" className="buttonlogin">
+                            회원가입
+                        </a>
                     </div>
                 </div>
             </form>

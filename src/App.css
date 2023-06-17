@@ -1,3 +1,29 @@
+/*레이아웃*/
+.container {
+    width: 100%;
+}
+
+/*헤더*/
+header {
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+header .btnLogout {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+}
+header .btnfire {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+}
+
+/*임시코드*/
 .fc .fc-daygrid-event {
     width: 10px;
     height: 10px;
@@ -6,4 +32,45 @@
 
 input {
     border: 1px solid #ddd;
+}
+
+/* 캘린더 */
+.calendarArea {
+    width: 100%;
+}
+
+/* 로그인 */
+.loginArea {
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+.loginArea h2 {
+    text-align: center;
+    font-size: 36px;
+}
+
+.loginArea .row {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.loginArea label {
+    display: block;
+    width: 100%;
+}
+
+.loginArea input {
+    display: block;
+    width: 100%;
+}
+
+.loginArea .loginUtil {
+    text-align: center;
+}
+
+.loginArea .loginUtil .buttonlogin {
+    text-decoration: underline;
 }
