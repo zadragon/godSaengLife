@@ -11,14 +11,16 @@ function Writetoday() {
         goodSleep: Boolean,
     });
 
-    const handleButtonClick = buttonId => {
-        setSelectedButtons(prevSelectedButtons => ({
-            ...prevSelectedButtons,
-            [buttonId]: !prevSelectedButtons[buttonId],
+    const handleButtonClick = buttonValue => {
+        setSelectedButtons(prevState => ({
+            ...Object.keys(prevState).reduce((acc, key) => {
+                acc[key] = key === buttonValue; // 선택된 버튼은 true, 나머지는 false
+                return acc;
+            }, {}),
         }));
     };
 
-    const handleSave = async () => {
+    const handleSave = () => {
         try {
             const data = {
                 // emotion: selectedButtons.emotion,
@@ -27,11 +29,11 @@ function Writetoday() {
                 // goodSleep: selectedButtons.goodSleep,
                 emotion: 'happy',
                 howEat: true,
-                gymDay: true,
+                didGym: true,
                 goodSleep: true,
             };
 
-            const response = await MainApi.saveData(cookies.token, data);
+            const response = MainApi.saveData(cookies.token, data);
 
             // Handle the response as needed
             console.log('피드 작성이 완료되었습니다', response);
