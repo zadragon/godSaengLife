@@ -6,12 +6,12 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { styled } from 'styled-components';
 import { MainApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
+import { useQuery } from '@tanstack/react-query';
 
 function Home() {
     const [cookies, setCookie, removeCookie] = useCookies();
-
-    console.log(cookies.token);
     const navigate = useNavigate();
+    //const { isLoading, error, data, refetch: getMain } = useQuery(['getMain'], payload => MainApi.getMain(payload));
 
     const handleClick = (date, jsEvent) => {
         console.log('Date clicked:', date);
@@ -26,8 +26,9 @@ function Home() {
     };
 
     useEffect(() => {
-        const response = MainApi.getMain(cookies.token);
-        console.log(response);
+        console.log(cookies.Authorization);
+        //getMain(cookies.token);
+        MainApi.getMain(cookies.Authorization);
     }, []);
 
     const [currentTab, clickTab] = useState(0);
@@ -43,15 +44,7 @@ function Home() {
     };
     return (
         <div>
-            <button
-                onClick={() => {
-                    navigate('/login');
-                }}
-            >
-                로그인
-            </button>
-
-            <div style={{ width: '500px' }}>
+            <div className="calendarArea">
                 <FullCalendar
                     plugins={[dayGridPlugin, interactionPlugin]}
                     initialView="dayGridMonth"

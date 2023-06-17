@@ -17,16 +17,43 @@ export const AuthApi = {
         const response = await api.post('/login', payload);
         return response.data;
     },
-    checkEmailDuplication: async email => {
-        const url = '/'; // 이메일 중복확인을 위한 끝점이 어딘지 설정해야함
-        const response = await api.post(url, { email });
-        return response.data;
+    signout: token => {
+        api.post('/logout', {
+            headers: {
+                'Content-Type': 'application/json', // 필요한 헤더를 여기에 추가하세요
+                Authorization: token, // 필요한 인증 헤더를 여기에 추가하세요
+            },
+        })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     },
 };
 
 export const MainApi = {
     getMain: token => {
-        api.get('/', {
+        console.log(token);
+        api.get('/main', {
+            headers: {
+                'Content-Type': 'application/json', // 필요한 헤더를 여기에 추가하세요
+                Authorization: token, // 필요한 인증 헤더를 여기에 추가하세요
+            },
+        })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
+};
+
+export const PostApi = {
+    getAllMeal: token => {
+        api.get('/allmeal', {
             headers: {
                 'Content-Type': 'application/json', // 필요한 헤더를 여기에 추가하세요
                 Authorization: token, // 필요한 인증 헤더를 여기에 추가하세요
