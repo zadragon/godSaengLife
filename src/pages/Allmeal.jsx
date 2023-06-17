@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Masonry from 'react-masonry-css';
 import { AuthApi } from '../shared/api';
 
-const MyPhotos = () => {
+const Allmeal = () => {
     const breakpointColumnsObj = {
         default: 3,
         1100: 2,
         700: 1,
+        //화면 크기에따라 보여지는 column수
     };
 
     const [images, setImages] = useState([]);
@@ -15,7 +16,7 @@ const MyPhotos = () => {
         const fetchPost = async () => {
             try {
                 const response = await AuthApi.getpost();
-                const data = response.data.feedImage; // 받아온 데이터 중 이미지 배열을 가져옵니다.
+                const data = response.data.feedImage;
                 setImages(data);
             } catch (error) {
                 console.error(error);
@@ -40,4 +41,4 @@ const MyPhotos = () => {
     );
 };
 
-export default MyPhotos;
+export default Allmeal;

@@ -39,4 +39,18 @@ export const MainApi = {
                 console.log(error);
             });
     },
+    saveData: (token, data) => {
+        api.post('/feed/write', data, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: token,
+            },
+        })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
 };
