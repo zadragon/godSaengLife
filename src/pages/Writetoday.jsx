@@ -148,9 +148,8 @@ function Writetoday() {
             <div>
                 <div>식단 사진 업로드</div>
                 <div>사진등록 (최대 5장)</div>
-                <div>
-                    <button>+</button>
-                </div>
+
+                <input type="file" />
             </div>
         </div>
     );
