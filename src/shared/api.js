@@ -1,14 +1,5 @@
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
-
-// 싱글톤 패턴으로 axios 인스터스를 생성
-export const api = axios.create({
-    baseURL: process.env.REACT_APP_BACKEND_SERVER_URL,
-    headers: {
-        Authorization: '',
-    },
-    withCredentials: true,
-});
+import { api } from './apiConfig';
 
 export const AuthApi = {
     signup: payload => {
@@ -34,8 +25,18 @@ export const AuthApi = {
 };
 
 export const MainApi = {
-    getMain: async () => {
-        const response = await api.get('/');
-        return response;
+    getMain: token => {
+        api.get('/', {
+            headers: {
+                'Content-Type': 'application/json', // 필요한 헤더를 여기에 추가하세요
+                Authorization: token, // 필요한 인증 헤더를 여기에 추가하세요
+            },
+        })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     },
 };
