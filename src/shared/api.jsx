@@ -1,10 +1,11 @@
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 // 싱글톤 패턴으로 axios 인스터스를 생성
 export const api = axios.create({
     baseURL: process.env.REACT_APP_BACKEND_SERVER_URL,
     headers: {
-        /* */
+        Authorization: '',
     },
     withCredentials: true,
 });
@@ -29,5 +30,12 @@ export const AuthApi = {
         const url = '/'; // 이메일 중복확인을 위한 끝점이 어딘지 설정해야함
         const response = await api.post(url, { email });
         return response.data;
+    },
+};
+
+export const MainApi = {
+    getMain: async () => {
+        const response = await api.get('/');
+        return response;
     },
 };
