@@ -8,7 +8,7 @@ const Header = () => {
     const [cookies, setCookie, removeCookie] = useCookies();
     const navigate = useNavigate();
     const logout = () => {
-        AuthApi.signout(cookies.token);
+        AuthApi.signout(cookies.Authorization);
         removeCookie('Authorization');
     };
 
