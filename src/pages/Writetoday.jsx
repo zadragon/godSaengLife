@@ -27,16 +27,6 @@ function Writetoday() {
 
         try {
             const data = {
-<<<<<<< HEAD
-                emotion: selectedButtons.emotion,
-                howEat: selectedButtons.howEat,
-                gymDay: selectedButtons.gymDay,
-                goodSleep: selectedButtons.goodSleep,
-                // emotion: 'happy',
-                // howEat: true,
-                // didGym: true,
-                // goodSleep: true,
-=======
                 // emotion: selectedButtons.emotion,
                 // howEat: selectedButtons.howEat,
                 // gymDay: selectedButtons.gymDay,
@@ -48,7 +38,6 @@ function Writetoday() {
                     goodSleep: true,
                 },
                 imagePaths: formData,
->>>>>>> 85e03cdb38a8c0a6d079e8664a38552ceb263019
             };
 
             PostApi.saveData(cookies.Authorization, data);
@@ -173,12 +162,7 @@ function Writetoday() {
             <div>
                 <div>식단 사진 업로드</div>
                 <div>사진등록 (최대 5장)</div>
-<<<<<<< HEAD
-                <input type="file" />
-=======
-
                 <input type="file" multiple onChange={setImgFile} />
->>>>>>> 85e03cdb38a8c0a6d079e8664a38552ceb263019
             </div>
         </div>
     );

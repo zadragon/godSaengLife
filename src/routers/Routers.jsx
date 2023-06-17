@@ -22,15 +22,10 @@ const Routers = () => {
 
                     {/* main */}
                     <Route path="/" element={<Home />} />
-<<<<<<< HEAD
 
                     <Route path="/allmeal" element={<Allmeal />} />
                     <Route path="/writetoday" element={<Writetoday />} />
 
-=======
-                    <Route path="/allmeal" element={<Allmeal />} />
-                    <Route path="/writetoday" element={<Writetoday />} />
->>>>>>> 85e03cdb38a8c0a6d079e8664a38552ceb263019
                     <Route path="/pitureList" element={<PictureList />} />
                 </Route>
             </Routes>
