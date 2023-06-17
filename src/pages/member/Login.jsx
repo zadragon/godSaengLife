@@ -23,7 +23,7 @@ const Login = () => {
 
             const response = await AuthApi.signin(payload);
             console.log(response);
-            setCookies('token', response.data.Authorization);
+            setCookies('Authorization', response.data.Authorization);
             //localStorage.setItem('Token', response.headers.authorization);
 
             if (response.code === 200) {
