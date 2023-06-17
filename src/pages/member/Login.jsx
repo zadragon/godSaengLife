@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { AuthApi } from '../../shared/api';
-
+import { useCookies } from 'react-cookie';
 const Login = () => {
     const navigate = useNavigate();
 
@@ -10,6 +10,7 @@ const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [cookies, setCookies] = useCookies();
 
     const loginaxios = async e => {
         e.preventDefault();
@@ -22,10 +23,10 @@ const Login = () => {
 
             const response = await AuthApi.signin(payload);
             console.log(response);
+            setCookies('token', response.data.Authorization);
+            //localStorage.setItem('Token', response.headers.authorization);
 
-            localStorage.setItem('Token', response.headers.authorization);
-
-            if (response.status === 200) {
+            if (response.code === 200) {
                 navigate('/');
             }
         } catch (error) {
