@@ -3,9 +3,10 @@ import { AuthApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
 
 const Header = () => {
-    const [cookies] = useCookies();
+    const [cookies, setCookie, removeCookie] = useCookies();
     const logout = () => {
         AuthApi.signout(cookies.token);
+        removeCookie('Authorization');
     };
     return (
         <div>
