@@ -69,8 +69,14 @@ const Header = () => {
     return (
         <div>
             <h1>갓생러헤더</h1>
-            <button onClick={logout}>로그아웃</button>
+            <button onClick={logout} style={{ border: '1px solid #ddd' }}>
+                로그아웃
+            </button>
+
             <hr />
+            <button onClick={fire} style={{ border: '1px solid #ddd' }}>
+                폭죽터뜨리기
+            </button>
             <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
         </div>
     );
