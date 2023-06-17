@@ -6,6 +6,7 @@ import Home from '../pages/Home';
 import Layout from '../pages/Layout';
 import Join from '../pages/member/Join';
 import MyPhotos from '../pages/MyPhotos';
+import PictureList from '../pages/record/PictureList';
 
 const Routers = () => {
     return (
@@ -22,6 +23,8 @@ const Routers = () => {
                     <Route path="/" element={<Home />} />
 
                     <Route path="/post" element={<MyPhotos />} />
+
+                    <Route path="/pitureList" element={<PictureList />} />
                 </Route>
             </Routes>
         </BrowserRouter>
