@@ -6,7 +6,7 @@ const PictureList = () => {
     const [cookies, setCookie, removeCookie] = useCookies();
 
     useEffect(() => {
-        PostApi.getAllMeal(cookies.token);
+        PostApi.getAllMeal(cookies.Authorization);
     }, []);
     return (
         <div>

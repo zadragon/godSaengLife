@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { MainApi } from '../shared/api';
+import { MainApi, PostApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
 
 function Writetoday() {
     const [cookies, setCookie, removeCookie] = useCookies();
+    const [selectedImg, setSelectedImg] = useState([]);
     const [selectedButtons, setSelectedButtons] = useState({
         emotion: null,
         howEat: Boolean,
@@ -21,27 +22,42 @@ function Writetoday() {
     };
 
     const handleSave = () => {
+        const formData = new FormData();
+        selectedImg.forEach(image => {
+            formData.append('images', image);
+        });
+
         try {
             const data = {
                 // emotion: selectedButtons.emotion,
                 // howEat: selectedButtons.howEat,
                 // gymDay: selectedButtons.gymDay,
                 // goodSleep: selectedButtons.goodSleep,
-                emotion: 'happy',
-                howEat: true,
-                didGym: true,
-                goodSleep: true,
+                feed: {
+                    emotion: 'happy',
+                    howEat: true,
+                    didGym: true,
+                    goodSleep: true,
+                },
+                imagePaths: formData,
             };
 
-            const response = MainApi.saveData(cookies.token, data);
+            PostApi.saveData(cookies.Authorization, data);
+            //const response = MainApi.saveData(cookies.Authorization, data);
 
             // Handle the response as needed
-            console.log('피드 작성이 완료되었습니다', response);
+            //console.log('피드 작성이 완료되었습니다', response);
         } catch (error) {
             // Handle errors
             console.log('피드 작성 실패', error);
         }
     };
+
+    const setImgFile = e => {
+        let files = e.target.files;
+        setSelectedImg([...selectedImg, ...files]);
+    };
+    console.log(selectedImg);
 
     return (
         <div>
@@ -149,7 +165,7 @@ function Writetoday() {
                 <div>식단 사진 업로드</div>
                 <div>사진등록 (최대 5장)</div>
 
-                <input type="file" />
+                <input type="file" multiple onChange={setImgFile} />
             </div>
         </div>
     );
