@@ -26,7 +26,13 @@ const Login = () => {
             setCookies('token', response.data.Authorization);
             //localStorage.setItem('Token', response.headers.authorization);
 
+<<<<<<< HEAD
+            // localStorage.setItem('Token', response.headers.authorization);
+
+            if (response.status === 200) {
+=======
             if (response.code === 200) {
+>>>>>>> master
                 navigate('/');
             }
         } catch (error) {
