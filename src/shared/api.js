@@ -67,6 +67,7 @@ export const PostApi = {
             });
     },
     saveData: (token, data) => {
+        console.log('token', token, data);
         api.post('/feed/write', data, {
             headers: {
                 'Content-Type': 'application/json',
