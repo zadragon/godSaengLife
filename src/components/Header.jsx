@@ -2,9 +2,11 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { AuthApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
 import ReactCanvasConfetti from 'react-canvas-confetti';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const [cookies, setCookie, removeCookie] = useCookies();
+    const navigate = useNavigate();
     const logout = () => {
         AuthApi.signout(cookies.token);
         removeCookie('Authorization');
@@ -67,18 +69,26 @@ const Header = () => {
         fire();
     }, []);
     return (
-        <div>
-            <h1>갓생러헤더</h1>
-            <button onClick={logout} style={{ border: '1px solid #ddd' }}>
+        <header>
+            <h1>
+                <Link to="/">갓생러헤더</Link>
+            </h1>
+            <button className="btnLogout" onClick={logout} style={{ border: '1px solid #ddd' }}>
                 로그아웃
             </button>
+            <button
+                onClick={() => {
+                    navigate('/login');
+                }}
+            >
+                로그인
+            </button>
 
-            <hr />
-            <button onClick={fire} style={{ border: '1px solid #ddd' }}>
+            <button className="btnfire" onClick={fire} style={{ border: '1px solid #ddd' }}>
                 폭죽터뜨리기
             </button>
             <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
-        </div>
+        </header>
     );
 };
 

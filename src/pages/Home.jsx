@@ -11,7 +11,6 @@ import { useQuery } from '@tanstack/react-query';
 function Home() {
     const [cookies, setCookie, removeCookie] = useCookies();
     const navigate = useNavigate();
-
     const { isLoading, error, data, refetch: getMain } = useQuery(['getMain'], payload => MainApi.getMain(payload));
 
     const handleClick = (date, jsEvent) => {
@@ -31,15 +30,7 @@ function Home() {
     }, []);
     return (
         <div>
-            <button
-                onClick={() => {
-                    navigate('/login');
-                }}
-            >
-                로그인
-            </button>
-
-            <div style={{ width: '500px' }}>
+            <div className="calendarArea">
                 <FullCalendar
                     plugins={[dayGridPlugin, interactionPlugin]}
                     initialView="dayGridMonth"
