@@ -11,7 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 function Home() {
     const [cookies, setCookie, removeCookie] = useCookies();
     const navigate = useNavigate();
-    const { isLoading, error, data, refetch: getMain } = useQuery(['getMain'], payload => MainApi.getMain(payload));
+    //const { isLoading, error, data, refetch: getMain } = useQuery(['getMain'], payload => MainApi.getMain(payload));
 
     const handleClick = (date, jsEvent) => {
         console.log('Date clicked:', date);
@@ -26,7 +26,9 @@ function Home() {
     };
 
     useEffect(() => {
-        getMain(cookies.token);
+        console.log(cookies.Authorization);
+        //getMain(cookies.token);
+        MainApi.getMain(cookies.Authorization);
     }, []);
     return (
         <div>
