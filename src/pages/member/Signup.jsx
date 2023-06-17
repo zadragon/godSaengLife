@@ -24,162 +24,110 @@ const alertMessage = {
 
 function Signup() {
     const navigate = useNavigate();
-    const [nickName, setNickName] = useState({
-        value: '',
-        err: null,
-    });
-    const [email, setEmail] = useState({
-        value: '',
-        err: false,
-        isDuplicate: false,
-    });
-    const [password, setPassword] = useState({
-        value: '',
-        err: null,
-    });
-    const [confirmPassword, setConfirmPassword] = useState({
-        value: '',
-        err: null,
+    const [inputs, setInputs] = useState({
+        payload: {
+            nickname: '',
+            email: '',
+            password: '',
+        },
     });
 
-    const [nicknameMessage, setNicknameMessage] = useState('');
-
-    //이메일 중복확인용 상태
-    const [emailDuplication, setEmailDuplication] = useState(false);
-
-    // 중복확인 버튼 눌렀을때 메세지 상태
-    const [emailDuplicationMessage, setEmailDuplicationMessage] = useState('');
-
-    const onNickNameChangeHandler = event => {
-        const inputNickName = event.target.value;
-        setNickName(inputNickName);
-
-        if (inputNickName.length < 4 || inputNickName.length > 20) {
-            setNicknameMessage('닉네임은 4글자 이상 20글자 이하로 입력해주세요!');
-        } else {
-            setNicknameMessage('');
-        }
+    const initErrorMsg = {
+        nickErrorMsg: '',
+        emailErrorMsg: '',
+        pwErrorMsg: '',
+        pwMatchErrorMsg: '',
+        pwValid: '',
     };
+    const [errMsg, setErrMsg] = useState(initErrorMsg);
 
-    const onEmailChangeHandler = event => {
-        const inputEmail = event.target.value;
-        const isValidEmail = emailRegex.test(inputEmail);
-        setEmail({ value: inputEmail, err: !isValidEmail, isDuplicate: false });
-        setEmailDuplicationMessage('');
-    };
+    const { nickErrorMsg, emailErrorMsg, pwErrorMsg, pwMatchErrorMsg, pwValid } = errMsg;
 
-    const checkEmailDuplication = async () => {
-        try {
-            // Perform email duplication check request asynchronously
-            const res = await AuthApi.checkEmailDuplication(email.value);
-            setEmail({ ...email, isDuplicate: res.duplicated });
-            if (res.duplicated) {
-                setEmailDuplicationMessage('이미 등록된 이메일입니다.');
-            } else {
-                setEmailDuplicationMessage('등록 가능한 이메일입니다.');
-            }
-        } catch (err) {
-            console.error('Error checking email duplication:', err);
-            // Handle the error as desired
-        }
-    };
+    const onChangeHandler = e => {
+        const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
 
-    const onPasswordChangeHandler = event => {
-        const inputPassword = event.target.value;
-        setPassword(prevPassword => ({
-            ...prevPassword,
-            value: inputPassword,
-        }));
-    };
-
-    const onConfirmPasswordChangeHandler = event => {
-        const inputConfirmPassword = event.target.value;
-        setConfirmPassword(prevConfimPw => ({
-            ...prevConfimPw,
-            value: inputConfirmPassword,
-        }));
-    };
-
-    const verifySiginUpData = () => {
-        // 유효성 검사 결과 저장
-        const verifiedNickname = nicknameRegex.test(nickName.value);
-        const verifiedPassword = passwordRegex.test(password.value);
-        const verifiedEmail = emailRegex.test(email.value);
-        const verifiedConfirmPassword = password.value === confirmPassword.value;
-
-        setNickName(prevNickName => ({
-            ...prevNickName,
-            err: !verifiedNickname,
-        }));
-        setEmail(prevEmail => ({
-            ...prevEmail,
-            err: !verifiedEmail,
-        }));
-        // 비밀번호 유효성 검사
-        setPassword(prevPassword => ({
-            ...prevPassword,
-            err: !verifiedPassword,
-        }));
-        // 비밀번호 재입력 일치 여부 검사
-        setConfirmPassword(prevConfimPw => ({
-            ...prevConfimPw,
-            err: !verifiedConfirmPassword,
-        }));
-        return !verifiedNickname || !verifiedPassword || !verifiedConfirmPassword ? false : true;
-    };
-    const onSubmitHandler = async () => {
-        const signUpVerfy = verifySiginUpData();
-        if (signUpVerfy) {
-            // 회원 가입 요청 가능
-
-            try {
-                const res = await AuthApi.signup({
-                    email: email.value,
-                    nickname: nickName.value,
-                    password: password.value,
+        if (name == 'nickname') {
+            if (value.length < 1 || value.length > 8) {
+                //console.log('닉네임은 4글자 이상 9글자 이하로 입력해주세요!');
+                setErrMsg({
+                    ...errMsg,
+                    nickErrorMsg: '닉네임은 1글자 이상 8글자 이하로 입력해주세요!',
                 });
-                alert(res.data.message);
-                navigate('/login');
-            } catch (err) {
-                alert(err.response.data.errorMessage);
+            } else {
+                setErrMsg(initErrorMsg);
             }
-            return;
-        } else {
-            // 회원가입 부적합으로 함수 종료
-            return;
+        } else if (name == 'email') {
+            if (!emailRegex.test(value)) {
+                setErrMsg({
+                    ...errMsg,
+                    emailErrorMsg: '이메일 형식이 올바르지 않습니다.',
+                });
+            } else {
+                setErrMsg(initErrorMsg);
+            }
+        } else if (name == 'password') {
+            if (!passwordRegex.test(value)) {
+                setErrMsg({
+                    ...errMsg,
+                    pwErrorMsg: '숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!',
+                });
+            } else {
+                setErrMsg(initErrorMsg);
+            }
         }
+
+        setInputs({
+            ...inputs, // 기존의 input 객체를 복사한 뒤
+            payload: {
+                ...inputs.payload,
+                [name]: value, // name 키를 가진 값을 value 로 설정
+            },
+        });
+
+        console.log(inputs);
     };
+
+    const onSubmitHandler = e => {
+        AuthApi.signup(inputs.payload);
+
+        //navigate('/login');
+    };
+
     return (
         <StSignupContainer>
             <h1>회원가입</h1>
-            <label>닉네임</label>
-            <input type="text" onChange={onNickNameChangeHandler} />
-            <StAlertBox>{nicknameMessage}</StAlertBox>
-            <label>이메일</label>
-            <input type="text" onChange={onEmailChangeHandler} />
-            {email.err && <StAlertBox>이메일 형식이 올바르지 않습니다.</StAlertBox>}
-            {!email.err && !email.isDuplicate && email.value.length > 0 && (
-                <StAlertBox>중복확인 버튼을 눌러주세요.</StAlertBox>
-            )}
-            {email.isDuplicate && <StAlertBox>이미 등록된 이메일입니다.</StAlertBox>}
-            <button onClick={checkEmailDuplication}>중복확인</button>
-            <StAlertBox>{emailDuplicationMessage}</StAlertBox>
 
-            <label>비밀번호</label>
-            <input type="password" placeholder="Password" onChange={onPasswordChangeHandler} />
-            <StAlertBox>{password.err ? alertMessage.pwErr : null}</StAlertBox>
-            <label>
-                비밀번호 재입력
-                <StAlertBox>{confirmPassword.err ? alertMessage.pwMachErr : null}</StAlertBox>
-            </label>
-            <input type="password" placeholder="Confirm Password" onChange={onConfirmPasswordChangeHandler} />
             <div>
-                <StBtn backgroundcolor="#7fccde" onClick={onSubmitHandler}>
-                    회원가입
-                </StBtn>
-                <Link to={'/'}>
-                    <StBtn backgroundcolor="#fa5a5a">취소</StBtn>
-                </Link>
+                <div>
+                    <label>닉네임</label>
+                    <input type="text" name="nickname" onChange={onChangeHandler} />
+                    <StAlertBox>{nickErrorMsg}</StAlertBox>
+                </div>
+                <div>
+                    <label>이메일</label>
+                    <input type="text" name="email" onChange={onChangeHandler} />
+                    <StAlertBox>{emailErrorMsg}</StAlertBox>
+                </div>
+                <div>
+                    <label>비밀번호</label>
+                    <input type="password" name="password" placeholder="Password" onChange={onChangeHandler} />
+                    <StAlertBox>{pwErrorMsg}</StAlertBox>
+                </div>
+                <div>
+                    <label>
+                        비밀번호 재입력
+                        <StAlertBox>{pwMatchErrorMsg}</StAlertBox>
+                    </label>
+                    <input type="password" placeholder="Confirm Password" />
+                </div>
+                <div>
+                    <StBtn backgroundcolor="#7fccde" onClick={onSubmitHandler}>
+                        회원가입
+                    </StBtn>
+                    <Link to={'/'}>
+                        <StBtn backgroundcolor="#fa5a5a">취소</StBtn>
+                    </Link>
+                </div>
             </div>
         </StSignupContainer>
     );

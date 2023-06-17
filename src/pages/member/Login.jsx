@@ -23,7 +23,7 @@ const Login = () => {
             const response = await AuthApi.signin(payload);
             console.log(response);
 
-            localStorage.setItem('Token', response.headers.authorization);
+            // localStorage.setItem('Token', response.headers.authorization);
 
             if (response.status === 200) {
                 navigate('/');
