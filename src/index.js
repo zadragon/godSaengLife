@@ -4,23 +4,16 @@ import { Provider } from 'react-redux';
 import store from './redux/config/configstore';
 import App from './App';
 import './index.css';
-import { QueryClient, QueryClientProvider } from 'react-query';
-// import { ReactQueryDevtools } from 'react-query-devtools';
 import { HelmetProvider } from 'react-helmet-async';
 import { CookiesProvider } from 'react-cookie';
-
-const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-            <HelmetProvider>
-                <CookiesProvider>
-                    <App />
-                </CookiesProvider>
-            </HelmetProvider>
-        </QueryClientProvider>
+        <HelmetProvider>
+            <CookiesProvider>
+                <App />
+            </CookiesProvider>
+        </HelmetProvider>
     </Provider>
 );

@@ -4,6 +4,7 @@ import FullCalendar from '@fullcalendar/react'; // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction';
 import { styled } from 'styled-components';
+import { MainApi } from '../shared/api';
 
 function Home() {
     const navigate = useNavigate();
@@ -19,6 +20,11 @@ function Home() {
         console.log('끝 날짜:', info.endStr);
         console.log('모든 정보:', info);
     };
+
+    useEffect(() => {
+        const response = MainApi.getMain();
+        console.log(response);
+    }, []);
     return (
         <div>
             <button
