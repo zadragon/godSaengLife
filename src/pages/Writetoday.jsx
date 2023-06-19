@@ -8,38 +8,47 @@ function Writetoday() {
     const [selectedButtons, setSelectedButtons] = useState({
         emotion: null,
         howEat: Boolean,
-        gymDay: Boolean,
+        didGym: Boolean,
         goodSleep: Boolean,
     });
 
-    const handleButtonClick = buttonValue => {
+    const handleButtonClick = (buttonName, buttonValue) => {
         setSelectedButtons(prevState => ({
-            ...Object.keys(prevState).reduce((acc, key) => {
-                acc[key] = key === buttonValue; // 선택된 버튼은 true, 나머지는 false
-                return acc;
-            }, {}),
+            ...prevState,
+            [buttonName]: buttonValue,
         }));
     };
 
     const handleSave = () => {
         const formData = new FormData();
-        selectedImg.forEach(image => {
-            formData.append('images', image);
+        selectedImg.forEach((images, index) => {
+            formData.append(`images[${index}]`, images);
         });
-
+        for (let key of formData.keys()) {
+            console.log(key, ':', formData.get(key));
+        }
         try {
             const data = {
-                // emotion: selectedButtons.emotion,
-                // howEat: selectedButtons.howEat,
-                // gymDay: selectedButtons.gymDay,
-                // goodSleep: selectedButtons.goodSleep,
-                feed: {
-                    emotion: 'happy',
-                    howEat: true,
-                    didGym: true,
-                    goodSleep: true,
-                },
+                emotion: selectedButtons.emotion,
+                howEat: selectedButtons.howEat,
+                didGym: selectedButtons.didGym,
+                goodSleep: selectedButtons.goodSleep,
                 imagePaths: formData,
+                // feed: {
+                //     emotion: selectedButtons.emotion,
+                //     howEat: selectedButtons.howEat,
+                //     didGym: selectedButtons.gymDay,
+                //     goodSleep: selectedButtons.goodSleep,
+                // },
+                // imagePaths: formData,
+                // const data = {
+                //     feed: {
+                //         emotion: selectedButtons.emotion,
+                //         howEat: selectedButtons.howEat,
+                //         didGym: selectedButtons.didGym,
+                //         goodSleep: selectedButtons.goodSleep,
+                //     },
+                //     imagePaths: formData,
             };
 
             PostApi.saveData(cookies.Authorization, data);
@@ -55,7 +64,7 @@ function Writetoday() {
 
     const setImgFile = e => {
         let files = e.target.files;
-        setSelectedImg([...selectedImg, ...files]);
+        setSelectedImg([...files]);
     };
     console.log(selectedImg);
 
@@ -69,38 +78,38 @@ function Writetoday() {
                 <div className="flex justify-around">
                     <button
                         id="happy"
-                        className={`rounded-full ${selectedButtons['happy'] ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('happy')}
+                        className={`rounded-full ${selectedButtons['emotion'] === 'happy' ? 'bg-gray-300' : ''}`}
+                        onClick={() => handleButtonClick('emotion', 'happy')}
                     >
-                        🤩
+                        🤩 기쁜 날
                     </button>
                     <button
                         id="good"
-                        className={`rounded-full ${selectedButtons['good'] ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('good')}
+                        className={`rounded-full ${selectedButtons['emotion'] === 'good' ? 'bg-gray-300' : ''}`}
+                        onClick={() => handleButtonClick('emotion', 'good')}
                     >
-                        😊
+                        😊 편안한 날
                     </button>
                     <button
                         id="soso"
-                        className={`rounded-full ${selectedButtons['soso'] ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('soso')}
+                        className={`rounded-full ${selectedButtons['emotion'] === 'soso' ? 'bg-gray-300' : ''}`}
+                        onClick={() => handleButtonClick('emotion', 'soso')}
                     >
-                        😐
+                        😐 그냥 그런 날
                     </button>
                     <button
                         id="tired"
-                        className={`rounded-full ${selectedButtons['tired'] ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('tired')}
+                        className={`rounded-full ${selectedButtons['emotion'] === 'tired' ? 'bg-gray-300' : ''}`}
+                        onClick={() => handleButtonClick('emotion', 'tired')}
                     >
-                        🥱
+                        🥱 피곤한 날
                     </button>
                     <button
                         id="stress"
-                        className={`rounded-full ${selectedButtons['stress'] ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('stress')}
+                        className={`rounded-full ${selectedButtons['emotion'] === 'stress' ? 'bg-gray-300' : ''}`}
+                        onClick={() => handleButtonClick('emotion', 'stress')}
                     >
-                        😡
+                        😡 스트레스 받는 날
                     </button>
                 </div>
             </div>
@@ -108,16 +117,16 @@ function Writetoday() {
                 <div>꽤 건강한 음식 위주로 먹었다.</div>
                 <div className="flex justify-around">
                     <button
-                        id="howEat"
-                        className={`rounded-full ${selectedButtons['button1'] ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('true')}
+                        id="howEatO"
+                        className={`rounded-full ${selectedButtons['howEat'] === true ? 'bg-gray-300' : ''}`}
+                        onClick={() => handleButtonClick('howEat', true)}
                     >
                         O
                     </button>
                     <button
-                        id="howEat"
-                        className={`rounded-full ${selectedButtons['button2'] ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('false')}
+                        id="howEatX"
+                        className={`rounded-full ${selectedButtons['howEat'] === false ? 'bg-gray-300' : ''}`}
+                        onClick={() => handleButtonClick('howEat', false)}
                     >
                         X
                     </button>
@@ -127,16 +136,16 @@ function Writetoday() {
                 <div>운동했다.</div>
                 <div className="flex justify-around">
                     <button
-                        id="gymDay"
-                        className={`rounded-full ${selectedButtons['button3'] ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('true')}
+                        id="didGymO"
+                        className={`rounded-full ${selectedButtons['didGym'] === true ? 'bg-gray-300' : ''}`}
+                        onClick={() => handleButtonClick('didGym', true)}
                     >
                         O
                     </button>
                     <button
-                        id="gymDay"
-                        className={`rounded-full ${selectedButtons['button4'] ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('false')}
+                        id="didGymX"
+                        className={`rounded-full ${selectedButtons['didGym'] === false ? 'bg-gray-300' : ''}`}
+                        onClick={() => handleButtonClick('didGym', false)}
                     >
                         X
                     </button>
@@ -146,16 +155,16 @@ function Writetoday() {
                 <div>꿀잠 자고 개운한 날이다.</div>
                 <div className="flex justify-around">
                     <button
-                        id="goodSleep"
-                        className={`rounded-full ${selectedButtons['button5'] ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('true')}
+                        id="goodSleepO"
+                        className={`rounded-full ${selectedButtons['goodSleep'] === true ? 'bg-gray-300' : ''}`}
+                        onClick={() => handleButtonClick('goodSleep', true)}
                     >
                         O
                     </button>
                     <button
-                        id="goodSleep"
-                        className={`rounded-full ${selectedButtons['button6'] ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('false')}
+                        id="goodSleepX"
+                        className={`rounded-full ${selectedButtons['goodSleep'] === false ? 'bg-gray-300' : ''}`}
+                        onClick={() => handleButtonClick('goodSleep', false)}
                     >
                         X
                     </button>
@@ -164,7 +173,6 @@ function Writetoday() {
             <div>
                 <div>식단 사진 업로드</div>
                 <div>사진등록 (최대 5장)</div>
-
                 <input type="file" multiple onChange={setImgFile} />
             </div>
         </div>
