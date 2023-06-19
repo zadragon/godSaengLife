@@ -21,17 +21,19 @@ function Writetoday() {
 
     const handleSave = () => {
         const formData = new FormData();
-        selectedImg.forEach((image, index) => {
-            formData.append(`images[${index}]`, image);
+        selectedImg.forEach((images, index) => {
+            formData.append(`images[${index}]`, images);
         });
-
+        for (let key of formData.keys()) {
+            console.log(key, ':', formData.get(key));
+        }
         try {
             const data = {
                 emotion: selectedButtons.emotion,
                 howEat: selectedButtons.howEat,
                 didGym: selectedButtons.didGym,
                 goodSleep: selectedButtons.goodSleep,
-                // imagePaths: formData,
+                imagePaths: formData,
                 // feed: {
                 //     emotion: selectedButtons.emotion,
                 //     howEat: selectedButtons.howEat,

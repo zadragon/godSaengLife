@@ -70,7 +70,7 @@ export const PostApi = {
         console.log('token', token, data);
         api.post('/feed/write', data, {
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
                 Authorization: token,
             },
         })
