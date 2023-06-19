@@ -21,8 +21,8 @@ function Writetoday() {
 
     const handleSave = () => {
         const formData = new FormData();
-        selectedImg.forEach(image => {
-            formData.append('images', image);
+        selectedImg.forEach((image, index) => {
+            formData.append(`images[${index}]`, image);
         });
 
         try {
@@ -31,12 +31,6 @@ function Writetoday() {
                 howEat: selectedButtons.howEat,
                 didGym: selectedButtons.didGym,
                 goodSleep: selectedButtons.goodSleep,
-                // feed: {
-                //     emotion: 'happy',
-                //     howEat: true,
-                //     didGym: true,
-                //     goodSleep: true,
-                // },
                 // imagePaths: formData,
                 // feed: {
                 //     emotion: selectedButtons.emotion,
@@ -45,6 +39,14 @@ function Writetoday() {
                 //     goodSleep: selectedButtons.goodSleep,
                 // },
                 // imagePaths: formData,
+                // const data = {
+                //     feed: {
+                //         emotion: selectedButtons.emotion,
+                //         howEat: selectedButtons.howEat,
+                //         didGym: selectedButtons.didGym,
+                //         goodSleep: selectedButtons.goodSleep,
+                //     },
+                //     imagePaths: formData,
             };
 
             PostApi.saveData(cookies.Authorization, data);
@@ -60,7 +62,7 @@ function Writetoday() {
 
     const setImgFile = e => {
         let files = e.target.files;
-        setSelectedImg([...selectedImg, ...files]);
+        setSelectedImg([...files]);
     };
     console.log(selectedImg);
 
