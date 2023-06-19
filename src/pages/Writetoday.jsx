@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MainApi, PostApi } from '../shared/api';
+import { PostApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
 
 function Writetoday() {
@@ -7,9 +7,9 @@ function Writetoday() {
     const [selectedImg, setSelectedImg] = useState([]);
     const [selectedButtons, setSelectedButtons] = useState({
         emotion: null,
-        howEat: Boolean,
-        didGym: Boolean,
-        goodSleep: Boolean,
+        howEat: null,
+        didGym: null,
+        goodSleep: null,
     });
 
     const handleButtonClick = (buttonName, buttonValue) => {
@@ -24,31 +24,34 @@ function Writetoday() {
         selectedImg.forEach((images, index) => {
             formData.append(`images[${index}]`, images);
         });
-        for (let key of formData.keys()) {
-            console.log(key, ':', formData.get(key));
+        // for (let key of formData.keys()) {
+        //     console.log(key, ':', formData.get(key));
+        // }
+        for (let value of formData.values()) {
+            console.log(value);
         }
         try {
+            // const data = {
+            //     emotion: selectedButtons.emotion,
+            //     howEat: selectedButtons.howEat,
+            //     didGym: selectedButtons.didGym,
+            //     goodSleep: selectedButtons.goodSleep,
+            //     imagePaths: formData,
+            // feed: {
+            //     emotion: selectedButtons.emotion,
+            //     howEat: selectedButtons.howEat,
+            //     didGym: selectedButtons.gymDay,
+            //     goodSleep: selectedButtons.goodSleep,
+            // },
+            // imagePaths: formData,
             const data = {
-                emotion: selectedButtons.emotion,
-                howEat: selectedButtons.howEat,
-                didGym: selectedButtons.didGym,
-                goodSleep: selectedButtons.goodSleep,
+                feed: {
+                    emotion: selectedButtons.emotion,
+                    howEat: selectedButtons.howEat,
+                    didGym: selectedButtons.didGym,
+                    goodSleep: selectedButtons.goodSleep,
+                },
                 imagePaths: formData,
-                // feed: {
-                //     emotion: selectedButtons.emotion,
-                //     howEat: selectedButtons.howEat,
-                //     didGym: selectedButtons.gymDay,
-                //     goodSleep: selectedButtons.goodSleep,
-                // },
-                // imagePaths: formData,
-                // const data = {
-                //     feed: {
-                //         emotion: selectedButtons.emotion,
-                //         howEat: selectedButtons.howEat,
-                //         didGym: selectedButtons.didGym,
-                //         goodSleep: selectedButtons.goodSleep,
-                //     },
-                //     imagePaths: formData,
             };
 
             PostApi.saveData(cookies.Authorization, data);
@@ -56,6 +59,7 @@ function Writetoday() {
 
             // Handle the response as needed
             //console.log('피드 작성이 완료되었습니다', response);
+            console.log('data:', data);
         } catch (error) {
             // Handle errors
             console.log('피드 작성 실패', error);
