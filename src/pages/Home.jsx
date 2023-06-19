@@ -7,7 +7,8 @@ import { styled } from 'styled-components';
 import { MainApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
 import { useQuery } from '@tanstack/react-query';
-
+import * as C from '../styles/common';
+import * as H from '../styles/home';
 function Home() {
     const [cookies, setCookie, removeCookie] = useCookies();
     const navigate = useNavigate();
