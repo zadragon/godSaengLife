@@ -8,7 +8,7 @@ function Writetoday() {
     const [selectedButtons, setSelectedButtons] = useState({
         emotion: null,
         howEat: Boolean,
-        gymDay: Boolean,
+        didGym: Boolean,
         goodSleep: Boolean,
     });
 
@@ -27,17 +27,24 @@ function Writetoday() {
 
         try {
             const data = {
-                // emotion: selectedButtons.emotion,
-                // howEat: selectedButtons.howEat,
-                // gymDay: selectedButtons.gymDay,
-                // goodSleep: selectedButtons.goodSleep,
-                feed: {
-                    emotion: 'happy',
-                    howEat: true,
-                    didGym: true,
-                    goodSleep: true,
-                },
-                imagePaths: formData,
+                emotion: selectedButtons.emotion,
+                howEat: selectedButtons.howEat,
+                didGym: selectedButtons.didGym,
+                goodSleep: selectedButtons.goodSleep,
+                // feed: {
+                //     emotion: 'happy',
+                //     howEat: true,
+                //     didGym: true,
+                //     goodSleep: true,
+                // },
+                // imagePaths: formData,
+                // feed: {
+                //     emotion: selectedButtons.emotion,
+                //     howEat: selectedButtons.howEat,
+                //     didGym: selectedButtons.gymDay,
+                //     goodSleep: selectedButtons.goodSleep,
+                // },
+                // imagePaths: formData,
             };
 
             PostApi.saveData(cookies.Authorization, data);
@@ -125,16 +132,16 @@ function Writetoday() {
                 <div>운동했다.</div>
                 <div className="flex justify-around">
                     <button
-                        id="gymDayO"
-                        className={`rounded-full ${selectedButtons['gymDay'] === true ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('gymDay', true)}
+                        id="didGymO"
+                        className={`rounded-full ${selectedButtons['didGym'] === true ? 'bg-gray-300' : ''}`}
+                        onClick={() => handleButtonClick('didGym', true)}
                     >
                         O
                     </button>
                     <button
-                        id="gymDayX"
-                        className={`rounded-full ${selectedButtons['gymDay'] === false ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('gymDay', false)}
+                        id="didGymX"
+                        className={`rounded-full ${selectedButtons['didGym'] === false ? 'bg-gray-300' : ''}`}
+                        onClick={() => handleButtonClick('didGym', false)}
                     >
                         X
                     </button>
