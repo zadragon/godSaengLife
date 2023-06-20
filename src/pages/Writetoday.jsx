@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MainApi, PostApi } from '../shared/api';
+import { PostApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
 
 function Writetoday() {
@@ -22,42 +22,20 @@ function Writetoday() {
     const handleSave = () => {
         const formData = new FormData();
         selectedImg.forEach((images, index) => {
-            formData.append(`images[${index}]`, images);
+            formData.append('images', images);
         });
-        for (let key of formData.keys()) {
-            console.log(key, ':', formData.get(key));
-        }
+        // console.log(formData.getAll('images')); // Prints an array of appended files
+        // for (let entry of formData.entries()) {
+        //     console.log(entry); // Prints each key-value pair in the FormData
+        // }
+
+        formData.append('emotion', selectedButtons.emotion);
+        formData.append('howEat', selectedButtons.howEat);
+        formData.append('didGym', selectedButtons.didGym);
+        formData.append('goodSleep', selectedButtons.goodSleep);
         try {
-            const data = {
-                emotion: selectedButtons.emotion,
-                howEat: selectedButtons.howEat,
-                didGym: selectedButtons.didGym,
-                goodSleep: selectedButtons.goodSleep,
-                imagePaths: formData,
-                // feed: {
-                //     emotion: selectedButtons.emotion,
-                //     howEat: selectedButtons.howEat,
-                //     didGym: selectedButtons.gymDay,
-                //     goodSleep: selectedButtons.goodSleep,
-                // },
-                // imagePaths: formData,
-                // const data = {
-                //     feed: {
-                //         emotion: selectedButtons.emotion,
-                //         howEat: selectedButtons.howEat,
-                //         didGym: selectedButtons.didGym,
-                //         goodSleep: selectedButtons.goodSleep,
-                //     },
-                //     imagePaths: formData,
-            };
-
-            PostApi.saveData(cookies.Authorization, data);
-            //const response = MainApi.saveData(cookies.Authorization, data);
-
-            // Handle the response as needed
-            //console.log('피드 작성이 완료되었습니다', response);
+            PostApi.saveData(cookies.Authorization, formData);
         } catch (error) {
-            // Handle errors
             console.log('피드 작성 실패', error);
         }
     };
@@ -173,7 +151,7 @@ function Writetoday() {
             <div>
                 <div>식단 사진 업로드</div>
                 <div>사진등록 (최대 5장)</div>
-                <input type="file" multiple onChange={setImgFile} />
+                <input type="file" name="images" multiple onChange={setImgFile} />
             </div>
         </div>
     );
