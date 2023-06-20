@@ -66,14 +66,33 @@ export const PostApi = {
                 console.log(error);
             });
     },
-    saveData: (token, data) => {
-        console.log('token', token, data);
-        api.post('/feed/write', data, {
+    // saveData: (token, data) => {
+    //     console.log('token', token, data);
+    //     api.post('/feed/write', data, {
+    //         headers: {
+    //             'Content-Type': 'multipart/form-data',
+    //             Authorization: token,
+    //         },
+    //     })
+    //         .then(response => {
+    //             console.log(response);
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         });
+    // },
+    saveData: (token, formData) => {
+        const apiInstance = axios.create({
+            baseURL: process.env.REACT_APP_BACKEND_SERVER_URL,
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
                 Authorization: token,
             },
-        })
+            withCredentials: true,
+        });
+
+        apiInstance
+            .post('/feed/write', formData)
             .then(response => {
                 console.log(response);
             })
@@ -81,19 +100,4 @@ export const PostApi = {
                 console.log(error);
             });
     },
-    // saveData: (token, data) => {
-    //     console.log('token', token, data);
-
-    //     const formData = new FormData();
-    //     formData.append('emotion', data.emotion);
-    //     formData.append('howEat', data.howEat);
-    //     formData.append('didGym', data.didGym);
-    //     formData.append('goodSleep', data.goodSleep);
-
-    //     data.imagePaths.forEach(image => {
-    //         formData.append('images', image);
-    //     });
-
-    //     PostApi.saveData(token, formData);
-    // },
 };
