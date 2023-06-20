@@ -34,16 +34,18 @@ export const AuthApi = {
 };
 
 export const MainApi = {
-    getMain: token => {
-        console.log(token);
-        api.get('/main', {
-            headers: {
-                'Content-Type': 'application/json', // 필요한 헤더를 여기에 추가하세요
-                Authorization: token, // 필요한 인증 헤더를 여기에 추가하세요
-            },
-        })
+    getMain: (token, setAllData) => {
+        return api
+            .get('/main', {
+                headers: {
+                    'Content-Type': 'application/json', // 필요한 헤더를 여기에 추가하세요
+                    Authorization: token, // 필요한 인증 헤더를 여기에 추가하세요
+                },
+            })
             .then(response => {
                 console.log(response);
+                setAllData(response.data.feeds);
+                return response;
             })
             .catch(error => {
                 console.log(error);

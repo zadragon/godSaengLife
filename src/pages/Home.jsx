@@ -12,6 +12,8 @@ import * as H from '../styles/home';
 
 function Home() {
     const [cookies, setCookie, removeCookie] = useCookies();
+    const [allData, setAllData] = useState();
+    const [calData, setCalData] = useState();
     const navigate = useNavigate();
     //const { isLoading, error, data, refetch: getMain } = useQuery(['getMain'], payload => MainApi.getMain(payload));
 
@@ -28,10 +30,12 @@ function Home() {
     };
 
     useEffect(() => {
-        console.log(cookies.Authorization);
-        //getMain(cookies.token);
-        MainApi.getMain(cookies.Authorization);
+        MainApi.getMain(cookies.Authorization, setAllData);
     }, []);
+
+    const calDataArr = allData?.map(item => {
+        return { date: item.createdAt };
+    });
 
     const [currentTab, clickTab] = useState(0);
     const menuArr = [
@@ -50,7 +54,7 @@ function Home() {
                 <FullCalendar
                     plugins={[dayGridPlugin, interactionPlugin]}
                     initialView="dayGridMonth"
-                    events={[{ date: '2023-06-01' }, { date: '2023-06-02' }]}
+                    events={calDataArr}
                     eventClick={handleClick}
                     dateClick={e => handleDateClick(e)}
                     selectable
