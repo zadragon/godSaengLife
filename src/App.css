@@ -1,42 +1,88 @@
 /*레이아웃*/
-.container {
+.section {
     width: 100%;
-}
-
-/*헤더*/
-header {
-    position: relative;
-    width: 100%;
-    padding: 10px 0;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-}
-
-header .btnLogout {
-    position: absolute;
-    top: 8px;
-    right: 10px;
-}
-header .btnfire {
-    position: absolute;
-    top: 8px;
-    left: 10px;
-}
-
-/*임시코드*/
-.fc .fc-daygrid-event {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-}
-
-input {
-    border: 1px solid #ddd;
+    padding-bottom: 100px;
 }
 
 /* 캘린더 */
 .calendarArea {
     width: 100%;
+    .fc-toolbar-title {
+        font-size: 20px;
+    }
+    .fc-theme-standard .fc-scrollgrid {
+        border: 0;
+    }
+    .fc-theme-standard td,
+    .fc-theme-standard th {
+        border: 0;
+    }
+    .fc-theme-standard th {
+        background-color: #f6f6f6;
+        height: 17px;
+        font-size: 10px;
+    }
+    .fc-theme-standard td {
+        border-bottom: 1px solid #ddd;
+    }
+    .fc .fc-daygrid-day-top {
+        flex-direction: initial;
+        justify-content: center;
+        padding-top: 15px;
+    }
+    .fc .fc-daygrid-day-frame {
+        height: 66px;
+        font-size: 15px;
+        color: #21242e;
+    }
+    .fc .fc-daygrid-event {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        text-align: center;
+        display: inline-block;
+        background-color: #ddff85;
+        border: 0;
+    }
+    .fc .fc-daygrid-day.fc-day-today {
+        background: none;
+        position: relative;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            margin-left: -14px;
+            display: block;
+            background-color: #d5ff66;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+        }
+    }
+    .fc .fc-daygrid-event-harness {
+        text-align: center;
+    }
+}
+
+/*----------------- 임시 ---------------*/
+/* 헤더임시 */
+header .imsi {
+    background-color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    opacity: 0.5;
+    font-size: 12px;
+}
+
+/*임시코드*/
+
+input {
+    border: 1px solid #ddd;
 }
 
 /* 로그인 */

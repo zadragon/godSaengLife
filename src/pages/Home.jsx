@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FullCalendar from '@fullcalendar/react'; // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction';
@@ -9,6 +9,7 @@ import { useCookies } from 'react-cookie';
 import { useQuery } from '@tanstack/react-query';
 import * as C from '../styles/common';
 import * as H from '../styles/home';
+
 function Home() {
     const [cookies, setCookie, removeCookie] = useCookies();
     const navigate = useNavigate();
@@ -55,40 +56,37 @@ function Home() {
                     selectable
                 />
             </div>
-            <div className="max-w-[500px]">
-                <div className="flex justify-between bg-slate-100 mt-3">
-                    <button>컨디션</button>
+            <H.MainTab>
+                <div className="tabInner">
+                    <button className="active">컨디션</button>
                     <button>식단 사진</button>
                 </div>
-            </div>
-            <div className="max-w-[500px]">
-                <div className="flex justify-between bg-slate-100 mt-3">
-                    <div>식단 사진첩</div>
-                    <div
-                        onClick={() => {
-                            navigate('/allmeal');
-                        }}
-                    >
-                        전체보기&nbsp;＞
+                <div className="tabCont">
+                    <div className="empty">
+                        <p>기록이 없어요</p>
                     </div>
                 </div>
-                <div className="flex justify-between bg-slate-100 mt-3">
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
+            </H.MainTab>
+            <H.MainAlbum>
+                <div>
+                    <h2>식단 사진첩</h2>
+                    <Link to="/allmeal" className="linkMore">
+                        전체보기&nbsp;＞
+                    </Link>
                 </div>
-            </div>
+                <div className="albumList">
+                    <div className="img"></div>
+                    <div className="img"></div>
+                    <div className="img"></div>
+                </div>
+            </H.MainAlbum>
 
-            <div className="flex justify-center">
-                오늘 하루 기록하기
-                <button
-                    onClick={() => {
-                        navigate('/writetoday');
-                    }}
-                >
-                    +
-                </button>
-            </div>
+            <C.AddPost>
+                <Link to="/writetoday">
+                    <span>+</span>
+                    <span className="sr-only">오늘 하루 기록하기</span>
+                </Link>
+            </C.AddPost>
         </div>
     );
 }
