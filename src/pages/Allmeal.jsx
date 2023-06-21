@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Masonry from 'react-masonry-css';
-import { AuthApi } from '../shared/api';
+import { AuthApi, PostApi } from '../shared/api';
+import { useCookies } from 'react-cookie';
 
 const Allmeal = () => {
+    const [cookies] = useCookies();
     const breakpointColumnsObj = {
         default: 3,
         1100: 2,
@@ -13,17 +15,17 @@ const Allmeal = () => {
     const [images, setImages] = useState([]);
 
     useEffect(() => {
-        const fetchPost = async () => {
-            try {
-                const response = await AuthApi.getpost();
-                const data = response.data.feedImage;
-                setImages(data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        fetchPost();
+        PostApi.getAllMeal(cookies.Authorization);
+        // const fetchPost = async () => {
+        //     try {
+        //         const response = await AuthApi.getpost();
+        //         const data = response.data.feedImage;
+        //         setImages(data);
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
+        // };
+        // fetchPost();
     }, []);
 
     return (

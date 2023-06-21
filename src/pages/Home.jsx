@@ -6,16 +6,26 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { styled } from 'styled-components';
 import { MainApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
-import { useQuery } from '@tanstack/react-query';
+import 'react-calendar/dist/Calendar.css'; // css import
 import * as C from '../styles/common';
 import * as H from '../styles/home';
+import { useQuery } from '@tanstack/react-query';
+import moment from 'moment';
+import Calendar from 'react-calendar';
 
 function Home() {
     const [cookies, setCookie, removeCookie] = useCookies();
     const [allData, setAllData] = useState();
     const [calData, setCalData] = useState();
     const navigate = useNavigate();
-    //const { isLoading, error, data, refetch: getMain } = useQuery(['getMain'], payload => MainApi.getMain(payload));
+
+    const { data, isLoading, error, refetch } = useQuery(['getMain'], () => MainApi.getMain(cookies.Authorization));
+
+    const calendarData = data?.data.feeds.map(item => {
+        return moment(item.createdAt).format('DD-MM-YYYY');
+    });
+
+    console.log(calendarData);
 
     const handleClick = (date, jsEvent) => {
         console.log('Date clicked:', date);
@@ -48,18 +58,23 @@ function Home() {
         // 해당 함수가 실행되면 현재 선택된 Tab Menu 가 갱신.
         clickTab(index);
     };
+    const [value, onChange] = useState(new Date());
+
     return (
         <div>
             <div className="calendarArea">
-                <FullCalendar
-                    plugins={[dayGridPlugin, interactionPlugin]}
-                    initialView="dayGridMonth"
-                    events={calDataArr}
-                    eventClick={handleClick}
-                    dateClick={e => handleDateClick(e)}
-                    selectable
+                <Calendar
+                    onChange={onChange}
+                    value={value}
+                    tileClassName={({ date, view }) => {
+                        if (calendarData?.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                            return 'highlight';
+                        }
+                    }}
                 />
+                <div className="text-gray-500 mt-4">{moment(value).format('YYYY년 MM월 DD일')}</div>
             </div>
+
             <H.MainTab>
                 <div className="tabInner">
                     <button className="active">컨디션</button>
@@ -75,7 +90,7 @@ function Home() {
                 <div>
                     <h2>식단 사진첩</h2>
                     <Link to="/allmeal" className="linkMore">
-                        전체보기&nbsp;＞
+                        전체보기 &nbsp;＞
                     </Link>
                 </div>
                 <div className="albumList">

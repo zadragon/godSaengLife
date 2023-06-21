@@ -7,61 +7,74 @@
 /* 캘린더 */
 .calendarArea {
     width: 100%;
-    .fc-toolbar-title {
-        font-size: 20px;
-    }
-    .fc-theme-standard .fc-scrollgrid {
+    font-family: 'Pretendard-Regular';
+    .react-calendar {
+        max-width: 100%;
+        width: 100%;
         border: 0;
     }
-    .fc-theme-standard td,
-    .fc-theme-standard th {
-        border: 0;
+    .react-calendar,
+    .react-calendar *,
+    .react-calendar *:before,
+    .react-calendar *:after {
+        position: relative;
+        z-index: 100;
     }
-    .fc-theme-standard th {
-        background-color: #f6f6f6;
-        height: 17px;
+    .react-calendar__month-view__weekdays__weekday {
+        padding: 0;
+        height: 20px;
         font-size: 10px;
     }
-    .fc-theme-standard td {
-        border-bottom: 1px solid #ddd;
+    .react-calendar__month-view__days {
+        background-color: #f8f8f9;
     }
-    .fc .fc-daygrid-day-top {
-        flex-direction: initial;
-        justify-content: center;
-        padding-top: 15px;
-    }
-    .fc .fc-daygrid-day-frame {
+    .react-calendar__month-view__days button {
         height: 66px;
         font-size: 15px;
+        font-family: 'Pretendard-Regular';
+        border-bottom: 1px solid #d5d6d9;
         color: #21242e;
     }
-    .fc .fc-daygrid-event {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        text-align: center;
-        display: inline-block;
-        background-color: #ddff85;
-        border: 0;
+    .react-calendar__month-view__days__day--weekend {
+        color: #21242e;
     }
-    .fc .fc-daygrid-day.fc-day-today {
-        background: none;
+    .react-calendar__month-view__days button.react-calendar__tile--now {
         position: relative;
-        &::before {
+        color: #fff;
+        &::after {
             content: '';
+            display: block;
             position: absolute;
-            top: 16px;
+            z-index: 0;
+            top: 18px;
             left: 50%;
             margin-left: -14px;
-            display: block;
-            background-color: #d5ff66;
             width: 28px;
             height: 28px;
+            background-color: #21242e !important;
             border-radius: 50%;
         }
+        abbr {
+            position: relative;
+            z-index: 10;
+            color: #fff;
+        }
     }
-    .fc .fc-daygrid-event-harness {
-        text-align: center;
+    .highlight {
+        position: relative;
+
+        &::before {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            margin-left: -3px;
+            width: 6px;
+            height: 6px;
+            background-color: #d1c8ff !important;
+            border-radius: 50%;
+        }
     }
 }
 

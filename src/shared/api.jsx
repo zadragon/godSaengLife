@@ -34,7 +34,7 @@ export const AuthApi = {
 };
 
 export const MainApi = {
-    getMain: (token, setAllData) => {
+    getMain: token => {
         return api
             .get('/main', {
                 headers: {
@@ -44,7 +44,6 @@ export const MainApi = {
             })
             .then(response => {
                 console.log(response);
-                setAllData(response.data.feeds);
                 return response;
             })
             .catch(error => {
