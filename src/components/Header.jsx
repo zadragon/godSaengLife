@@ -69,6 +69,7 @@ const Header = () => {
     useEffect(() => {
         fire();
     }, []);
+
     return (
         <C.Header>
             <p className="txtWelcome">환영합니다🎉 갓생러 님</p>
@@ -88,12 +89,12 @@ const Header = () => {
                     로그인
                 </button>
 
-                <button className="btnfire" onClick={fire} style={{ border: '1px solid #ddd' }}>
+                {/* <button className="btnfire" onClick={fire} style={{ border: '1px solid #ddd' }}>
                     폭죽터뜨리기
-                </button>
+                </button> */}
             </div>
 
-            <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
+            {/* <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} /> */}
         </C.Header>
     );
 };
