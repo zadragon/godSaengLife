@@ -40,15 +40,12 @@ function Home() {
     };
 
     useEffect(() => {
-        // const res = MainApi.getMain(cookies.Authorization, setAllData);
-        // console.log(res);
+        MainApi.getMain(cookies.Authorization, setAllData);
     }, []);
 
-    // const { data, error, isLoading, refetch } = useQuery(['getMainCal'], () => MainApi.getMain(cookies.Authorization));
-
-    // const calDataArr = allData?.map(item => {
-    //     return { date: item.createdAt };
-    // });
+    const calDataArr = allData?.map(item => {
+        return { date: item.createdAt };
+    });
 
     const [currentTab, clickTab] = useState(0);
     const menuArr = [
