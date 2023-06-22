@@ -25,8 +25,6 @@ function Home() {
         return moment(item.createdAt).format('DD-MM-YYYY');
     });
 
-    console.log(calendarData);
-
     const handleClick = (date, jsEvent) => {
         console.log('Date clicked:', date);
         console.log('JS event:', jsEvent);
@@ -60,6 +58,15 @@ function Home() {
     };
     const [value, onChange] = useState(new Date());
 
+    const selectCondition = data?.data.feeds.filter(item => {
+        return moment(item.createdAt).format('DD-MM-YYYY') == moment(value).format('DD-MM-YYYY');
+    });
+    const feedImgs = selectCondition?.map(item => {
+        return item.FeedImages[0].imagePath;
+    });
+
+    console.log(feedImgs);
+
     return (
         <div>
             <div className="calendarArea">
@@ -81,9 +88,33 @@ function Home() {
                     <button>식단 사진</button>
                 </div>
                 <div className="tabCont">
-                    <div className="empty">
-                        <p>기록이 없어요</p>
-                    </div>
+                    {selectCondition?.length === 0 && (
+                        <div className="empty">
+                            <p>기록이 없어요</p>
+                        </div>
+                    )}
+                    <ul>
+                        {selectCondition?.map(item => {
+                            return (
+                                <>
+                                    <li>{item.emotion}</li>
+                                    <li>{item.didGym ? '운동완료' : '운동못함ㅜㅜ'}</li>
+                                    <li>{item.goodSleep ? '꿀잠^^' : '잠못자서 두드려맞은듯 ㅜㅜ'}</li>
+                                    <li>{item.howEat ? '건강하게 먹음!!' : '주워먹음'}</li>
+                                    <li></li>
+                                </>
+                            );
+                        })}
+                        {feedImgs?.map(item => {
+                            return (
+                                <>
+                                    <div>
+                                        <img src={`${item}`} alt="" />
+                                    </div>
+                                </>
+                            );
+                        })}
+                    </ul>
                 </div>
             </H.MainTab>
             <H.MainAlbum>
