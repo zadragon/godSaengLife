@@ -71,7 +71,9 @@ function Home() {
         if (cookies.Authorization) {
             PostApi.getLatestImg(cookies.Authorization)
                 .then(response => {
-                    setLatestImgs(response.data); // 이미지 데이터를 상태로 설정
+                    setLatestImgs(response.data.feedImages);
+                    // 이미지 데이터를 상태로 설정
+                    console.log('피드:', response.data);
                 })
                 .catch(error => {
                     console.log(error);
@@ -80,7 +82,7 @@ function Home() {
     }, [cookies.Authorization]);
 
     // console.log(feedImgs);
-    console.log('최근이미지:', latestImgs);
+    // console.log('최근이미지:', latestImgs);
 
     return (
         <div>
