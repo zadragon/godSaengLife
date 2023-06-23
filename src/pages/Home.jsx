@@ -62,7 +62,7 @@ function Home() {
         return moment(item.createdAt).format('DD-MM-YYYY') == moment(value).format('DD-MM-YYYY');
     });
     const feedImgs = selectCondition?.map(item => {
-        return item.FeedImages[0].imagePath;
+        return item.FeedImages[0]?.imagePath;
     });
 
     console.log(feedImgs);
