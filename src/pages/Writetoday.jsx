@@ -75,8 +75,10 @@ function Writetoday() {
 
     return (
         <div>
-            <div className="flex-start flex-row">
-                <Link to="/">＜</Link>
+            <div className="flex-row">
+                <div>
+                    <Link to="/">＜</Link>
+                </div>
                 <div className="text-center text-2xl">하루 기록</div>
             </div>
             <div>
