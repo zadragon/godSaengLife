@@ -65,6 +65,11 @@ function Home() {
         return item.FeedImages[0]?.imagePath;
     });
 
+    const [tabId, setTabId] = useState('condition');
+    const tabClick = e => {
+        setTabId(e.target.id);
+    };
+
     const [latestImgs, setLatestImgs] = useState([]);
 
     useEffect(() => {
@@ -81,9 +86,6 @@ function Home() {
         }
     }, [cookies.Authorization]);
 
-    // console.log(feedImgs);
-    // console.log('최근이미지:', latestImgs);
-
     return (
         <div>
             <div className="calendarArea">
@@ -96,43 +98,91 @@ function Home() {
                         }
                     }}
                 />
-                <div className="text-gray-500 mt-4">{moment(value).format('YYYY년 MM월 DD일')}</div>
             </div>
 
             <H.MainTab>
-                <div className="tabInner">
-                    <button className="active">컨디션</button>
-                    <button>식단 사진</button>
+                <div className="tabInner" onClick={tabClick}>
+                    <button className={tabId == 'condition' ? 'active' : ''} id="condition">
+                        컨디션
+                    </button>
+                    <button className={tabId == 'picture' ? 'active' : ''} id="picture">
+                        식단 사진
+                    </button>
                 </div>
-                <div className="tabCont">
-                    {selectCondition?.length === 0 && (
-                        <div className="empty">
-                            <p>기록이 없어요</p>
+
+                {tabId == 'condition' && (
+                    <div className="tabCont">
+                        {selectCondition?.length === 0 && (
+                            <div className="empty">
+                                <p>기록이 없어요</p>
+                            </div>
+                        )}
+                        <div className="conditionList">
+                            <div className="btnArea">
+                                <button className="btnEdit">
+                                    <span className="sr-only">수정</span>
+                                </button>
+                            </div>
+
+                            <ul>
+                                {selectCondition?.map((item, idx) => {
+                                    return (
+                                        <>
+                                            <li key={idx}>😁 {item.emotion}</li>
+                                            <li>{item.didGym ? '✅ 오늘 진짜 운동 잘됨' : '✅ 운동못함ㅜㅜ'}</li>
+                                            <li>
+                                                {item.goodSleep
+                                                    ? '🙌🏻 꿀잠 자고 개운한 날'
+                                                    : '🙌🏻 잠못자서 두드려맞은듯 ㅜㅜ'}
+                                            </li>
+                                            <li>{item.howEat ? '😁 건강하게 먹음!!' : '😁 주워먹음'}</li>
+                                        </>
+                                    );
+                                })}
+                            </ul>
                         </div>
-                    )}
-                    <ul>
-                        {selectCondition?.map(item => {
-                            return (
-                                <>
-                                    <li>{item.emotion}</li>
-                                    <li>{item.didGym ? '운동완료' : '운동못함ㅜㅜ'}</li>
-                                    <li>{item.goodSleep ? '꿀잠^^' : '잠못자서 두드려맞은듯 ㅜㅜ'}</li>
-                                    <li>{item.howEat ? '건강하게 먹음!!' : '주워먹음'}</li>
-                                    <li></li>
-                                </>
-                            );
-                        })}
-                        {feedImgs?.map(item => {
-                            return (
-                                <>
-                                    <div>
-                                        <img src={`${item}`} alt="" />
-                                    </div>
-                                </>
-                            );
-                        })}
-                    </ul>
-                </div>
+                    </div>
+                )}
+
+                {tabId == 'picture' && (
+                    <div className="tabCont">
+                        <div className="imgList">
+                            <div className="imgRail">
+                                {feedImgs?.map((item, idx) => {
+                                    return (
+                                        <div key={idx} className="img">
+                                            <img src={`${item}`} alt="" />
+                                        </div>
+                                    );
+                                })}
+                                <div className="img">
+                                    <img
+                                        src="https://god-seangler.s3.ap-northeast-2.amazonaws.com/1687518720107.jpg"
+                                        alt=""
+                                    />
+                                </div>
+                                <div className="img">
+                                    <img
+                                        src="https://god-seangler.s3.ap-northeast-2.amazonaws.com/1687518720107.jpg"
+                                        alt=""
+                                    />
+                                </div>
+                                <div className="img">
+                                    <img
+                                        src="https://god-seangler.s3.ap-northeast-2.amazonaws.com/1687518720107.jpg"
+                                        alt=""
+                                    />
+                                </div>
+                                <div className="img">
+                                    <img
+                                        src="https://god-seangler.s3.ap-northeast-2.amazonaws.com/1687518720107.jpg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </H.MainTab>
             <H.MainAlbum>
                 <div>
