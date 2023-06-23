@@ -15,10 +15,7 @@ const Routers = () => {
             <Routes>
                 {/* 공통영역(상단 gnb메뉴)을 위한 Layout  */}
                 <Route element={<Layout />}>
-                    {/* auth */}
-                    <Route path="/join" element={<Join />} />
-                    <Route path="/signup" element={<Signup />} />
-                    <Route path="/login" element={<Login />} />
+                    <Route path="/splash" element={<Join />} />
 
                     {/* main */}
                     <Route path="/" element={<Home />} />
@@ -28,6 +25,10 @@ const Routers = () => {
 
                     <Route path="/pitureList" element={<PictureList />} />
                 </Route>
+                {/* auth */}
+                <Route path="/join" element={<Join />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
             </Routes>
         </BrowserRouter>
     );

@@ -60,6 +60,9 @@
             color: #fff;
         }
     }
+    .react-calendar__tile--active {
+        background: none;
+    }
     .highlight {
         position: relative;
 
@@ -72,7 +75,7 @@
             margin-left: -3px;
             width: 6px;
             height: 6px;
-            background-color: #d1c8ff !important;
+            background-color: #c7f860 !important;
             border-radius: 50%;
         }
     }

@@ -6,11 +6,17 @@ export const Header = styled.header`
     width: 100%;
     padding: 20px 16px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
 
     .txtWelcome {
+        display: inline-block;
+        padding: 12px 24px;
+        align-items: center;
+        gap: 8px;
+        border-radius: 16px 16px 16px 0px;
+        background: var(--neutral-900, #21242e);
         font-family: 'Pretendard-Bold';
-        font-size: 20px;
+        font-size: 16px;
+        color: #fff;
     }
 `;
 
