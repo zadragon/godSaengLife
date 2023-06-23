@@ -4,7 +4,7 @@ import FullCalendar from '@fullcalendar/react'; // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction';
 import { styled } from 'styled-components';
-import { MainApi } from '../shared/api';
+import { MainApi, PostApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
 import 'react-calendar/dist/Calendar.css'; // css import
 import * as C from '../styles/common';
@@ -65,7 +65,22 @@ function Home() {
         return item.FeedImages[0]?.imagePath;
     });
 
-    console.log(feedImgs);
+    const [latestImgs, setLatestImgs] = useState([]);
+
+    useEffect(() => {
+        if (cookies.Authorization) {
+            PostApi.getLatestImg(cookies.Authorization)
+                .then(response => {
+                    setLatestImgs(response.data); // 이미지 데이터를 상태로 설정
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    }, [cookies.Authorization]);
+
+    // console.log(feedImgs);
+    console.log('최근이미지:', latestImgs);
 
     return (
         <div>
@@ -125,9 +140,15 @@ function Home() {
                     </Link>
                 </div>
                 <div className="albumList">
-                    <div className="img"></div>
-                    <div className="img"></div>
-                    <div className="img"></div>
+                    {latestImgs.length === 0 ? (
+                        <div className="img"></div>
+                    ) : (
+                        latestImgs.map((item, index) => (
+                            <div className="img" key={index}>
+                                <img src={item.imagePath} alt="" />
+                            </div>
+                        ))
+                    )}
                 </div>
             </H.MainAlbum>
 
