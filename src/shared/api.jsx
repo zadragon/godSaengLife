@@ -67,21 +67,14 @@ export const PostApi = {
                 console.log(error);
             });
     },
-    // saveData: (token, data) => {
-    //     console.log('token', token, data);
-    //     api.post('/feed/write', data, {
-    //         headers: {
-    //             'Content-Type': 'multipart/form-data',
-    //             Authorization: token,
-    //         },
-    //     })
-    //         .then(response => {
-    //             console.log(response);
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         });
-    // },
+    getLatestImg: token => {
+        return api.get('/image/latest', {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: token,
+            },
+        });
+    },
     saveData: (token, formData) => {
         const apiInstance = axios.create({
             baseURL: process.env.REACT_APP_BACKEND_SERVER_URL,
