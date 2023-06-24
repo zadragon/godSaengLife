@@ -10,12 +10,12 @@ const Gnb = () => {
                     <Link to="/">홈</Link>
                 </li>
                 <li className="analyse">
-                    <Link to="/">분석</Link>
+                    <Link to="/analysis">분석</Link>
                 </li>
-                <li className="community">
+                <li className="community" onClick={() => alert('준비중입니다.')}>
                     <Link to="/">나도갓생</Link>
                 </li>
-                <li className="mypage">
+                <li className="mypage" onClick={() => alert('준비중입니다.')}>
                     <Link to="/">마이페이지</Link>
                 </li>
             </ul>

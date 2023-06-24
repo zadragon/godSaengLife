@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { PostApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
+import * as P from '../styles/post';
+import * as C from '../styles/common';
 
 function Writetoday() {
     const navigate = useNavigate();
@@ -75,46 +77,31 @@ function Writetoday() {
 
     return (
         <div>
-            <div className="flex-row">
-                <div>
+            <C.PageHeader>
+                <button className="btnPrev" onClick={() => navigate(-1)}>
                     <Link to="/">＜</Link>
-                </div>
-                <div className="text-center text-2xl">하루 기록</div>
-            </div>
-            <div>
-                <div className="flex justify-around">
-                    <div
-                        className={`menu-tab ${activeTab === 'condition' ? 'active bg-gray-800 w-300 h-70' : ''}`}
-                        onClick={() => handleTabClick('condition')}
-                    >
-                        나의 컨디션
-                    </div>
-                    <div
-                        className={`menu-tab ${activeTab === 'healthyFood' ? 'active bg-gray-800 w-300 h-70' : ''}`}
-                        onClick={() => handleTabClick('healthyFood')}
-                    >
-                        건강한 음식
-                    </div>
-                    <div
-                        className={`menu-tab ${activeTab === 'exercise' ? 'active bg-gray-800 w-300 h-70' : ''}`}
-                        onClick={() => handleTabClick('exercise')}
-                    >
-                        운동
-                    </div>
-                    <div
-                        className={`menu-tab ${activeTab === 'goodSleep' ? 'active bg-gray-800 w-300 h-70' : ''}`}
-                        onClick={() => handleTabClick('goodSleep')}
-                    >
-                        꿀잠
-                    </div>
-                    <div
-                        className={`menu-tab ${activeTab === 'photo' ? 'active bg-gray-800 w-300 h-70' : ''}`}
-                        onClick={() => handleTabClick('photo')}
-                    >
-                        사진 선택
-                    </div>
-                </div>
-            </div>
+                </button>
+                <h2>하루 기록</h2>
+            </C.PageHeader>
+            <P.PostTab>
+                <ul className="flex justify-around">
+                    <li className={`menu-tab`} onClick={() => handleTabClick('condition')}>
+                        <span className="hidden"> 나의 컨디션</span>
+                    </li>
+                    <li className={`menu-tab`} onClick={() => handleTabClick('healthyFood')}>
+                        <span className="hidden">건강한 음식</span>
+                    </li>
+                    <li className={`menu-tab`} onClick={() => handleTabClick('exercise')}>
+                        <span className="hidden">운동</span>
+                    </li>
+                    <li className={`menu-tab`} onClick={() => handleTabClick('goodSleep')}>
+                        <span className="hidden">꿀잠</span>
+                    </li>
+                    <li className={`menu-tab`} onClick={() => handleTabClick('photo')}>
+                        <span className="hidden">사진 선택</span>
+                    </li>
+                </ul>
+            </P.PostTab>
             {activeTab === 'condition' && (
                 <div>
                     <h2 className="text-2xl">오늘 하루 컨디션은?</h2>

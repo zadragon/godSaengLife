@@ -2,15 +2,15 @@ import axios from 'axios';
 import { api } from './apiConfig';
 
 export const AuthApi = {
-    signup: payload => {
-        console.log(payload);
+    signup: (payload, navigate) => {
         const url = '/signup';
         api.post(url, payload)
             .then(response => {
-                console.log(response);
+                response.data.code == 201 && navigate('/joinDone');
             })
             .catch(error => {
-                console.log(error);
+                alert(error.response.data.message);
+                //console.log(error);
             });
     },
     signin: async payload => {
@@ -25,10 +25,10 @@ export const AuthApi = {
             },
         })
             .then(response => {
-                console.log(response);
+                //console.log(response);
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             });
     },
 };
@@ -43,11 +43,11 @@ export const MainApi = {
                 },
             })
             .then(response => {
-                console.log(response);
+                //console.log(response);
                 return response;
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
             });
     },
 };
@@ -82,7 +82,22 @@ export const PostApi = {
         apiInstance
             .post('/feed/write', formData)
             .then(response => {
-                console.log(response);
+                //console.log(response);
+            })
+            .catch(error => {
+                //console.log(error);
+            });
+    },
+    deleteOneImg: (imageId, token) => {
+        return api
+            .delete(`/feed/image/${imageId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: token,
+                },
+            })
+            .then(response => {
+                alert(response.data.message);
             })
             .catch(error => {
                 console.log(error);

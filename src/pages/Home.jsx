@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import FullCalendar from '@fullcalendar/react'; // must go before plugins
-import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
-import interactionPlugin from '@fullcalendar/interaction';
 import { styled } from 'styled-components';
 import { MainApi, PostApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
@@ -12,57 +9,39 @@ import * as H from '../styles/home';
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
 import Calendar from 'react-calendar';
+import OverlayImg from '../components/picture/OverlayImg';
 
 function Home() {
-    const [cookies, setCookie, removeCookie] = useCookies();
+    const [cookies] = useCookies();
     const [allData, setAllData] = useState();
-    const [calData, setCalData] = useState();
     const navigate = useNavigate();
 
-    const { data, isLoading, error, refetch } = useQuery(['getMain'], () => MainApi.getMain(cookies.Authorization));
+    const { data, isLoading, isError, refetch } = useQuery(['getMain'], () => MainApi.getMain(cookies.Authorization));
+
+    console.log(data);
 
     const calendarData = data?.data.feeds.map(item => {
         return moment(item.createdAt).format('DD-MM-YYYY');
     });
 
-    const handleClick = (date, jsEvent) => {
-        console.log('Date clicked:', date);
-        console.log('JS event:', jsEvent);
-    };
-
-    const handleDateClick = info => {
-        console.log('클릭된 날짜:', info.dateStr);
-        console.log('시작 날짜:', info.startStr);
-        console.log('끝 날짜:', info.endStr);
-        console.log('모든 정보:', info);
-    };
-
     useEffect(() => {
-        MainApi.getMain(cookies.Authorization, setAllData);
-    }, []);
+        if (cookies.Authorization) {
+            MainApi.getMain(cookies.Authorization, setAllData);
+        }
+    }, [cookies.Authorization]);
 
     const calDataArr = allData?.map(item => {
         return { date: item.createdAt };
     });
 
-    const [currentTab, clickTab] = useState(0);
-    const menuArr = [
-        { name: '컨디션', content: 'Tab menu ONE' },
-        { name: '식단 사진', content: 'Tab menu TWO' },
-    ];
-
-    const selectMenuHandler = index => {
-        // parameter로 현재 선택한 인덱스 값을 전달해야 하며, 이벤트 객체(event)는 쓰지 않는다
-        // 해당 함수가 실행되면 현재 선택된 Tab Menu 가 갱신.
-        clickTab(index);
-    };
     const [value, onChange] = useState(new Date());
 
-    const selectCondition = data?.data.feeds.filter(item => {
+    const selectDate = data?.data.feeds.filter(item => {
         return moment(item.createdAt).format('DD-MM-YYYY') == moment(value).format('DD-MM-YYYY');
     });
-    const feedImgs = selectCondition?.map(item => {
-        return item.FeedImages[0]?.imagePath;
+
+    const feedImgs = selectDate?.map(item => {
+        return item.FeedImages;
     });
 
     const [tabId, setTabId] = useState('condition');
@@ -78,13 +57,18 @@ function Home() {
                 .then(response => {
                     setLatestImgs(response.data.feedImages);
                     // 이미지 데이터를 상태로 설정
-                    console.log('피드:', response.data);
+                    //console.log('피드:', response.data);
                 })
                 .catch(error => {
                     console.log(error);
                 });
         }
     }, [cookies.Authorization]);
+
+    const [imgViewUrl, setImgViewUrl] = useState({ view: false, url: '', feedId: '' });
+    const viewDetail = (imgUrl, imageId) => {
+        setImgViewUrl({ ...imgViewUrl, view: true, url: imgUrl, imageId: imageId });
+    };
 
     return (
         <div>
@@ -112,32 +96,63 @@ function Home() {
 
                 {tabId == 'condition' && (
                     <div className="tabCont">
-                        {selectCondition?.length === 0 && (
+                        {isError ? (
                             <div className="empty">
                                 <p>기록이 없어요</p>
                             </div>
-                        )}
-                        <div className="conditionList">
-                            <div className="btnArea">
-                                <Link to={`/feed/${feedId}`} className="btnEdit">
-                                    <span className="hidden">수정</span>
-                                </Link>
-                            </div>
-
-                            <div>
-                                {selectCondition?.map((item, idx) => {
+                        ) : (
+                            <div className="conditionList">
+                                {selectDate?.map((item, idx) => {
                                     return (
-                                        <div key={idx}>
-                                            <ul>
-                                                <li key={idx}>😁 {item.emotion}</li>
-                                                <li>{item.didGym ? '✅ 오늘 진짜 운동 잘됨' : '✅ 운동못함ㅜㅜ'}</li>
-                                                <li>
-                                                    {item.goodSleep
-                                                        ? '🙌🏻 꿀잠 자고 개운한 날'
-                                                        : '🙌🏻 잠못자서 두드려맞은듯 ㅜㅜ'}
-                                                </li>
-                                                <li>{item.howEat ? '😁 건강하게 먹음!!' : '😁 주워먹음'}</li>
-                                            </ul>
+                                        <>
+                                            <div className="btnArea">
+                                                <Link to={`/feed/${item.feedId}`} className="btnEdit">
+                                                    <span className="hidden">수정</span>
+                                                </Link>
+                                            </div>
+
+                                            <div>
+                                                <div key={idx}>
+                                                    <ul>
+                                                        <li key={idx}>😁 {item.emotion}</li>
+                                                        <li>
+                                                            {item.didGym ? '✅ 오늘 진짜 운동 잘됨' : '✅ 운동못함ㅜㅜ'}
+                                                        </li>
+                                                        <li>
+                                                            {item.goodSleep
+                                                                ? '🙌🏻 꿀잠 자고 개운한 날'
+                                                                : '🙌🏻 잠못자서 두드려맞은듯 ㅜㅜ'}
+                                                        </li>
+                                                        <li>{item.howEat ? '😁 건강하게 먹음!!' : '😁 주워먹음'}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </>
+                                    );
+                                })}
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {tabId == 'picture' && (
+                    <div className="tabCont">
+                        {isError ||
+                            (feedImgs[0].length == 0 && (
+                                <div className="empty">
+                                    <p>기록이 없어요</p>
+                                </div>
+                            ))}
+                        <div className="imgList">
+                            <div className="imgRail">
+                                {feedImgs[0]?.map(item => {
+                                    return (
+                                        <div
+                                            key={item.FeedId}
+                                            className="img"
+                                            onClick={() => viewDetail(item.imagePath, item.imageId)}
+                                        >
+                                            <img src={`${item.imagePath}`} alt="" />
                                         </div>
                                     );
                                 })}
@@ -145,45 +160,8 @@ function Home() {
                         </div>
                     </div>
                 )}
-
-                {tabId == 'picture' && (
-                    <div className="tabCont">
-                        <div className="imgList">
-                            <div className="imgRail">
-                                {feedImgs?.map((item, idx) => {
-                                    return (
-                                        <div key={idx} className="img">
-                                            <img src={`${item}`} alt="" />
-                                        </div>
-                                    );
-                                })}
-                                <div className="img">
-                                    <img
-                                        src="https://god-seangler.s3.ap-northeast-2.amazonaws.com/1687518720107.jpg"
-                                        alt=""
-                                    />
-                                </div>
-                                <div className="img">
-                                    <img
-                                        src="https://god-seangler.s3.ap-northeast-2.amazonaws.com/1687518720107.jpg"
-                                        alt=""
-                                    />
-                                </div>
-                                <div className="img">
-                                    <img
-                                        src="https://god-seangler.s3.ap-northeast-2.amazonaws.com/1687518720107.jpg"
-                                        alt=""
-                                    />
-                                </div>
-                                <div className="img">
-                                    <img
-                                        src="https://god-seangler.s3.ap-northeast-2.amazonaws.com/1687518720107.jpg"
-                                        alt=""
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {imgViewUrl.view && (
+                    <OverlayImg imgUrl={imgViewUrl.url} imageId={imgViewUrl.imageId} setImgViewUrl={setImgViewUrl} />
                 )}
             </H.MainTab>
             <H.MainAlbum>

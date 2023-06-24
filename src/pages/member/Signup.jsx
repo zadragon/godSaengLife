@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { AuthApi } from '../../shared/api';
 import * as M from '../../styles/member';
+import * as C from '../../styles/common';
 import { TextField } from '@mui/material';
 
 // 닉네임 정규식
@@ -33,6 +34,7 @@ function Signup() {
             password: '',
         },
     });
+    const [pwConfirm, setPwConfirm] = useState('');
 
     const initErrorMsg = {
         nickErrorMsg: '',
@@ -89,56 +91,98 @@ function Signup() {
         console.log(inputs);
     };
 
+    const onChangePwConfirmHandler = e => {
+        const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
+        setPwConfirm(value);
+
+        if (inputs.payload.password !== value) {
+            setErrMsg({
+                ...errMsg,
+                pwMatchErrorMsg: '비밀번호가 맞는지 다시 한번 확인해주세요.',
+            });
+        } else {
+            setErrMsg({
+                ...errMsg,
+                pwMatchErrorMsg: '',
+            });
+        }
+    };
+
     const onSubmitHandler = e => {
-        AuthApi.signup(inputs.payload);
+        if (inputs.payload.password == pwConfirm) {
+            AuthApi.signup(inputs.payload, navigate);
+        } else {
+            setErrMsg({
+                ...errMsg,
+                pwMatchErrorMsg: '비밀번호가 맞는지 다시 한번 확인해주세요.',
+            });
+        }
 
         //navigate('/login');
     };
 
     return (
-        <div>
-            <M.MemHeader>
+        <div className="section">
+            <C.PageHeader>
+                <button className="btnPrev" onClick={() => navigate(-1)}>
+                    <span className="hidden">뒤로가기</span>
+                </button>
                 <h2>회원가입</h2>
-            </M.MemHeader>
+            </C.PageHeader>
+            <M.ProfileImg></M.ProfileImg>
             <M.Inputs>
                 <div className="row">
-                    <label>닉네임</label>
-                    <input type="text" name="nickname" onChange={onChangeHandler} />
-                    <StAlertBox>{nickErrorMsg}</StAlertBox>
-
-                    <TextField label="닉네임" variant="outlined" fullWidth />
+                    <TextField
+                        label="닉네임"
+                        name="nickname"
+                        variant="outlined"
+                        fullWidth
+                        onChange={onChangeHandler}
+                        helperText={nickErrorMsg}
+                        placeholder="닉네임 (2 - 9자 사이)"
+                    />
                 </div>
                 <div className="row">
-                    <label>이메일</label>
-                    <input type="text" name="email" onChange={onChangeHandler} />
-
-                    <TextField label="이메일" variant="outlined" fullWidth />
-                    <StAlertBox>{emailErrorMsg}</StAlertBox>
+                    <TextField
+                        label="이메일"
+                        name="email"
+                        variant="outlined"
+                        fullWidth
+                        onChange={onChangeHandler}
+                        placeholder="god@godSaeng.com"
+                        helperText={emailErrorMsg}
+                    />
                 </div>
                 <div className="row">
-                    <label>비밀번호</label>
-                    <input type="password" name="password" placeholder="Password" onChange={onChangeHandler} />
-
-                    <TextField type="password" label="비밀번호" variant="outlined" fullWidth />
-                    <StAlertBox>{pwErrorMsg}</StAlertBox>
+                    <TextField
+                        type="password"
+                        name="password"
+                        label="비밀번호"
+                        variant="outlined"
+                        fullWidth
+                        onChange={onChangeHandler}
+                        placeholder="숫자+영문+특수문자 조합으로 8자리 이상"
+                        helperText={pwErrorMsg}
+                    />
                 </div>
                 <div className="row">
-                    <label>
-                        비밀번호 재입력
-                        <StAlertBox>{pwMatchErrorMsg}</StAlertBox>
-                    </label>
-                    <input type="password" placeholder="Confirm Password" />
-
-                    <TextField type="password" label="비밀번호 재입력" variant="outlined" fullWidth />
+                    <TextField
+                        type="password"
+                        name="passwordConfim"
+                        label="비밀번호 재입력"
+                        variant="outlined"
+                        fullWidth
+                        onChange={onChangePwConfirmHandler}
+                        helperText={pwMatchErrorMsg}
+                    />
                 </div>
-                <div>
-                    <StBtn backgroundcolor="#7fccde" onClick={onSubmitHandler}>
-                        회원가입
-                    </StBtn>
-                    <Link to={'/'}>
-                        <StBtn backgroundcolor="#fa5a5a">취소</StBtn>
-                    </Link>
+                <div className="txtTerms">
+                    아래 버튼을 선택함으로써 <br /> 개인정보 제공 및 이용 에 동의합니다.
+                    <span> 내용보기</span>
                 </div>
+                <M.BtnJoinArea>
+                    <M.BtnJoin onClick={onSubmitHandler}>회원가입</M.BtnJoin>
+                </M.BtnJoinArea>
             </M.Inputs>
         </div>
     );

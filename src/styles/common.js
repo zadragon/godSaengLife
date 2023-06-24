@@ -18,6 +18,43 @@ export const Header = styled.header`
         font-size: 16px;
         color: #fff;
     }
+    .signInOut {
+        margin-left: 10px;
+        text-decoration: underline;
+    }
+`;
+
+/* 페이지 내부 헤더 */
+export const PageHeader = styled.div`
+    position: relative;
+    width: 100%;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 121px;
+    border-bottom: 0.3px solid var(--neutral-300, #d5d6d9);
+    h2 {
+        font-size: 20px;
+        color: #21242e;
+        font-family: 'Pretendard-Bold';
+    }
+    .btnClose {
+        position: absolute;
+        top: 10px;
+        right: 16px;
+        width: 24px;
+        height: 24px;
+        background: url('/images/icons/icon-close.svg') no-repeat center;
+    }
+    .btnPrev {
+        position: absolute;
+        top: 10px;
+        left: 16px;
+        width: 24px;
+        height: 24px;
+        background: url('/images/icons/icon-prev.svg') no-repeat center;
+    }
 `;
 
 export const GnbBar = styled.nav`
@@ -39,8 +76,13 @@ export const GnbBar = styled.nav`
             width: 56px;
             font-size: 11px;
             color: #393e4f;
-            padding-top: 22px;
             justify-content: center;
+            a {
+                display: block;
+                width: 100%;
+                padding-top: 22px;
+                text-align: center;
+            }
             &.home {
                 background: url('/images/gnb/menu-home.svg') no-repeat center 5px;
                 &.active {
@@ -74,6 +116,11 @@ export const AddPost = styled.div`
     border-radius: 200px;
     text-align: center;
     line-height: 56px;
+    a {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
     span {
         font-size: 22px;
         color: #21242e;
