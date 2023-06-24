@@ -1,8 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { AuthApi } from '../../shared/api';
 import { useCookies } from 'react-cookie';
+import { Link, useNavigate } from 'react-router-dom';
+
 const Login = () => {
     const navigate = useNavigate();
 
@@ -72,9 +73,9 @@ const Login = () => {
                     </div>
                     <div>
                         <p>계정이 없다면?</p>
-                        <a to="/signup" className="buttonlogin">
+                        <Link to="/signup" className="buttonlogin">
                             회원가입
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </form>

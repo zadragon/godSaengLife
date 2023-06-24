@@ -4,6 +4,7 @@ import { PostApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
 import { styled } from 'styled-components';
 import { useQuery } from '@tanstack/react-query';
+import * as H from '../styles/home';
 
 const Allmeal = () => {
     const [cookies, setCookie, removeCookie] = useCookies();
@@ -24,17 +25,19 @@ const Allmeal = () => {
     }, [cookies.Authorization]);
 
     return (
-        <div className="albumList">
-            {allMeal.length === 0 ? (
-                <div className="img"></div>
-            ) : (
-                allMeal.map((item, index) => (
-                    <div className="img" key={index}>
-                        <img src={item.imagePath} alt="" />
-                    </div>
-                ))
-            )}
-        </div>
+        <H.MainAlbum>
+            <div className="albumList">
+                {allMeal.length === 0 ? (
+                    <div className="img"></div>
+                ) : (
+                    allMeal.map((item, index) => (
+                        <div className="img" key={index}>
+                            <img src={item.imagePath} alt="" />
+                        </div>
+                    ))
+                )}
+            </div>
+        </H.MainAlbum>
     );
 };
 
