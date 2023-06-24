@@ -35,7 +35,7 @@ const Routers = () => {
                     <Route path="/image/latest" element={<Home />} />
                     <Route path="/allmeal" element={<Allmeal />} />
 
-                    <Route path="/editfeed" element={<EditFeed />} />
+                    <Route path="/feed/:feedId" element={<EditFeed />} />
                     <Route path="/pitureList" element={<PictureList />} />
                     <Route path="/analysis" element={<Analysis />} />
                 </Route>

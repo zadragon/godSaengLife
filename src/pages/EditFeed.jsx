@@ -12,10 +12,13 @@ function EditFeed() {
     const { data, isLoading, error, refetch } = useQuery(['getMain'], () => MainApi.getMain(cookies.Authorization));
     const [value, onChange] = useState(new Date());
     const [cookies, setCookie, removeCookie] = useCookies();
-    const selectCondition = data?.data.feeds.filter(item => {
+    // const selectCondition = data?.data.feeds.filter(item => {
+    //     return moment(item.createdAt).format('DD-MM-YYYY') == moment(value).format('DD-MM-YYYY');
+    // });
+    const selectDate = data?.data.feeds.filter(item => {
         return moment(item.createdAt).format('DD-MM-YYYY') == moment(value).format('DD-MM-YYYY');
     });
-    const feedImgs = selectCondition?.map(item => {
+    const feedImgs = selectDate?.map(item => {
         return item.FeedImages[0]?.imagePath;
     });
 
@@ -55,7 +58,7 @@ function EditFeed() {
         formData.append('goodSleep', selectedButtons.goodSleep);
 
         const feedId = data?.feeds?.feedId; // feedId 추출
-
+        console.log('피드아이디:', feedId);
         try {
             PutApi.editData(cookies.Authorization, formData, feedId);
         } catch (error) {
@@ -72,19 +75,31 @@ function EditFeed() {
                 <div className="text-center text-2xl">피드 수정</div>
             </div>
             <div>
-                <div>
-                    {selectCondition?.map((item, idx) => {
+                <div className="conditionList">
+                    {selectDate?.map((item, idx) => {
                         return (
-                            <div key={idx}>
-                                <ul>
-                                    <li key={idx}>😁 {item.emotion}</li>
-                                    <li>{item.didGym ? '✅ 오늘 진짜 운동 잘됨' : '✅ 운동못함ㅜㅜ'}</li>
-                                    <li>
-                                        {item.goodSleep ? '🙌🏻 꿀잠 자고 개운한 날' : '🙌🏻 잠못자서 두드려맞은듯 ㅜㅜ'}
-                                    </li>
-                                    <li>{item.howEat ? '😁 건강하게 먹음!!' : '😁 주워먹음'}</li>
-                                </ul>
-                            </div>
+                            <>
+                                {/* <div className="btnArea">
+                                    <Link to={`/feed/${item.feedId}`} className="btnEdit">
+                                        <span className="hidden">수정</span>
+                                    </Link>
+                                </div> */}
+
+                                <div>
+                                    <div key={idx}>
+                                        <ul>
+                                            <li key={idx}>😁 {item.emotion}</li>
+                                            <li>{item.didGym ? '✅ 오늘 진짜 운동 잘됨' : '✅ 운동못함ㅜㅜ'}</li>
+                                            <li>
+                                                {item.goodSleep
+                                                    ? '🙌🏻 꿀잠 자고 개운한 날'
+                                                    : '🙌🏻 잠못자서 두드려맞은듯 ㅜㅜ'}
+                                            </li>
+                                            <li>{item.howEat ? '😁 건강하게 먹음!!' : '😁 주워먹음'}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </>
                         );
                     })}
                 </div>
