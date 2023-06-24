@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { AuthApi } from '../../shared/api';
+import * as M from '../../styles/member';
+import { TextField } from '@mui/material';
 
 // 닉네임 정규식
 const nicknameRegex = /[^ㄱ-ㅎ가-힣a-zA-Z]/g;
@@ -94,31 +96,40 @@ function Signup() {
     };
 
     return (
-        <StSignupContainer>
-            <h1>회원가입</h1>
-
-            <div>
-                <div>
+        <div>
+            <M.MemHeader>
+                <h2>회원가입</h2>
+            </M.MemHeader>
+            <M.Inputs>
+                <div className="row">
                     <label>닉네임</label>
                     <input type="text" name="nickname" onChange={onChangeHandler} />
                     <StAlertBox>{nickErrorMsg}</StAlertBox>
+
+                    <TextField label="닉네임" variant="outlined" fullWidth />
                 </div>
-                <div>
+                <div className="row">
                     <label>이메일</label>
                     <input type="text" name="email" onChange={onChangeHandler} />
+
+                    <TextField label="이메일" variant="outlined" fullWidth />
                     <StAlertBox>{emailErrorMsg}</StAlertBox>
                 </div>
-                <div>
+                <div className="row">
                     <label>비밀번호</label>
                     <input type="password" name="password" placeholder="Password" onChange={onChangeHandler} />
+
+                    <TextField type="password" label="비밀번호" variant="outlined" fullWidth />
                     <StAlertBox>{pwErrorMsg}</StAlertBox>
                 </div>
-                <div>
+                <div className="row">
                     <label>
                         비밀번호 재입력
                         <StAlertBox>{pwMatchErrorMsg}</StAlertBox>
                     </label>
                     <input type="password" placeholder="Confirm Password" />
+
+                    <TextField type="password" label="비밀번호 재입력" variant="outlined" fullWidth />
                 </div>
                 <div>
                     <StBtn backgroundcolor="#7fccde" onClick={onSubmitHandler}>
@@ -128,8 +139,8 @@ function Signup() {
                         <StBtn backgroundcolor="#fa5a5a">취소</StBtn>
                     </Link>
                 </div>
-            </div>
-        </StSignupContainer>
+            </M.Inputs>
+        </div>
     );
 }
 export default Signup;

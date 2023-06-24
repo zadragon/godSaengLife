@@ -120,26 +120,28 @@ function Home() {
                         <div className="conditionList">
                             <Link to="/editfeed" className="btnArea">
                                 <button className="btnEdit">
-                                    <span className="sr-only">수정</span>
+                                    <span className="hidden">수정</span>
                                 </button>
                             </Link>
 
-                            <ul>
+                            <div>
                                 {selectCondition?.map((item, idx) => {
                                     return (
-                                        <>
-                                            <li key={idx}>😁 {item.emotion}</li>
-                                            <li>{item.didGym ? '✅ 오늘 진짜 운동 잘됨' : '✅ 운동못함ㅜㅜ'}</li>
-                                            <li>
-                                                {item.goodSleep
-                                                    ? '🙌🏻 꿀잠 자고 개운한 날'
-                                                    : '🙌🏻 잠못자서 두드려맞은듯 ㅜㅜ'}
-                                            </li>
-                                            <li>{item.howEat ? '😁 건강하게 먹음!!' : '😁 주워먹음'}</li>
-                                        </>
+                                        <div key={idx}>
+                                            <ul>
+                                                <li key={idx}>😁 {item.emotion}</li>
+                                                <li>{item.didGym ? '✅ 오늘 진짜 운동 잘됨' : '✅ 운동못함ㅜㅜ'}</li>
+                                                <li>
+                                                    {item.goodSleep
+                                                        ? '🙌🏻 꿀잠 자고 개운한 날'
+                                                        : '🙌🏻 잠못자서 두드려맞은듯 ㅜㅜ'}
+                                                </li>
+                                                <li>{item.howEat ? '😁 건강하게 먹음!!' : '😁 주워먹음'}</li>
+                                            </ul>
+                                        </div>
                                     );
                                 })}
-                            </ul>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -207,7 +209,7 @@ function Home() {
             <C.AddPost>
                 <Link to="/writetoday">
                     <span>+</span>
-                    <span className="sr-only">오늘 하루 기록하기</span>
+                    <span className="hidden">오늘 하루 기록하기</span>
                 </Link>
             </C.AddPost>
         </div>

@@ -1,8 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit";
-
+import { configureStore } from '@reduxjs/toolkit';
+import profileImgState from '../modules/auth';
 const store = configureStore({
-  reducer: {},
-  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+    reducer: { profileImgState },
 });
 
 export default store;

@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { AuthApi } from '../../shared/api';
 import { useCookies } from 'react-cookie';
-import { Link, useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import * as M from '../../styles/member';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -38,46 +40,65 @@ const Login = () => {
 
     return (
         <div className="loginArea">
-            <h2>로그인</h2>
+            <M.MemHeader>
+                <h2>로그인</h2>
+                <button className="btnClose">
+                    <span className="hidden">닫기</span>
+                </button>
+            </M.MemHeader>
+
             <form>
-                <div className="Login">
+                <M.Inputs>
                     <div className="row inputemail">
-                        <label>이메일 주소</label>
+                        {/* <label>이메일 주소</label>
                         <input
                             type="text"
+                            className={!message ? 'inputLogin' : 'err_password'}
+                            placeholder="이메일 주소를 입력해주세요"
+                        /> */}
+
+                        <TextField
                             onChange={e => {
                                 setEmail(e.target.value);
                             }}
-                            className={!message ? 'inputLogin' : 'err_password'}
-                            placeholder="이메일 주소를 입력해주세요"
+                            id="standard-error-helper-text"
+                            label="이메일 주소"
+                            variant="outlined"
+                            fullWidth
                         />
                     </div>
                     <div className="row inputpassword">
-                        <label>비밀번호</label>
+                        {/* <label>비밀번호</label>
                         <input
                             type="password"
+                            className={!message ? 'inputLogin' : 'err_password'}
+                            placeholder="비밀번호를 입력해주세요"
+                        /> */}
+                        <TextField
                             onChange={e => {
                                 setPassword(e.target.value);
                             }}
-                            className={!message ? 'inputLogin' : 'err_password'}
-                            placeholder="비밀번호를 입력해주세요"
+                            type="password"
+                            id="standard-error-helper-text"
+                            label="비밀번호"
+                            variant="outlined"
+                            fullWidth
                         />
                         <p className="err">{message}</p>
                     </div>
-                </div>
-                <div className="loginUtil">
-                    <div>
-                        <button className="buttonlogin" onClick={loginaxios}>
-                            시작해볼까요? 🥰
-                        </button>
-                    </div>
-                    <div>
-                        <p>계정이 없다면?</p>
-                        <Link to="/signup" className="buttonlogin">
+                </M.Inputs>
+                <M.loginFunc>
+                    <button className="btnLogin" onClick={loginaxios}>
+                        로그인
+                    </button>
+                    <div className="loginUtil">
+                        {/* <span>이메일 찾기</span>
+                        <span>비밀번호찾기 찾기</span> */}
+                        <Link to="/signup" className="btnJoin">
                             회원가입
                         </Link>
                     </div>
-                </div>
+                </M.loginFunc>
             </form>
         </div>
     );
