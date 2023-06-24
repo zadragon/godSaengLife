@@ -8,6 +8,7 @@ import Join from '../pages/member/Join';
 import Allmeal from '../pages/Allmeal';
 import Writetoday from '../pages/Writetoday';
 import PictureList from '../pages/record/PictureList';
+import EditFeed from '../pages/EditFeed';
 
 const Routers = () => {
     return (
@@ -22,7 +23,7 @@ const Routers = () => {
                     <Route path="/image/latest" element={<Home />} />
                     <Route path="/allmeal" element={<Allmeal />} />
                     <Route path="/writetoday" element={<Writetoday />} />
-
+                    <Route path="/editfeed" element={<EditFeed />} />
                     <Route path="/pitureList" element={<PictureList />} />
                 </Route>
                 {/* auth */}

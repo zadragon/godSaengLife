@@ -1,45 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import Masonry from 'react-masonry-css';
-import { AuthApi, PostApi } from '../shared/api';
+import { PostApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
+import { styled } from 'styled-components';
+import { useQuery } from '@tanstack/react-query';
+import * as H from '../styles/home';
 
 const Allmeal = () => {
-    const [cookies] = useCookies();
-    const breakpointColumnsObj = {
-        default: 3,
-        1100: 2,
-        700: 1,
-        //화면 크기에따라 보여지는 column수
-    };
-
-    const [images, setImages] = useState([]);
+    const [cookies, setCookie, removeCookie] = useCookies();
+    const [allMeal, setAllMeal] = useState([]);
 
     useEffect(() => {
-        PostApi.getAllMeal(cookies.Authorization);
-        // const fetchPost = async () => {
-        //     try {
-        //         const response = await AuthApi.getpost();
-        //         const data = response.data.feedImage;
-        //         setImages(data);
-        //     } catch (error) {
-        //         console.error(error);
-        //     }
-        // };
-        // fetchPost();
-    }, []);
+        if (cookies.Authorization) {
+            PostApi.getAllMeal(cookies.Authorization)
+                .then(response => {
+                    setAllMeal(response.data.feeds);
+                    // 이미지 데이터를 상태로 설정
+                    console.log('전체사진:', response.data.feeds);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    }, [cookies.Authorization]);
 
     return (
-        <Masonry
-            breakpointCols={breakpointColumnsObj}
-            className="my-masonry-grid"
-            columnClassName="my-masonry-grid-column"
-        >
-            {images.map((image, index) => (
-                <div key={index}>
-                    <img src={image} alt={`Image ${index + 1}`} />
-                </div>
-            ))}
-        </Masonry>
+        <div className="albumList">
+            {allMeal.length === 0 ? (
+                <div className="img"></div>
+            ) : (
+                allMeal.map((item, index) =>
+                    item.FeedImages.map((images, index) => (
+                        <div className="img" key={index}>
+                            <img src={images.imagePath} alt="" />
+                        </div>
+                    ))
+                )
+            )}
+        </div>
     );
 };
 

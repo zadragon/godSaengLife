@@ -54,18 +54,12 @@ export const MainApi = {
 
 export const PostApi = {
     getAllMeal: token => {
-        api.get('/allmeal', {
+        return api.get('/allmeal', {
             headers: {
-                'Content-Type': 'application/json', // 필요한 헤더를 여기에 추가하세요
-                Authorization: token, // 필요한 인증 헤더를 여기에 추가하세요
+                'Content-Type': 'application/json',
+                Authorization: token,
             },
-        })
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        });
     },
     getLatestImg: token => {
         return api.get('/image/latest', {

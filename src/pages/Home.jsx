@@ -118,11 +118,11 @@ function Home() {
                             </div>
                         )}
                         <div className="conditionList">
-                            <div className="btnArea">
+                            <Link to="/editfeed" className="btnArea">
                                 <button className="btnEdit">
                                     <span className="hidden">수정</span>
                                 </button>
-                            </div>
+                            </Link>
 
                             <div>
                                 {selectCondition?.map((item, idx) => {

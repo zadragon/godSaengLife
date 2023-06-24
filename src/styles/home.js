@@ -110,8 +110,9 @@ export const MainAlbum = styled.div`
     }
     .albumList {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         margin-top: 12px;
+        gap: 10px;
         .img {
             width: 112px;
             height: 112px;
