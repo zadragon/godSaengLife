@@ -9,27 +9,36 @@ import Allmeal from '../pages/Allmeal';
 import Writetoday from '../pages/Writetoday';
 import PictureList from '../pages/record/PictureList';
 import EditFeed from '../pages/EditFeed';
+import JoinDone from '../pages/member/JoinDone';
+import Analysis from '../pages/analysis/Analysis';
 
 const Routers = () => {
     return (
         <BrowserRouter>
             <Routes>
-                {/* 공통영역(상단 gnb메뉴)을 위한 Layout  */}
-                <Route element={<Layout />}>
-                    <Route path="/splash" element={<Join />} />
+                {/* default */}
+                <Route path="/splash" element={<Login />} />
 
-                    {/* main */}
-                    <Route path="/" element={<Home />} />
-                    <Route path="/image/latest" element={<Home />} />
-                    <Route path="/allmeal" element={<Allmeal />} />
-                    <Route path="/writetoday" element={<Writetoday />} />
-                    <Route path="/editfeed" element={<EditFeed />} />
-                    <Route path="/pitureList" element={<PictureList />} />
-                </Route>
                 {/* auth */}
                 <Route path="/join" element={<Join />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/joinDone" element={<JoinDone />} />
+
+                {/* 글 작성 */}
+                <Route path="/writetoday" element={<Writetoday />} />
+
+                {/* 공통영역(상단 gnb메뉴)을 위한 Layout  */}
+                <Route element={<Layout />}>
+                    {/* main */}
+                    <Route path="/" element={<Home />} />
+                    <Route path="/image/latest" element={<Home />} />
+                    <Route path="/allmeal" element={<Allmeal />} />
+
+                    <Route path="/editfeed" element={<EditFeed />} />
+                    <Route path="/pitureList" element={<PictureList />} />
+                    <Route path="/analysis" element={<Analysis />} />
+                </Route>
             </Routes>
         </BrowserRouter>
     );

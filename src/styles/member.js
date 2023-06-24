@@ -1,32 +1,12 @@
 import styled from 'styled-components';
 
-export const Header = styled.div`
-    h2 {
-    }
-`;
-
-export const MemHeader = styled.div`
-    position: relative;
-    width: 100%;
-    height: 44px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 121px;
-    border-bottom: 0.3px solid var(--neutral-300, #d5d6d9);
-    h2 {
-        font-size: 20px;
-        color: #21242e;
-        font-family: 'Pretendard-Bold';
-    }
-    .btnClose {
-        position: absolute;
-        top: 10px;
-        right: 16px;
-        width: 24px;
-        height: 24px;
-        background: url('/images/icons/icon-close.svg') no-repeat center;
-    }
+export const ProfileImg = styled.div`
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    margin: 24px auto 0;
+    overflow: hidden;
+    background: #21242e url('/images/icons/img-profile.png') no-repeat;
 `;
 
 export const Inputs = styled.div`
@@ -35,6 +15,19 @@ export const Inputs = styled.div`
     display: flex;
     flex-direction: column;
     gap: 12px;
+    .txtTerms {
+        margin-top: 43px;
+        text-align: center;
+        line-height: 16px;
+        font-size: 13px;
+        color: #888d9a;
+        span {
+            margin-top: 20px;
+            display: block;
+            text-decoration: underline;
+            color: #21242e;
+        }
+    }
 `;
 
 export const loginFunc = styled.div`
@@ -76,6 +69,75 @@ export const loginFunc = styled.div`
             &:first-child::before {
                 display: none;
             }
+        }
+    }
+`;
+
+export const BtnJoinArea = styled.div`
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 10px 16px;
+    background: #fff;
+    width: 100%;
+`;
+
+export const BtnJoin = styled.button`
+    width: 100%;
+    height: 56px;
+    border-radius: 8px;
+    background: #21242e;
+    color: var(--neutral-000, #fff);
+    /* Paragraph/Mid Bold */
+    font-size: 16px;
+    font-family: 'Pretendard-Medium';
+`;
+
+export const JoinDone = styled.div`
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    .message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 280px;
+        padding: 24px 30px;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+        border-radius: 8px;
+        background: var(--primary-500, #c7f860);
+        text-align: center;
+        p {
+            color: var(--neutral-900, #21242e);
+            text-align: center;
+
+            /* Paragraph/Large Bold */
+            font-size: 20px;
+            font-family: Pretendard;
+            font-weight: 700;
+            line-height: 32px;
+        }
+        span {
+            color: var(--neutral-500, #727580);
+            text-align: center;
+
+            /* Description/Bold */
+            font-size: 12px;
+            font-family: Pretendard;
+            font-weight: 700;
+            line-height: 20px;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+            font-size: 14px;
+            font-family: Pretendard;
+            font-weight: 700;
+            line-height: 32px;
+            text-decoration: underline;
         }
     }
 `;

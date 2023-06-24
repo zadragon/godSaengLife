@@ -5,6 +5,7 @@ import { AuthApi } from '../../shared/api';
 import { useCookies } from 'react-cookie';
 import TextField from '@mui/material/TextField';
 import * as M from '../../styles/member';
+import * as C from '../../styles/common';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -40,12 +41,12 @@ const Login = () => {
 
     return (
         <div className="loginArea">
-            <M.MemHeader>
+            <C.PageHeader>
                 <h2>로그인</h2>
-                <button className="btnClose">
+                <button className="btnClose" onClick={() => navigate('/')}>
                     <span className="hidden">닫기</span>
                 </button>
-            </M.MemHeader>
+            </C.PageHeader>
 
             <form>
                 <M.Inputs>

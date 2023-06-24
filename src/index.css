@@ -59,6 +59,9 @@ body {
 .MuiFormLabel-root {
     font-size: 14px !important;
 }
+.MuiFormHelperText-root {
+    color: #f44336 !important;
+}
 
 .hidden {
     overflow: hidden;

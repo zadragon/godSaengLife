@@ -116,7 +116,14 @@ export const MainAlbum = styled.div`
         .img {
             width: 112px;
             height: 112px;
+            overflow: hidden;
+            border-radius: 8px;
             background: #f8f8f9 url('/images/icons/img-star.svg') no-repeat center;
+            img {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
         }
     }
 `;
