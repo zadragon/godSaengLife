@@ -100,39 +100,3 @@ header .imsi {
 input {
     border: 1px solid #ddd;
 }
-
-/* 로그인 */
-.loginArea {
-    width: 90%;
-    margin: 0 auto;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 10px 20px;
-}
-.loginArea h2 {
-    text-align: center;
-    font-size: 36px;
-}
-
-.loginArea .row {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.loginArea label {
-    display: block;
-    width: 100%;
-}
-
-.loginArea input {
-    display: block;
-    width: 100%;
-}
-
-.loginArea .loginUtil {
-    text-align: center;
-}
-
-.loginArea .loginUtil .buttonlogin {
-    text-decoration: underline;
-}

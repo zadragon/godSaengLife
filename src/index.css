@@ -49,7 +49,18 @@ body {
     font-family: 'Pretendard-Regular';
 }
 
-.sr-only {
+.MuiInputBase-input {
+    width: 100%;
+    height: 48px !important;
+    padding: 0 14px !important;
+    background-color: #f8f8f9 !important;
+    border: 0 !important;
+}
+.MuiFormLabel-root {
+    font-size: 14px !important;
+}
+
+.hidden {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     position: absolute;
