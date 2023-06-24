@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import FullCalendar from '@fullcalendar/react'; // must go before plugins
-import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
-import interactionPlugin from '@fullcalendar/interaction';
 import { styled } from 'styled-components';
 import { MainApi, PostApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
@@ -116,11 +113,11 @@ function Home() {
                             </div>
                         ) : (
                             <div className="conditionList">
-                                <Link to="/editfeed" className="btnArea">
-                                    <button className="btnEdit">
+                                <div className="btnArea">
+                                    <Link to={`/feed/feedId`} className="btnEdit">
                                         <span className="hidden">수정</span>
-                                    </button>
-                                </Link>
+                                    </Link>
+                                </div>
 
                                 <div>
                                     {selectDate?.map((item, idx) => {

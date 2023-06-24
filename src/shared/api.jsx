@@ -104,3 +104,24 @@ export const PostApi = {
             });
     },
 };
+
+export const PutApi = {
+    editData: (token, formData, feedId) => {
+        return axios
+            .put(`${process.env.REACT_APP_BACKEND_SERVER_URL}/feeds/${feedId}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: token,
+                },
+                withCredentials: true,
+            })
+            .then(response => {
+                console.log(response.data);
+                return response.data; // 필요에 따라 응답 데이터 반환
+            })
+            .catch(error => {
+                console.log(error);
+                throw error; // 에러를 상위 컴포넌트로 전달하거나 처리할 수 있도록 throw
+            });
+    },
+};
