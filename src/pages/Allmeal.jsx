@@ -16,7 +16,7 @@ const Allmeal = () => {
                 .then(response => {
                     setAllMeal(response.data.feeds);
                     // 이미지 데이터를 상태로 설정
-                    console.log('전체사진:', response.data);
+                    console.log('전체사진:', response.data.feeds);
                 })
                 .catch(error => {
                     console.log(error);
@@ -25,19 +25,19 @@ const Allmeal = () => {
     }, [cookies.Authorization]);
 
     return (
-        <H.MainAlbum>
-            <div className="albumList">
-                {allMeal.length === 0 ? (
-                    <div className="img"></div>
-                ) : (
-                    allMeal.map((item, index) => (
+        <div className="albumList">
+            {allMeal.length === 0 ? (
+                <div className="img"></div>
+            ) : (
+                allMeal.map((item, index) =>
+                    item.FeedImages.map((images, index) => (
                         <div className="img" key={index}>
-                            <img src={item.imagePath} alt="" />
+                            <img src={images.imagePath} alt="" />
                         </div>
                     ))
-                )}
-            </div>
-        </H.MainAlbum>
+                )
+            )}
+        </div>
     );
 };
 
