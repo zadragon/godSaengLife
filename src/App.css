@@ -66,6 +66,26 @@
     .react-calendar__tile--active {
         background: none;
     }
+    .react-calendar__tile--active:after {
+        content: '';
+        display: block;
+        position: absolute;
+        z-index: 0;
+        top: 18px;
+        left: 50%;
+        margin-left: -14px;
+        width: 28px;
+        height: 28px;
+        border: 1px solid #c7f860;
+        border-radius: 50%;
+    }
+    .react-calendar button:enabled:hover {
+        background: none;
+    }
+    .react-calendar__tile--active:enabled:hover,
+    .react-calendar__tile--active:enabled:focus {
+        background: none;
+    }
     .highlight {
         position: relative;
 
@@ -82,24 +102,4 @@
             border-radius: 50%;
         }
     }
-}
-
-/*----------------- 임시 ---------------*/
-/* 헤더임시 */
-header .imsi {
-    background-color: white;
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    z-index: 10;
-    opacity: 0.5;
-    font-size: 12px;
-}
-
-/*임시코드*/
-
-input {
-    border: 1px solid #ddd;
 }

@@ -6,11 +6,12 @@ export const AuthApi = {
         const url = '/signup';
         api.post(url, payload)
             .then(response => {
+                console.log(response);
                 response.data.code == 201 && navigate('/joinDone');
             })
             .catch(error => {
+                console.log(error);
                 alert(error.response.data.message);
-                //console.log(error);
             });
     },
     signin: async payload => {
@@ -70,6 +71,9 @@ export const PostApi = {
         });
     },
     saveData: (token, formData) => {
+        for (let key of formData.keys()) {
+            console.log(key, ':', formData.get(key));
+        }
         const apiInstance = axios.create({
             baseURL: process.env.REACT_APP_BACKEND_SERVER_URL,
             headers: {
@@ -82,10 +86,10 @@ export const PostApi = {
         apiInstance
             .post('/feed/write', formData)
             .then(response => {
-                //console.log(response);
+                console.log(response);
             })
             .catch(error => {
-                //console.log(error);
+                console.log(error);
             });
     },
     deleteOneImg: (imageId, token) => {

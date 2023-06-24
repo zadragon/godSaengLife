@@ -13,36 +13,44 @@ import OverlayImg from '../components/picture/OverlayImg';
 
 function Home() {
     const [cookies] = useCookies();
-    const [allData, setAllData] = useState();
-    const navigate = useNavigate();
-
+    const [value, onChange] = useState(new Date());
     const { data, isLoading, isError, refetch } = useQuery(['getMain'], () => MainApi.getMain(cookies.Authorization));
+    const navigate = useNavigate();
+    const [calendarData, setCalendarData] = useState([]);
 
-    console.log(data);
-
-    const calendarData = data?.data.feeds.map(item => {
-        return moment(item.createdAt).format('DD-MM-YYYY');
-    });
+    useEffect(() => {
+        setCalendarData(
+            data?.data.feeds.map(item => {
+                return moment(item.createdAt).format('DD-MM-YYYY');
+            })
+        );
+    }, [data]);
 
     useEffect(() => {
         if (cookies.Authorization) {
-            MainApi.getMain(cookies.Authorization, setAllData);
+            MainApi.getMain(cookies.Authorization);
         }
     }, [cookies.Authorization]);
 
-    const calDataArr = allData?.map(item => {
-        return { date: item.createdAt };
-    });
+    const [selectDate, setSelectDate] = useState([]);
 
-    const [value, onChange] = useState(new Date());
+    useEffect(() => {
+        console.log(value);
+        setSelectDate(
+            data?.data.feeds.filter(item => {
+                return moment(item.createdAt).format('DD-MM-YYYY') == moment(value).format('DD-MM-YYYY');
+            })
+        );
+    }, [value]);
 
-    const selectDate = data?.data.feeds.filter(item => {
-        return moment(item.createdAt).format('DD-MM-YYYY') == moment(value).format('DD-MM-YYYY');
-    });
-
-    const feedImgs = selectDate?.map(item => {
-        return item.FeedImages;
-    });
+    const [feedImgs, setFeedImgs] = useState([]);
+    useEffect(() => {
+        setFeedImgs(
+            selectDate?.map(item => {
+                return item.FeedImages;
+            })
+        );
+    }, [selectDate]);
 
     const [tabId, setTabId] = useState('condition');
     const tabClick = e => {
@@ -96,7 +104,7 @@ function Home() {
 
                 {tabId == 'condition' && (
                     <div className="tabCont">
-                        {isError ? (
+                        {selectDate == undefined || selectDate.length == 0 ? (
                             <div className="empty">
                                 <p>기록이 없어요</p>
                             </div>
@@ -104,7 +112,7 @@ function Home() {
                             <div className="conditionList">
                                 {selectDate?.map((item, idx) => {
                                     return (
-                                        <>
+                                        <div key={idx}>
                                             <div className="btnArea">
                                                 <Link to={`/feed/${item.feedId}`} className="btnEdit">
                                                     <span className="hidden">수정</span>
@@ -112,7 +120,7 @@ function Home() {
                                             </div>
 
                                             <div>
-                                                <div key={idx}>
+                                                <div>
                                                     <ul>
                                                         <li key={idx}>😁 {item.emotion}</li>
                                                         <li>
@@ -127,7 +135,7 @@ function Home() {
                                                     </ul>
                                                 </div>
                                             </div>
-                                        </>
+                                        </div>
                                     );
                                 })}
                             </div>
@@ -138,7 +146,7 @@ function Home() {
                 {tabId == 'picture' && (
                     <div className="tabCont">
                         {isError ||
-                            (feedImgs[0].length == 0 && (
+                            (feedImgs.length == 0 && (
                                 <div className="empty">
                                     <p>기록이 없어요</p>
                                 </div>
