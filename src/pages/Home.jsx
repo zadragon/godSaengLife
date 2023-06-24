@@ -34,17 +34,6 @@ function Home() {
         return { date: item.createdAt };
     });
 
-    const [currentTab, clickTab] = useState(0);
-    const menuArr = [
-        { name: '컨디션', content: 'Tab menu ONE' },
-        { name: '식단 사진', content: 'Tab menu TWO' },
-    ];
-
-    const selectMenuHandler = index => {
-        // parameter로 현재 선택한 인덱스 값을 전달해야 하며, 이벤트 객체(event)는 쓰지 않는다
-        // 해당 함수가 실행되면 현재 선택된 Tab Menu 가 갱신.
-        clickTab(index);
-    };
     const [value, onChange] = useState(new Date());
 
     const selectDate = data?.data.feeds.filter(item => {
@@ -113,32 +102,34 @@ function Home() {
                             </div>
                         ) : (
                             <div className="conditionList">
-                                <div className="btnArea">
-                                    <Link to={`/feed/feedId`} className="btnEdit">
-                                        <span className="hidden">수정</span>
-                                    </Link>
-                                </div>
-
-                                <div>
-                                    {selectDate?.map((item, idx) => {
-                                        return (
-                                            <div key={idx}>
-                                                <ul>
-                                                    <li key={idx}>😁 {item.emotion}</li>
-                                                    <li>
-                                                        {item.didGym ? '✅ 오늘 진짜 운동 잘됨' : '✅ 운동못함ㅜㅜ'}
-                                                    </li>
-                                                    <li>
-                                                        {item.goodSleep
-                                                            ? '🙌🏻 꿀잠 자고 개운한 날'
-                                                            : '🙌🏻 잠못자서 두드려맞은듯 ㅜㅜ'}
-                                                    </li>
-                                                    <li>{item.howEat ? '😁 건강하게 먹음!!' : '😁 주워먹음'}</li>
-                                                </ul>
+                                {selectDate?.map((item, idx) => {
+                                    return (
+                                        <>
+                                            <div className="btnArea">
+                                                <Link to={`/feed/${item.feedId}`} className="btnEdit">
+                                                    <span className="hidden">수정</span>
+                                                </Link>
                                             </div>
-                                        );
-                                    })}
-                                </div>
+
+                                            <div>
+                                                <div key={idx}>
+                                                    <ul>
+                                                        <li key={idx}>😁 {item.emotion}</li>
+                                                        <li>
+                                                            {item.didGym ? '✅ 오늘 진짜 운동 잘됨' : '✅ 운동못함ㅜㅜ'}
+                                                        </li>
+                                                        <li>
+                                                            {item.goodSleep
+                                                                ? '🙌🏻 꿀잠 자고 개운한 날'
+                                                                : '🙌🏻 잠못자서 두드려맞은듯 ㅜㅜ'}
+                                                        </li>
+                                                        <li>{item.howEat ? '😁 건강하게 먹음!!' : '😁 주워먹음'}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </>
+                                    );
+                                })}
                             </div>
                         )}
                     </div>
