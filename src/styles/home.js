@@ -38,14 +38,17 @@ export const MainTab = styled.div`
             }
         }
         .conditionList {
-            display: flex;
-            width: calc(100% - 32px);
-            margin: 0 auto;
-            padding: 12px;
-            flex-direction: column;
-            align-items: flex-start;
-            border-radius: 8px;
-            background: var(--neutral-100, #f8f8f9);
+            & > div {
+                display: flex;
+                width: calc(100% - 32px);
+                margin: 0 auto;
+                padding: 12px;
+                flex-direction: column;
+                align-items: flex-start;
+                border-radius: 8px;
+                background: var(--neutral-100, #f8f8f9);
+            }
+
             .btnArea {
                 width: 100%;
                 display: flex;

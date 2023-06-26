@@ -4,7 +4,6 @@ import Signup from '../pages/member/Signup';
 import Login from '../pages/member/Login';
 import Home from '../pages/Home';
 import Layout from '../pages/Layout';
-import Join from '../pages/member/Join';
 import Allmeal from '../pages/Allmeal';
 import Writetoday from '../pages/Writetoday';
 import PictureList from '../pages/record/PictureList';
@@ -20,7 +19,6 @@ const Routers = () => {
                 <Route path="/splash" element={<Login />} />
 
                 {/* auth */}
-                <Route path="/join" element={<Join />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/joinDone" element={<JoinDone />} />

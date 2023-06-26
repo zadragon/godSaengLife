@@ -80,7 +80,7 @@ function Writetoday() {
         <div>
             <C.PageHeader>
                 <button className="btnPrev" onClick={() => navigate(-1)}>
-                    <Link to="/">＜</Link>
+                    <span className="hidden">뒤로가기</span>
                 </button>
                 <h2>하루 기록</h2>
             </C.PageHeader>
