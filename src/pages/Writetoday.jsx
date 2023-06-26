@@ -104,12 +104,12 @@ function Writetoday() {
                 </ul>
             </P.PostTab>
             {activeTab === 'condition' && (
-                <div>
-                    <h2 className="text-2xl">오늘 하루 컨디션은?</h2>
-                    <div className="flex flex-col">
+                <P.SelectCondition>
+                    <h3>오늘 하루 컨디션은?</h3>
+                    <div className="selectArea">
                         <button
                             id="happy"
-                            className={`rounded-full ${selectedButtons['emotion'] === 'happy' ? 'bg-gray-300' : ''}`}
+                            className={`${selectedButtons['emotion'] === 'happy' ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'happy')}
                         >
                             😁 아주 상쾌함
@@ -117,101 +117,101 @@ function Writetoday() {
 
                         <button
                             id="soso"
-                            className={`rounded-full ${selectedButtons['emotion'] === 'soso' ? 'bg-gray-300' : ''}`}
+                            className={`${selectedButtons['emotion'] === 'soso' ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'soso')}
                         >
                             🙃 그냥 그럼
                         </button>
                         <button
                             id="tired"
-                            className={`rounded-full ${selectedButtons['emotion'] === 'tired' ? 'bg-gray-300' : ''}`}
+                            className={`${selectedButtons['emotion'] === 'tired' ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'tired')}
                         >
                             🥱 피곤함
                         </button>
                         <button
                             id="good"
-                            className={`rounded-full ${selectedButtons['emotion'] === 'good' ? 'bg-gray-300' : ''}`}
+                            className={`${selectedButtons['emotion'] === 'good' ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'good')}
                         >
                             😊 편안한 날
                         </button>
                         <button
                             id="stress"
-                            className={`rounded-full ${selectedButtons['emotion'] === 'stress' ? 'bg-gray-300' : ''}`}
+                            className={`${selectedButtons['emotion'] === 'stress' ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'stress')}
                         >
                             😡 나쁨
                         </button>
                     </div>
-                </div>
+                </P.SelectCondition>
             )}
             {activeTab === 'healthyFood' && (
-                <div>
-                    <h2 className="text-2xl">꽤 건강한 음식 위주로 먹었다.</h2>
-                    <div className="flex flex-col">
+                <P.SelectCondition>
+                    <h3>꽤 건강한 음식 위주로 먹었다.</h3>
+                    <div className="selectArea">
                         <button
                             id="howEatO"
-                            className={`rounded-full ${selectedButtons['howEat'] === true ? 'bg-gray-300' : ''}`}
+                            className={`${selectedButtons['howEat'] === true ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('howEat', true)}
                         >
-                            O
+                            🌱 80% 이상 건강하게 먹음
                         </button>
                         <button
                             id="howEatX"
-                            className={`rounded-full ${selectedButtons['howEat'] === false ? 'bg-gray-300' : ''}`}
+                            className={`${selectedButtons['howEat'] === false ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('howEat', false)}
                         >
-                            X
+                            ❌ 오늘은 갓생 보류...
                         </button>
                     </div>
-                </div>
+                </P.SelectCondition>
             )}
             {activeTab === 'exercise' && (
-                <div>
-                    <h2 className="text-2xl">오늘 운동 완료?</h2>
-                    <div className="flex flex-col">
+                <P.SelectCondition>
+                    <h3>오늘 운동 완료?</h3>
+                    <div className="selectArea">
                         <button
                             id="didGymO"
-                            className={`rounded-full ${selectedButtons['didGym'] === true ? 'bg-gray-300' : ''}`}
+                            className={`${selectedButtons['didGym'] === true ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('didGym', true)}
                         >
                             O
                         </button>
                         <button
                             id="didGymX"
-                            className={`rounded-full ${selectedButtons['didGym'] === false ? 'bg-gray-300' : ''}`}
+                            className={`${selectedButtons['didGym'] === false ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('didGym', false)}
                         >
                             X
                         </button>
                     </div>
-                </div>
+                </P.SelectCondition>
             )}
             {activeTab === 'goodSleep' && (
-                <div>
-                    <h2 className="text-2xl">꿀잠 자고 개운한 날이다.</h2>
-                    <div className="flex flex-col">
+                <P.SelectCondition>
+                    <h3>꿀잠 자고 개운한 날이다.</h3>
+                    <div className="selectArea">
                         <button
                             id="goodSleepO"
-                            className={`rounded-full ${selectedButtons['goodSleep'] === true ? 'bg-gray-300' : ''}`}
+                            className={`${selectedButtons['goodSleep'] === true ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('goodSleep', true)}
                         >
                             O
                         </button>
                         <button
                             id="goodSleepX"
-                            className={`rounded-full ${selectedButtons['goodSleep'] === false ? 'bg-gray-300' : ''}`}
+                            className={`${selectedButtons['goodSleep'] === false ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('goodSleep', false)}
                         >
                             X
                         </button>
                     </div>
-                </div>
+                </P.SelectCondition>
             )}
             {activeTab === 'photo' && (
-                <div>
-                    <h2 className="text-2xl">오늘 먹은 음식 올리기</h2>
+                <P.SelectCondition>
+                    <h3>오늘 먹은 음식 올리기</h3>
                     <div>사진등록 (최대 5장)</div>
                     <input type="file" name="images" multiple onChange={setImgFile} accept="image/*" />
                     <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '10px' }}>
@@ -228,7 +228,7 @@ function Writetoday() {
                     <div>
                         <button onClick={handleSave}>저장</button>
                     </div>
-                </div>
+                </P.SelectCondition>
             )}
         </div>
     );

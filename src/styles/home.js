@@ -128,5 +128,15 @@ export const MainAlbum = styled.div`
                 height: 100%;
             }
         }
+        &.col1 {
+            .img {
+                width: 100%;
+            }
+        }
+        &.col2 {
+            .img {
+                width: 49.5%;
+            }
+        }
     }
 `;
