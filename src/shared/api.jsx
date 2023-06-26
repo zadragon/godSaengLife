@@ -129,3 +129,43 @@ export const PutApi = {
             });
     },
 };
+
+export const analysis = {
+    getWeekData: (token, setChart1) => {
+        return axios
+            .get(`${process.env.REACT_APP_BACKEND_SERVER_URL}/graph/week`, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: token,
+                },
+                withCredentials: true,
+            })
+            .then(response => {
+                console.log(response.data);
+                setChart1(response.data);
+                return response.data; // 필요에 따라 응답 데이터 반환
+            })
+            .catch(error => {
+                console.log(error);
+                throw error; // 에러를 상위 컴포넌트로 전달하거나 처리할 수 있도록 throw
+            });
+    },
+    getMonthData: token => {
+        return axios
+            .get(`${process.env.REACT_APP_BACKEND_SERVER_URL}/graph/week`, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: token,
+                },
+                withCredentials: true,
+            })
+            .then(response => {
+                console.log(response.data);
+                return response.data; // 필요에 따라 응답 데이터 반환
+            })
+            .catch(error => {
+                console.log(error);
+                throw error; // 에러를 상위 컴포넌트로 전달하거나 처리할 수 있도록 throw
+            });
+    },
+};
