@@ -17,10 +17,6 @@ function Home() {
     const { data, isLoading, isError, refetch } = useQuery(['getMain'], () => MainApi.getMain(cookies.Authorization));
     const navigate = useNavigate();
     const [calendarData, setCalendarData] = useState([]);
-    const [updateTrigger, setUpdateTrigger] = useState(false); //피드 수정 실시간 반영
-    const updateData = () => {
-        setUpdateTrigger(prev => !prev);
-    };
 
     useEffect(() => {
         setCalendarData(
