@@ -49,6 +49,7 @@ function Writetoday() {
         formData.append('goodSleep', selectedButtons.goodSleep);
         try {
             PostApi.saveData(cookies.Authorization, formData);
+            navigate('/');
         } catch (error) {
             console.log('피드 작성 실패', error);
         }

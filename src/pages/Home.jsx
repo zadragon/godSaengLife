@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { MainApi, PostApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
-import 'react-calendar/dist/Calendar.css'; // css import
+import 'react-calendar/dist/Calendar.css';
 import * as C from '../styles/common';
 import * as H from '../styles/home';
 import { useQuery } from '@tanstack/react-query';
@@ -37,7 +37,7 @@ function Home() {
     const [value, onChange] = useState(new Date());
 
     const selectDate = data?.data.feeds.filter(item => {
-        return moment(item.createdAt).format('DD-MM-YYYY') == moment(value).format('DD-MM-YYYY');
+        return moment(item.createdAt).format('DD-MM-YYYY') === moment(value).format('DD-MM-YYYY');
     });
 
     const feedImgs = selectDate?.map(item => {
@@ -56,8 +56,6 @@ function Home() {
             PostApi.getLatestImg(cookies.Authorization)
                 .then(response => {
                     setLatestImgs(response.data.feedImages);
-                    // 이미지 데이터를 상태로 설정
-                    //console.log('피드:', response.data);
                 })
                 .catch(error => {
                     console.log(error);
@@ -68,6 +66,10 @@ function Home() {
     const [imgViewUrl, setImgViewUrl] = useState({ view: false, url: '', feedId: '' });
     const viewDetail = (imgUrl, imageId) => {
         setImgViewUrl({ ...imgViewUrl, view: true, url: imgUrl, imageId: imageId });
+    };
+
+    const onUpdate = () => {
+        refetch(); // 데이터 업데이트를 위해 쿼리를 다시 실행
     };
 
     return (
@@ -86,15 +88,15 @@ function Home() {
 
             <H.MainTab>
                 <div className="tabInner" onClick={tabClick}>
-                    <button className={tabId == 'condition' ? 'active' : ''} id="condition">
+                    <button className={tabId === 'condition' ? 'active' : ''} id="condition">
                         컨디션
                     </button>
-                    <button className={tabId == 'picture' ? 'active' : ''} id="picture">
+                    <button className={tabId === 'picture' ? 'active' : ''} id="picture">
                         식단 사진
                     </button>
                 </div>
 
-                {tabId == 'condition' && (
+                {tabId === 'condition' && (
                     <div className="tabCont">
                         {isError ? (
                             <div className="empty">
@@ -135,10 +137,10 @@ function Home() {
                     </div>
                 )}
 
-                {tabId == 'picture' && (
+                {tabId === 'picture' && (
                     <div className="tabCont">
                         {isError ||
-                            (feedImgs[0].length == 0 && (
+                            (feedImgs[0]?.length === 0 && (
                                 <div className="empty">
                                     <p>기록이 없어요</p>
                                 </div>
