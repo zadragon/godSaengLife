@@ -35,13 +35,12 @@ function Home() {
     const [selectDate, setSelectDate] = useState([]);
 
     useEffect(() => {
-        console.log(value);
         setSelectDate(
             data?.data.feeds.filter(item => {
                 return moment(item.createdAt).format('DD-MM-YYYY') == moment(value).format('DD-MM-YYYY');
             })
         );
-    }, [value]);
+    }, [value, data]);
 
     const [feedImgs, setFeedImgs] = useState([]);
     useEffect(() => {
@@ -110,9 +109,9 @@ function Home() {
                             </div>
                         ) : (
                             <div className="conditionList">
-                                {selectDate?.map((item, idx) => {
+                                {selectDate?.map(item => {
                                     return (
-                                        <div key={idx}>
+                                        <div key={item.feedId}>
                                             <div className="btnArea">
                                                 <Link to={`/feed/${item.feedId}`} className="btnEdit">
                                                     <span className="hidden">수정</span>
@@ -122,7 +121,7 @@ function Home() {
                                             <div>
                                                 <div>
                                                     <ul>
-                                                        <li key={idx}>😁 {item.emotion}</li>
+                                                        <li>😁 {item.emotion}</li>
                                                         <li>
                                                             {item.didGym ? '✅ 오늘 진짜 운동 잘됨' : '✅ 운동못함ㅜㅜ'}
                                                         </li>
@@ -179,7 +178,7 @@ function Home() {
                         전체보기 &nbsp;＞
                     </Link>
                 </div>
-                <div className="albumList">
+                <div className={`albumList col${latestImgs.length}`}>
                     {latestImgs.length === 0 ? (
                         <div className="img"></div>
                     ) : (
