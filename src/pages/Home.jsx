@@ -18,6 +18,7 @@ function Home() {
     const navigate = useNavigate();
     const [calendarData, setCalendarData] = useState([]);
 
+    console.log(data);
     useEffect(() => {
         setCalendarData(
             data?.data.feeds.map(item => {
@@ -85,6 +86,7 @@ function Home() {
                     value={value}
                     tileClassName={({ date, view }) => {
                         if (calendarData?.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                            console.log('ok');
                             return 'highlight';
                         }
                     }}
