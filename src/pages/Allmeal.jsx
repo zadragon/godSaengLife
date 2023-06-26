@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Masonry from 'react-masonry-css';
 import { PostApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
-import { styled } from 'styled-components';
-import { useQuery } from '@tanstack/react-query';
-import * as H from '../styles/home';
 
 const Allmeal = () => {
     const [cookies, setCookie, removeCookie] = useCookies();
@@ -15,7 +11,6 @@ const Allmeal = () => {
             PostApi.getAllMeal(cookies.Authorization)
                 .then(response => {
                     setAllMeal(response.data.feeds);
-                    // 이미지 데이터를 상태로 설정
                     console.log('전체사진:', response.data.feeds);
                 })
                 .catch(error => {
@@ -25,14 +20,14 @@ const Allmeal = () => {
     }, [cookies.Authorization]);
 
     return (
-        <div className="albumList">
+        <div className="albumList grid grid-cols-3 gap-1">
             {allMeal.length === 0 ? (
                 <div className="img"></div>
             ) : (
                 allMeal.map((item, index) =>
                     item.FeedImages.map((images, index) => (
                         <div className="img" key={index}>
-                            <img src={images.imagePath} alt="" />
+                            <img src={images.imagePath} alt="" className="rounded-lg object-cover w-full h-full" />
                         </div>
                     ))
                 )
