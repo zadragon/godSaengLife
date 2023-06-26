@@ -131,7 +131,7 @@ export const PutApi = {
 };
 
 export const analysis = {
-    getWeekData: (token, setChart1) => {
+    getWeekData: token => {
         return axios
             .get(`${process.env.REACT_APP_BACKEND_SERVER_URL}/graph/week`, {
                 headers: {
@@ -141,8 +141,6 @@ export const analysis = {
                 withCredentials: true,
             })
             .then(response => {
-                console.log(response.data);
-                setChart1(response.data);
                 return response.data; // 필요에 따라 응답 데이터 반환
             })
             .catch(error => {
