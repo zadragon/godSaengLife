@@ -58,12 +58,13 @@ function EditFeed({ onUpdate }) {
         formData.append('didGym', selectedButtons.didGym);
         formData.append('goodSleep', selectedButtons.goodSleep);
 
-        try {
-            await PutApi.editData(cookies.Authorization, formData, feedId);
-            onUpdate(); // Call the callback function to update the data in the parent component
-        } catch (error) {
-            console.log('피드 수정 실패', error);
-        }
+        await PutApi.editData(cookies.Authorization, formData, feedId)
+            .then(() => {
+                onUpdate();
+            })
+            .catch(error => {
+                console.log('피드 수정 실패', error);
+            });
     };
 
     return (
