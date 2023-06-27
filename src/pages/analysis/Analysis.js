@@ -52,6 +52,7 @@ const Analysis = () => {
     }, [dataG]);
 
     if (isLoading) return <div>...로딩중</div>;
+    if (isError) return <div>...에러발생</div>;
     return (
         <div>
             <div>
