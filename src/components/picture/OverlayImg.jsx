@@ -66,7 +66,7 @@ const OverLayArea = styled.div`
         gap: 24px;
         background-color: #fff;
         border-radius: 8px;
-        transition: transform 0.3s ease;
+        transition: transform 0.15s ease;
         p {
             color: #000;
             /* Paragraph/Small Bold */
