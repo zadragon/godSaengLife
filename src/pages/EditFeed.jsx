@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
@@ -24,6 +24,8 @@ function EditFeed({ onUpdate }) {
     );
 
     const feedImgs = selectDate?.map(item => item.FeedImages[0]?.imagePath);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         refetch();
@@ -60,7 +62,7 @@ function EditFeed({ onUpdate }) {
 
         await PutApi.editData(cookies.Authorization, formData, feedId)
             .then(() => {
-                onUpdate();
+                navigate('/');
             })
             .catch(error => {
                 console.log('피드 수정 실패', error);
@@ -70,9 +72,7 @@ function EditFeed({ onUpdate }) {
     const handleDelete = async () => {
         try {
             await PostApi.deleteFeed(feedId, cookies.Authorization);
-            // 삭제 후 필요한 처리를 수행합니다.
-            // 예를 들어, 삭제 후 화면을 새로고침하거나 다른 동작을 수행할 수 있습니다.
-            onUpdate();
+            navigate('/');
         } catch (error) {
             console.log('피드 삭제 실패', error);
         }
