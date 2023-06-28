@@ -20,7 +20,7 @@ function Home() {
     const navigate = useNavigate();
     const [calendarData, setCalendarData] = useState([]);
     const [selectDate, setSelectDate] = useState([]);
-
+    const [feedImgs, setFeedImgs] = useState([]);
     useEffect(() => {
         data?.data?.feeds &&
             setCalendarData(
@@ -28,13 +28,12 @@ function Home() {
                     return moment(item.createdAt).format('DD-MM-YYYY');
                 })
             );
-
-        setSelectDate(
-            data?.data.feeds.filter(item => {
-                return moment(item.createdAt).format('DD-MM-YYYY') == moment(value).format('DD-MM-YYYY');
+        setFeedImgs(
+            selectDate?.map(item => {
+                return item.FeedImages;
             })
         );
-    }, [value, data]);
+    }, [data]);
 
     useEffect(() => {
         data?.data?.feeds &&
@@ -45,7 +44,6 @@ function Home() {
             );
     }, [value, data]);
 
-    const [feedImgs, setFeedImgs] = useState([]);
     useEffect(() => {
         selectDate &&
             setFeedImgs(
