@@ -84,7 +84,7 @@ const OverLayArea = styled.div`
         button {
             width: 100%;
             height: 44px;
-            color: #727580;
+            color: #f44336;
             display: flex;
             align-items: center;
             justify-content: center;
