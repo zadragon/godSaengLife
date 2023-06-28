@@ -47,8 +47,11 @@ function Writetoday() {
         formData.append('howEat', selectedButtons.howEat);
         formData.append('didGym', selectedButtons.didGym);
         formData.append('goodSleep', selectedButtons.goodSleep);
+
         try {
-            PostApi.saveData(cookies.Authorization, formData);
+            PostApi.saveData(formData);
+            alert('등록되었습니다.');
+            navigate('/');
         } catch (error) {
             console.log('피드 작성 실패', error);
         }
