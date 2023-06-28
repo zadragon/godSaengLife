@@ -18,13 +18,8 @@ export const AuthApi = {
         const response = await api.post('/login', payload);
         return response.data;
     },
-    signout: token => {
-        api.post('/logout', {
-            headers: {
-                'Content-Type': 'application/json', // 필요한 헤더를 여기에 추가하세요
-                Authorization: token, // 필요한 인증 헤더를 여기에 추가하세요
-            },
-        })
+    signout: () => {
+        api.post('/logout')
             .then(response => {
                 //console.log(response);
             })
@@ -34,57 +29,43 @@ export const AuthApi = {
     },
 };
 
+// export const MainApi = {
+//     getMain: async () => {
+//         const data = await api.get('/main');
+//         return data;
+//     },
+// };
+
 export const MainApi = {
-    getMain: token => {
+    getMain: () => {
         return api
-            .get('/main', {
-                headers: {
-                    'Content-Type': 'application/json', // 필요한 헤더를 여기에 추가하세요
-                    Authorization: token, // 필요한 인증 헤더를 여기에 추가하세요
-                },
-            })
+            .get('/main')
             .then(response => {
-                //console.log(response);
                 return response;
             })
             .catch(error => {
-                //console.log(error);
+                console.log(error);
             });
     },
 };
 
 export const PostApi = {
-    getAllMeal: token => {
-        return api.get('/allmeal', {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: token,
-            },
-        });
+    getAllMeal: () => {
+        return api.get('/allmeal');
     },
-    getLatestImg: token => {
-        return api.get('/image/latest', {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: token,
-            },
-        });
+    getLatestImg: () => {
+        return api.get('/image/latest');
     },
-    saveData: (token, formData) => {
+    saveData: formData => {
         for (let key of formData.keys()) {
             console.log(key, ':', formData.get(key));
         }
-        const apiInstance = axios.create({
-            baseURL: process.env.REACT_APP_BACKEND_SERVER_URL,
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                Authorization: token,
-            },
-            withCredentials: true,
-        });
 
-        apiInstance
-            .post('/feed/write', formData)
+        api.post('/feed/write', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
+            },
+        })
             .then(response => {
                 console.log(response);
             })
@@ -92,14 +73,9 @@ export const PostApi = {
                 console.log(error);
             });
     },
-    deleteOneImg: (imageId, token) => {
+    deleteOneImg: imageId => {
         return api
-            .delete(`/feed/image/${imageId}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: token,
-                },
-            })
+            .delete(`/feed/image/${imageId}`)
             .then(response => {
                 alert(response.data.message);
             })
@@ -110,14 +86,12 @@ export const PostApi = {
 };
 
 export const PutApi = {
-    editData: (token, formData, feedId) => {
+    editData: (formData, feedId) => {
         return axios
             .put(`${process.env.REACT_APP_BACKEND_SERVER_URL}/feed/${feedId}`, formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
-                    Authorization: token,
+                    'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
                 },
-                withCredentials: true,
             })
             .then(response => {
                 console.log(response.data);
@@ -131,15 +105,9 @@ export const PutApi = {
 };
 
 export const analysis = {
-    getWeekData: token => {
-        return axios
-            .get(`${process.env.REACT_APP_BACKEND_SERVER_URL}/graph/week`, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    Authorization: token,
-                },
-                withCredentials: true,
-            })
+    getWeekData: () => {
+        return api
+            .get(`${process.env.REACT_APP_BACKEND_SERVER_URL}/graph/week`)
             .then(response => {
                 return response.data; // 필요에 따라 응답 데이터 반환
             })
@@ -148,15 +116,9 @@ export const analysis = {
                 throw error; // 에러를 상위 컴포넌트로 전달하거나 처리할 수 있도록 throw
             });
     },
-    getMonthData: token => {
+    getMonthData: () => {
         return axios
-            .get(`${process.env.REACT_APP_BACKEND_SERVER_URL}/graph/week`, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    Authorization: token,
-                },
-                withCredentials: true,
-            })
+            .get(`${process.env.REACT_APP_BACKEND_SERVER_URL}/graph/week`)
             .then(response => {
                 console.log(response.data);
                 return response.data; // 필요에 따라 응답 데이터 반환

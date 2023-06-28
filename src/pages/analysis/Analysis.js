@@ -7,12 +7,9 @@ import { useQuery } from '@tanstack/react-query';
 const Analysis = () => {
     const [cookies] = useCookies();
 
-    const {
-        data: dataG,
-        isLoading,
-        isError,
-        refetch,
-    } = useQuery(['getMain'], () => analysis.getWeekData(cookies.Authorization));
+    const { data: dataG, isLoading, isError, refetch } = useQuery(['getMain'], () => analysis.getWeekData());
+    //const { periodData = [] } = dataG;
+
     const [chart, setChart] = useState([
         {
             country: 0,
@@ -26,29 +23,28 @@ const Analysis = () => {
     ]);
 
     useEffect(() => {
-        console.log(dataG);
+        dataG?.periodData &&
+            setChart(
+                dataG?.periodData?.map((item, idx) => {
+                    let d = new Date();
+                    let sel_day = -idx; //일자를 조절하시면 됩니다. -1이면 하루전/ +1이면 내일
+                    d.setDate(d.getDate() + sel_day);
 
-        setChart(
-            dataG?.periodData.map((item, idx) => {
-                let d = new Date();
-                let sel_day = -idx; //일자를 조절하시면 됩니다. -1이면 하루전/ +1이면 내일
-                d.setDate(d.getDate() + sel_day);
+                    const howEat = item.howEat == false || item.howEat == null ? 0 : 1;
+                    const didGym = item.didGym == false || item.howEat == null ? 0 : 1;
+                    const goodSleep = item.goodSleep == false || item.howEat == null ? 0 : 1;
 
-                const howEat = item.howEat == false || item.howEat == null ? 0 : 1;
-                const didGym = item.didGym == false || item.howEat == null ? 0 : 1;
-                const goodSleep = item.goodSleep == false || item.howEat == null ? 0 : 1;
-
-                return {
-                    country: d.getDate(),
-                    건강식: howEat,
-                    건강식Color: 'hsl(46, 70%, 50%)',
-                    운동: didGym,
-                    운동Color: 'hsl(105, 70%, 50%)',
-                    꿀잠: goodSleep,
-                    꿀잠Color: 'hsl(170, 70%, 50%)',
-                };
-            })
-        );
+                    return {
+                        country: d.getDate(),
+                        건강식: howEat,
+                        건강식Color: 'hsl(46, 70%, 50%)',
+                        운동: didGym,
+                        운동Color: 'hsl(105, 70%, 50%)',
+                        꿀잠: goodSleep,
+                        꿀잠Color: 'hsl(170, 70%, 50%)',
+                    };
+                })
+            );
     }, [dataG]);
 
     if (isLoading) return <div>...로딩중</div>;
@@ -56,10 +52,10 @@ const Analysis = () => {
     return (
         <div>
             <div>
-                기록을 시작한지 : <strong> {dataG.totalFeedDays} 일</strong>
+                기록을 시작한지 : <strong> {dataG?.totalFeedDays} 일</strong>
             </div>
             <div>
-                나의 갓생 포인트는? <strong>{dataG.totalPointScore} 점</strong>
+                나의 갓생 포인트는? <strong>{dataG?.totalPointScore} 점</strong>
             </div>
             <div style={{ height: '400px' }}>
                 <ResponsiveBar
