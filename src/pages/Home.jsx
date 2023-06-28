@@ -26,6 +26,7 @@ function Home() {
             })
         );
     }, [data]);
+    console.log(calendarData);
 
     useEffect(() => {
         if (cookies.Authorization) {
@@ -89,7 +90,6 @@ function Home() {
                     value={value}
                     tileClassName={({ date, view }) => {
                         if (calendarData?.find(x => x === moment(date).format('DD-MM-YYYY'))) {
-                            console.log('ok');
                             return 'highlight';
                         }
                     }}

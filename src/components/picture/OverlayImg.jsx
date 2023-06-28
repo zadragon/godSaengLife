@@ -66,7 +66,7 @@ const OverLayArea = styled.div`
         gap: 24px;
         background-color: #fff;
         border-radius: 8px;
-        transition: transform 0.3s ease;
+        transition: transform 0.15s ease;
         p {
             color: #000;
             /* Paragraph/Small Bold */
@@ -84,7 +84,7 @@ const OverLayArea = styled.div`
         button {
             width: 100%;
             height: 44px;
-            color: #727580;
+            color: #f44336;
             display: flex;
             align-items: center;
             justify-content: center;
