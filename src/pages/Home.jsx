@@ -77,10 +77,6 @@ function Home() {
         setImgViewUrl({ ...imgViewUrl, view: true, url: imgUrl, imageId: imageId });
     };
 
-    const onUpdate = () => {
-        refetch(); // 데이터 업데이트를 위해 쿼리를 다시 실행
-    };
-
     return (
         <div>
             <div className="calendarArea">
