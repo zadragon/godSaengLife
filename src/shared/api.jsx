@@ -107,6 +107,21 @@ export const PostApi = {
                 console.log(error);
             });
     },
+    deleteFeed: (feedId, token) => {
+        return api
+            .delete(`/feed/${feedId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: token,
+                },
+            })
+            .then(response => {
+                alert(response.data.message);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
 };
 
 export const PutApi = {

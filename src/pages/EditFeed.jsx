@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
-import { MainApi, PutApi } from '../shared/api';
+import { MainApi, PutApi, PostApi } from '../shared/api';
 
 function EditFeed({ onUpdate }) {
     const { feedId } = useParams();
@@ -65,6 +65,17 @@ function EditFeed({ onUpdate }) {
             .catch(error => {
                 console.log('피드 수정 실패', error);
             });
+    };
+
+    const handleDelete = async () => {
+        try {
+            await PostApi.deleteFeed(feedId, cookies.Authorization);
+            // 삭제 후 필요한 처리를 수행합니다.
+            // 예를 들어, 삭제 후 화면을 새로고침하거나 다른 동작을 수행할 수 있습니다.
+            onUpdate();
+        } catch (error) {
+            console.log('피드 삭제 실패', error);
+        }
     };
 
     return (
@@ -207,6 +218,9 @@ function EditFeed({ onUpdate }) {
                 </div>
                 <div>
                     <button onClick={handleEdit}>수정</button>
+                </div>
+                <div>
+                    <button onClick={handleDelete}>삭제</button>
                 </div>
             </div>
         </div>
