@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
-import { MainApi, PutApi } from '../shared/api';
+import { MainApi, PutApi, PostApi } from '../shared/api';
 
 function EditFeed({ onUpdate }) {
     const { feedId } = useParams();
@@ -24,6 +24,8 @@ function EditFeed({ onUpdate }) {
     );
 
     const feedImgs = selectDate?.map(item => item.FeedImages[0]?.imagePath);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         refetch();
@@ -60,11 +62,20 @@ function EditFeed({ onUpdate }) {
 
         await PutApi.editData(cookies.Authorization, formData, feedId)
             .then(() => {
-                onUpdate();
+                navigate('/');
             })
             .catch(error => {
                 console.log('피드 수정 실패', error);
             });
+    };
+
+    const handleDelete = async () => {
+        try {
+            await PostApi.deleteFeed(feedId, cookies.Authorization);
+            navigate('/');
+        } catch (error) {
+            console.log('피드 삭제 실패', error);
+        }
     };
 
     return (
@@ -207,6 +218,9 @@ function EditFeed({ onUpdate }) {
                 </div>
                 <div>
                     <button onClick={handleEdit}>수정</button>
+                </div>
+                <div>
+                    <button onClick={handleDelete}>삭제</button>
                 </div>
             </div>
         </div>
