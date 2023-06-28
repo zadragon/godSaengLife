@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Masonry from 'react-masonry-css';
 import { PostApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
 import { styled } from 'styled-components';
@@ -16,7 +15,6 @@ const Allmeal = () => {
             PostApi.getAllMeal(cookies.Authorization)
                 .then(response => {
                     setAllMeal(response.data.feeds);
-                    // 이미지 데이터를 상태로 설정
                     console.log('전체사진:', response.data.feeds);
                 })
                 .catch(error => {

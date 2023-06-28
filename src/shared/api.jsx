@@ -88,7 +88,7 @@ export const PostApi = {
 export const PutApi = {
     editData: (formData, feedId) => {
         return axios
-            .put(`${process.env.REACT_APP_BACKEND_SERVER_URL}/feeds/${feedId}`, formData, {
+            .put(`${process.env.REACT_APP_BACKEND_SERVER_URL}/feed/${feedId}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
                 },
