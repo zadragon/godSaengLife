@@ -14,44 +14,44 @@ import OverlayImg from '../components/picture/OverlayImg';
 function Home() {
     const [cookies] = useCookies();
     const [value, onChange] = useState(new Date());
-    const { data, isLoading, isError, refetch } = useQuery(['getMain'], () => MainApi.getMain(cookies.Authorization));
+    const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getMain'], () =>
+        MainApi.getMain(cookies.Authorization)
+    );
     const navigate = useNavigate();
     const [calendarData, setCalendarData] = useState([]);
-
-    console.log(data);
-    useEffect(() => {
-        setCalendarData(
-            data?.data.feeds.map(item => {
-                return moment(item.createdAt).format('DD-MM-YYYY');
-            })
-        );
-    }, [data]);
-    console.log(calendarData);
-
-    useEffect(() => {
-        if (cookies.Authorization) {
-            MainApi.getMain(cookies.Authorization);
-        }
-    }, [cookies.Authorization]);
-
     const [selectDate, setSelectDate] = useState([]);
-
-    useEffect(() => {
-        console.log(value);
-        setSelectDate(
-            data?.data.feeds.filter(item => {
-                return moment(item.createdAt).format('DD-MM-YYYY') == moment(value).format('DD-MM-YYYY');
-            })
-        );
-    }, [value, data]);
-
     const [feedImgs, setFeedImgs] = useState([]);
     useEffect(() => {
+        data?.data?.feeds &&
+            setCalendarData(
+                data?.data.feeds.map(item => {
+                    return moment(item.createdAt).format('DD-MM-YYYY');
+                })
+            );
         setFeedImgs(
             selectDate?.map(item => {
                 return item.FeedImages;
             })
         );
+    }, [data]);
+
+    useEffect(() => {
+        data?.data?.feeds &&
+            setSelectDate(
+                data?.data.feeds.filter(item => {
+                    return moment(item.createdAt).format('DD-MM-YYYY') == moment(value).format('DD-MM-YYYY');
+                })
+            );
+    }, [value, data]);
+
+    useEffect(() => {
+        selectDate &&
+            setFeedImgs(
+                selectDate?.map(item => {
+                    return item.FeedImages;
+                })
+            );
+        setTabId('condition');
     }, [selectDate]);
 
     const [tabId, setTabId] = useState('condition');
@@ -61,17 +61,15 @@ function Home() {
 
     const [latestImgs, setLatestImgs] = useState([]);
 
-    useEffect(() => {
-        if (cookies.Authorization) {
-            PostApi.getLatestImg(cookies.Authorization)
-                .then(response => {
-                    setLatestImgs(response.data.feedImages);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
-    }, [cookies.Authorization]);
+    PostApi.getLatestImg()
+        .then(response => {
+            setLatestImgs(response.data.feedImages);
+            // 이미지 데이터를 상태로 설정
+            //console.log('피드:', response.data);
+        })
+        .catch(error => {
+            console.log(error);
+        });
 
     const [imgViewUrl, setImgViewUrl] = useState({ view: false, url: '', feedId: '' });
     const viewDetail = (imgUrl, imageId) => {
@@ -145,12 +143,11 @@ function Home() {
 
                 {tabId === 'picture' && (
                     <div className="tabCont">
-                        {isError ||
-                            (feedImgs.length == 0 && (
-                                <div className="empty">
-                                    <p>기록이 없어요</p>
-                                </div>
-                            ))}
+                        {feedImgs.length == 0 && (
+                            <div className="empty">
+                                <p>기록이 없어요</p>
+                            </div>
+                        )}
                         <div className="imgList">
                             <div className="imgRail">
                                 {feedImgs[0]?.map(item => {
