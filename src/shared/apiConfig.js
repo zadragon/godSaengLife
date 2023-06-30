@@ -8,7 +8,7 @@ export const api = axios.create({
 api.interceptors.request.use(
     config => {
         //토큰값을 문자열로 가져와서 Bearer%20 중 %20값 제거
-        const token = getCookie('Authorization').split('%20').join(' ');
+        const token = getCookie('Authorization')?.split('%20').join(' ');
         if (token) {
             config.headers['Authorization'] = token;
             return config;
