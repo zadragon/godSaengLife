@@ -114,7 +114,7 @@ function Writetoday() {
                             className={`${selectedButtons['emotion'] === 'happy' ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'happy')}
                         >
-                            😁 아주 상쾌함
+                            <img src="images/emoji/happy.png" /> 아주 상쾌함
                         </button>
 
                         <button
@@ -122,28 +122,28 @@ function Writetoday() {
                             className={`${selectedButtons['emotion'] === 'soso' ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'soso')}
                         >
-                            🙃 그냥 그럼
+                            <img src="images/emoji/soso.png" /> 그냥 그럼
                         </button>
                         <button
                             id="tired"
                             className={`${selectedButtons['emotion'] === 'tired' ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'tired')}
                         >
-                            🥱 피곤함
+                            <img src="images/emoji/tired.png" /> 피곤함
                         </button>
                         <button
                             id="good"
                             className={`${selectedButtons['emotion'] === 'good' ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'good')}
                         >
-                            😊 편안한 날
+                            <img src="images/emoji/bad.png" /> 안좋음
                         </button>
                         <button
                             id="stress"
                             className={`${selectedButtons['emotion'] === 'stress' ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'stress')}
                         >
-                            😡 나쁨
+                            <img src="images/emoji/stress.png" /> 나쁨
                         </button>
                     </div>
                 </P.SelectCondition>
@@ -157,14 +157,14 @@ function Writetoday() {
                             className={`${selectedButtons['howEat'] === true ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('howEat', true)}
                         >
-                            🌱 80% 이상 건강하게 먹음
+                            <img src="images/icons/icon-howEat.png" /> 80% 이상 건강하게 먹음
                         </button>
                         <button
                             id="howEatX"
                             className={`${selectedButtons['howEat'] === false ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('howEat', false)}
                         >
-                            ❌ 오늘은 갓생 보류...
+                            <img src="images/icons/icon-x.png" /> 오늘은 갓생 보류...
                         </button>
                     </div>
                 </P.SelectCondition>
@@ -178,35 +178,35 @@ function Writetoday() {
                             className={`${selectedButtons['didGym'] === true ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('didGym', true)}
                         >
-                            O
+                            <img src="images/icons/icon-didGym.png" /> 오늘 운동 완료
                         </button>
                         <button
                             id="didGymX"
                             className={`${selectedButtons['didGym'] === false ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('didGym', false)}
                         >
-                            X
+                            <img src="images/icons/icon-x.png" /> 오늘 운동 실패... 내일은 꼭 해야지!
                         </button>
                     </div>
                 </P.SelectCondition>
             )}
             {activeTab === 'goodSleep' && (
                 <P.SelectCondition>
-                    <h3>꿀잠 자고 개운한 날이다.</h3>
+                    <h3>오늘 꿀잠자고 일어난 날?</h3>
                     <div className="selectArea">
                         <button
                             id="goodSleepO"
                             className={`${selectedButtons['goodSleep'] === true ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('goodSleep', true)}
                         >
-                            O
+                            <img src="images/icons/icon-goodSleep.png" /> 꿀잠자고 일어남
                         </button>
                         <button
                             id="goodSleepX"
                             className={`${selectedButtons['goodSleep'] === false ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('goodSleep', false)}
                         >
-                            X
+                            <img src="images/icons/icon-x.png" /> 꿀잠 못잠... 왜지?
                         </button>
                     </div>
                 </P.SelectCondition>
@@ -214,7 +214,7 @@ function Writetoday() {
             {activeTab === 'photo' && (
                 <P.SelectCondition>
                     <h3>오늘 먹은 음식 올리기</h3>
-                    <div>사진등록 (최대 5장)</div>
+                    <div>나의 갓생 식단을 기록해봅시다!(다섯 장까지 가능)</div>
                     <input type="file" name="images" multiple onChange={setImgFile} accept="image/*" />
                     <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '10px' }}>
                         {selectedImg.map((image, index) => (

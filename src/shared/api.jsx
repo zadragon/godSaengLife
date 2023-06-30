@@ -102,7 +102,6 @@ export const PostApi = {
 
 export const PutApi = {
     editData: (formData, feedId) => {
-        console.log(feedId);
         return api
             .put(`${process.env.REACT_APP_BACKEND_SERVER_URL}/feed/${feedId}`, formData, {
                 headers: {
