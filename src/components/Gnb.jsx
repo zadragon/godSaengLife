@@ -1,15 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import * as C from '../styles/common';
 
 const Gnb = () => {
+    const location = useLocation();
+    console.log(location.pathname);
     return (
         <C.GnbBar>
             <ul>
-                <li className="home active">
+                <li className={`home ${location.pathname == '/' && 'active'} `}>
                     <Link to="/">홈</Link>
                 </li>
-                <li className="analyse">
+                <li className={`analyse ${location.pathname == '/analysis' && 'active'} `}>
                     <Link to="/analysis">분석</Link>
                 </li>
                 <li className="community" onClick={() => alert('준비중입니다.')}>

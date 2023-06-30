@@ -3,28 +3,6 @@ import styled from 'styled-components';
 export const MainTab = styled.div`
     padding: 15px 0;
     border-bottom: 6px solid #f8f8f9;
-    .tabInner {
-        padding: 4px 6px;
-        background: #f8f8f9;
-        display: flex;
-        border-radius: 8px;
-        width: calc(100% - 32px);
-        margin: 0 auto;
-        button {
-            display: block;
-            width: 50%;
-            height: 28px;
-            font-size: 14px;
-            color: #aaacb3;
-            font-family: 'Pretendard-Bold';
-            &.active {
-                background: #21242e;
-                color: #fff;
-                box-shadow: 0px 1px 3px rgba(213, 255, 102, 0.16);
-                border-radius: 6px;
-            }
-        }
-    }
     .tabCont {
         margin-top: 12px;
 

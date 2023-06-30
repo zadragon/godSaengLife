@@ -82,6 +82,13 @@ export const GnbBar = styled.nav`
                 width: 100%;
                 padding-top: 22px;
                 text-align: center;
+                color: #8d9996;
+            }
+            &.active {
+                transition: 0.3s;
+                a {
+                    color: #393e4f;
+                }
             }
             &.home {
                 background: url('/images/gnb/menu-home.svg') no-repeat center 5px;
@@ -116,6 +123,7 @@ export const AddPost = styled.div`
     border-radius: 200px;
     text-align: center;
     line-height: 56px;
+    z-index: 100;
     a {
         display: block;
         width: 100%;
@@ -124,5 +132,32 @@ export const AddPost = styled.div`
     span {
         font-size: 22px;
         color: #21242e;
+    }
+`;
+
+export const TabInner = styled.div`
+    padding: 4px 6px;
+    background: #f8f8f9;
+    display: flex;
+    border-radius: 8px;
+    width: calc(100% - 32px);
+    margin: 0 auto;
+    background-color: #fff;
+    button {
+        display: block;
+        width: 50%;
+        height: 28px;
+        font-size: 14px;
+        color: #aaacb3;
+        font-family: 'Pretendard-Bold';
+        &.active {
+            background: #21242e;
+            color: #fff;
+            box-shadow: 0px 1px 3px rgba(213, 255, 102, 0.16);
+            border-radius: 6px;
+        }
+    }
+    &.gapTop {
+        margin-top: 12px;
     }
 `;

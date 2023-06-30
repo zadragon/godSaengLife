@@ -29,11 +29,6 @@ function Home() {
                     return moment(item.createdAt).format('DD-MM-YYYY');
                 })
             );
-        setFeedImgs(
-            selectDate?.map(item => {
-                return item.FeedImages;
-            })
-        );
     }, [data]);
 
     useEffect(() => {
@@ -54,6 +49,7 @@ function Home() {
                 })
             );
         setTabId('condition');
+        console.log(feedImgs);
     }, [selectDate]);
 
     const [tabId, setTabId] = useState('condition');
@@ -97,14 +93,14 @@ function Home() {
             </div>
 
             <H.MainTab>
-                <div className="tabInner" onClick={tabClick}>
+                <C.TabInner className="tabInner" onClick={tabClick}>
                     <button className={tabId === 'condition' ? 'active' : ''} id="condition">
                         컨디션
                     </button>
                     <button className={tabId === 'picture' ? 'active' : ''} id="picture">
                         식단 사진
                     </button>
-                </div>
+                </C.TabInner>
 
                 {tabId === 'condition' && (
                     <div className="tabCont">
@@ -149,7 +145,7 @@ function Home() {
 
                 {tabId === 'picture' && (
                     <div className="tabCont">
-                        {feedImgs.length == 0 && (
+                        {feedImgs && feedImgs[0]?.length == 0 && (
                             <div className="empty">
                                 <p>기록이 없어요</p>
                             </div>
