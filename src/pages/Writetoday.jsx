@@ -15,9 +15,15 @@ function Writetoday() {
         didGym: Boolean,
         goodSleep: Boolean,
     });
+    const [selectedResults, setSelectedResults] = useState({});
+    const [showHomeButton, setShowHomeButton] = useState(false);
 
     const handleButtonClick = (buttonName, buttonValue) => {
         setSelectedButtons(prevState => ({
+            ...prevState,
+            [buttonName]: buttonValue,
+        }));
+        setSelectedResults(prevState => ({
             ...prevState,
             [buttonName]: buttonValue,
         }));
@@ -42,7 +48,10 @@ function Writetoday() {
         // for (let entry of formData.entries()) {
         //     console.log(entry); // Prints each key-value pair in the FormData
         // }
-
+        if (activeTab === 'result') {
+            console.log(selectedResults);
+            // Render the selected results in the desired format
+        }
         formData.append('emotion', selectedButtons.emotion);
         formData.append('howEat', selectedButtons.howEat);
         formData.append('didGym', selectedButtons.didGym);
@@ -74,8 +83,17 @@ function Writetoday() {
     // 탭
     const [activeTab, setActiveTab] = useState('condition');
 
-    const handleTabClick = tabName => {
-        setActiveTab(tabName);
+    const handleTabClick = tab => {
+        setActiveTab(tab);
+        setShowHomeButton(tab === 'condition');
+    };
+
+    const handleNextClick = () => {
+        handleTabClick('result');
+    };
+
+    const handleHomeClick = () => {
+        navigate('/');
     };
 
     return (
@@ -85,11 +103,31 @@ function Writetoday() {
                     <span className="hidden">뒤로가기</span>
                 </button>
                 <h2>하루 기록</h2>
+                {activeTab === 'photo' && (
+                    <div>
+                        <button onClick={handleNextClick}>건너뛰기</button>
+                    </div>
+                )}
+                {showHomeButton && (
+                    <button className="btnHome" onClick={handleHomeClick}>
+                        <span className="hidden">홈으로 가기</span>X
+                    </button>
+                )}
+                {activeTab === 'result' && (
+                    <div>
+                        <button className="save-button" onClick={handleSave}>
+                            저장
+                        </button>
+                    </div>
+                )}
             </C.PageHeader>
             <P.PostTab>
                 <ul className="flex justify-around">
-                    <li className={`menu-tab`} onClick={() => handleTabClick('condition')}>
-                        <span className="hidden"> 나의 컨디션</span>
+                    <li
+                        className={`menu-tab ${activeTab === 'condition' ? 'active' : ''}`}
+                        onClick={() => handleTabClick('condition')}
+                    >
+                        <span className="hidden">나의 컨디션</span>
                     </li>
                     <li className={`menu-tab`} onClick={() => handleTabClick('healthyFood')}>
                         <span className="hidden">건강한 음식</span>
@@ -102,6 +140,9 @@ function Writetoday() {
                     </li>
                     <li className={`menu-tab`} onClick={() => handleTabClick('photo')}>
                         <span className="hidden">사진 선택</span>
+                    </li>
+                    <li className={`menu-tab`} onClick={() => handleTabClick('result')}>
+                        <span className="hidden">선택 결과</span>
                     </li>
                 </ul>
             </P.PostTab>
@@ -150,7 +191,7 @@ function Writetoday() {
             )}
             {activeTab === 'healthyFood' && (
                 <P.SelectCondition>
-                    <h3>꽤 건강한 음식 위주로 먹었다.</h3>
+                    <h3>오늘 먹은 음식은?</h3>
                     <div className="selectArea">
                         <button
                             id="howEatO"
@@ -215,13 +256,10 @@ function Writetoday() {
                 <P.SelectCondition>
                     <h3>오늘 먹은 음식 올리기</h3>
                     <div>나의 갓생 식단을 기록해봅시다!(다섯 장까지 가능)</div>
-
-                    {/* <P.PhotoInput type="file" name="images" multiple onChange={setImgFile} accept="image/*" /> */}
                     <P.PhotoInput>
                         <P.FileIcon src="images/icons/icon-camera.svg" alt="파일 선택" />
                         <P.FileInput type="file" name="images" multiple onChange={setImgFile} accept="image/*" />
                     </P.PhotoInput>
-
                     <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '10px' }}>
                         {selectedImg.map((image, index) => (
                             <img
@@ -232,9 +270,92 @@ function Writetoday() {
                             />
                         ))}
                     </div>
-                    {/* <img alt="메인사진" src={mainImg} style={{ maxWidth: '100px' }}></img> */}
                     <div>
-                        <button onClick={handleSave}>저장</button>
+                        <button onClick={handleNextClick}>다음</button>
+                    </div>
+                </P.SelectCondition>
+            )}
+            {activeTab === 'result' && (
+                <P.SelectCondition>
+                    <div>
+                        <h3>오늘 하루 컨디션은?</h3>
+                        {selectedButtons.emotion === 'happy' && (
+                            <p>
+                                <img src="images/emoji/happy.png" />
+                                아주 상쾌함
+                            </p>
+                        )}
+                        {selectedButtons.emotion === 'soso' && (
+                            <p>
+                                <img src="images/emoji/soso.png" />
+                                그냥 그럼
+                            </p>
+                        )}
+                        {selectedButtons.emotion === 'tired' && (
+                            <p>
+                                <img src="images/emoji/tired.png" />
+                                피곤함
+                            </p>
+                        )}
+                        {selectedButtons.emotion === 'good' && (
+                            <p>
+                                <img src="images/emoji/bad.png" />
+                                안좋음
+                            </p>
+                        )}
+                        {selectedButtons.emotion === 'stress' && (
+                            <p>
+                                <img src="images/emoji/stress.png" />
+                                나쁨
+                            </p>
+                        )}
+                        <h3>오늘 먹은 음식은?</h3>
+                        {selectedButtons.howEat && (
+                            <p>
+                                <img src="images/icons/icon-howEat.png" /> 80% 이상 건강하게 먹음
+                            </p>
+                        )}
+                        {!selectedButtons.howEat && (
+                            <p>
+                                <img src="images/icons/icon-x.png" /> 갓생 보류...
+                            </p>
+                        )}
+                        <h3>오늘 운동 완료?</h3>
+                        {selectedButtons.didGym && (
+                            <p>
+                                <img src="images/icons/icon-didGym.png" />
+                                완료
+                            </p>
+                        )}
+                        {!selectedButtons.didGym && (
+                            <p>
+                                <img src="images/icons/icon-x.png" /> 실패... 내일은 꼭 해야지!
+                            </p>
+                        )}
+                        <h3>오늘 꿀잠자고 일어난 날?</h3>
+                        {selectedButtons.goodSleep && (
+                            <p>
+                                <img src="images/icons/icon-goodSleep.png" />
+                                꿀잠자고 일어남
+                            </p>
+                        )}
+                        {!selectedButtons.goodSleep && (
+                            <p>
+                                <img src="images/icons/icon-x.png" />
+                                꿀잠 못잠... 왜지?
+                            </p>
+                        )}
+                        <h3>오늘 먹은 음식 올리기</h3>
+                        <div className="image-container">
+                            {selectedImg.map((image, index) => (
+                                <img
+                                    key={index}
+                                    alt={`미리보기 ${index}`}
+                                    src={URL.createObjectURL(image)}
+                                    className="preview-image"
+                                />
+                            ))}
+                        </div>
                     </div>
                 </P.SelectCondition>
             )}

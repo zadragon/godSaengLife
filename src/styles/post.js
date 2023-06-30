@@ -59,6 +59,15 @@ export const SelectCondition = styled.div`
             }
         }
     }
+    .FeedDelBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            color: red;
+        }
+    }
 `;
 
 export const PhotoInput = styled.label`
@@ -82,3 +91,9 @@ export const FileIcon = styled.img`
     width: 24px;
     height: 24px;
 `;
+// export const FeedDelBtn = styled.button`
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     color: red;
+// `;

@@ -5,9 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
 import { MainApi, PutApi, PostApi } from '../shared/api';
 import * as P from '../styles/post';
+import * as C from '../styles/common';
 
 function EditFeed({ onUpdate }) {
-    const { feedId } = useParams();
+    const { feedId, imageId } = useParams();
     const [selectedImg, setSelectedImg] = useState([]);
     const [mainImg, setMainImg] = useState('');
     const [selectedButtons, setSelectedButtons] = useState({
@@ -19,6 +20,7 @@ function EditFeed({ onUpdate }) {
     const [cookies] = useCookies();
     const { data, isLoading, error, refetch } = useQuery(['getMain'], () => MainApi.getMain(cookies.Authorization));
     const [value, setValue] = useState(new Date());
+    const [showHomeButton, setShowHomeButton] = useState(false);
 
     const selectDate = data?.data.feeds.filter(
         item => moment(item.createdAt).format('DD-MM-YYYY') === moment(value).format('DD-MM-YYYY')
@@ -37,6 +39,26 @@ function EditFeed({ onUpdate }) {
             ...prevState,
             [buttonName]: buttonValue,
         }));
+    };
+
+    //해당 피드 감정에 선택된듯한 효과 주기
+    const getButtonStyle = (emotion, type) => {
+        if (selectDate && selectDate.length > 0) {
+            const item = selectDate[0];
+            if (item.emotion === emotion) {
+                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
+            }
+            if (type === 'howEat' && item.howEat) {
+                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
+            }
+            if (type === 'didGym' && item.didGym) {
+                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
+            }
+            if (type === 'goodSleep' && item.goodSleep) {
+                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
+            }
+        }
+        return {};
     };
 
     const setImgFile = e => {
@@ -79,138 +101,143 @@ function EditFeed({ onUpdate }) {
         }
     };
 
+    const photoDelete = async () => {
+        try {
+            await PostApi.deleteOneImg(imageId, cookies.Authorization);
+        } catch (error) {
+            console.log('피드 삭제 실패', error);
+        }
+    };
+
+    const handleHomeClick = () => {
+        navigate('/');
+    };
+
     return (
         <div>
-            <div className="flex-row">
-                <div>
-                    <Link to="/">＜</Link>
-                </div>
-                <div className="text-center text-2xl">피드 수정</div>
-            </div>
             <div>
-                <div className="conditionList">
-                    {selectDate?.map((item, idx) => (
-                        <div key={idx}>
-                            <ul>
-                                <li>😁 {item.emotion}</li>
-                                <li>{item.didGym ? '✅ 오늘 진짜 운동 잘됨' : '✅ 운동못함ㅜㅜ'}</li>
-                                <li>{item.goodSleep ? '🙌🏻 꿀잠 자고 개운한 날' : '🙌🏻 잠못자서 두드려맞은듯 ㅜㅜ'}</li>
-                                <li>{item.howEat ? '😁 건강하게 먹음!!' : '😁 주워먹음'}</li>
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-                <div className="imgRail">
-                    {feedImgs?.map((item, idx) => (
-                        <div key={idx} className="img">
-                            <img src={item} alt="" />
-                        </div>
-                    ))}
-                </div>
-                <h2 className="text-2xl">오늘 하루 컨디션은?</h2>
-                <div className="flex flex-col">
-                    <button
-                        id="happy"
-                        className={`rounded-full ${selectedButtons['emotion'] === 'happy' ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('emotion', 'happy')}
-                    >
-                        😁 아주 상쾌함
+                <C.PageHeader>
+                    <button className="btnPrev" onClick={() => navigate(-1)}>
+                        <span className="hidden">뒤로가기</span>
                     </button>
-                    <button
-                        id="soso"
-                        className={`rounded-full ${selectedButtons['emotion'] === 'soso' ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('emotion', 'soso')}
-                    >
-                        🙃 그냥 그럼
-                    </button>
-                    <button
-                        id="tired"
-                        className={`rounded-full ${selectedButtons['emotion'] === 'tired' ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('emotion', 'tired')}
-                    >
-                        🥱 피곤함
-                    </button>
-                    <button
-                        id="good"
-                        className={`rounded-full ${selectedButtons['emotion'] === 'good' ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('emotion', 'good')}
-                    >
-                        😊 편안한 날
-                    </button>
-                    <button
-                        id="stress"
-                        className={`rounded-full ${selectedButtons['emotion'] === 'stress' ? 'bg-gray-300' : ''}`}
-                        onClick={() => handleButtonClick('emotion', 'stress')}
-                    >
-                        😡 나쁨
-                    </button>
-                </div>
+                    <h2>
+                        피드 수정
+                        {showHomeButton && (
+                            <button className="btnHome" onClick={handleHomeClick}>
+                                <span className="hidden">홈으로 가기</span>X
+                            </button>
+                        )}
+                    </h2>
+                    <div>
+                        <button onClick={handleEdit}>수정</button>
+                    </div>
+                </C.PageHeader>
+                <P.SelectCondition>
+                    <h3>오늘 하루 컨디션은?</h3>
+                    <div className="selectArea">
+                        <button
+                            id="happy"
+                            style={getButtonStyle('happy')}
+                            onClick={() => handleButtonClick('emotion', 'happy')}
+                        >
+                            <img src="/images/emoji/happy.png" /> 아주 상쾌함
+                        </button>
+
+                        <button
+                            id="soso"
+                            style={getButtonStyle('soso')}
+                            onClick={() => handleButtonClick('emotion', 'soso')}
+                        >
+                            <img src="/images/emoji/soso.png" /> 그냥 그럼
+                        </button>
+                        <button
+                            id="tired"
+                            style={getButtonStyle('tired')}
+                            onClick={() => handleButtonClick('emotion', 'tired')}
+                        >
+                            <img src="/images/emoji/tired.png" /> 피곤함
+                        </button>
+                        <button
+                            id="good"
+                            style={getButtonStyle('good')}
+                            onClick={() => handleButtonClick('emotion', 'good')}
+                        >
+                            <img src="/images/emoji/bad.png" /> 안좋음
+                        </button>
+                        <button
+                            id="stress"
+                            style={getButtonStyle('stress')}
+                            onClick={() => handleButtonClick('emotion', 'stress')}
+                        >
+                            <img src="/images/emoji/stress.png" /> 나쁨
+                        </button>
+                    </div>
+                </P.SelectCondition>
             </div>
-            <div>
-                <h2 className="text-2xl">꽤 건강한 음식 위주로 먹었다.</h2>
-                <div className="flex flex-col">
+            <P.SelectCondition>
+                <h3>꽤 건강한 음식 위주로 먹었다.</h3>
+                <div className="selectArea">
                     <button
                         id="howEatO"
-                        className={`rounded-full ${selectedButtons['howEat'] === true ? 'bg-gray-300' : ''}`}
+                        style={getButtonStyle('howEatO', true)}
                         onClick={() => handleButtonClick('howEat', true)}
                     >
-                        O
+                        <img src="/images/icons/icon-howEat.png" /> 80% 이상 건강하게 먹음
                     </button>
                     <button
                         id="howEatX"
-                        className={`rounded-full ${selectedButtons['howEat'] === false ? 'bg-gray-300' : ''}`}
+                        style={getButtonStyle('howEatX', false)}
                         onClick={() => handleButtonClick('howEat', false)}
                     >
-                        X
+                        <img src="/images/icons/icon-x.png" /> 오늘은 갓생 보류...
                     </button>
                 </div>
-            </div>
-            <div>
-                <h2 className="text-2xl">오늘 운동 완료?</h2>
-                <div className="flex flex-col">
+            </P.SelectCondition>
+            <P.SelectCondition>
+                <h3>오늘 운동 완료?</h3>
+                <div className="selectArea">
                     <button
                         id="didGymO"
-                        className={`rounded-full ${selectedButtons['didGym'] === true ? 'bg-gray-300' : ''}`}
+                        style={getButtonStyle('didGym', true)}
                         onClick={() => handleButtonClick('didGym', true)}
                     >
-                        O
+                        <img src="/images/icons/icon-didGym.png" /> 오늘 운동 완료
                     </button>
                     <button
                         id="didGymX"
-                        className={`rounded-full ${selectedButtons['didGym'] === false ? 'bg-gray-300' : ''}`}
+                        style={getButtonStyle('didGym', false)}
                         onClick={() => handleButtonClick('didGym', false)}
                     >
-                        X
+                        <img src="/images/icons/icon-x.png" /> 오늘 운동 실패... 내일은 꼭 해야지!
                     </button>
                 </div>
-            </div>
-            <div>
-                <h2 className="text-2xl">꿀잠 자고 개운한 날이다.</h2>
-                <div className="flex flex-col">
+            </P.SelectCondition>
+            <P.SelectCondition>
+                <h3>오늘 꿀잠자고 일어난 날?</h3>
+                <div className="selectArea">
                     <button
                         id="goodSleepO"
-                        className={`rounded-full ${selectedButtons['goodSleep'] === true ? 'bg-gray-300' : ''}`}
+                        style={getButtonStyle('goodSleep', true)}
                         onClick={() => handleButtonClick('goodSleep', true)}
                     >
-                        O
+                        <img src="/images/icons/icon-goodSleep.png" /> 꿀잠자고 일어남
                     </button>
                     <button
                         id="goodSleepX"
-                        className={`rounded-full ${selectedButtons['goodSleep'] === false ? 'bg-gray-300' : ''}`}
+                        style={getButtonStyle('goodSleep', false)}
                         onClick={() => handleButtonClick('goodSleep', false)}
                     >
-                        X
+                        <img src="/images/icons/icon-x.png" /> 꿀잠 못잠... 왜지?
                     </button>
                 </div>
-            </div>
-            <div>
-                <h2 className="text-2xl">오늘 먹은 음식 올리기</h2>
-                <div>사진 추가</div>
+            </P.SelectCondition>
+            <P.SelectCondition>
+                <h3>오늘 먹은 음식 올리기</h3>
+
                 <P.PhotoInput>
-                    <P.FileIcon src="images/icons/icon-camera.svg" alt="파일 선택" />
+                    <P.FileIcon src="/images/icons/icon-camera.svg" alt="파일 선택" />
                     <P.FileInput type="file" name="images" multiple onChange={setImgFile} accept="image/*" />
                 </P.PhotoInput>
-                {/* <input type="file" name="images" multiple onChange={setImgFile} accept="image/*" /> */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '10px' }}>
                     {selectedImg.map((image, index) => (
                         <img
@@ -221,13 +248,27 @@ function EditFeed({ onUpdate }) {
                         />
                     ))}
                 </div>
-                <div>
-                    <button onClick={handleEdit}>수정</button>
+
+                <div className="imgRail">
+                    {feedImgs?.map((item, idx) => (
+                        <div key={idx} className="img">
+                            <img
+                                src={item}
+                                alt=""
+                                style={{ maxWidth: '100px', marginRight: '10px', marginBottom: '10px' }}
+                            />
+                        </div>
+                    ))}
+                    <div className="delIcon">
+                        <img onClick={photoDelete} src="/images/icons/icon-delete.svg" alt="삭제" />
+                    </div>
                 </div>
-                <div>
-                    <button onClick={handleDelete}>삭제</button>
+            </P.SelectCondition>
+            <P.SelectCondition>
+                <div className="FeedDelBtn">
+                    <button onClick={handleDelete}>피드 삭제</button>
                 </div>
-            </div>
+            </P.SelectCondition>
         </div>
     );
 }
