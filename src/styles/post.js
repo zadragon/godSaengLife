@@ -59,4 +59,41 @@ export const SelectCondition = styled.div`
             }
         }
     }
+    .FeedDelBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            color: red;
+        }
+    }
 `;
+
+export const PhotoInput = styled.label`
+    border-radius: 8px;
+    background: #21242e;
+    display: flex;
+    width: 112px;
+    height: 112px;
+    padding: 32px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+`;
+
+export const FileInput = styled.input`
+    display: none;
+`;
+
+export const FileIcon = styled.img`
+    width: 24px;
+    height: 24px;
+`;
+// export const FeedDelBtn = styled.button`
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     color: red;
+// `;
