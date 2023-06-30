@@ -215,7 +215,13 @@ function Writetoday() {
                 <P.SelectCondition>
                     <h3>오늘 먹은 음식 올리기</h3>
                     <div>나의 갓생 식단을 기록해봅시다!(다섯 장까지 가능)</div>
-                    <input type="file" name="images" multiple onChange={setImgFile} accept="image/*" />
+
+                    {/* <P.PhotoInput type="file" name="images" multiple onChange={setImgFile} accept="image/*" /> */}
+                    <P.PhotoInput>
+                        <P.FileIcon src="images/icons/icon-camera.svg" alt="파일 선택" />
+                        <P.FileInput type="file" name="images" multiple onChange={setImgFile} accept="image/*" />
+                    </P.PhotoInput>
+
                     <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '10px' }}>
                         {selectedImg.map((image, index) => (
                             <img

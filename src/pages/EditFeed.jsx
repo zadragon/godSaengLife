@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
 import { MainApi, PutApi, PostApi } from '../shared/api';
+import * as P from '../styles/post';
 
 function EditFeed({ onUpdate }) {
     const { feedId } = useParams();
@@ -204,8 +205,12 @@ function EditFeed({ onUpdate }) {
             </div>
             <div>
                 <h2 className="text-2xl">오늘 먹은 음식 올리기</h2>
-                <div>사진등록 (최대 5장)</div>
-                <input type="file" name="images" multiple onChange={setImgFile} accept="image/*" />
+                <div>사진 추가</div>
+                <P.PhotoInput>
+                    <P.FileIcon src="images/icons/icon-camera.svg" alt="파일 선택" />
+                    <P.FileInput type="file" name="images" multiple onChange={setImgFile} accept="image/*" />
+                </P.PhotoInput>
+                {/* <input type="file" name="images" multiple onChange={setImgFile} accept="image/*" /> */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '10px' }}>
                     {selectedImg.map((image, index) => (
                         <img
