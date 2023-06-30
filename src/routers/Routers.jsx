@@ -26,6 +26,9 @@ const Routers = () => {
                 {/* 글 작성 */}
                 <Route path="/writetoday" element={<Writetoday />} />
 
+                {/* 분석 */}
+                <Route path="/analysis" element={<Analysis />} />
+
                 {/* 공통영역(상단 gnb메뉴)을 위한 Layout  */}
                 <Route element={<Layout />}>
                     {/* main */}
@@ -35,7 +38,6 @@ const Routers = () => {
 
                     <Route path="/feed/:feedId" element={<EditFeed />} />
                     <Route path="/pitureList" element={<PictureList />} />
-                    <Route path="/analysis" element={<Analysis />} />
                 </Route>
             </Routes>
         </BrowserRouter>

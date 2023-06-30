@@ -22,6 +22,7 @@ function Home() {
     const [selectDate, setSelectDate] = useState([]);
     const [feedImgs, setFeedImgs] = useState([]);
     useEffect(() => {
+        console.log(data);
         data?.data?.feeds &&
             setCalendarData(
                 data?.data.feeds.map(item => {
@@ -36,6 +37,7 @@ function Home() {
     }, [data]);
 
     useEffect(() => {
+        console.log(data);
         data?.data?.feeds &&
             setSelectDate(
                 data?.data.feeds.filter(item => {
@@ -61,20 +63,24 @@ function Home() {
 
     const [latestImgs, setLatestImgs] = useState([]);
 
-    PostApi.getLatestImg()
-        .then(response => {
-            setLatestImgs(response.data.feedImages);
-            // 이미지 데이터를 상태로 설정
-            //console.log('피드:', response.data);
-        })
-        .catch(error => {
-            console.log(error);
-        });
+    useEffect(() => {
+        PostApi.getLatestImg()
+            .then(response => {
+                setLatestImgs(response.data.feedImages);
+                // 이미지 데이터를 상태로 설정
+                //console.log('피드:', response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
 
     const [imgViewUrl, setImgViewUrl] = useState({ view: false, url: '', feedId: '' });
     const viewDetail = (imgUrl, imageId) => {
         setImgViewUrl({ ...imgViewUrl, view: true, url: imgUrl, imageId: imageId });
     };
+
+    //console.log(selectDate);
 
     return (
         <div>

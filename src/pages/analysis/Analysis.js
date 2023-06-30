@@ -3,12 +3,14 @@ import { analysis } from '../../shared/api';
 import { useCookies } from 'react-cookie';
 import { ResponsiveBar } from '@nivo/bar';
 import { useQuery } from '@tanstack/react-query';
-
+import * as C from '../../styles/common';
+import { useNavigate } from 'react-router-dom';
 const Analysis = () => {
-    const [cookies] = useCookies();
+    const navigate = useNavigate();
 
     const { data: dataG, isLoading, isError, refetch } = useQuery(['getMain'], () => analysis.getWeekData());
-    //const { periodData = [] } = dataG;
+
+    console.log(dataG);
 
     const [chart, setChart] = useState([
         {
@@ -51,6 +53,12 @@ const Analysis = () => {
     if (isError) return <div>...에러발생</div>;
     return (
         <div>
+            <C.PageHeader>
+                <button className="btnPrev" onClick={() => navigate(-1)}>
+                    <span className="hidden">뒤로가기</span>
+                </button>
+                <h2>갓생 분석</h2>
+            </C.PageHeader>
             <div>
                 기록을 시작한지 : <strong> {dataG?.totalFeedDays} 일</strong>
             </div>
