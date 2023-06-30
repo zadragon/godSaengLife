@@ -60,7 +60,7 @@ function EditFeed({ onUpdate }) {
         formData.append('didGym', selectedButtons.didGym);
         formData.append('goodSleep', selectedButtons.goodSleep);
 
-        await PutApi.editData(cookies.Authorization, formData, feedId)
+        await PutApi.editData(formData, feedId)
             .then(() => {
                 navigate('/');
             })
