@@ -11,12 +11,7 @@ function EditFeed({ onUpdate }) {
     const { feedId, imageId } = useParams();
     const [selectedImg, setSelectedImg] = useState([]);
     const [mainImg, setMainImg] = useState('');
-    const [selectedButtons, setSelectedButtons] = useState({
-        emotion: null,
-        howEat: false,
-        didGym: false,
-        goodSleep: false,
-    });
+
     const [cookies] = useCookies();
     const { data, isLoading, error, refetch } = useQuery(['getMain'], () => MainApi.getMain(cookies.Authorization));
     const [value, setValue] = useState(new Date());
@@ -25,7 +20,13 @@ function EditFeed({ onUpdate }) {
     const selectDate = data?.data.feeds.filter(
         item => moment(item.createdAt).format('DD-MM-YYYY') === moment(value).format('DD-MM-YYYY')
     );
-
+    const [selectedButtons, setSelectedButtons] = useState({
+        emotion: selectDate && selectDate.length > 0 ? selectDate[0].emotion : null,
+        howEat: selectDate && selectDate.length > 0 ? selectDate[0].howEat : false,
+        didGym: selectDate && selectDate.length > 0 ? selectDate[0].didGym : false,
+        goodSleep: selectDate && selectDate.length > 0 ? selectDate[0].goodSleep : false,
+    });
+    console.log(selectDate);
     const feedImgs = selectDate?.map(item => item.FeedImages[0]?.imagePath);
 
     const navigate = useNavigate();
@@ -40,22 +41,6 @@ function EditFeed({ onUpdate }) {
             [buttonName]: buttonValue,
         }));
         console.log(selectedButtons);
-    };
-
-    // 해당 피드 감정에 선택된듯한 효과 주기
-    const getButtonStyle = (emotion, howEat, didGym, goodSleep) => {
-        if (selectDate?.length > 0) {
-            const item = selectDate[0];
-            if (
-                item.emotion === emotion ||
-                item.howEat === howEat ||
-                item.didGym === didGym ||
-                item.goodSleep === goodSleep
-            ) {
-                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
-            }
-        }
-        return {};
     };
 
     const setImgFile = e => {
@@ -134,7 +119,7 @@ function EditFeed({ onUpdate }) {
                     <div className="selectArea">
                         <button
                             id="happy"
-                            className={`${selectedButtons.emotion == 'happy' ? 'active' : ''}`}
+                            className={`${selectedButtons.emotion === 'happy' ? 'active' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'happy')}
                         >
                             <img src="/images/emoji/happy.png" /> 아주 상쾌함
@@ -142,28 +127,28 @@ function EditFeed({ onUpdate }) {
 
                         <button
                             id="soso"
-                            className={`${selectedButtons.emotion == 'soso' ? 'active' : ''}`}
+                            className={`${selectedButtons.emotion === 'soso' ? 'active' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'soso')}
                         >
                             <img src="/images/emoji/soso.png" /> 그냥 그럼
                         </button>
                         <button
                             id="tired"
-                            className={`${selectedButtons.emotion == 'tired' ? 'active' : ''}`}
+                            className={`${selectedButtons.emotion === 'tired' ? 'active' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'tired')}
                         >
                             <img src="/images/emoji/tired.png" /> 피곤함
                         </button>
                         <button
                             id="good"
-                            className={`${selectedButtons.emotion == 'good' ? 'active' : ''}`}
+                            className={`${selectedButtons.emotion === 'good' ? 'active' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'good')}
                         >
                             <img src="/images/emoji/bad.png" /> 안좋음
                         </button>
                         <button
                             id="stress"
-                            className={`${selectedButtons.emotion == 'stress' ? 'active' : ''}`}
+                            className={`${selectedButtons.emotion === 'stress' ? 'active' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'stress')}
                         >
                             <img src="/images/emoji/stress.png" /> 나쁨
