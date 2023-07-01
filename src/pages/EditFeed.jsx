@@ -11,12 +11,7 @@ function EditFeed({ onUpdate }) {
     const { feedId, imageId } = useParams();
     const [selectedImg, setSelectedImg] = useState([]);
     const [mainImg, setMainImg] = useState('');
-    const [selectedButtons, setSelectedButtons] = useState({
-        emotion: null,
-        howEat: false,
-        didGym: false,
-        goodSleep: false,
-    });
+
     const [cookies] = useCookies();
     const { data, isLoading, error, refetch } = useQuery(['getMain'], () => MainApi.getMain(cookies.Authorization));
     const [value, setValue] = useState(new Date());
@@ -25,7 +20,13 @@ function EditFeed({ onUpdate }) {
     const selectDate = data?.data.feeds.filter(
         item => moment(item.createdAt).format('DD-MM-YYYY') === moment(value).format('DD-MM-YYYY')
     );
-
+    const [selectedButtons, setSelectedButtons] = useState({
+        emotion: selectDate && selectDate.length > 0 ? selectDate[0].emotion : null,
+        howEat: selectDate && selectDate.length > 0 ? selectDate[0].howEat : false,
+        didGym: selectDate && selectDate.length > 0 ? selectDate[0].didGym : false,
+        goodSleep: selectDate && selectDate.length > 0 ? selectDate[0].goodSleep : false,
+    });
+    console.log(selectDate);
     const feedImgs = selectDate?.map(item => item.FeedImages[0]?.imagePath);
 
     const navigate = useNavigate();
@@ -39,26 +40,7 @@ function EditFeed({ onUpdate }) {
             ...prevState,
             [buttonName]: buttonValue,
         }));
-    };
-
-    //해당 피드 감정에 선택된듯한 효과 주기
-    const getButtonStyle = (emotion, type) => {
-        if (selectDate && selectDate.length > 0) {
-            const item = selectDate[0];
-            if (item.emotion === emotion) {
-                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
-            }
-            if (type === 'howEat' && item.howEat) {
-                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
-            }
-            if (type === 'didGym' && item.didGym) {
-                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
-            }
-            if (type === 'goodSleep' && item.goodSleep) {
-                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
-            }
-        }
-        return {};
+        console.log(selectedButtons);
     };
 
     const setImgFile = e => {
@@ -137,7 +119,7 @@ function EditFeed({ onUpdate }) {
                     <div className="selectArea">
                         <button
                             id="happy"
-                            style={getButtonStyle('happy')}
+                            className={`${selectedButtons.emotion === 'happy' ? 'active' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'happy')}
                         >
                             <img src="/images/emoji/happy.png" /> 아주 상쾌함
@@ -145,28 +127,28 @@ function EditFeed({ onUpdate }) {
 
                         <button
                             id="soso"
-                            style={getButtonStyle('soso')}
+                            className={`${selectedButtons.emotion === 'soso' ? 'active' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'soso')}
                         >
                             <img src="/images/emoji/soso.png" /> 그냥 그럼
                         </button>
                         <button
                             id="tired"
-                            style={getButtonStyle('tired')}
+                            className={`${selectedButtons.emotion === 'tired' ? 'active' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'tired')}
                         >
                             <img src="/images/emoji/tired.png" /> 피곤함
                         </button>
                         <button
                             id="good"
-                            style={getButtonStyle('good')}
+                            className={`${selectedButtons.emotion === 'good' ? 'active' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'good')}
                         >
                             <img src="/images/emoji/bad.png" /> 안좋음
                         </button>
                         <button
                             id="stress"
-                            style={getButtonStyle('stress')}
+                            className={`${selectedButtons.emotion === 'stress' ? 'active' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'stress')}
                         >
                             <img src="/images/emoji/stress.png" /> 나쁨
@@ -179,14 +161,14 @@ function EditFeed({ onUpdate }) {
                 <div className="selectArea">
                     <button
                         id="howEatO"
-                        style={getButtonStyle('howEatO', true)}
+                        className={`${selectedButtons.howEat ? 'active' : ''}`}
                         onClick={() => handleButtonClick('howEat', true)}
                     >
                         <img src="/images/icons/icon-howEat.png" /> 80% 이상 건강하게 먹음
                     </button>
                     <button
                         id="howEatX"
-                        style={getButtonStyle('howEatX', false)}
+                        className={`${!selectedButtons.howEat ? 'active' : ''}`}
                         onClick={() => handleButtonClick('howEat', false)}
                     >
                         <img src="/images/icons/icon-x.png" /> 오늘은 갓생 보류...
@@ -198,14 +180,14 @@ function EditFeed({ onUpdate }) {
                 <div className="selectArea">
                     <button
                         id="didGymO"
-                        style={getButtonStyle('didGym', true)}
+                        className={`${selectedButtons.didGym ? 'active' : ''}`}
                         onClick={() => handleButtonClick('didGym', true)}
                     >
                         <img src="/images/icons/icon-didGym.png" /> 오늘 운동 완료
                     </button>
                     <button
                         id="didGymX"
-                        style={getButtonStyle('didGym', false)}
+                        className={`${!selectedButtons.didGym ? 'active' : ''}`}
                         onClick={() => handleButtonClick('didGym', false)}
                     >
                         <img src="/images/icons/icon-x.png" /> 오늘 운동 실패... 내일은 꼭 해야지!
@@ -217,14 +199,14 @@ function EditFeed({ onUpdate }) {
                 <div className="selectArea">
                     <button
                         id="goodSleepO"
-                        style={getButtonStyle('goodSleep', true)}
+                        className={`${selectedButtons.goodSleep ? 'active' : ''}`}
                         onClick={() => handleButtonClick('goodSleep', true)}
                     >
                         <img src="/images/icons/icon-goodSleep.png" /> 꿀잠자고 일어남
                     </button>
                     <button
                         id="goodSleepX"
-                        style={getButtonStyle('goodSleep', false)}
+                        className={`${!selectedButtons.goodSleep ? 'active' : ''}`}
                         onClick={() => handleButtonClick('goodSleep', false)}
                     >
                         <img src="/images/icons/icon-x.png" /> 꿀잠 못잠... 왜지?
