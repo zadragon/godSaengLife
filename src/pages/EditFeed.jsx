@@ -41,20 +41,29 @@ function EditFeed({ onUpdate }) {
         }));
     };
 
-    //해당 피드 감정에 선택된듯한 효과 주기
-    const getButtonStyle = (emotion, type) => {
+    // 해당 피드 감정에 선택된듯한 효과 주기
+    const getButtonStyle = (emotion, howEat, didGym, goodSleep) => {
         if (selectDate && selectDate.length > 0) {
             const item = selectDate[0];
             if (item.emotion === emotion) {
                 return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
             }
-            if (type === 'howEat' && item.howEat) {
+            if (item.howEat === true && howEat === true) {
                 return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
             }
-            if (type === 'didGym' && item.didGym) {
+            if (item.howEat === false && howEat === false) {
                 return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
             }
-            if (type === 'goodSleep' && item.goodSleep) {
+            if (item.didGym === true && didGym === true) {
+                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
+            }
+            if (item.didGym === false && didGym === false) {
+                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
+            }
+            if (item.goodSleep === true && goodSleep === true) {
+                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
+            }
+            if (item.goodSleep === false && goodSleep === false) {
                 return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
             }
         }
@@ -179,14 +188,14 @@ function EditFeed({ onUpdate }) {
                 <div className="selectArea">
                     <button
                         id="howEatO"
-                        style={getButtonStyle('howEatO', true)}
+                        style={getButtonStyle('emotionValue', true)}
                         onClick={() => handleButtonClick('howEat', true)}
                     >
                         <img src="/images/icons/icon-howEat.png" /> 80% 이상 건강하게 먹음
                     </button>
                     <button
                         id="howEatX"
-                        style={getButtonStyle('howEatX', false)}
+                        style={getButtonStyle('emotionValue', false)}
                         onClick={() => handleButtonClick('howEat', false)}
                     >
                         <img src="/images/icons/icon-x.png" /> 오늘은 갓생 보류...
@@ -198,14 +207,14 @@ function EditFeed({ onUpdate }) {
                 <div className="selectArea">
                     <button
                         id="didGymO"
-                        style={getButtonStyle('didGym', true)}
+                        style={getButtonStyle('emotionValue', true)}
                         onClick={() => handleButtonClick('didGym', true)}
                     >
                         <img src="/images/icons/icon-didGym.png" /> 오늘 운동 완료
                     </button>
                     <button
                         id="didGymX"
-                        style={getButtonStyle('didGym', false)}
+                        style={getButtonStyle('emotionValue', false)}
                         onClick={() => handleButtonClick('didGym', false)}
                     >
                         <img src="/images/icons/icon-x.png" /> 오늘 운동 실패... 내일은 꼭 해야지!
@@ -217,14 +226,14 @@ function EditFeed({ onUpdate }) {
                 <div className="selectArea">
                     <button
                         id="goodSleepO"
-                        style={getButtonStyle('goodSleep', true)}
+                        style={getButtonStyle('emotionValue', true)}
                         onClick={() => handleButtonClick('goodSleep', true)}
                     >
                         <img src="/images/icons/icon-goodSleep.png" /> 꿀잠자고 일어남
                     </button>
                     <button
                         id="goodSleepX"
-                        style={getButtonStyle('goodSleep', false)}
+                        style={getButtonStyle('emotionValue', false)}
                         onClick={() => handleButtonClick('goodSleep', false)}
                     >
                         <img src="/images/icons/icon-x.png" /> 꿀잠 못잠... 왜지?
