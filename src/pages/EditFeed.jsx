@@ -43,27 +43,14 @@ function EditFeed({ onUpdate }) {
 
     // 해당 피드 감정에 선택된듯한 효과 주기
     const getButtonStyle = (emotion, howEat, didGym, goodSleep) => {
-        if (selectDate && selectDate.length > 0) {
+        if (selectDate?.length > 0) {
             const item = selectDate[0];
-            if (item.emotion === emotion) {
-                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
-            }
-            if (item.howEat === true && howEat === true) {
-                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
-            }
-            if (item.howEat === false && howEat === false) {
-                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
-            }
-            if (item.didGym === true && didGym === true) {
-                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
-            }
-            if (item.didGym === false && didGym === false) {
-                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
-            }
-            if (item.goodSleep === true && goodSleep === true) {
-                return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
-            }
-            if (item.goodSleep === false && goodSleep === false) {
+            if (
+                item.emotion === emotion ||
+                item.howEat === howEat ||
+                item.didGym === didGym ||
+                item.goodSleep === goodSleep
+            ) {
                 return { backgroundColor: 'gray', fontWeight: 'bold', color: 'white' };
             }
         }
