@@ -53,7 +53,8 @@ export const SelectCondition = styled.div`
             &:hover {
                 background: var(--primary-200, #ebffb8);
             }
-            &:focus {
+            &:focus,
+            &.active {
                 background: var(--neutral-900, #21242e);
                 color: #fff;
             }
