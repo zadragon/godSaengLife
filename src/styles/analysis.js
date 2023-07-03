@@ -45,7 +45,19 @@ export const Wrapper = styled.div`
     }
     .godRecord {
         margin-top: 24px;
+        .btnShare {
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: var(--neutral-500, #727580);
 
+            /* Paragraph/Small Medium */
+            font-size: 14px;
+            font-family: Pretendard;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+        }
         h3 {
             color: var(--neutral-900, #21242e);
             /* Paragraph/Mid Bold */
@@ -57,6 +69,7 @@ export const Wrapper = styled.div`
         .recordWrap {
             display: flex;
             justify-content: space-between;
+            margin-top: 8px;
             .col {
                 width: 32%;
                 border-radius: 8px;
@@ -110,7 +123,7 @@ export const Wrapper = styled.div`
             p {
                 color: var(--neutral-400, #aaacb3);
 
-                /* Description/Medium */
+                /* Description/Medium */
                 font-size: 12px;
                 font-family: Pretendard;
                 font-weight: 500;

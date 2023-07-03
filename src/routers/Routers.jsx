@@ -1,15 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Signup from '../pages/member/Signup';
-import Login from '../pages/member/Login';
 import Home from '../pages/Home';
 import Layout from '../pages/Layout';
-import Allmeal from '../pages/Allmeal';
-import Writetoday from '../pages/Writetoday';
-import PictureList from '../pages/record/PictureList';
-import EditFeed from '../pages/EditFeed';
-import JoinDone from '../pages/member/JoinDone';
 import Analysis from '../pages/analysis/Analysis';
+import { JoinDone, Login, Signup } from '../pages/member/';
+import { Allmeal, EditFeed, PictureList, Writetoday } from '../pages/post';
 
 const Routers = () => {
     return (

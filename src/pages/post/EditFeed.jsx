@@ -3,9 +3,9 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
-import { MainApi, PutApi, PostApi } from '../shared/api';
-import * as P from '../styles/post';
-import * as C from '../styles/common';
+import { MainApi, PutApi, PostApi } from '../../shared/api';
+import * as P from '../../styles/post';
+import * as C from '../../styles/common';
 
 function EditFeed({ onUpdate }) {
     const { feedId, imageId } = useParams();

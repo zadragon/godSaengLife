@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { analysis } from '../../shared/api';
-import { useCookies } from 'react-cookie';
 import { ResponsiveBar } from '@nivo/bar';
 import { useQuery } from '@tanstack/react-query';
 import * as C from '../../styles/common';
@@ -140,8 +139,11 @@ const Analysis = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="godRecord">
+                <div className="godRecord relative">
                     <h3>갓생 기록</h3>
+                    <button className="btnShare">
+                        <span>커뮤니티 공유</span>
+                    </button>
                     <div className="recordWrap">
                         <div className="col type1">
                             <strong>건강한식단</strong>

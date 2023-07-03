@@ -14,6 +14,7 @@ import OverlayImg from '../components/picture/OverlayImg';
 function Home() {
     const [cookies] = useCookies();
     const [value, onChange] = useState(new Date());
+    const [today, setToday] = useState(moment(new Date()).format('YYYY-MM-DD'));
     const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getMain'], () =>
         MainApi.getMain(cookies.Authorization)
     );
@@ -22,21 +23,20 @@ function Home() {
     const [selectDate, setSelectDate] = useState([]);
     const [feedImgs, setFeedImgs] = useState([]);
     useEffect(() => {
-        console.log(data);
         data?.data?.feeds &&
             setCalendarData(
                 data?.data.feeds.map(item => {
-                    return moment(item.createdAt).format('DD-MM-YYYY');
+                    return moment(item.createdAt).format('YYYY-MM-DD');
                 })
             );
     }, [data]);
+    console.log(calendarData);
 
     useEffect(() => {
-        console.log(data);
         data?.data?.feeds &&
             setSelectDate(
                 data?.data.feeds.filter(item => {
-                    return moment(item.createdAt).format('DD-MM-YYYY') == moment(value).format('DD-MM-YYYY');
+                    return moment(item.createdAt).format('YYYY-MM-DD') == moment(value).format('YYYY-MM-DD');
                 })
             );
     }, [value, data]);
@@ -49,7 +49,6 @@ function Home() {
                 })
             );
         setTabId('condition');
-        console.log(feedImgs);
     }, [selectDate]);
 
     const [tabId, setTabId] = useState('condition');
@@ -85,7 +84,7 @@ function Home() {
                     onChange={onChange}
                     value={value}
                     tileClassName={({ date, view }) => {
-                        if (calendarData?.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                        if (calendarData?.find(x => x === moment(date).format('YYYY-MM-DD'))) {
                             return 'highlight';
                         }
                     }}

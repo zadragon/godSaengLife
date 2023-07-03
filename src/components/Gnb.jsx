@@ -4,7 +4,6 @@ import * as C from '../styles/common';
 
 const Gnb = () => {
     const location = useLocation();
-    console.log(location.pathname);
     return (
         <C.GnbBar>
             <ul>
