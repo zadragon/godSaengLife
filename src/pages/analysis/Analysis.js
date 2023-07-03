@@ -140,8 +140,11 @@ const Analysis = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="godRecord">
+                <div className="godRecord relative">
                     <h3>갓생 기록</h3>
+                    <button className="btnShare">
+                        <span>커뮤니티 공유</span>
+                    </button>
                     <div className="recordWrap">
                         <div className="col type1">
                             <strong>건강한식단</strong>
