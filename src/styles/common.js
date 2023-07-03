@@ -38,6 +38,16 @@ export const PageHeader = styled.div`
         font-size: 20px;
         color: #21242e;
         font-family: 'Pretendard-Bold';
+        &.date {
+            color: var(--neutral-900, #21242e);
+
+            /* Paragraph/Small Medium */
+            font-size: 14px;
+            font-family: Pretendard;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+        }
     }
     .btnClose {
         position: absolute;
@@ -54,6 +64,14 @@ export const PageHeader = styled.div`
         width: 24px;
         height: 24px;
         background: url('/images/icons/icon-prev.svg') no-repeat center;
+    }
+    .btnDel {
+        position: absolute;
+        top: 10px;
+        right: 16px;
+        width: 24px;
+        height: 24px;
+        background: url('/images/icons/icon-delete.svg') no-repeat center;
     }
 `;
 

@@ -1,6 +1,5 @@
-import Allmeal from './Allmeal';
+import AllImgList from './AllImgList';
 import EditFeed from './EditFeed';
-import PictureList from './PictureList';
 import Writetoday from './Writetoday';
 
-export { Allmeal, EditFeed, PictureList, Writetoday };
+export { AllImgList, EditFeed, Writetoday };
