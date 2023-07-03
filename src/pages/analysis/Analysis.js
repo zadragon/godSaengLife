@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { analysis } from '../../shared/api';
-import { useCookies } from 'react-cookie';
 import { ResponsiveBar } from '@nivo/bar';
 import { useQuery } from '@tanstack/react-query';
 import * as C from '../../styles/common';

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { PostApi } from '../shared/api';
+import { PostApi } from '../../shared/api';
 import { useCookies } from 'react-cookie';
-import { styled } from 'styled-components';
-import { useQuery } from '@tanstack/react-query';
-import * as A from '../styles/album';
-import OverlayImg from '../components/picture/OverlayImg';
+import * as A from '../../styles/album';
+import OverlayImg from '../../components/picture/OverlayImg';
 
 const Allmeal = () => {
     const [cookies, setCookie, removeCookie] = useCookies();

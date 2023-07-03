@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { PostApi } from '../shared/api';
+import { PostApi } from '../../shared/api';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
-import * as P from '../styles/post';
-import * as C from '../styles/common';
+import * as P from '../../styles/post';
+import * as C from '../../styles/common';
 import ReactCanvasConfetti from 'react-canvas-confetti';
 
 function Writetoday() {

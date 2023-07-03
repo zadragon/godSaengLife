@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
-import { MainApi, PutApi, PostApi } from '../shared/api';
+import { MainApi, PutApi, PostApi } from '../../shared/api';
 
 function EditFeed({ onUpdate }) {
     const { feedId } = useParams();

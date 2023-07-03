@@ -123,7 +123,7 @@ export const Wrapper = styled.div`
             p {
                 color: var(--neutral-400, #aaacb3);
 
-                /* Description/Medium */
+                /* Description/Medium */
                 font-size: 12px;
                 font-family: Pretendard;
                 font-weight: 500;
