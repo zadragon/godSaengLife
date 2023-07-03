@@ -144,3 +144,16 @@ export const analysis = {
             });
     },
 };
+
+export const MypageApi = {
+    getMypage: () => {
+        return api
+            .get('/mypage')
+            .then(response => {
+                return response;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
+};

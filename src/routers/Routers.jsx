@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import Layout from '../pages/Layout';
 import Analysis from '../pages/analysis/Analysis';
+import Mypage from '../pages/mypage/Mypage';
 import { JoinDone, Login, Signup } from '../pages/member/';
 import { Allmeal, EditFeed, PictureList, Writetoday } from '../pages/post';
 
@@ -23,6 +24,9 @@ const Routers = () => {
 
                 {/* 분석 */}
                 <Route path="/analysis" element={<Analysis />} />
+
+                {/*마이페이지*/}
+                <Route path="/mypage" element={<Mypage />} />
 
                 {/* 공통영역(상단 gnb메뉴)을 위한 Layout  */}
                 <Route element={<Layout />}>
