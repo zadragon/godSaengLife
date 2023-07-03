@@ -5,7 +5,7 @@ import Layout from '../pages/Layout';
 import Analysis from '../pages/analysis/Analysis';
 import Mypage from '../pages/mypage/Mypage';
 import { JoinDone, Login, Signup } from '../pages/member/';
-import { Allmeal, EditFeed, PictureList, Writetoday } from '../pages/post';
+import { EditFeed, AllImgList, Writetoday } from '../pages/post';
 
 const Routers = () => {
     return (
@@ -19,7 +19,8 @@ const Routers = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/joinDone" element={<JoinDone />} />
 
-                {/* 글 작성 */}
+                {/* 피드관련 */}
+                <Route path="/everyImgList" element={<AllImgList />} />
                 <Route path="/writetoday" element={<Writetoday />} />
 
                 {/* 분석 */}
@@ -33,10 +34,8 @@ const Routers = () => {
                     {/* main */}
                     <Route path="/" element={<Home />} />
                     <Route path="/image/latest" element={<Home />} />
-                    <Route path="/allmeal" element={<Allmeal />} />
 
                     <Route path="/feed/:feedId" element={<EditFeed />} />
-                    <Route path="/pitureList" element={<PictureList />} />
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -3,13 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { MainApi, PostApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
-import 'react-calendar/dist/Calendar.css';
-import * as C from '../styles/common';
-import * as H from '../styles/home';
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
 import Calendar from 'react-calendar';
 import OverlayImg from '../components/picture/OverlayImg';
+import * as C from '../styles/common';
+import * as H from '../styles/home';
+import 'react-calendar/dist/Calendar.css';
 
 function Home() {
     const [cookies] = useCookies();
@@ -173,7 +173,7 @@ function Home() {
             <H.MainAlbum>
                 <div>
                     <h2>식단 사진첩</h2>
-                    <Link to="/allmeal" className="linkMore">
+                    <Link to="/everyImgList" className="linkMore">
                         전체보기 &nbsp;＞
                     </Link>
                 </div>
