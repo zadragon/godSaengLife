@@ -16,8 +16,8 @@ const Gnb = () => {
                 <li className="community" onClick={() => alert('준비중입니다.')}>
                     <Link to="/">나도갓생</Link>
                 </li>
-                <li className="mypage" onClick={() => alert('준비중입니다.')}>
-                    <Link to="/">마이페이지</Link>
+                <li className="mypage">
+                    <Link to="/mypage">마이페이지</Link>
                 </li>
             </ul>
         </C.GnbBar>

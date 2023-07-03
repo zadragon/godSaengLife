@@ -6,6 +6,7 @@ import moment from 'moment';
 import { MainApi, PutApi, PostApi } from '../../shared/api';
 import * as P from '../../styles/post';
 import * as C from '../../styles/common';
+import styled from 'styled-components';
 
 function EditFeed({ onUpdate }) {
     const { feedId, imageId } = useParams();
@@ -27,7 +28,7 @@ function EditFeed({ onUpdate }) {
         goodSleep: selectDate && selectDate.length > 0 ? selectDate[0].goodSleep : false,
     });
     console.log(selectDate);
-    const feedImgs = selectDate?.map(item => item.FeedImages[0]?.imagePath);
+    const feedImgs = selectDate?.flatMap(item => item.FeedImages?.map(image => image.imagePath));
 
     const navigate = useNavigate();
 
@@ -220,30 +221,22 @@ function EditFeed({ onUpdate }) {
                     <P.FileIcon src="/images/icons/icon-camera.svg" alt="파일 선택" />
                     <P.FileInput type="file" name="images" multiple onChange={setImgFile} accept="image/*" />
                 </P.PhotoInput>
-                <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '10px' }}>
-                    {selectedImg.map((image, index) => (
-                        <img
-                            key={index}
-                            alt={`미리보기 ${index}`}
-                            src={URL.createObjectURL(image)}
-                            style={{ maxWidth: '100px', marginRight: '10px', marginBottom: '10px' }}
-                        />
-                    ))}
-                </div>
-
-                <div className="imgRail">
-                    {feedImgs?.map((item, idx) => (
-                        <div key={idx} className="img">
-                            <img
-                                src={item}
-                                alt=""
-                                style={{ maxWidth: '100px', marginRight: '10px', marginBottom: '10px' }}
-                            />
-                        </div>
-                    ))}
-                    <div className="delIcon">
-                        <img onClick={photoDelete} src="/images/icons/icon-delete.svg" alt="삭제" />
+                <ImageContainer>
+                    <div className="imgRail" style={{ display: 'flex' }}>
+                        {feedImgs?.map((item, idx) => (
+                            <ImageWrapper key={idx} className="img">
+                                <Image src={item} alt="" />
+                            </ImageWrapper>
+                        ))}
+                        {selectedImg.map((image, index) => (
+                            <ImageWrapper key={index}>
+                                <Image alt={`미리보기 ${index}`} src={URL.createObjectURL(image)} />
+                            </ImageWrapper>
+                        ))}
                     </div>
+                </ImageContainer>
+                <div className="delIcon">
+                    <img onClick={photoDelete} src="/images/icons/icon-delete.svg" alt="삭제" />
                 </div>
             </P.SelectCondition>
             <P.SelectCondition>
@@ -256,3 +249,22 @@ function EditFeed({ onUpdate }) {
 }
 
 export default EditFeed;
+
+const ImageContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+`;
+
+// 스타일드 컴포넌트를 사용하여 이미지를 감싸는 div를 생성합니다.
+const ImageWrapper = styled.div`
+    display: flex;
+    max-width: 100px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+`;
+
+// 이미지 컴포넌트에 스타일을 적용합니다.
+const Image = styled.img`
+    max-width: 100%;
+`;
