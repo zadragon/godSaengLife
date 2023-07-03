@@ -27,11 +27,11 @@ const Header = () => {
                 </Link>
             )}
 
-            <div className="imsi">
+            {/* <div className="imsi">
                 <h1>
                     <Link to="/">홈으로 가기</Link>
                 </h1>
-            </div>
+            </div> */}
         </C.Header>
     );
 };
