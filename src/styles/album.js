@@ -39,11 +39,12 @@ export const Filter = styled.div`
             white-space: nowrap;
             flex-wrap: nowrap;
             color: var(--neutral-500, #727580);
+            cursor: pointer;
 
             /* Description/Medium */
             font-size: 12px;
             line-height: 16px;
-            &.allImg {
+            &.type00 {
                 padding: 0px 8px;
             }
             &.type01 {
@@ -73,7 +74,7 @@ export const Filter = styled.div`
             }
             &.active {
                 color: var(--neutral-900, #21242e);
-                background: var(--primary-400, #ddff85);
+                background-color: var(--primary-400, #ddff85);
             }
         }
     }
