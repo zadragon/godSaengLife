@@ -90,7 +90,7 @@ export const PostApi = {
     },
     deleteAllImg: feedId => {
         return api
-            .delete(`feed/${feedId}/allImage`)
+            .delete(`/feed/${feedId}/allImage`)
             .then(response => {
                 alert(response.data.message);
             })
@@ -106,16 +106,6 @@ export const PostApi = {
                     Authorization: token,
                 },
             })
-            .then(response => {
-                alert(response.data.message);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    },
-    deleteAllImg: feedId => {
-        return api
-            .delete(`/feed/${feedId}/allImage`)
             .then(response => {
                 alert(response.data.message);
             })
