@@ -19,23 +19,35 @@ import { PostApi } from '../../shared/api';
 
 const AllPopLayer = ({ allPopActive, setAllPopActive, selectItem }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const [feedImg, setFeedImg] = useState([]);
+    const [feedImg, setFeedImg] = useState([]); // 피드 사진 아이템들
+    const [showImgIdx, setShowImgIdx] = useState('');
+    const [popActive, setPopActive] = useState(false); // 삭제 묻는 툴팁 팝업
+
     useEffect(() => {
-        allPopActive &&
-            setFeedImg(
-                selectItem.FeedImages.map(item => {
-                    return item.imagePath;
-                })
-            );
+        allPopActive && setFeedImg(selectItem.FeedImages);
+        allPopActive && setShowImgIdx(selectItem?.FeedImages[0].imageId);
     }, [allPopActive]);
 
-    const [popActive, setPopActive] = useState(false);
+    useEffect(() => {
+        !feedImg && setAllPopActive(false);
+    }, []);
+
     const confirmTool = bool => {
         setPopActive(bool);
     };
 
-    const deleteImg = () => {
-        //PostApi.deleteOneImg(imageId);
+    const deleteImg = showImgIdx => {
+        console.log(showImgIdx);
+        PostApi.deleteOneImg(showImgIdx);
+        setFeedImg(prev => prev.filter(item => item.imageId !== showImgIdx));
+        setPopActive(false);
+    };
+
+    const handleSlideChange = swiper => {
+        console.log(feedImg[swiper.visibleSlidesIndexes]);
+        // 스와이프 직후에 실행되는 코드
+        setShowImgIdx(feedImg[swiper.visibleSlidesIndexes].imageId);
+        // 추가적인 로직을 여기에 작성할 수 있습니다.
     };
 
     return (
@@ -49,6 +61,7 @@ const AllPopLayer = ({ allPopActive, setAllPopActive, selectItem }) => {
                     <span className="hidden">삭제</span>
                 </button>
             </C.PageHeader>
+            {feedImg.length == 0 && <div className="flex justify-center py-20">이미지가 없습니다.</div>}
             <SwiperArea>
                 <Swiper
                     style={{
@@ -60,11 +73,13 @@ const AllPopLayer = ({ allPopActive, setAllPopActive, selectItem }) => {
                     thumbs={{ swiper: thumbsSwiper }}
                     modules={[FreeMode, Navigation, Thumbs]}
                     className="mySwiper2"
+                    onSlideChange={handleSlideChange}
+                    watchSlidesProgress
                 >
-                    {feedImg.map(imgSrc => {
+                    {feedImg.map(item => {
                         return (
-                            <SwiperSlide key={imgSrc}>
-                                <img src={imgSrc} />
+                            <SwiperSlide key={item.imageId}>
+                                <img src={item.imagePath} alt={item.imageId} />
                             </SwiperSlide>
                         );
                     })}
@@ -78,21 +93,21 @@ const AllPopLayer = ({ allPopActive, setAllPopActive, selectItem }) => {
                     modules={[FreeMode, Navigation, Thumbs]}
                     className="mySwiper"
                 >
-                    {feedImg.map(imgSrc => {
+                    {feedImg.map(item => {
                         return (
-                            <SwiperSlide key={imgSrc}>
-                                <img src={imgSrc} />
+                            <SwiperSlide key={item.imageId}>
+                                <img src={item.imagePath} alt={item.imageId} />
                             </SwiperSlide>
                         );
                     })}
                 </Swiper>
             </SwiperArea>
             <div className={`tool ${popActive ? 'active' : ''}`}>
-                <p>정말로 삭제하시겠어요?</p>
+                <p>이 사진을 정말로 삭제하시겠어요?</p>
                 <button onClick={() => confirmTool(false)} className="black">
                     취소
                 </button>
-                <button>삭제하기</button>
+                <button onClick={() => deleteImg(showImgIdx)}>삭제하기</button>
             </div>
         </PopLayer>
     );
@@ -184,6 +199,7 @@ const SwiperArea = styled.div`
             height: 80px;
             border-radius: 8px;
             overflow: hidden;
+            &.swiper-slide-active,
             &.swiper-slide-thumb-active {
                 border-radius: 8px;
                 border: 2px solid var(--primary-500, #c7f860);
