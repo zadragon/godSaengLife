@@ -27,6 +27,11 @@ export const AuthApi = {
                 // console.log(error);
             });
     },
+    withdrawal: async () => {
+        const response = await api.delete('/mypage/userdel');
+        return response.data;
+    },
+    //회원 탈퇴
 };
 
 // export const MainApi = {
@@ -101,6 +106,16 @@ export const PostApi = {
                     Authorization: token,
                 },
             })
+            .then(response => {
+                alert(response.data.message);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
+    deleteAllImg: feedId => {
+        return api
+            .delete(`/feed/${feedId}/allImage`)
             .then(response => {
                 alert(response.data.message);
             })

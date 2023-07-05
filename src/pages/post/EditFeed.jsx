@@ -84,11 +84,11 @@ function EditFeed({ onUpdate }) {
         }
     };
 
-    const photoDelete = async () => {
+    const deleteAllImg = async () => {
         try {
-            await PostApi.deleteOneImg(imageId, cookies.Authorization);
+            await PostApi.deleteAllImg(feedId, cookies.Authorization);
         } catch (error) {
-            console.log('피드 삭제 실패', error);
+            console.log('전체 이미지 삭제 실패', error);
         }
     };
 
@@ -216,7 +216,10 @@ function EditFeed({ onUpdate }) {
             </P.SelectCondition>
             <P.SelectCondition>
                 <h3>오늘 먹은 음식 올리기</h3>
-
+                <div className="delIcon">
+                    <img onClick={deleteAllImg} src="/images/icons/icon-delete.svg" alt="전체 이미지 삭제" />
+                    전체 사진 삭제
+                </div>
                 <P.PhotoInput>
                     <P.FileIcon src="/images/icons/icon-camera.svg" alt="파일 선택" />
                     <P.FileInput type="file" name="images" multiple onChange={setImgFile} accept="image/*" />
@@ -235,9 +238,6 @@ function EditFeed({ onUpdate }) {
                         ))}
                     </div>
                 </ImageContainer>
-                <div className="delIcon">
-                    <img onClick={photoDelete} src="/images/icons/icon-delete.svg" alt="삭제" />
-                </div>
             </P.SelectCondition>
             <P.SelectCondition>
                 <div className="FeedDelBtn">
