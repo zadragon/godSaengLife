@@ -6,6 +6,7 @@ import Analysis from '../pages/analysis/Analysis';
 import Mypage from '../pages/mypage/Mypage';
 import { JoinDone, Login, Signup } from '../pages/member/';
 import { EditFeed, AllImgList, Writetoday } from '../pages/post';
+import Setting from '../pages/mypage/Setting';
 
 const Routers = () => {
     return (
@@ -28,6 +29,7 @@ const Routers = () => {
 
                 {/*마이페이지*/}
                 <Route path="/mypage" element={<Mypage />} />
+                <Route path="/mypage/nickname" element={<Setting />} />
 
                 {/* 공통영역(상단 gnb메뉴)을 위한 Layout  */}
                 <Route element={<Layout />}>
