@@ -32,10 +32,6 @@ const AllPopLayer = ({ allPopActive, setAllPopActive, selectItem }) => {
         !feedImg && setAllPopActive(false);
     }, []);
 
-    const confirmTool = bool => {
-        setPopActive(bool);
-    };
-
     const deleteImg = showImgIdx => {
         console.log(showImgIdx);
         PostApi.deleteOneImg(showImgIdx);
@@ -57,7 +53,7 @@ const AllPopLayer = ({ allPopActive, setAllPopActive, selectItem }) => {
                     <span className="hidden">뒤로가기</span>
                 </button>
                 <h2 className="date">{moment(selectItem?.createdAt).format('YYYY/MM/DD')}</h2>
-                <button className="btnDel" onClick={() => confirmTool(true)}>
+                <button className="btnDel" onClick={() => setPopActive(true)}>
                     <span className="hidden">삭제</span>
                 </button>
             </C.PageHeader>
@@ -104,7 +100,7 @@ const AllPopLayer = ({ allPopActive, setAllPopActive, selectItem }) => {
             </SwiperArea>
             <div className={`tool ${popActive ? 'active' : ''}`}>
                 <p>이 사진을 정말로 삭제하시겠어요?</p>
-                <button onClick={() => confirmTool(false)} className="black">
+                <button onClick={() => setPopActive(false)} className="black">
                     취소
                 </button>
                 <button onClick={() => deleteImg(showImgIdx)}>삭제하기</button>
@@ -199,7 +195,7 @@ const SwiperArea = styled.div`
             height: 80px;
             border-radius: 8px;
             overflow: hidden;
-            &.swiper-slide-active,
+            /* &.swiper-slide-active, */
             &.swiper-slide-thumb-active {
                 border-radius: 8px;
                 border: 2px solid var(--primary-500, #c7f860);
