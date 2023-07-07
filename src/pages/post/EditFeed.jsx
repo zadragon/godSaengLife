@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
@@ -12,22 +12,24 @@ function EditFeed({ onUpdate }) {
     const { feedId, imageId } = useParams();
     const [selectedImg, setSelectedImg] = useState([]);
     const [mainImg, setMainImg] = useState('');
+    const location = useLocation();
+
+    console.log('장소:', location);
 
     const [cookies] = useCookies();
     const { data, isLoading, error, refetch } = useQuery(['getMain'], () => MainApi.getMain(cookies.Authorization));
-    const [value, setValue] = useState(new Date());
+    // const [value, setValue] = useState(new Date('2023-07-06'));
     const [showHomeButton, setShowHomeButton] = useState(false);
 
-    const selectDate = data?.data.feeds.filter(
-        item => moment(item.createdAt).format('DD-MM-YYYY') === moment(value).format('DD-MM-YYYY')
-    );
+    const selectDate = data?.data.feeds.filter(item => location.state.feedId === item.feedId);
+
     const [selectedButtons, setSelectedButtons] = useState({
         emotion: selectDate && selectDate.length > 0 ? selectDate[0].emotion : null,
         howEat: selectDate && selectDate.length > 0 ? selectDate[0].howEat : false,
         didGym: selectDate && selectDate.length > 0 ? selectDate[0].didGym : false,
         goodSleep: selectDate && selectDate.length > 0 ? selectDate[0].goodSleep : false,
     });
-    console.log(selectDate);
+    console.log('선택날짜:', selectDate);
     const feedImgs = selectDate?.flatMap(item => item.FeedImages?.map(image => image.imagePath));
 
     const navigate = useNavigate();

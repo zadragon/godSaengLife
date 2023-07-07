@@ -112,7 +112,11 @@ function Home() {
                                     return (
                                         <div key={item.feedId}>
                                             <div className="btnArea">
-                                                <Link to={`/feed/${item.feedId}`} className="btnEdit">
+                                                <Link
+                                                    to={`/feed/${item.feedId}`}
+                                                    state={{ feedId: item.feedId }}
+                                                    className="btnEdit"
+                                                >
                                                     <span className="hidden">수정</span>
                                                 </Link>
                                             </div>
