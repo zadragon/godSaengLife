@@ -44,9 +44,18 @@ function Mypage() {
                                 className="profileImg"
                                 style={{ width: '48px', height: '48px' }}
                             />
-                            <div>갓생러</div>
+                            <M.NicknameFont>갓생러</M.NicknameFont>
                         </M.FlexContainer>
-                        <M.Font style={{ backgroundColor: '#F7FFE2' }}>
+                        <M.Font
+                            style={{
+                                width: '65px',
+                                height: '36px',
+                                backgroundColor: '#F7FFE2',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}
+                        >
                             <Link
                                 to="/mypage/badge"
                                 className="settings"
@@ -59,7 +68,7 @@ function Mypage() {
                 </div>
                 <div>
                     <M.Between>
-                        <div>커뮤니티에 올린 피드</div>
+                        <M.SubjectFont>커뮤니티에 올린 피드</M.SubjectFont>
                         <div>＞</div>
                     </M.Between>
                     <M.Graybg>
@@ -69,7 +78,7 @@ function Mypage() {
                 </div>
                 <div>
                     <M.Between>
-                        <div>좋아요한 피드</div>
+                        <M.SubjectFont>좋아요한 피드</M.SubjectFont>
                         <div>＞</div>
                     </M.Between>
                     <M.Graybg>
@@ -79,19 +88,19 @@ function Mypage() {
                 </div>
                 <M.ContainerBottom>
                     <div>
-                        <div>이메일 주소</div>
+                        <M.SubjectFont>이메일 주소</M.SubjectFont>
                         <M.Font style={{ color: 'var(--neutral-500, #727580)' }}>godsaeng1234@naver.com</M.Font>
                     </div>
                     <M.Between>
-                        <div>비밀번호 변경</div>
+                        <M.SubjectFont>비밀번호 변경</M.SubjectFont>
                         <div>＞</div>
                     </M.Between>
                     <M.Between>
-                        <div>의견 보내기</div>
+                        <M.SubjectFont>의견 보내기</M.SubjectFont>
                         <div>＞</div>
                     </M.Between>
                     <M.Between>
-                        <div onClick={handleWithdrawal}>탈퇴하기</div>
+                        <M.SubjectFont>탈퇴하기</M.SubjectFont>
                         <div>＞</div>
                     </M.Between>
                 </M.ContainerBottom>
