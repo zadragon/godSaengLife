@@ -30,7 +30,6 @@ function Home() {
                 })
             );
     }, [data]);
-    console.log(calendarData);
 
     useEffect(() => {
         data?.data?.feeds &&
@@ -185,8 +184,8 @@ function Home() {
                     {latestImgs.length === 0 ? (
                         <div className="img"></div>
                     ) : (
-                        latestImgs.map((item, index) => (
-                            <div className="img" key={index}>
+                        latestImgs.map(item => (
+                            <div className="img" key={item.imagePath}>
                                 <img src={item.imagePath} alt="" />
                             </div>
                         ))

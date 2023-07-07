@@ -7,29 +7,111 @@ import * as C from '../../styles/common';
 import { useQuery } from '@tanstack/react-query';
 import AllPopLayer from '../../components/picture/AllPopLayer';
 import Gnb from '../../components/Gnb';
+import { styled } from 'styled-components';
 
 const AllImgList = () => {
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const [allMeal, setAllMeal] = useState([]);
+    //const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    //const [allMeal, setAllMeal] = useState([]);
     const navigate = useNavigate();
-
-    const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getAllMeal'], () => PostApi.getAllMeal());
-
-    console.log(data);
-
-    useEffect(() => {}, []);
-
-    // const [imgViewUrl, setImgViewUrl] = useState({ view: false, url: '', feedId: '' });
-
     const [allPopActive, setAllPopActive] = useState(false);
     const [selectItem, setSelectItem] = useState(null);
+    const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getAllMeal'], () => PostApi.getAllMeal());
+    const [emptyCheck, setEmptyCheck] = useState(0); //이미지 배열이 없는 피드 카운트
+    const [emotionFilter, setEmotionFilter] = useState([
+        {
+            emotion: 'all',
+            active: true,
+            emotionKr: '모든날',
+        },
+        {
+            emotion: 'happy',
+            active: false,
+            emotionKr: '기쁜날',
+        },
+        {
+            emotion: 'good',
+            active: false,
+            emotionKr: '편안한 날',
+        },
+        {
+            emotion: 'soso',
+            active: false,
+            emotionKr: '그냥 그런 날',
+        },
+        {
+            emotion: 'tired',
+            active: false,
+            emotionKr: '피곤한 날',
+        },
+        {
+            emotion: 'stress',
+            active: false,
+            emotionKr: '스트레스 받는 날',
+        },
+    ]);
+    const [filterData, setFilterData] = useState('all');
+    const [toolPopActive, setToolPopActive] = useState(false); // 삭제 묻는 툴팁 팝업
+
+    useEffect(() => {
+        data?.data.feeds.map(item => {
+            item.FeedImages.length == 0 && setEmptyCheck(prev => prev + 1);
+        });
+    }, [data]);
+
     const viewDetail = item => {
         setAllPopActive(true);
         setSelectItem(item);
     };
 
+    const viewFiltering = emotion => {
+        setFilterData(emotion);
+    };
+    useEffect(() => {
+        setEmotionFilter(prev =>
+            prev.map(item => {
+                return item.emotion == filterData
+                    ? {
+                          ...item,
+                          active: true,
+                      }
+                    : {
+                          ...item,
+                          active: false,
+                      };
+            })
+        );
+    }, [filterData]);
+
+    const [delFeedId, setDelFeedId] = useState([]);
+    const [selectDelMode, setSelectDelMode] = useState(false); //선택삭제 모드 설정
+    const selectDelImgMode = () => {
+        setSelectDelMode(!selectDelMode);
+        setDelFeedId([]);
+    };
+
+    //const [selectFeedImg, setSelectFeedImg] = useState('');
+    const feedDel = feedId => {
+        // setSelectFeedImg(feedId);
+        const existingIndex = delFeedId.indexOf(feedId);
+        if (existingIndex === -1) {
+            // 배열에 값이 없는 경우, 추가
+            setDelFeedId([...delFeedId, feedId]);
+        } else {
+            // 배열에 값이 있는 경우, 제거
+            const updatedArray = delFeedId.filter(value => value !== feedId);
+            setDelFeedId(updatedArray);
+        }
+    };
+
+    const allImgDel = () => {
+        delFeedId.forEach(item => {
+            PostApi.deleteAllImg(item);
+        });
+        setToolPopActive(false);
+    };
+
     return (
-        <>
+        <div className="relative">
             <C.PageHeader>
                 <button className="btnPrev" onClick={() => navigate(-1)}>
                     <span className="hidden">뒤로가기</span>
@@ -38,46 +120,115 @@ const AllImgList = () => {
             </C.PageHeader>
             <A.Filter>
                 <ul>
-                    <li className="allImg active">
-                        <span>모든 사진</span>
-                    </li>
-                    <li className="type01">
-                        <span>아주 상쾌함</span>
-                    </li>
-                    <li className="type02">
-                        <span>그냥 그럼</span>
-                    </li>
-                    <li className="type03">
-                        <span>피곤함</span>
-                    </li>
-                    <li className="type04">
-                        <span>안좋음</span>
-                    </li>
-                    <li className="type05">
-                        <span>나쁨</span>
-                    </li>
+                    {emotionFilter.map((item, idx) => (
+                        <li
+                            onClick={() => viewFiltering(item.emotion)}
+                            className={`type0${idx} ${item.active ? 'active' : ''}`}
+                            key={item.emotion}
+                        >
+                            <span>{item.emotionKr}</span>
+                        </li>
+                    ))}
                 </ul>
             </A.Filter>
             <A.btnUtilArea>
-                <button>삭제 선택</button>
+                {selectDelMode && delFeedId.length > 0 && (
+                    <button className="btnImgdel" onClick={() => setToolPopActive(true)}>
+                        <span className="hidden">삭제하기</span>
+                    </button>
+                )}
+                {selectDelMode && <span className="count">{delFeedId.length}장 선택</span>}
+
+                <button onClick={() => selectDelImgMode()}>{selectDelMode ? '취소' : '삭제 선택'}</button>
             </A.btnUtilArea>
             <A.AlbumList>
-                {data?.data.feeds === 0 ? (
-                    <div className="img">이미지가 없습니다.</div>
+                {emptyCheck == data?.data.feeds.length ? ( //이미지 배열이 없는 숫자와 게시물 숫자 비교
+                    <div className="w-full flex justify-center py-20">이미지가 없습니다.</div>
                 ) : (
                     data?.data.feeds.map(item => {
-                        return (
-                            <div className="img" key={item.feedId} onClick={() => viewDetail(item)}>
-                                <img src={item.FeedImages[0].imagePath} alt="" />
-                            </div>
-                        );
+                        if (filterData == 'all' || (filterData == item.emotion && item.FeedImages.length > 0)) {
+                            //기본은 all, 필터 데이터와 아이템 이모션이 같고 아이템 피드이미지수가 하나라도 있으면
+
+                            if (item.FeedImages.length == 0) {
+                                return null; // item이 3일 때 렌더링하지 않음
+                            }
+
+                            return (
+                                <div
+                                    className={`img ${item.FeedImages.length > 1 ? 'cards' : ''} ${
+                                        delFeedId?.some(selectItem => selectItem == item.feedId) ? 'active' : ''
+                                    }`}
+                                    key={item.feedId}
+                                    onClick={() => (selectDelMode ? feedDel(item.feedId) : viewDetail(item))}
+                                >
+                                    {item.FeedImages.length !== 0 && <img src={item.FeedImages[0].imagePath} alt="" />}
+                                </div>
+                            );
+                        }
                     })
                 )}
             </A.AlbumList>
             <Gnb />
-            <AllPopLayer allPopActive={allPopActive} setAllPopActive={setAllPopActive} selectItem={selectItem} />
-        </>
+            {allPopActive && (
+                <AllPopLayer allPopActive={allPopActive} setAllPopActive={setAllPopActive} selectItem={selectItem} />
+            )}
+            <ToolPop className={`tool ${toolPopActive ? 'active' : ''}`}>
+                <p>이 사진을 정말로 삭제하시겠어요?</p>
+                <button onClick={() => setToolPopActive(false)} className="black">
+                    취소
+                </button>
+                <button onClick={() => allImgDel()}>삭제하기</button>
+            </ToolPop>
+        </div>
     );
 };
+
+const ToolPop = styled.div`
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    bottom: 0;
+    transform: translateY(100%);
+    width: 100%;
+    padding: 32px 16px 24px 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    background-color: #fff;
+    border-radius: 8px;
+    transition: transform 0.15s ease;
+    p {
+        color: #000;
+        /* Paragraph/Small Bold */
+        font-size: 14px;
+        font-family: Pretendard;
+        font-weight: 700;
+        line-height: 20px;
+        text-align: center;
+        display: block;
+        margin-bottom: 24px;
+    }
+    &.active {
+        transform: translateY(0);
+    }
+    button {
+        width: 100%;
+        height: 44px;
+        color: #f44336;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-family: Pretendard;
+        font-weight: 700;
+        line-height: 20px;
+        border-radius: 8px;
+        &.black {
+            background-color: #21242e;
+            color: #fff;
+        }
+    }
+`;
 
 export default AllImgList;
