@@ -7,6 +7,7 @@ import * as C from '../../styles/common';
 import { useQuery } from '@tanstack/react-query';
 import AllPopLayer from '../../components/picture/AllPopLayer';
 import Gnb from '../../components/Gnb';
+import { styled } from 'styled-components';
 
 const AllImgList = () => {
     //const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -49,6 +50,8 @@ const AllImgList = () => {
         },
     ]);
     const [filterData, setFilterData] = useState('all');
+    const [toolPopActive, setToolPopActive] = useState(false); // 삭제 묻는 툴팁 팝업
+
     useEffect(() => {
         data?.data.feeds.map(item => {
             item.FeedImages.length == 0 && setEmptyCheck(prev => prev + 1);
@@ -79,12 +82,13 @@ const AllImgList = () => {
         );
     }, [filterData]);
 
+    const [delFeedId, setDelFeedId] = useState([]);
     const [selectDelMode, setSelectDelMode] = useState(false); //선택삭제 모드 설정
     const selectDelImgMode = () => {
         setSelectDelMode(!selectDelMode);
+        setDelFeedId([]);
     };
 
-    const [delFeedId, setDelFeedId] = useState([]);
     //const [selectFeedImg, setSelectFeedImg] = useState('');
     const feedDel = feedId => {
         // setSelectFeedImg(feedId);
@@ -98,16 +102,16 @@ const AllImgList = () => {
             setDelFeedId(updatedArray);
         }
     };
-    console.log(data?.data.feeds);
 
     const allImgDel = () => {
         delFeedId.forEach(item => {
             PostApi.deleteAllImg(item);
         });
+        setToolPopActive(false);
     };
 
     return (
-        <>
+        <div className="relative">
             <C.PageHeader>
                 <button className="btnPrev" onClick={() => navigate(-1)}>
                     <span className="hidden">뒤로가기</span>
@@ -128,7 +132,13 @@ const AllImgList = () => {
                 </ul>
             </A.Filter>
             <A.btnUtilArea>
-                {selectDelMode && <button onClick={() => allImgDel()}>삭제하기</button>}
+                {selectDelMode && delFeedId.length > 0 && (
+                    <button className="btnImgdel" onClick={() => setToolPopActive(true)}>
+                        <span className="hidden">삭제하기</span>
+                    </button>
+                )}
+                {selectDelMode && <span className="count">{delFeedId.length}장 선택</span>}
+
                 <button onClick={() => selectDelImgMode()}>{selectDelMode ? '취소' : '삭제 선택'}</button>
             </A.btnUtilArea>
             <A.AlbumList>
@@ -139,11 +149,15 @@ const AllImgList = () => {
                         if (filterData == 'all' || (filterData == item.emotion && item.FeedImages.length > 0)) {
                             //기본은 all, 필터 데이터와 아이템 이모션이 같고 아이템 피드이미지수가 하나라도 있으면
 
+                            if (item.FeedImages.length == 0) {
+                                return null; // item이 3일 때 렌더링하지 않음
+                            }
+
                             return (
                                 <div
-                                    className={`img ${delFeedId.map(selectItem =>
-                                        selectItem == item.feedId ? 'active' : ' '
-                                    )}`}
+                                    className={`img ${item.FeedImages.length > 1 ? 'cards' : ''} ${
+                                        delFeedId?.some(selectItem => selectItem == item.feedId) ? 'active' : ''
+                                    }`}
                                     key={item.feedId}
                                     onClick={() => (selectDelMode ? feedDel(item.feedId) : viewDetail(item))}
                                 >
@@ -158,8 +172,63 @@ const AllImgList = () => {
             {allPopActive && (
                 <AllPopLayer allPopActive={allPopActive} setAllPopActive={setAllPopActive} selectItem={selectItem} />
             )}
-        </>
+            <ToolPop className={`tool ${toolPopActive ? 'active' : ''}`}>
+                <p>이 사진을 정말로 삭제하시겠어요?</p>
+                <button onClick={() => setToolPopActive(false)} className="black">
+                    취소
+                </button>
+                <button onClick={() => allImgDel()}>삭제하기</button>
+            </ToolPop>
+        </div>
     );
 };
+
+const ToolPop = styled.div`
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    bottom: 0;
+    transform: translateY(100%);
+    width: 100%;
+    padding: 32px 16px 24px 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    background-color: #fff;
+    border-radius: 8px;
+    transition: transform 0.15s ease;
+    p {
+        color: #000;
+        /* Paragraph/Small Bold */
+        font-size: 14px;
+        font-family: Pretendard;
+        font-weight: 700;
+        line-height: 20px;
+        text-align: center;
+        display: block;
+        margin-bottom: 24px;
+    }
+    &.active {
+        transform: translateY(0);
+    }
+    button {
+        width: 100%;
+        height: 44px;
+        color: #f44336;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-family: Pretendard;
+        font-weight: 700;
+        line-height: 20px;
+        border-radius: 8px;
+        &.black {
+            background-color: #21242e;
+            color: #fff;
+        }
+    }
+`;
 
 export default AllImgList;
