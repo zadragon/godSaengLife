@@ -8,6 +8,26 @@ export const Font = styled.p`
     line-height: 20px;
 `;
 
+export const NicknameFont = styled.p`
+    color: var(--neutral-900, #21242e);
+    /* Paragraph/Large Bold */
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+`;
+
+export const SubjectFont = styled.div`
+    color: var(--neutral-900, #21242e);
+    /* Paragraph/Mid Bold */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+`;
+
 export const Container = styled.div`
     margin-top: 12px;
     padding: 0px 16px;
