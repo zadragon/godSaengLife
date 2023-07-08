@@ -100,7 +100,7 @@ function Mypage() {
                         <div>＞</div>
                     </M.Between>
                     <M.Between>
-                        <M.SubjectFont>탈퇴하기</M.SubjectFont>
+                        <M.SubjectFont onClick={handleWithdrawal}>탈퇴하기</M.SubjectFont>
                         <div>＞</div>
                     </M.Between>
                 </M.ContainerBottom>
