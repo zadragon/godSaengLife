@@ -75,3 +75,15 @@ export const btnAreaFixed = styled.div`
         background: var(--neutral-900, #21242e);
     }
 `;
+
+export const SearchBox = styled.div`
+    padding: 16px;
+`;
+
+export const CommList = styled.div`
+    padding: 0 16px;
+`;
+
+export const CommDetail = styled.div`
+    padding: 16px;
+`;
