@@ -6,10 +6,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { MypageApi, AuthApi } from '../../shared/api';
 import { useCookies } from 'react-cookie';
+import { useState } from 'react';
 
 function Mypage() {
     const navigate = useNavigate();
     const [cookies, setCookie, removeCookie] = useCookies();
+
+    const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getMypage'], () =>
+        MypageApi.getMypage(cookies.Authorization)
+    );
 
     const handleWithdrawal = async () => {
         try {
@@ -38,13 +43,13 @@ function Mypage() {
                         </Link>
                     </M.RightAligned>
                     <M.Between>
-                        <M.FlexContainer>
+                        <M.FlexContainer style={{ marginBottom: '12px' }}>
                             <img
                                 src="/images/profile/lv1.png"
                                 className="profileImg"
                                 style={{ width: '48px', height: '48px' }}
                             />
-                            <M.NicknameFont>갓생러</M.NicknameFont>
+                            <M.NicknameFont>{data?.data.user.nickname}</M.NicknameFont>
                         </M.FlexContainer>
                         <M.Font
                             style={{
@@ -89,18 +94,22 @@ function Mypage() {
                 <M.ContainerBottom>
                     <div>
                         <M.SubjectFont>이메일 주소</M.SubjectFont>
-                        <M.Font style={{ color: 'var(--neutral-500, #727580)' }}>godsaeng1234@naver.com</M.Font>
+                        <M.Font style={{ color: 'var(--neutral-500, #727580)' }}>{data?.data.user.email}</M.Font>
                     </div>
-                    <M.Between>
-                        <M.SubjectFont>비밀번호 변경</M.SubjectFont>
-                        <div>＞</div>
-                    </M.Between>
+                    <div>
+                        <Link to="/mypage/password">
+                            <M.Between>
+                                <M.SubjectFont>비밀번호 변경</M.SubjectFont>
+                                <div>＞</div>
+                            </M.Between>
+                        </Link>
+                    </div>
                     <M.Between>
                         <M.SubjectFont>의견 보내기</M.SubjectFont>
                         <div>＞</div>
                     </M.Between>
-                    <M.Between>
-                        <M.SubjectFont onClick={handleWithdrawal}>탈퇴하기</M.SubjectFont>
+                    <M.Between onClick={handleWithdrawal}>
+                        <M.SubjectFont>탈퇴하기</M.SubjectFont>
                         <div>＞</div>
                     </M.Between>
                 </M.ContainerBottom>

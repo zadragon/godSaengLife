@@ -9,6 +9,7 @@ import { EditFeed, AllImgList, Writetoday } from '../pages/post';
 import Setting from '../pages/mypage/Setting';
 import AddArticle from '../pages/community/AddArticle';
 import Badge from '../pages/mypage/Badge';
+import ChangePw from '../pages/mypage/ChangePw';
 import CommunityList from '../pages/community/CommunityList';
 import CommunityDetail from '../pages/community/CommunityDetail';
 
@@ -40,6 +41,7 @@ const Routers = () => {
                 <Route path="/mypage" element={<Mypage />} />
                 <Route path="/mypage/nickname" element={<Setting />} />
                 <Route path="/mypage/badge" element={<Badge />} />
+                <Route path="/mypage/password" element={<ChangePw />} />
 
                 {/* 공통영역(상단 gnb메뉴)을 위한 Layout  */}
                 <Route element={<Layout />}>

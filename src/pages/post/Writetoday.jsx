@@ -167,7 +167,11 @@ function Writetoday() {
                 <h2>하루 기록</h2>
                 {activeTab === 'photo' && (
                     <div>
-                        <button onClick={handleNextClick}>건너뛰기</button>
+                        {selectedImg.length > 0 ? (
+                            <button onClick={handleNextClick}>다음으로</button>
+                        ) : (
+                            <button onClick={handleNextClick}>건너뛰기</button>
+                        )}
                     </div>
                 )}
                 {showHomeButton && (
@@ -331,9 +335,6 @@ function Writetoday() {
                                 style={{ maxWidth: '100px', marginRight: '10px', marginBottom: '10px' }}
                             />
                         ))}
-                    </div>
-                    <div>
-                        <button onClick={handleNextClick}>다음</button>
                     </div>
                 </P.SelectCondition>
             )}
