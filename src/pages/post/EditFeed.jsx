@@ -17,26 +17,33 @@ function EditFeed({ onUpdate }) {
     console.log('장소:', location);
 
     const [cookies] = useCookies();
-    const { data, isLoading, error, refetch } = useQuery(['getMain'], () => MainApi.getMain(cookies.Authorization));
-    // const [value, setValue] = useState(new Date('2023-07-06'));
+    const {
+        data: dataFeed,
+        isLoading: isLoadingFeed,
+        error: errorFeed,
+        refetch: refetchFeed,
+    } = useQuery(['getFeed'], () => PostApi.getFeed(location.state.feedId));
+
+    console.log('dataFeed', dataFeed?.data.feed);
     const [showHomeButton, setShowHomeButton] = useState(false);
 
-    const selectDate = data?.data.feeds.filter(item => location.state.feedId === item.feedId);
+    //const selectDate = data?.data.feeds.filter(item => location.state.feedId === item.feedId);
 
     const [selectedButtons, setSelectedButtons] = useState({
-        emotion: selectDate && selectDate.length > 0 ? selectDate[0].emotion : null,
-        howEat: selectDate && selectDate.length > 0 ? selectDate[0].howEat : false,
-        didGym: selectDate && selectDate.length > 0 ? selectDate[0].didGym : false,
-        goodSleep: selectDate && selectDate.length > 0 ? selectDate[0].goodSleep : false,
+        emotion: dataFeed?.data.feed.emotion,
+        howEat: dataFeed?.data.feed.howEat,
+        didGym: dataFeed?.data.feed.didGym,
+        goodSleep: dataFeed?.data.feed.goodSleep,
     });
-    console.log('선택날짜:', selectDate);
-    const feedImgs = selectDate?.flatMap(item => item.FeedImages?.map(image => image.imagePath));
+    // console.log('선택날짜:', selectDate);
+    console.log(dataFeed?.data.feed.FeedImages);
+    const feedImgs = dataFeed && dataFeed?.data.feed.FeedImages;
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        refetch();
-    }, [feedId]);
+    // useEffect(() => {
+    //     refetch();
+    // }, [feedId]);
 
     const handleButtonClick = (buttonName, buttonValue) => {
         setSelectedButtons(prevState => ({
@@ -230,7 +237,7 @@ function EditFeed({ onUpdate }) {
                     <div className="imgRail" style={{ display: 'flex' }}>
                         {feedImgs?.map((item, idx) => (
                             <ImageWrapper key={idx} className="img">
-                                <Image src={item} alt="" />
+                                <Image src={item.imagePath} alt="" />
                             </ImageWrapper>
                         ))}
                         {selectedImg.map((image, index) => (

@@ -32,9 +32,12 @@
         height: 66px;
         font-size: 15px;
         font-family: 'Pretendard-Regular';
-        border-bottom: 1px solid #d5d6d9;
+        border-top: 1px solid #d5d6d9;
         color: #21242e;
     }
+    /* .react-calendar__month-view__days button abbr {
+        display: none;
+    } */
     .react-calendar__month-view__days__day--weekend {
         color: #21242e;
     }
@@ -86,7 +89,32 @@
     .react-calendar__tile--active:enabled:focus {
         background: none;
     }
-    .highlight {
+    & .react-calendar__month-view__days button abbr {
+        display: none;
+    }
+    .dotArea {
+        position: absolute;
+        bottom: 14px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 2px;
+    }
+    .dotArea span {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+
+        border-radius: 50%;
+    }
+    .dotArea .greenDot {
+        background-color: #c7f860 !important;
+    }
+    .dotArea .purpleDot {
+        background-color: #d1c8ff !important;
+    }
+    /* .article {
         position: relative;
 
         &::before {
@@ -101,5 +129,37 @@
             background-color: #c7f860 !important;
             border-radius: 50%;
         }
-    }
+    } */
+}
+.calendarArea.analysis .imoji {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    margin: 0 auto;
+    border-radius: 50%;
+    background-color: #e3e3e6;
+    justify-content: center;
+    align-items: center;
+}
+.calendarArea.analysis .imoji img {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.calendarArea.analysis .today {
+    color: var(--neutral-500, #727580);
+    text-align: center;
+    font-size: 12px;
+    line-height: 16px;
+}
+.calendarArea.analysis .react-calendar__month-view__days button.react-calendar__tile--now::after {
+    display: none;
+}
+.calendarArea.analysis .react-calendar__month-view__days button {
+    height: 50px;
+}
+.calendarArea.analysis .react-calendar__month-view__days__day--neighboringMonth .today,
+.calendarArea.analysis .react-calendar__month-view__days__day--neighboringMonth .imoji {
+    opacity: 0.2;
 }

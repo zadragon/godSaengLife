@@ -12,13 +12,11 @@ import * as H from '../styles/home';
 import 'react-calendar/dist/Calendar.css';
 
 function Home() {
-    const [cookies] = useCookies();
+    //const [cookies] = useCookies();
     const [value, onChange] = useState(new Date());
-    const [today, setToday] = useState(moment(new Date()).format('YYYY-MM-DD'));
-    const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getMain'], () =>
-        MainApi.getMain(cookies.Authorization)
-    );
-    const navigate = useNavigate();
+    //const [today, setToday] = useState(moment(new Date()).format('YYYY-MM-DD'));
+    const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getMain'], () => MainApi.getMain());
+    //const navigate = useNavigate();
     const [calendarData, setCalendarData] = useState([]);
     const [selectDate, setSelectDate] = useState([]);
     const [feedImgs, setFeedImgs] = useState([]);
@@ -26,10 +24,14 @@ function Home() {
         data?.data?.feeds &&
             setCalendarData(
                 data?.data.feeds.map(item => {
-                    return moment(item.createdAt).format('YYYY-MM-DD');
+                    return {
+                        date: moment(item.createdAt).format('YYYY-MM-DD'),
+                        isImg: item.FeedImages.length > 0 ? true : false,
+                    };
                 })
             );
     }, [data]);
+    console.log(data?.data.feeds);
 
     useEffect(() => {
         data?.data?.feeds &&
@@ -82,9 +84,51 @@ function Home() {
                 <Calendar
                     onChange={onChange}
                     value={value}
-                    tileClassName={({ date, view }) => {
-                        if (calendarData?.find(x => x === moment(date).format('YYYY-MM-DD'))) {
-                            return 'highlight';
+                    // tileClassName={({ date, view }) => {
+                    //     if (calendarData?.find(x => x.isImg && x.date === moment(date).format('YYYY-MM-DD'))) {
+                    //         return 'article picture';
+                    //     } else if (calendarData?.find(x => x.date === moment(date).format('YYYY-MM-DD'))) {
+                    //         return 'article';
+                    //     }
+                    // }}
+                    tileContent={({ date }) => {
+                        if (calendarData?.find(x => x.isImg && x.date === moment(date).format('YYYY-MM-DD'))) {
+                            return (
+                                <>
+                                    <div>
+                                        {moment(date).format('DD') < 10
+                                            ? moment(date).format('D')
+                                            : moment(date).format('DD')}
+                                    </div>
+                                    <div className="dotArea">
+                                        <span className="greenDot"></span>
+                                        <span className="purpleDot"></span>
+                                    </div>
+                                </>
+                            );
+                        } else if (calendarData?.find(x => x.date === moment(date).format('YYYY-MM-DD'))) {
+                            return (
+                                <>
+                                    <div>
+                                        {moment(date).format('DD') < 10
+                                            ? moment(date).format('D')
+                                            : moment(date).format('DD')}
+                                    </div>
+                                    <div className="dotArea">
+                                        <span className="greenDot"></span>
+                                    </div>
+                                </>
+                            );
+                        } else {
+                            return (
+                                <>
+                                    <div>
+                                        {moment(date).format('DD') < 10
+                                            ? moment(date).format('D')
+                                            : moment(date).format('DD')}
+                                    </div>
+                                </>
+                            );
                         }
                     }}
                 />

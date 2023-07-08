@@ -7,8 +7,11 @@ import Mypage from '../pages/mypage/Mypage';
 import { JoinDone, Login, Signup } from '../pages/member/';
 import { EditFeed, AllImgList, Writetoday } from '../pages/post';
 import Setting from '../pages/mypage/Setting';
+import AddArticle from '../pages/community/AddArticle';
 import Badge from '../pages/mypage/Badge';
 import ChangePw from '../pages/mypage/ChangePw';
+import CommunityList from '../pages/community/CommunityList';
+import CommunityDetail from '../pages/community/CommunityDetail';
 
 const Routers = () => {
     return (
@@ -28,6 +31,11 @@ const Routers = () => {
 
                 {/* 분석 */}
                 <Route path="/analysis" element={<Analysis />} />
+
+                {/* 나도갓생 커뮤니티 */}
+                <Route path="/communityList" element={<CommunityList />} />
+                <Route path="/articleDetail" element={<CommunityDetail />} />
+                <Route path="/addArticle" element={<AddArticle />} />
 
                 {/*마이페이지*/}
                 <Route path="/mypage" element={<Mypage />} />
