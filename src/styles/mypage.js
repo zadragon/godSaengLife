@@ -18,8 +18,32 @@ export const NicknameFont = styled.p`
     line-height: 32px;
 `;
 
+export const LvFont = styled.p`
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+`;
+
+export const LvFontBg = styled.div`
+    margin-top: -30px;
+    padding: 0px 4px;
+    border-radius: 4px;
+    background: var(--primary-50050, rgba(214, 247, 129, 0.5));
+`;
+
 export const SubjectFont = styled.div`
+    /* Paragraph/Mid Bold */
     color: var(--neutral-900, #21242e);
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+`;
+
+export const BadgeFont = styled.div`
     /* Paragraph/Mid Bold */
     font-family: Pretendard;
     font-size: 16px;
@@ -28,13 +52,36 @@ export const SubjectFont = styled.div`
     line-height: 24px;
 `;
 
+export const BadgeContent = styled.div`
+    color: var(--neutral-500, #727580);
+    /* Paragraph/Small Medium */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+`;
+
+export const BadgeContentContainer = styled.div`
+    padding: 16px;
+    border-radius: 8px;
+`;
+
 export const Container = styled.div`
     margin-top: 12px;
     padding: 0px 16px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 24px;
+    gap: 12px;
+    .ProfileImg {
+        border-bottom: 0.3px solid var(--neutral-300, #d5d6d9);
+    }
+`;
+
+export const ProfileImg = styled.img`
+    margin: 0px auto;
+    align-self: stretch;
 `;
 
 export const ContainerBottom = styled.div`
@@ -75,4 +122,39 @@ export const Graybg = styled.div`
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+`;
+
+export const Input = styled.input`
+    border-radius: 8px;
+    border: 3px solid var(--primary-50050, rgba(214, 247, 129, 0.5));
+    display: flex;
+    width: 100%;
+    height: 48px;
+    padding: 12px 16px;
+    align-items: center;
+`;
+
+export const ButtonEditNickname = styled.button`
+    display: flex;
+    width: 100&;
+    min-width: 343px;
+    padding: 16px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    background: var(--primary-50050, rgba(214, 247, 129, 0.5));
+`;
+
+export const BadgeContainer = styled.div`
+    display: flex;
+    width: 100%;
+    padding: 24px 0px;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 32px 24px;
+    flex-wrap: wrap;
+    border-radius: 12px;
+    background: var(--neutral-900, #21242e);
 `;

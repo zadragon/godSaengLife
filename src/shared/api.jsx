@@ -171,4 +171,16 @@ export const MypageApi = {
                 console.log(error);
             });
     },
+    editNickname: formData => {
+        return api
+            .put('/mypage/nickname', formData) // Pass newNickname as request data
+            .then(response => {
+                console.log(response.data);
+                return response.data; // Return the response data if needed
+            })
+            .catch(error => {
+                console.log(error);
+                throw error; // Throw the error to be handled by the calling component
+            });
+    },
 };
