@@ -40,12 +40,7 @@ export const PageHeader = styled.div`
         font-family: 'Pretendard-Bold';
         &.date {
             color: var(--neutral-900, #21242e);
-
-            /* Paragraph/Small Medium */
             font-size: 14px;
-            font-family: Pretendard;
-            font-style: normal;
-            font-weight: 500;
             line-height: 20px;
         }
     }
@@ -83,6 +78,7 @@ export const GnbBar = styled.nav`
     height: 60px;
     background: #f8f8f9;
     border-top: 0.3px solid #d5d6d9;
+    z-index: 100;
     ul {
         display: flex;
         height: 100%;
@@ -103,7 +99,7 @@ export const GnbBar = styled.nav`
                 color: #8d9996;
             }
             &.active {
-                transition: 0.3s;
+                transition: 0.5s;
                 a {
                     color: #393e4f;
                 }
@@ -164,15 +160,28 @@ export const TabInner = styled.div`
     button {
         display: block;
         width: 50%;
-        height: 28px;
+        height: 40px;
         font-size: 14px;
         color: #aaacb3;
         font-family: 'Pretendard-Bold';
         &.active {
+            transition: 0.3s;
+            position: relative;
             background: #21242e;
             color: #fff;
             box-shadow: 0px 1px 3px rgba(213, 255, 102, 0.16);
             border-radius: 6px;
+            &:after {
+                content: '';
+                position: absolute;
+                top: 4px;
+                right: 4px;
+                display: block;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--secondary-500, #d1c8ff);
+            }
         }
     }
     &.gapTop {

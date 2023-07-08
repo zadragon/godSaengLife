@@ -100,14 +100,20 @@ export const PostApi = {
     },
     deleteFeed: (feedId, token) => {
         return api
-            .delete(`/feed/${feedId}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: token,
-                },
-            })
+            .delete(`/feed/${feedId}`)
             .then(response => {
                 alert(response.data.message);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
+    getFeed: feedId => {
+        return api
+            .get(`/feed/${feedId}`)
+            .then(response => {
+                return response;
+                //console.log(response);
             })
             .catch(error => {
                 console.log(error);
@@ -147,8 +153,8 @@ export const analysis = {
             });
     },
     getMonthData: () => {
-        return axios
-            .get(`${process.env.REACT_APP_BACKEND_SERVER_URL}/graph/week`)
+        return api
+            .get(`${process.env.REACT_APP_BACKEND_SERVER_URL}/graph/month`)
             .then(response => {
                 console.log(response.data);
                 return response.data; // 필요에 따라 응답 데이터 반환

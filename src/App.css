@@ -32,9 +32,12 @@
         height: 66px;
         font-size: 15px;
         font-family: 'Pretendard-Regular';
-        border-bottom: 1px solid #d5d6d9;
+        border-top: 1px solid #d5d6d9;
         color: #21242e;
     }
+    /* .react-calendar__month-view__days button abbr {
+        display: none;
+    } */
     .react-calendar__month-view__days__day--weekend {
         color: #21242e;
     }

@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as C from '../styles/common';
 
 const Header = () => {
-    const [cookies, setCookie, removeCookie] = useCookies();
+    const [cookies, removeCookie] = useCookies();
     const navigate = useNavigate();
     const logout = () => {
         AuthApi.signout(cookies.Authorization);

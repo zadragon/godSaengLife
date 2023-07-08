@@ -1,20 +1,18 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { analysis } from '../../shared/api';
+import React, { useEffect, useRef, useState } from 'react';
 import { ResponsiveBar } from '@nivo/bar';
-import { useQuery } from '@tanstack/react-query';
-import * as C from '../../styles/common';
 import * as A from '../../styles/analysis';
-import { useNavigate } from 'react-router-dom';
-import Gnb from '../../components/Gnb';
-import html2canvas from 'html2canvas';
+import { useQuery } from '@tanstack/react-query';
+import { analysis } from '../../shared/api';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import html2canvas from 'html2canvas';
 import { setGraphImg } from '../../redux/modules/community';
 
-const Analysis = () => {
+const WeekData = () => {
     const navigate = useNavigate();
     const captureRef = useRef(null);
     const dispatch = useDispatch();
-    const { data: dataG, isLoading, isError, refetch } = useQuery(['getMain'], () => analysis.getWeekData());
+    const { data: dataG, isLoading, isError, refetch } = useQuery(['getWeekData'], () => analysis.getWeekData());
     // const { periodData = [] } = dataG;
 
     const [chart, setChart] = useState([
@@ -53,20 +51,19 @@ const Analysis = () => {
                 })
             );
     }, [dataG]);
+    // console.log('dataG', dataG);
 
     const handleCapture = () => {
         html2canvas(captureRef.current).then(canvas => {
             // 캡처된 이미지를 사용하여 원하는 작업을 수행합니다.
             // 예를 들어, 이미지를 다운로드하거나 캡처된 이미지를 다른 요소에 삽입할 수 있습니다.
-            console.dir(canvas);
             const image = canvas.toDataURL();
-            console.log(image);
             dispatch(setGraphImg(image));
         });
         navigate('/addArticle');
     };
 
-    console.log(dataG?.periodData);
+    //console.log(dataG?.periodData);
     const conditionInfo = {
         dayName: ['월', '화', '수', '목', '금', '토', '일'],
         emotionImg: {
@@ -77,23 +74,13 @@ const Analysis = () => {
             stress: '/images/chart/icon-emoji-05.svg',
         },
     };
-    console.log(conditionInfo.emotionImg);
+
+    //console.log(conditionInfo.emotionImg);
     if (isLoading) return <div>...로딩중</div>;
     if (isError) return <div>...에러발생</div>;
+
     return (
-        <div style={{ background: '#F8F8F9' }}>
-            <C.PageHeader>
-                <button className="btnPrev" onClick={() => navigate(-1)}>
-                    <span className="hidden">뒤로가기</span>
-                </button>
-                <h2>갓생 분석</h2>
-            </C.PageHeader>
-
-            <C.TabInner className="gapTop">
-                <button className="active">주간</button>
-                <button>월간</button>
-            </C.TabInner>
-
+        <div className="tabCont">
             <A.SelectPeriod>
                 <span>7월 3일 (월) - 7월 9일 (일)</span>
                 <button className="btnPrev">
@@ -134,49 +121,6 @@ const Analysis = () => {
                                     </li>
                                 );
                             })}
-
-                        {/* <li>
-                            <p>
-                                <img src="/images/chart/icon-emoji-01.svg" />
-                            </p>
-                            <span>월</span>
-                        </li>
-                        <li>
-                            <p>
-                                <img src="/images/chart/icon-emoji-02.svg" />
-                            </p>
-                            <span>화</span>
-                        </li>
-                        <li>
-                            <p>
-                                <img src="/images/chart/icon-emoji-03.svg" />
-                            </p>
-                            <span>수</span>
-                        </li>
-                        <li>
-                            <p>
-                                <img src="/images/chart/icon-emoji-04.svg" />
-                            </p>
-                            <span>목</span>
-                        </li>
-                        <li>
-                            <p>
-                                <img src="/images/chart/icon-emoji-05.svg" />
-                            </p>
-                            <span>금</span>
-                        </li>
-                        <li>
-                            <p>
-                                <img src="/images/chart/icon-emoji-01.svg" />
-                            </p>
-                            <span>토</span>
-                        </li>
-                        <li>
-                            <p>
-                                <img src="/images/chart/icon-emoji-01.svg" />
-                            </p>
-                            <span>일</span>
-                        </li> */}
                     </ul>
                 </div>
                 <div className="godRecord relative">
@@ -335,9 +279,8 @@ const Analysis = () => {
                     </div>
                 </div>
             </A.Wrapper>
-            <Gnb />
         </div>
     );
 };
 
-export default Analysis;
+export default WeekData;

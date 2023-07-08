@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
         h3 {
             color: var(--neutral-900, #21242e);
             /* Paragraph/Mid Bold */
+            font-family: 'Pretendard-Bold';
             font-size: 16px;
             font-weight: 700;
             line-height: 24px;
@@ -129,6 +130,24 @@ export const Wrapper = styled.div`
                 font-weight: 500;
                 line-height: 20px;
             }
+        }
+    }
+    .calendarArea {
+        margin-top: 12px;
+        border-radius: 8px;
+        overflow: hidden;
+        .react-calendar__month-view__days button {
+            background-color: #fff;
+            border: 0;
+        }
+    }
+    .scrollBar {
+        overflow-y: auto;
+        padding-bottom: 10px;
+
+        .chartArea {
+            width: '1000px';
+            height: '400px';
         }
     }
 `;
