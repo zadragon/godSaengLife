@@ -66,26 +66,26 @@ export const Wrapper = styled.div`
             font-weight: 700;
             line-height: 24px;
         }
-        .recordWrap {
+    }
+    .recordWrap {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 8px;
+        .col {
+            width: 32%;
+            border-radius: 8px;
             display: flex;
-            justify-content: space-between;
-            margin-top: 8px;
-            .col {
-                width: 32%;
-                border-radius: 8px;
-                display: flex;
-                padding: 8px;
-                flex-direction: column;
-                justify-content: center;
-                &.type1 {
-                    background: var(--primary-400, #ddff85);
-                }
-                &.type2 {
-                    background: var(--secondary-400, #e2d9ff);
-                }
-                &.type3 {
-                    background: var(--warning-400, #fef58c);
-                }
+            padding: 8px;
+            flex-direction: column;
+            justify-content: center;
+            &.type1 {
+                background: var(--primary-400, #ddff85);
+            }
+            &.type2 {
+                background: var(--secondary-400, #e2d9ff);
+            }
+            &.type3 {
+                background: var(--warning-400, #fef58c);
             }
         }
     }

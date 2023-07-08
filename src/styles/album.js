@@ -65,7 +65,7 @@ export const Filter = styled.div`
     ul {
         display: flex;
         flex-wrap: nowrap;
-        gap: 8px;
+        gap: 10px;
         li {
             display: flex;
             height: 32px;
@@ -84,6 +84,7 @@ export const Filter = styled.div`
             line-height: 16px;
             &.type00 {
                 padding: 0px 8px;
+                background: #f8f8f9;
             }
             &.type01 {
                 background: #f8f8f9 url('/images/emoji/happy.png') no-repeat 8px center;
@@ -113,6 +114,7 @@ export const Filter = styled.div`
             &.active {
                 color: var(--neutral-900, #21242e);
                 background-color: var(--primary-400, #ddff85);
+                font-family: 'Pretendard-Bold';
             }
         }
     }
@@ -123,7 +125,7 @@ export const btnUtilArea = styled.div`
     display: flex;
     justify-content: flex-end;
     padding: 0 16px;
-    margin-top: 12px;
+    margin-top: 16px;
     .count {
         display: flex;
         align-items: center;

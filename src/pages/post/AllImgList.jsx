@@ -26,7 +26,7 @@ const AllImgList = () => {
         {
             emotion: 'happy',
             active: false,
-            emotionKr: '기쁜날',
+            emotionKr: '아주 상쾌함',
         },
         {
             emotion: 'good',
@@ -36,17 +36,17 @@ const AllImgList = () => {
         {
             emotion: 'soso',
             active: false,
-            emotionKr: '그냥 그런 날',
+            emotionKr: '그냥 그럼',
         },
         {
             emotion: 'tired',
             active: false,
-            emotionKr: '피곤한 날',
+            emotionKr: '피곤함',
         },
         {
             emotion: 'stress',
             active: false,
-            emotionKr: '스트레스 받는 날',
+            emotionKr: '안좋음',
         },
     ]);
     const [filterData, setFilterData] = useState('all');
@@ -66,6 +66,7 @@ const AllImgList = () => {
     const viewFiltering = emotion => {
         setFilterData(emotion);
     };
+
     useEffect(() => {
         setEmotionFilter(prev =>
             prev.map(item => {

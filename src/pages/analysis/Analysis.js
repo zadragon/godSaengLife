@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { analysis } from '../../shared/api';
 import { ResponsiveBar } from '@nivo/bar';
 import { useQuery } from '@tanstack/react-query';
@@ -6,9 +6,14 @@ import * as C from '../../styles/common';
 import * as A from '../../styles/analysis';
 import { useNavigate } from 'react-router-dom';
 import Gnb from '../../components/Gnb';
+import html2canvas from 'html2canvas';
+import { useDispatch } from 'react-redux';
+import { setGraphImg } from '../../redux/modules/community';
+
 const Analysis = () => {
     const navigate = useNavigate();
-
+    const captureRef = useRef(null);
+    const dispatch = useDispatch();
     const { data: dataG, isLoading, isError, refetch } = useQuery(['getMain'], () => analysis.getWeekData());
     // const { periodData = [] } = dataG;
 
@@ -23,7 +28,6 @@ const Analysis = () => {
             꿀잠Color: 'hsl(170, 70%, 50%)',
         },
     ]);
-    console.log(dataG);
 
     useEffect(() => {
         dataG?.periodData &&
@@ -50,6 +54,30 @@ const Analysis = () => {
             );
     }, [dataG]);
 
+    const handleCapture = () => {
+        html2canvas(captureRef.current).then(canvas => {
+            // 캡처된 이미지를 사용하여 원하는 작업을 수행합니다.
+            // 예를 들어, 이미지를 다운로드하거나 캡처된 이미지를 다른 요소에 삽입할 수 있습니다.
+            console.dir(canvas);
+            const image = canvas.toDataURL();
+            console.log(image);
+            dispatch(setGraphImg(image));
+        });
+        navigate('/addArticle');
+    };
+
+    console.log(dataG?.periodData);
+    const conditionInfo = {
+        dayName: ['월', '화', '수', '목', '금', '토', '일'],
+        emotionImg: {
+            happy: '/images/chart/icon-emoji-01.svg',
+            good: '/images/chart/icon-emoji-02.svg',
+            soso: '/images/chart/icon-emoji-03.svg',
+            tired: '/images/chart/icon-emoji-04.svg',
+            stress: '/images/chart/icon-emoji-05.svg',
+        },
+    };
+    console.log(conditionInfo.emotionImg);
     if (isLoading) return <div>...로딩중</div>;
     if (isError) return <div>...에러발생</div>;
     return (
@@ -95,7 +123,19 @@ const Analysis = () => {
                 <div className="condition">
                     <h3>컨디션</h3>
                     <ul>
-                        <li>
+                        {dataG?.periodData &&
+                            dataG?.periodData.map((item, idx) => {
+                                return (
+                                    <li key={idx}>
+                                        <p>
+                                            <img src={conditionInfo.emotionImg[item.emotion]} />
+                                        </p>
+                                        <span>{conditionInfo.dayName[idx]}</span>
+                                    </li>
+                                );
+                            })}
+
+                        {/* <li>
                             <p>
                                 <img src="/images/chart/icon-emoji-01.svg" />
                             </p>
@@ -136,14 +176,16 @@ const Analysis = () => {
                                 <img src="/images/chart/icon-emoji-01.svg" />
                             </p>
                             <span>일</span>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
                 <div className="godRecord relative">
                     <h3>갓생 기록</h3>
-                    <button className="btnShare">
+                    <button className="btnShare" onClick={() => handleCapture()}>
                         <span>커뮤니티 공유</span>
                     </button>
+                </div>
+                <div className="dataArea" ref={captureRef}>
                     <div className="recordWrap">
                         <div className="col type1">
                             <strong>건강한식단</strong>
@@ -173,110 +215,108 @@ const Analysis = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div style={{ height: '400px' }}>
-                    <ResponsiveBar
-                        data={chart}
-                        keys={['건강식', '운동', '꿀잠']}
-                        indexBy="country"
-                        margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
-                        padding={0.3}
-                        valueScale={{ type: 'linear' }}
-                        indexScale={{ type: 'band', round: true }}
-                        colors={{ scheme: 'nivo' }}
-                        defs={[
-                            {
-                                id: 'dots',
-                                type: 'patternDots',
-                                background: 'inherit',
-                                color: '#38bcb2',
-                                size: 4,
-                                padding: 1,
-                                stagger: true,
-                            },
-                            {
-                                id: 'lines',
-                                type: 'patternLines',
-                                background: 'inherit',
-                                color: '#eed312',
-                                rotation: -45,
-                                lineWidth: 6,
-                                spacing: 10,
-                            },
-                        ]}
-                        fill={[
-                            {
-                                match: {
-                                    id: 'fries',
+                    <div style={{ height: '400px' }}>
+                        <ResponsiveBar
+                            data={chart}
+                            keys={['건강식', '운동', '꿀잠']}
+                            indexBy="country"
+                            margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+                            padding={0.3}
+                            valueScale={{ type: 'linear' }}
+                            indexScale={{ type: 'band', round: true }}
+                            colors={{ scheme: 'nivo' }}
+                            defs={[
+                                {
+                                    id: 'dots',
+                                    type: 'patternDots',
+                                    background: 'inherit',
+                                    color: '#38bcb2',
+                                    size: 4,
+                                    padding: 1,
+                                    stagger: true,
                                 },
-                                id: 'dots',
-                            },
-                            {
-                                match: {
-                                    id: 'sandwich',
+                                {
+                                    id: 'lines',
+                                    type: 'patternLines',
+                                    background: 'inherit',
+                                    color: '#eed312',
+                                    rotation: -45,
+                                    lineWidth: 6,
+                                    spacing: 10,
                                 },
-                                id: 'lines',
-                            },
-                        ]}
-                        borderColor={{
-                            from: 'color',
-                            modifiers: [['darker', 1.6]],
-                        }}
-                        axisTop={null}
-                        axisRight={null}
-                        axisBottom={{
-                            tickSize: 5,
-                            tickPadding: 5,
-                            tickRotation: 0,
-                            legend: 'country',
-                            legendPosition: 'middle',
-                            legendOffset: 32,
-                        }}
-                        axisLeft={{
-                            tickSize: 5,
-                            tickPadding: 5,
-                            tickRotation: 0,
-                            legend: 'food',
-                            legendPosition: 'middle',
-                            legendOffset: -40,
-                        }}
-                        labelSkipWidth={12}
-                        labelSkipHeight={12}
-                        labelTextColor={{
-                            from: 'color',
-                            modifiers: [['darker', 1.6]],
-                        }}
-                        legends={[
-                            {
-                                dataFrom: 'keys',
-                                anchor: 'bottom-right',
-                                direction: 'column',
-                                justify: false,
-                                translateX: 120,
-                                translateY: 0,
-                                itemsSpacing: 2,
-                                itemWidth: 100,
-                                itemHeight: 20,
-                                itemDirection: 'left-to-right',
-                                itemOpacity: 0.85,
-                                symbolSize: 20,
-                                effects: [
-                                    {
-                                        on: 'hover',
-                                        style: {
-                                            itemOpacity: 1,
-                                        },
+                            ]}
+                            fill={[
+                                {
+                                    match: {
+                                        id: 'fries',
                                     },
-                                ],
-                            },
-                        ]}
-                        role="application"
-                        ariaLabel="Nivo bar chart demo"
-                        barAriaLabel={e => e.id + ': ' + e.formattedValue + ' in country: ' + e.indexValue}
-                    />
+                                    id: 'dots',
+                                },
+                                {
+                                    match: {
+                                        id: 'sandwich',
+                                    },
+                                    id: 'lines',
+                                },
+                            ]}
+                            borderColor={{
+                                from: 'color',
+                                modifiers: [['darker', 1.6]],
+                            }}
+                            axisTop={null}
+                            axisRight={null}
+                            axisBottom={{
+                                tickSize: 5,
+                                tickPadding: 5,
+                                tickRotation: 0,
+                                legend: 'country',
+                                legendPosition: 'middle',
+                                legendOffset: 32,
+                            }}
+                            axisLeft={{
+                                tickSize: 5,
+                                tickPadding: 5,
+                                tickRotation: 0,
+                                legend: 'food',
+                                legendPosition: 'middle',
+                                legendOffset: -40,
+                            }}
+                            labelSkipWidth={12}
+                            labelSkipHeight={12}
+                            labelTextColor={{
+                                from: 'color',
+                                modifiers: [['darker', 1.6]],
+                            }}
+                            legends={[
+                                {
+                                    dataFrom: 'keys',
+                                    anchor: 'bottom-right',
+                                    direction: 'column',
+                                    justify: false,
+                                    translateX: 120,
+                                    translateY: 0,
+                                    itemsSpacing: 2,
+                                    itemWidth: 100,
+                                    itemHeight: 20,
+                                    itemDirection: 'left-to-right',
+                                    itemOpacity: 0.85,
+                                    symbolSize: 20,
+                                    effects: [
+                                        {
+                                            on: 'hover',
+                                            style: {
+                                                itemOpacity: 1,
+                                            },
+                                        },
+                                    ],
+                                },
+                            ]}
+                            role="application"
+                            ariaLabel="Nivo bar chart demo"
+                            barAriaLabel={e => e.id + ': ' + e.formattedValue + ' in country: ' + e.indexValue}
+                        />
+                    </div>
                 </div>
-
                 <div className="pointBox">
                     <h3>
                         현재 갓생 포인트 <img src="/images/chart/icon-medal.svg" alt="" />

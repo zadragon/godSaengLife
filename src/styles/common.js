@@ -28,7 +28,7 @@ export const Header = styled.header`
 export const PageHeader = styled.div`
     position: relative;
     width: 100%;
-    height: 44px;
+    height: 56px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,7 +51,7 @@ export const PageHeader = styled.div`
     }
     .btnClose {
         position: absolute;
-        top: 10px;
+        top: 20px;
         right: 16px;
         width: 24px;
         height: 24px;
@@ -59,7 +59,7 @@ export const PageHeader = styled.div`
     }
     .btnPrev {
         position: absolute;
-        top: 10px;
+        top: 20px;
         left: 16px;
         width: 24px;
         height: 24px;
@@ -67,7 +67,7 @@ export const PageHeader = styled.div`
     }
     .btnDel {
         position: absolute;
-        top: 10px;
+        top: 20px;
         right: 16px;
         width: 24px;
         height: 24px;
