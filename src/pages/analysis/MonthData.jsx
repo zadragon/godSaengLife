@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import * as A from '../../styles/analysis';
 import { ResponsiveBar } from '@nivo/bar';
-import Calendar from 'react-calendar';
 import { analysis } from '../../shared/api';
 import { useQuery } from '@tanstack/react-query';
+import Calendar from 'react-calendar';
+import moment from 'moment';
 
 const MonthData = () => {
     const {
@@ -50,9 +51,37 @@ const MonthData = () => {
             );
     }, [dataM]);
 
+    const [emotionFilter, setEmotionFilter] = useState([
+        {
+            emotion: 'happy',
+            imgSrc: '/images/emoji/happy.png',
+            emotionKr: '아주 상쾌함',
+        },
+        {
+            emotion: 'good',
+            imgSrc: '/images/emoji/soso.png',
+            emotionKr: '편안한 날',
+        },
+        {
+            emotion: 'soso',
+            imgSrc: '/images/emoji/tired.png',
+            emotionKr: '그냥 그럼',
+        },
+        {
+            emotion: 'tired',
+            imgSrc: '/images/emoji/bad.png',
+            emotionKr: '피곤함',
+        },
+        {
+            emotion: 'stress',
+            imgSrc: '/images/emoji/stress.png',
+            emotionKr: '안좋음',
+        },
+    ]);
+
     if (isLoadingM) return <div>...로딩중</div>;
     if (isErrorM) return <div>...에러발생</div>;
-    console.log('chartM', chartM);
+    console.log('chartM', dataM?.periodData);
     return (
         <div className="tabCont">
             {/* <A.SelectPeriod>
@@ -85,15 +114,44 @@ const MonthData = () => {
                     <h3>컨디션</h3>
                 </div>
 
-                <div className="calendarArea">
+                <div className="calendarArea analysis">
                     <Calendar
-                    //onChange={onChange}
-                    //value={value}
-                    // tileClassName={({ date, view }) => {
-                    //     if (calendarData?.find(x => x === moment(date).format('YYYY-MM-DD'))) {
-                    //         return 'highlight';
-                    //     }
-                    // }}
+                        tileContent={({ date, view }) => {
+                            const todayEmotion = dataM?.periodData?.filter(
+                                x => x.date && moment(x.date).format('MM/DD/YYYY') == moment(date).format('MM/DD/YYYY')
+                            );
+                            if (todayEmotion.length > 0) {
+                                return (
+                                    <div className="emotionArea">
+                                        <span className="imoji">
+                                            <img
+                                                src={
+                                                    emotionFilter.find(
+                                                        item => item.emotion == todayEmotion[0].emotion && item.imgSrc
+                                                    ).imgSrc
+                                                }
+                                            />
+                                        </span>
+                                        <div className="today">
+                                            {moment(date).format('DD') < 10
+                                                ? moment(date).format('D')
+                                                : moment(date).format('DD')}
+                                        </div>
+                                    </div>
+                                );
+                            } else {
+                                return (
+                                    <div className="emotionArea">
+                                        <span className="imoji"></span>
+                                        <div className="today">
+                                            {moment(date).format('DD') < 10
+                                                ? moment(date).format('D')
+                                                : moment(date).format('DD')}
+                                        </div>
+                                    </div>
+                                );
+                            }
+                        }}
                     />
                 </div>
 

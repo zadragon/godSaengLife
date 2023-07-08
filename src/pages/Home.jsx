@@ -24,10 +24,14 @@ function Home() {
         data?.data?.feeds &&
             setCalendarData(
                 data?.data.feeds.map(item => {
-                    return moment(item.createdAt).format('YYYY-MM-DD');
+                    return {
+                        date: moment(item.createdAt).format('YYYY-MM-DD'),
+                        isImg: item.FeedImages.length > 0 ? true : false,
+                    };
                 })
             );
     }, [data]);
+    console.log(data?.data.feeds);
 
     useEffect(() => {
         data?.data?.feeds &&
@@ -80,24 +84,53 @@ function Home() {
                 <Calendar
                     onChange={onChange}
                     value={value}
-                    tileClassName={({ date, view }) => {
-                        if (calendarData?.find(x => x === moment(date).format('YYYY-MM-DD'))) {
-                            return 'highlight';
-                        }
-                    }}
-                    // tileContent={({ date, view }) => {
-                    //     if (calendarData?.find(x => x === moment(date).format('YYYY-MM-DD'))) {
-                    //         return (
-                    //             <div className="custom-tile">
-                    //                 <span className="date">{date.getDate()}</span>
-                    //                 <span className="event">이벤트 발생!</span>
-                    //             </div>
-                    //         );
-                    //     }
-                    //     else {
-                    //         return <div>{moment(date).format('d')}</div>;
+                    // tileClassName={({ date, view }) => {
+                    //     if (calendarData?.find(x => x.isImg && x.date === moment(date).format('YYYY-MM-DD'))) {
+                    //         return 'article picture';
+                    //     } else if (calendarData?.find(x => x.date === moment(date).format('YYYY-MM-DD'))) {
+                    //         return 'article';
                     //     }
                     // }}
+                    tileContent={({ date }) => {
+                        if (calendarData?.find(x => x.isImg && x.date === moment(date).format('YYYY-MM-DD'))) {
+                            return (
+                                <>
+                                    <div>
+                                        {moment(date).format('DD') < 10
+                                            ? moment(date).format('D')
+                                            : moment(date).format('DD')}
+                                    </div>
+                                    <div className="dotArea">
+                                        <span className="greenDot"></span>
+                                        <span className="purpleDot"></span>
+                                    </div>
+                                </>
+                            );
+                        } else if (calendarData?.find(x => x.date === moment(date).format('YYYY-MM-DD'))) {
+                            return (
+                                <>
+                                    <div>
+                                        {moment(date).format('DD') < 10
+                                            ? moment(date).format('D')
+                                            : moment(date).format('DD')}
+                                    </div>
+                                    <div className="dotArea">
+                                        <span className="greenDot"></span>
+                                    </div>
+                                </>
+                            );
+                        } else {
+                            return (
+                                <>
+                                    <div>
+                                        {moment(date).format('DD') < 10
+                                            ? moment(date).format('D')
+                                            : moment(date).format('DD')}
+                                    </div>
+                                </>
+                            );
+                        }
+                    }}
                 />
             </div>
 

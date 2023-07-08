@@ -13,8 +13,8 @@ const Gnb = () => {
                 <li className={`analyse ${location.pathname == '/analysis' && 'active'} `}>
                     <Link to="/analysis">분석</Link>
                 </li>
-                <li className="community" onClick={() => alert('준비중입니다.')}>
-                    <Link to="/">나도갓생</Link>
+                <li className={`community ${location.pathname == '/communityList' && 'active'} `}>
+                    <Link to="/communityList">나도갓생</Link>
                 </li>
                 <li className="mypage">
                     <Link to="/mypage">마이페이지</Link>
