@@ -12,13 +12,11 @@ import * as H from '../styles/home';
 import 'react-calendar/dist/Calendar.css';
 
 function Home() {
-    const [cookies] = useCookies();
+    //const [cookies] = useCookies();
     const [value, onChange] = useState(new Date());
-    const [today, setToday] = useState(moment(new Date()).format('YYYY-MM-DD'));
-    const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getMain'], () =>
-        MainApi.getMain(cookies.Authorization)
-    );
-    const navigate = useNavigate();
+    //const [today, setToday] = useState(moment(new Date()).format('YYYY-MM-DD'));
+    const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getMain'], () => MainApi.getMain());
+    //const navigate = useNavigate();
     const [calendarData, setCalendarData] = useState([]);
     const [selectDate, setSelectDate] = useState([]);
     const [feedImgs, setFeedImgs] = useState([]);
@@ -87,6 +85,19 @@ function Home() {
                             return 'highlight';
                         }
                     }}
+                    // tileContent={({ date, view }) => {
+                    //     if (calendarData?.find(x => x === moment(date).format('YYYY-MM-DD'))) {
+                    //         return (
+                    //             <div className="custom-tile">
+                    //                 <span className="date">{date.getDate()}</span>
+                    //                 <span className="event">이벤트 발생!</span>
+                    //             </div>
+                    //         );
+                    //     }
+                    //     else {
+                    //         return <div>{moment(date).format('d')}</div>;
+                    //     }
+                    // }}
                 />
             </div>
 
