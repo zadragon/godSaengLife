@@ -140,6 +140,9 @@ export const Wrapper = styled.div`
             background-color: #fff;
             border: 0;
         }
+        .react-calendar__tile--active:after {
+            display: none;
+        }
     }
     .scrollBar {
         overflow-y: auto;

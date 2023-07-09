@@ -120,17 +120,24 @@ const MonthData = () => {
                             const todayEmotion = dataM?.periodData?.filter(
                                 x => x.date && moment(x.date).format('MM/DD/YYYY') == moment(date).format('MM/DD/YYYY')
                             );
+                            // console.log(
+                            //     //emotionFilter.find(item => item.emotion == todayEmotion[0].emotion && item.imgSrc)
+                            //     todayEmotion[0].emotion
+                            // );
                             if (todayEmotion.length > 0) {
                                 return (
                                     <div className="emotionArea">
                                         <span className="imoji">
-                                            <img
-                                                src={
-                                                    emotionFilter.find(
-                                                        item => item.emotion == todayEmotion[0].emotion && item.imgSrc
-                                                    ).imgSrc
-                                                }
-                                            />
+                                            {todayEmotion[0].emotion && (
+                                                <img
+                                                    src={
+                                                        emotionFilter.find(
+                                                            item =>
+                                                                item.emotion == todayEmotion[0].emotion && item.imgSrc
+                                                        )?.imgSrc
+                                                    }
+                                                />
+                                            )}
                                         </span>
                                         <div className="today">
                                             {moment(date).format('DD') < 10
