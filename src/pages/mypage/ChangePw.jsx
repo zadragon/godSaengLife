@@ -15,27 +15,55 @@ function ChangePw() {
         MypageApi.getMypage(cookies.Authorization)
     );
 
-    const [newNickname, setNewNickname] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [emailCode, setEmailCode] = useState('');
 
-    const editNicknameBtn = async () => {
+    const editPasswordBtn = async () => {
         try {
-            await MypageApi.editNickname({ nickname: newNickname });
-            alert('닉네임이 수정되었습니다.');
+            await MypageApi.editPassword({ password: newPassword, authCode: emailCode });
+            alert('비밀번호가 변경되었습니다.');
             navigate('/mypage');
         } catch (error) {
-            console.log('닉네임 수정 실패', error);
+            console.log('비밀번호 변경 실패', error);
             if (error.response) {
                 const statusCode = error.response.status;
                 let errorMessage = '';
                 switch (statusCode) {
                     case 400:
-                        errorMessage = '닉네임을 입력해주세요.';
+                        errorMessage = '비밀번호를 입력해주세요.';
                         break;
                     case 401:
-                        errorMessage = '닉네임은 한글, 영문, 숫자 1~8자리로 입력해주세요.';
+                        errorMessage = '인증 코드를 입력하세요.';
                         break;
-                    case 409:
-                        errorMessage = '이미 존재하는 닉네임입니다.';
+                    case 402:
+                        errorMessage = '인증 코드가 일치하지 않습니다.';
+                        break;
+                    case 500:
+                        errorMessage = '서버 에러';
+                        break;
+                    default:
+                        errorMessage = '알 수 없는 에러가 발생했습니다.';
+                }
+                alert(errorMessage);
+            }
+        }
+    };
+
+    const sendEmailCodeBtn = async () => {
+        try {
+            await MypageApi.sendEmailCode({ password: newPassword });
+            alert('가입하신 이메일로 인증코드를 전송했습니다.');
+        } catch (error) {
+            console.log('인증코드 전송 실패', error);
+            if (error.response) {
+                const statusCode = error.response.status;
+                let errorMessage = '';
+                switch (statusCode) {
+                    case 400:
+                        errorMessage = '변경할 비밀번호를 입력하세요.';
+                        break;
+                    case 401:
+                        errorMessage = '비밀번호는 영문, 숫자 4~20자리로 입력하세요.';
                         break;
                     case 500:
                         errorMessage = '서버 에러';
@@ -54,17 +82,25 @@ function ChangePw() {
                 <button className="btnPrev" onClick={() => navigate(-1)}>
                     <span className="hidden">뒤로가기</span>
                 </button>
-                <h2>비밀번호 수정</h2>
+                <h2>비밀번호 변경</h2>
                 <Gnb />
             </C.PageHeader>
             <M.Container>
-                <M.SubjectFont style={{ marginTop: '12px' }}>현재 비밀번호</M.SubjectFont>
+                <M.SubjectFont style={{ marginTop: '12px' }}>새 비밀번호</M.SubjectFont>
                 <M.Input
-                    placeholder="현재 비밀번호"
-                    value={newNickname}
-                    onChange={e => setNewNickname(e.target.value)}
+                    placeholder="새 비밀번호를 입력해주세요"
+                    value={newPassword}
+                    onChange={e => setNewPassword(e.target.value)}
+                    type="password"
                 ></M.Input>
-                <M.ButtonEditNickname style={{ marginTop: '292px' }} onClick={editNicknameBtn}>
+                <button onClick={sendEmailCodeBtn}>인증코드 전송</button>
+                <M.SubjectFont style={{ marginTop: '12px' }}>인증코드 입력</M.SubjectFont>
+                <M.Input
+                    placeholder="인증코드를 입력해주세요"
+                    value={emailCode}
+                    onChange={e => setEmailCode(e.target.value)}
+                ></M.Input>
+                <M.ButtonEditNickname style={{ marginTop: '292px' }} onClick={editPasswordBtn}>
                     <M.BadgeFont style={{ color: 'var(--neutral-400, #AAACB3)' }}>수정</M.BadgeFont>
                 </M.ButtonEditNickname>
             </M.Container>

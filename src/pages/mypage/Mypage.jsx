@@ -16,15 +16,27 @@ function Mypage() {
         MypageApi.getMypage(cookies.Authorization)
     );
 
+    // const handleWithdrawal = async () => {
+    //     try {
+    //         await AuthApi.withdrawal();
+    //         alert('회원에서 탈퇴하셨습니다.');
+    //         removeCookie('Authorization');
+    //         navigate('/');
+    //         console.log('탈퇴 성공');
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
+
     const handleWithdrawal = async () => {
-        try {
+        if (!confirm('정말 탈퇴하시겠습니까?')) {
+            alert('취소를 누르셨습니다.');
+        } else {
             await AuthApi.withdrawal();
             alert('회원에서 탈퇴하셨습니다.');
             removeCookie('Authorization');
             navigate('/');
             console.log('탈퇴 성공');
-        } catch (error) {
-            console.log(error);
         }
     };
     return (
