@@ -31,7 +31,7 @@ function Home() {
                 })
             );
     }, [data]);
-    console.log(data?.data.feeds);
+    console.log(data);
 
     useEffect(() => {
         data?.data?.feeds &&

@@ -151,9 +151,10 @@ export const PutApi = {
 };
 
 export const analysis = {
-    getWeekData: () => {
+    getWeekData: period => {
+        console.log(period);
         return api
-            .get(`${process.env.REACT_APP_BACKEND_SERVER_URL}/graph/week`)
+            .get(`${process.env.REACT_APP_BACKEND_SERVER_URL}/graph/week/${period == 0 ? '' : period}`)
             .then(response => {
                 return response.data; // 필요에 따라 응답 데이터 반환
             })
