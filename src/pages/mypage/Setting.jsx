@@ -47,6 +47,23 @@ function Setting() {
             }
         }
     };
+
+    let profileImgSrc = '/images/profile/lv1.png';
+    if (data?.data.totalPointScore >= 26 && data?.data.totalPointScore <= 75) {
+        profileImgSrc = '/images/profile/lv2.png';
+    } else if (data?.data.totalPointScore >= 76 && data?.data.totalPointScore <= 125) {
+        profileImgSrc = '/images/profile/lv3.png';
+    } else if (data?.data.totalPointScore >= 126 && data?.data.totalPointScore <= 175) {
+        profileImgSrc = '/images/profile/lv4.png';
+    } else if (data?.data.totalPointScore >= 176 && data?.data.totalPointScore <= 225) {
+        profileImgSrc = '/images/profile/lv5.png';
+    } else if (data?.data.totalPointScore >= 226 && data?.data.totalPointScore <= 275) {
+        profileImgSrc = '/images/profile/lv6.png';
+    } else if (data?.data.totalPointScore >= 276 && data?.data.totalPointScore <= 350) {
+        profileImgSrc = '/images/profile/lv7.png';
+    } else if (data?.data.totalPointScore >= 351) {
+        profileImgSrc = '/images/profile/lv7.png';
+    }
     return (
         <div>
             <C.PageHeader>
@@ -58,7 +75,7 @@ function Setting() {
             </C.PageHeader>
             <M.Container>
                 <div className="ProfileImg">
-                    <M.ProfileImg src="/images/profile/lv1.png" style={{ width: '120px', height: '120px' }} />
+                    <M.ProfileImg src={profileImgSrc} style={{ width: '120px', height: '120px' }} />
                 </div>
                 <M.SubjectFont style={{ marginTop: '12px' }}>닉네임</M.SubjectFont>
                 <M.Input
