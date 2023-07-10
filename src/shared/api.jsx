@@ -200,4 +200,28 @@ export const MypageApi = {
                 throw error; // Throw the error to be handled by the calling component
             });
     },
+    editPassword: formData => {
+        return api
+            .put('/mypage/password', formData) // Pass newNickname as request data
+            .then(response => {
+                console.log(response.data);
+                return response.data; // Return the response data if needed
+            })
+            .catch(error => {
+                console.log(error);
+                throw error; // Throw the error to be handled by the calling component
+            });
+    },
+    sendEmailCode: formData => {
+        return api
+            .put('/mypage/mailcode', formData) // Pass newNickname as request data
+            .then(response => {
+                console.log(response.data);
+                return response.data; // Return the response data if needed
+            })
+            .catch(error => {
+                console.log(error);
+                throw error; // Throw the error to be handled by the calling component
+            });
+    },
 };
