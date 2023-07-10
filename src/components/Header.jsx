@@ -15,7 +15,7 @@ const Header = () => {
         navigate('/splash');
     };
 
-    const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getMain'], () => MainApi.getProfile());
+    const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getProfile'], () => MainApi.getProfile());
     isLoading && '로딩중';
     isError && '에러발생';
     return (

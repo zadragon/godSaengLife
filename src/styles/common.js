@@ -21,6 +21,7 @@ export const Header = styled.header`
     .signInOut {
         margin-left: 10px;
         text-decoration: underline;
+        cursor: pointer;
     }
 `;
 
@@ -154,6 +155,11 @@ export const AddPost = styled.div`
     span {
         font-size: 22px;
         color: #21242e;
+    }
+    /* 500px 이상인 경우에만 적용될 스타일 */
+    @media screen and (min-width: 400px) {
+        left: 50%;
+        margin-left: 133px;
     }
 `;
 

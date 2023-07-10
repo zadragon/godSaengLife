@@ -7,13 +7,22 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import { setGraphImg } from '../../redux/modules/community';
+import moment from 'moment';
 
 const WeekData = () => {
     const navigate = useNavigate();
     const captureRef = useRef(null);
     const dispatch = useDispatch();
-    const { data: dataG, isLoading, isError, refetch } = useQuery(['getWeekData'], () => analysis.getWeekData());
+    const [weekState, setWeekState] = useState(0);
+    const {
+        data: dataG,
+        isLoading,
+        isError,
+        refetch: moveWeek,
+    } = useQuery(['getWeekData', weekState], () => analysis.getWeekData(weekState));
+    //const { data: dataG, isLoading, isError, refetch } = useQuery(['getWeekData'], () => analysis.getWeekData());
     // const { periodData = [] } = dataG;
+    console.log(dataG);
 
     const [chart, setChart] = useState([
         {
@@ -75,6 +84,16 @@ const WeekData = () => {
         },
     };
 
+    const btnWeekMove = move => {
+        if (move == 'prev') {
+            setWeekState(weekState => --weekState);
+        } else if (move == 'next') {
+            setWeekState(weekState => ++weekState);
+        }
+        console.log(weekState);
+        moveWeek(weekState);
+    };
+
     //console.log(conditionInfo.emotionImg);
     if (isLoading) return <div>...로딩중</div>;
     if (isError) return <div>...에러발생</div>;
@@ -82,8 +101,16 @@ const WeekData = () => {
     return (
         <div className="tabCont">
             <A.SelectPeriod>
-                <span>7월 3일 (월) - 7월 9일 (일)</span>
-                <button className="btnPrev">
+                <span>
+                    {moment(dataG?.periodData[0].date).format('MM-DD')} (월) -{' '}
+                    {moment(dataG?.periodData[6].date).format('MM-DD')} (일)
+                </span>
+                <button
+                    className="btnPrev"
+                    onClick={() => {
+                        btnWeekMove('prev');
+                    }}
+                >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M14 17L10 12L14 7"
@@ -94,7 +121,12 @@ const WeekData = () => {
                         />
                     </svg>
                 </button>
-                <button className="btnNext">
+                <button
+                    className="btnNext"
+                    onClick={() => {
+                        btnWeekMove('next');
+                    }}
+                >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M10 17L14 12L10 7"
