@@ -7,13 +7,14 @@ import Calendar from 'react-calendar';
 import moment from 'moment';
 
 const MonthData = () => {
+    const [monthState, setMonthState] = useState(0);
     const {
         data: dataM,
         isLoading: isLoadingM,
         isError: isErrorM,
-        refetch,
-    } = useQuery(['getMonthData'], () => analysis.getMonthData());
-    console.log(dataM);
+        refetch: moveMonth,
+    } = useQuery(['getMonthData', monthState], () => analysis.getMonthData(monthState));
+    //console.log(dataM);
     const [chartM, setChartM] = useState([
         {
             country: 0,
@@ -79,14 +80,34 @@ const MonthData = () => {
         },
     ]);
 
+    const btnMonthMove = move => {
+        if (move == 'prev') {
+            setMonthState(monthState => --monthState);
+        } else if (move == 'next') {
+            setMonthState(monthState => ++monthState);
+        }
+        moveMonth(monthState);
+    };
+
+    const handleMonthClick = () => {};
+
     if (isLoadingM) return <div>...로딩중</div>;
     if (isErrorM) return <div>...에러발생</div>;
-    console.log('chartM', dataM?.periodData);
+
     return (
         <div className="tabCont">
-            {/* <A.SelectPeriod>
-                <span>2023년 7월</span>
-                <button className="btnPrev">
+            <A.SelectPeriod>
+                <span>
+                    {moment(dataM?.periodData[0].date).format('MM') < 10
+                        ? moment(dataM?.periodData[0].date).format('YYYY년 M월')
+                        : moment(dataM?.periodData[0].date).format('YYYY년 MM월')}
+                </span>
+                <button
+                    className="btnPrev"
+                    onClick={() => {
+                        btnMonthMove('prev');
+                    }}
+                >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M14 17L10 12L14 7"
@@ -97,7 +118,12 @@ const MonthData = () => {
                         />
                     </svg>
                 </button>
-                <button className="btnNext">
+                <button
+                    className="btnNext"
+                    onClick={() => {
+                        btnMonthMove('next');
+                    }}
+                >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M10 17L14 12L10 7"
@@ -108,7 +134,8 @@ const MonthData = () => {
                         />
                     </svg>
                 </button>
-            </A.SelectPeriod> */}
+            </A.SelectPeriod>
+
             <A.Wrapper>
                 <div className="condition">
                     <h3>컨디션</h3>
@@ -116,14 +143,12 @@ const MonthData = () => {
 
                 <div className="calendarArea analysis">
                     <Calendar
+                        value={dataM?.periodData[0].date}
+                        onClickMonth={handleMonthClick}
                         tileContent={({ date, view }) => {
                             const todayEmotion = dataM?.periodData?.filter(
                                 x => x.date && moment(x.date).format('MM/DD/YYYY') == moment(date).format('MM/DD/YYYY')
                             );
-                            // console.log(
-                            //     //emotionFilter.find(item => item.emotion == todayEmotion[0].emotion && item.imgSrc)
-                            //     todayEmotion[0].emotion
-                            // );
                             if (todayEmotion.length > 0) {
                                 return (
                                     <div className="emotionArea">

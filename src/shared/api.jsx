@@ -152,7 +152,6 @@ export const PutApi = {
 
 export const analysis = {
     getWeekData: period => {
-        console.log(period);
         return api
             .get(`${process.env.REACT_APP_BACKEND_SERVER_URL}/graph/week/${period == 0 ? '' : period}`)
             .then(response => {
@@ -163,9 +162,9 @@ export const analysis = {
                 throw error; // 에러를 상위 컴포넌트로 전달하거나 처리할 수 있도록 throw
             });
     },
-    getMonthData: () => {
+    getMonthData: period => {
         return api
-            .get(`${process.env.REACT_APP_BACKEND_SERVER_URL}/graph/month`)
+            .get(`${process.env.REACT_APP_BACKEND_SERVER_URL}/graph/month/${period == 0 ? '' : period}`)
             .then(response => {
                 console.log(response.data);
                 return response.data; // 필요에 따라 응답 데이터 반환
@@ -199,5 +198,22 @@ export const MypageApi = {
                 console.log(error);
                 throw error; // Throw the error to be handled by the calling component
             });
+    },
+};
+
+export const communityApi = {
+    addCommunityArticle: async payload => {
+        const res = await api
+            .post('/share', payload)
+            .then(response => {
+                console.log(response);
+                response.data.code == 201 && response;
+                return response;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+        return res.data;
     },
 };

@@ -10,6 +10,12 @@
     width: 100% !important;
     border: 0;
 }
+.calendarArea.analysis .react-calendar {
+    padding: 16px 24px;
+}
+.calendarArea.analysis .react-calendar__navigation {
+    display: none !important;
+}
 .calendarArea {
     width: 100%;
     font-family: 'Pretendard-Regular';
