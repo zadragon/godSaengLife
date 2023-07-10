@@ -5,6 +5,7 @@ import Gnb from '../../components/Gnb';
 import WeekData from './WeekData';
 import MonthData from './MonthData';
 import { useNavigate } from 'react-router-dom';
+import PointInfoPop from '../../components/PointInfoPop';
 
 const Analysis = () => {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ const Analysis = () => {
 
     return (
         <div style={{ background: '#F8F8F9' }}>
+            {/* <PointInfoPop /> */}
             <C.PageHeader>
                 <button className="btnPrev" onClick={() => navigate(-1)}>
                     <span className="hidden">뒤로가기</span>
