@@ -16,26 +16,6 @@ function Badge() {
     );
     console.log('마이페이지badge:', data);
 
-    // const getBadgeStyle = score => {
-    //     if (score <= 25) {
-    //         return { backgroundColor: '#F7FFE2' };
-    //     } else if (score <= 75) {
-    //         return { backgroundColor: '#F7FFE2' };
-    //     } else if (score <= 125) {
-    //         return { backgroundColor: '#F7FFE2' };
-    //     } else if (score <= 175) {
-    //         return { backgroundColor: '#F7FFE2' };
-    //     } else if (score <= 225) {
-    //         return { backgroundColor: '#F7FFE2' };
-    //     } else if (score <= 275) {
-    //         return { backgroundColor: '#F7FFE2' };
-    //     } else if (score <= 350) {
-    //         return { backgroundColor: '#F7FFE2' };
-    //     } else {
-    //         return { backgroundColor: '#F8F8F9' };
-    //     }
-    // };
-
     return (
         <div>
             <C.PageHeader>
@@ -46,6 +26,18 @@ function Badge() {
             </C.PageHeader>
             <M.Container>
                 <M.BadgeContainer>
+                    {data?.data.totalPointScore === undefined && (
+                        <>
+                            <img src="/images/profile/lv1gray.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv2gray.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv3gray.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv4gray.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv5gray.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv6gray.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv7gray.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv8gray.png" style={{ width: '84px', height: '84px' }} />
+                        </>
+                    )}
                     {data?.data.totalPointScore <= 25 && (
                         <>
                             <img src="/images/profile/lv1.png" style={{ width: '84px', height: '84px' }} />
