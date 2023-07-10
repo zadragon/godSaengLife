@@ -69,6 +69,16 @@ export const SelectCondition = styled.div`
             color: red;
         }
     }
+    .image-container {
+        display: flex;
+        flex-wrap: wrap;
+
+        flex-direction: row;
+        justify-content: space-between;
+        img {
+            width: 32%;
+        }
+    }
 `;
 
 export const PhotoInput = styled.label`

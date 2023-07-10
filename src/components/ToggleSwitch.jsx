@@ -4,7 +4,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 
-const ToggleSwitch = () => {
+const ToggleSwitch = ({ articlePost, setArticlePost }) => {
     const IOSSwitch = styled(props => <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />)(
         ({ theme }) => ({
             width: 42,
@@ -54,8 +54,8 @@ const ToggleSwitch = () => {
     );
 
     return (
-        <FormGroup>
-            <FormControlLabel control={<IOSSwitch sx={{ m: 1 }} />} />
+        <FormGroup onChange={e => setArticlePost({ ...articlePost, anonymous: !articlePost.anonymous })}>
+            <FormControlLabel control={<IOSSwitch sx={{ m: 1 }} checked={articlePost.anonymous} />} />
         </FormGroup>
     );
 };

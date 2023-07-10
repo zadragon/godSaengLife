@@ -202,3 +202,20 @@ export const TabInner = styled.div`
         margin-top: 12px;
     }
 `;
+
+export const Loading = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 100;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 139px;
+        height: 124px;
+    }
+`;

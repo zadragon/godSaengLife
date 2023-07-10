@@ -74,6 +74,13 @@ export const btnAreaFixed = styled.div`
         border-radius: 8px;
         background: var(--neutral-900, #21242e);
     }
+    /* 500px 이상인 경우에만 적용될 스타일 */
+    @media screen and (min-width: 400px) {
+        width: 400px;
+        margin: 0 auto;
+        left: 50%;
+        margin-left: -200px;
+    }
 `;
 
 export const SearchBox = styled.div`
@@ -86,4 +93,61 @@ export const CommList = styled.div`
 
 export const CommDetail = styled.div`
     padding: 16px;
+`;
+
+export const AddArticleDone = styled.div`
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 100;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    div {
+        text-align: center;
+        margin-top: -100px;
+        width: 280px;
+        padding: 24px 0;
+        gap: 28px;
+        border-radius: 8px;
+        background: var(--primary-500, #c7f860);
+        strong {
+            color: var(--neutral-900, #21242e);
+            text-align: center;
+            font-size: 20px;
+        }
+        p {
+            color: var(--neutral-500, #727580);
+            text-align: center;
+            font-size: 12px;
+        }
+        ul {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            color: var(--neutral-500, #21242e);
+            text-align: center;
+            font-size: 12px;
+            vertical-align: top;
+            li:after {
+                content: '';
+                display: inline-block;
+                margin: 0 5px;
+                width: 1px;
+                height: 10px;
+                background-color: #727580;
+                margin-top: 3px;
+            }
+            li:last-child:after {
+                display: none;
+            }
+            a {
+                text-decoration: underline;
+            }
+        }
+    }
 `;
