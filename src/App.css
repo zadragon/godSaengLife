@@ -1,7 +1,7 @@
 /*레이아웃*/
 .section {
     width: 100%;
-    padding-bottom: 200px;
+    padding-bottom: 100px;
 }
 
 /* 캘린더 */
@@ -99,7 +99,7 @@
     }
     .dotArea {
         position: absolute;
-        bottom: 14px;
+        bottom: 9px;
         left: 0;
         width: 100%;
         display: flex;

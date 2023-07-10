@@ -21,6 +21,7 @@ export const Header = styled.header`
     .signInOut {
         margin-left: 10px;
         text-decoration: underline;
+        cursor: pointer;
     }
 `;
 
