@@ -124,6 +124,14 @@ export const GnbBar = styled.nav`
             }
         }
     }
+
+    /* 500px 이상인 경우에만 적용될 스타일 */
+    @media screen and (min-width: 400px) {
+        width: 400px;
+        margin: 0 auto;
+        left: 50%;
+        margin-left: -200px;
+    }
 `;
 
 export const AddPost = styled.div`

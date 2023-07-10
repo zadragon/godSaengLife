@@ -73,3 +73,19 @@ body {
     border: 0;
     padding: 0;
 }
+
+/* 500px 이상인 경우에만 적용될 스타일 */
+@media screen and (min-width: 400px) {
+    html {
+        background-color: rgb(243, 243, 243);
+    }
+    body {
+        background-color: #fff;
+        width: 400px;
+        height: 100vh;
+        margin: 0 auto;
+    }
+    .section {
+        background-color: #fff;
+    }
+}

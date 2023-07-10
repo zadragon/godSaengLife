@@ -5,6 +5,11 @@
 }
 
 /* 캘린더 */
+.react-calendar {
+    max-width: 100%;
+    width: 100% !important;
+    border: 0;
+}
 .calendarArea {
     width: 100%;
     font-family: 'Pretendard-Regular';

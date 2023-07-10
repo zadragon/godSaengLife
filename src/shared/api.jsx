@@ -52,6 +52,16 @@ export const MainApi = {
                 console.log(error);
             });
     },
+    getProfile: () => {
+        return api
+            .get('/mypage')
+            .then(response => {
+                return response;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
 };
 
 export const PostApi = {

@@ -110,9 +110,10 @@ const AllPopLayer = ({ allPopActive, setAllPopActive, selectItem }) => {
 };
 
 const PopLayer = styled.div`
-    position: fixed;
+    position: absolute;
     top: 0;
-    right: 100vw;
+    //right: 100vw;
+    left: 0;
     width: 100vw;
     height: calc(100vh - 60px);
     background-color: #fff;
@@ -169,6 +170,10 @@ const PopLayer = styled.div`
                 color: #fff;
             }
         }
+    }
+    /* 500px 이상인 경우에만 적용될 스타일 */
+    @media screen and (min-width: 400px) {
+        width: 400px;
     }
 `;
 
