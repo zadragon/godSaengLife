@@ -39,6 +39,7 @@ function Mypage() {
             console.log('탈퇴 성공');
         }
     };
+    console.log('마이페이지data:', data);
     return (
         <div>
             <C.PageHeader>
@@ -84,21 +85,29 @@ function Mypage() {
                     </M.Between>
                 </div>
                 <div>
-                    <M.Between>
+                    <M.Between style={{ marginBottom: '12px' }}>
                         <M.SubjectFont>커뮤니티에 올린 피드</M.SubjectFont>
                         <div>＞</div>
                     </M.Between>
-                    <M.Graybg>
-                        <img src="/images/icons/img-noPictures.png" style={{ width: '48px', height: '48px' }} />
-                        <M.Font style={{ color: 'var(--neutral-400, #aaacb3)' }}>사진이 없어요</M.Font>
-                    </M.Graybg>
+                    {data?.data.sharedShares.length === 0 ? (
+                        <M.Graybg>
+                            <img src="/images/icons/img-noPictures.png" style={{ width: '48px', height: '48px' }} />
+                            <M.Font style={{ color: 'var(--neutral-400, #aaacb3)' }}>사진이 없어요</M.Font>
+                        </M.Graybg>
+                    ) : (
+                        <M.Frame>
+                            {data?.data.sharedShares.slice(0, 3).map((item, index) => (
+                                <img key={index} src={item.imagePath} style={{ width: '100%', height: '100%' }} />
+                            ))}
+                        </M.Frame>
+                    )}
                 </div>
                 <div>
-                    <M.Between>
-                        <M.SubjectFont>좋아요한 피드</M.SubjectFont>
+                    <M.Between style={{ marginBottom: '12px', marginTop: '20px' }}>
+                        <M.SubjectFont s>좋아요한 피드</M.SubjectFont>
                         <div>＞</div>
                     </M.Between>
-                    <M.Graybg>
+                    <M.Graybg style={{ marginBottom: '20px' }}>
                         <img src="/images/icons/img-noPictures.png" style={{ width: '48px', height: '48px' }} />
                         <M.Font style={{ color: 'var(--neutral-400, #aaacb3)' }}>사진이 없어요</M.Font>
                     </M.Graybg>

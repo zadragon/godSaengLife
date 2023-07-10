@@ -158,3 +158,14 @@ export const BadgeContainer = styled.div`
     border-radius: 12px;
     background: var(--neutral-900, #21242e);
 `;
+
+export const Frame = styled.div`
+    display: flex;
+    height: 84px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex: 1 0 0;
+    border-radius: 4px;
+    background: url(<path-to-image>), lightgray 50% / cover no-repeat, #21242e;
+`;
