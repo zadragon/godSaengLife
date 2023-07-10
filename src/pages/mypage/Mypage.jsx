@@ -39,6 +39,7 @@ function Mypage() {
             console.log('탈퇴 성공');
         }
     };
+    console.log('마이페이지data:', data);
     return (
         <div>
             <C.PageHeader>
