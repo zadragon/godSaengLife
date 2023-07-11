@@ -18,10 +18,10 @@ export const AuthApi = {
         const response = await api.post('/login', payload);
         return response.data;
     },
-    signout: () => {
+    signout: removeCookie => {
         api.post('/logout')
             .then(response => {
-                //console.log(response);
+                console.log(response);
             })
             .catch(error => {
                 // console.log(error);
@@ -49,7 +49,7 @@ export const MainApi = {
                 return response;
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
             });
     },
     getProfile: () => {
@@ -59,7 +59,7 @@ export const MainApi = {
                 return response;
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
             });
     },
 };

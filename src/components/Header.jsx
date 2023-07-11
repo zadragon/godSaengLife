@@ -7,11 +7,11 @@ import * as C from '../styles/common';
 import { useQuery } from '@tanstack/react-query';
 
 const Header = () => {
-    const [cookies, removeCookie] = useCookies();
+    const [cookies, setCookie, removeCookie] = useCookies();
     const navigate = useNavigate();
     const logout = () => {
-        AuthApi.signout(cookies.Authorization);
         removeCookie('Authorization');
+        //AuthApi.signout(removeCookie);
         navigate('/splash');
     };
 

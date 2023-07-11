@@ -39,6 +39,7 @@ function Mypage() {
             console.log('탈퇴 성공');
         }
     };
+    console.log('마이페이지data:', data);
     return (
         <div>
             <C.PageHeader>
@@ -57,7 +58,25 @@ function Mypage() {
                     <M.Between>
                         <M.FlexContainer style={{ marginBottom: '12px' }}>
                             <img
-                                src="/images/profile/lv1.png"
+                                src={
+                                    data?.data.totalPointScore === undefined
+                                        ? '/images/profile/lv1gray.png'
+                                        : data?.data.totalPointScore <= 25
+                                        ? '/images/profile/lv1.png'
+                                        : data?.data.totalPointScore <= 75
+                                        ? '/images/profile/lv2.png'
+                                        : data?.data.totalPointScore <= 125
+                                        ? '/images/profile/lv3.png'
+                                        : data?.data.totalPointScore <= 175
+                                        ? '/images/profile/lv4.png'
+                                        : data?.data.totalPointScore <= 225
+                                        ? '/images/profile/lv5.png'
+                                        : data?.data.totalPointScore <= 275
+                                        ? '/images/profile/lv6.png'
+                                        : data?.data.totalPointScore <= 350
+                                        ? '/images/profile/lv7.png'
+                                        : '/images/profile/lv8.png'
+                                }
                                 className="profileImg"
                                 style={{ width: '48px', height: '48px' }}
                             />
@@ -78,27 +97,51 @@ function Mypage() {
                                 className="settings"
                                 style={{ color: 'var(--neutral-700, #393e4f)' }}
                             >
-                                Lv.1 ＞
+                                {data?.data.totalPointScore === undefined
+                                    ? 'Lv.? ＞'
+                                    : data?.data.totalPointScore <= 25
+                                    ? 'Lv.1 ＞'
+                                    : data?.data.totalPointScore <= 75
+                                    ? 'Lv.2 ＞'
+                                    : data?.data.totalPointScore <= 125
+                                    ? 'Lv.3 ＞'
+                                    : data?.data.totalPointScore <= 175
+                                    ? 'Lv.4 ＞'
+                                    : data?.data.totalPointScore <= 225
+                                    ? 'Lv.5 ＞'
+                                    : data?.data.totalPointScore <= 275
+                                    ? 'Lv.6 ＞'
+                                    : data?.data.totalPointScore <= 350
+                                    ? 'Lv.7 ＞'
+                                    : 'Lv.8 ＞'}
                             </Link>
                         </M.Font>
                     </M.Between>
                 </div>
                 <div>
-                    <M.Between>
+                    <M.Between style={{ marginBottom: '12px' }}>
                         <M.SubjectFont>커뮤니티에 올린 피드</M.SubjectFont>
                         <div>＞</div>
                     </M.Between>
-                    <M.Graybg>
-                        <img src="/images/icons/img-noPictures.png" style={{ width: '48px', height: '48px' }} />
-                        <M.Font style={{ color: 'var(--neutral-400, #aaacb3)' }}>사진이 없어요</M.Font>
-                    </M.Graybg>
+                    {data?.data.sharedShares.length === 0 || data === undefined ? (
+                        <M.Graybg>
+                            <img src="/images/icons/img-noPictures.png" style={{ width: '48px', height: '48px' }} />
+                            <M.Font style={{ color: 'var(--neutral-400, #aaacb3)' }}>사진이 없어요</M.Font>
+                        </M.Graybg>
+                    ) : (
+                        <M.Frame>
+                            {data?.data.sharedShares.slice(0, 3).map((item, index) => (
+                                <img key={index} src={item.imagePath} style={{ width: '100%', height: '100%' }} />
+                            ))}
+                        </M.Frame>
+                    )}
                 </div>
                 <div>
-                    <M.Between>
-                        <M.SubjectFont>좋아요한 피드</M.SubjectFont>
+                    <M.Between style={{ marginBottom: '12px', marginTop: '20px' }}>
+                        <M.SubjectFont s>좋아요한 피드</M.SubjectFont>
                         <div>＞</div>
                     </M.Between>
-                    <M.Graybg>
+                    <M.Graybg style={{ marginBottom: '20px' }}>
                         <img src="/images/icons/img-noPictures.png" style={{ width: '48px', height: '48px' }} />
                         <M.Font style={{ color: 'var(--neutral-400, #aaacb3)' }}>사진이 없어요</M.Font>
                     </M.Graybg>

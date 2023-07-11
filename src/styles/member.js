@@ -80,6 +80,12 @@ export const BtnJoinArea = styled.div`
     padding: 10px 16px;
     background: #fff;
     width: 100%;
+    /* 500px 이상인 경우에만 적용될 스타일 */
+    @media screen and (min-width: 400px) {
+        width: 400px;
+        left: 50%;
+        margin-left: -200px;
+    }
 `;
 
 export const BtnJoin = styled.button`

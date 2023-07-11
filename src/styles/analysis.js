@@ -79,6 +79,17 @@ export const Wrapper = styled.div`
             padding: 8px;
             flex-direction: column;
             justify-content: center;
+            strong {
+                font-size: 12px;
+                font-family: 'Pretendard-Medium';
+                font-weight: normal;
+                color: var(--neutral-500, #727580);
+            }
+            span {
+                font-size: 16px;
+                color: var(--neutral-900, #21242e);
+                font-family: 'Pretendard-Bold';
+            }
             &.type1 {
                 background: var(--primary-400, #ddff85);
             }
@@ -153,6 +164,17 @@ export const Wrapper = styled.div`
             height: '400px';
         }
     }
+    .barChartArea {
+        display: flex;
+        width: 100%;
+        padding: 16px 24px;
+        margin-top: 8px;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        border-radius: 8px;
+        background: var(--neutral-000, #fff);
+    }
 `;
 export const SelectPeriod = styled.div`
     position: relative;
@@ -163,6 +185,11 @@ export const SelectPeriod = styled.div`
     align-items: center;
     border-bottom: 0.3px solid var(--neutral-300, #d5d6d9);
     justify-content: center;
+    span {
+        font-size: 14px;
+        font-family: 'Pretendard-Medium';
+        color: var(--neutral-900, #21242e);
+    }
     button {
         position: absolute;
         width: 24px;

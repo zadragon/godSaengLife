@@ -5,11 +5,15 @@ export const PostTab = styled.div`
     padding: 0 16px;
     ul {
         display: flex;
+        gap: 2px;
+        background-color: #f8f8f9;
         li {
             width: 20%;
             height: 6px;
             border-radius: 4px;
             background: var(--neutral-900, #21242e);
+            &.active {
+            }
         }
     }
 `;

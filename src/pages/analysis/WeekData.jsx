@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import { setGraphImg } from '../../redux/modules/community';
 import moment from 'moment';
+import Loading from '../../components/common/Loading';
 
 const WeekData = () => {
     const navigate = useNavigate();
@@ -20,19 +21,19 @@ const WeekData = () => {
         isError,
         refetch: moveWeek,
     } = useQuery(['getWeekData', weekState], () => analysis.getWeekData(weekState));
-    //const { data: dataG, isLoading, isError, refetch } = useQuery(['getWeekData'], () => analysis.getWeekData());
-    // const { periodData = [] } = dataG;
-    console.log(dataG);
 
     const [chart, setChart] = useState([
         {
             country: 0,
             건강식: 0,
+            건강식height: 80,
             건강식Color: 'hsl(46, 70%, 50%)',
             운동: 0,
             운동Color: 'hsl(105, 70%, 50%)',
+            운동height: 80,
             꿀잠: 0,
             꿀잠Color: 'hsl(170, 70%, 50%)',
+            꿀잠height: 80,
         },
     ]);
 
@@ -43,24 +44,30 @@ const WeekData = () => {
                     let d = new Date();
                     let sel_day = -idx; //일자를 조절하시면 됩니다. -1이면 하루전/ +1이면 내일
                     d.setDate(d.getDate() + sel_day);
-
+                    const weekName = ['월', '화', '수', '목', '금', '토', '일'];
                     const howEat = item.howEat == false || item.howEat == null ? 0 : 1;
                     const didGym = item.didGym == false || item.howEat == null ? 0 : 1;
                     const goodSleep = item.goodSleep == false || item.howEat == null ? 0 : 1;
 
                     return {
-                        country: d.getDate(),
+                        //country: d.getDate(),
+                        id: weekName[idx],
+                        country: weekName[idx],
                         건강식: howEat,
                         건강식Color: 'hsl(46, 70%, 50%)',
+                        건강식height: 80,
                         운동: didGym,
                         운동Color: 'hsl(105, 70%, 50%)',
+                        운동height: 80,
                         꿀잠: goodSleep,
                         꿀잠Color: 'hsl(170, 70%, 50%)',
+                        꿀잠height: 80,
                     };
                 })
             );
     }, [dataG]);
-    // console.log('dataG', dataG);
+
+    console.log('dataG', dataG?.periodData);
 
     const handleCapture = () => {
         html2canvas(captureRef.current).then(canvas => {
@@ -90,17 +97,17 @@ const WeekData = () => {
         } else if (move == 'next') {
             setWeekState(weekState => ++weekState);
         }
-        console.log(weekState);
         moveWeek(weekState);
     };
 
     //console.log(conditionInfo.emotionImg);
-    if (isLoading) return <div>...로딩중</div>;
+    if (isLoading) return <Loading />;
     if (isError) return <div>...에러발생</div>;
 
     return (
         <div className="tabCont">
             <A.SelectPeriod>
+                {/* 월요일과 일요일 날짜를 구해서 보여주기 */}
                 <span>
                     {moment(dataG?.periodData[0].date).format('MM-DD')} (월) -{' '}
                     {moment(dataG?.periodData[6].date).format('MM-DD')} (일)
@@ -191,105 +198,33 @@ const WeekData = () => {
                             </div>
                         </div>
                     </div>
-                    <div style={{ height: '400px' }}>
+                    <div className="barChartArea" style={{ height: '190px' }}>
                         <ResponsiveBar
+                            minHeight={300}
                             data={chart}
                             keys={['건강식', '운동', '꿀잠']}
                             indexBy="country"
-                            margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
-                            padding={0.3}
-                            valueScale={{ type: 'linear' }}
-                            indexScale={{ type: 'band', round: true }}
-                            colors={{ scheme: 'nivo' }}
-                            defs={[
-                                {
-                                    id: 'dots',
-                                    type: 'patternDots',
-                                    background: 'inherit',
-                                    color: '#38bcb2',
-                                    size: 4,
-                                    padding: 1,
-                                    stagger: true,
-                                },
-                                {
-                                    id: 'lines',
-                                    type: 'patternLines',
-                                    background: 'inherit',
-                                    color: '#eed312',
-                                    rotation: -45,
-                                    lineWidth: 6,
-                                    spacing: 10,
-                                },
-                            ]}
-                            fill={[
-                                {
-                                    match: {
-                                        id: 'fries',
-                                    },
-                                    id: 'dots',
-                                },
-                                {
-                                    match: {
-                                        id: 'sandwich',
-                                    },
-                                    id: 'lines',
-                                },
-                            ]}
-                            borderColor={{
-                                from: 'color',
-                                modifiers: [['darker', 1.6]],
-                            }}
-                            axisTop={null}
-                            axisRight={null}
+                            margin={{ top: 0, right: 0, bottom: 25, left: 0 }}
+                            padding={0.5}
+                            colors={['#DDFF85', '#E2D9FF', '#FEF58C']}
+                            borderRadius={5}
+                            innerPadding={3}
+                            axisLeft={null}
+                            labelSkipWidth={12}
+                            labelSkipHeight={12}
+                            enableGridY={true}
+                            gridYValues={[0]}
+                            enableLabel={false}
+                            role="application"
+                            ariaLabel="Nivo bar chart demo"
                             axisBottom={{
-                                tickSize: 5,
+                                tickSize: 0,
                                 tickPadding: 5,
                                 tickRotation: 0,
                                 legend: 'country',
                                 legendPosition: 'middle',
                                 legendOffset: 32,
                             }}
-                            axisLeft={{
-                                tickSize: 5,
-                                tickPadding: 5,
-                                tickRotation: 0,
-                                legend: 'food',
-                                legendPosition: 'middle',
-                                legendOffset: -40,
-                            }}
-                            labelSkipWidth={12}
-                            labelSkipHeight={12}
-                            labelTextColor={{
-                                from: 'color',
-                                modifiers: [['darker', 1.6]],
-                            }}
-                            legends={[
-                                {
-                                    dataFrom: 'keys',
-                                    anchor: 'bottom-right',
-                                    direction: 'column',
-                                    justify: false,
-                                    translateX: 120,
-                                    translateY: 0,
-                                    itemsSpacing: 2,
-                                    itemWidth: 100,
-                                    itemHeight: 20,
-                                    itemDirection: 'left-to-right',
-                                    itemOpacity: 0.85,
-                                    symbolSize: 20,
-                                    effects: [
-                                        {
-                                            on: 'hover',
-                                            style: {
-                                                itemOpacity: 1,
-                                            },
-                                        },
-                                    ],
-                                },
-                            ]}
-                            role="application"
-                            ariaLabel="Nivo bar chart demo"
-                            barAriaLabel={e => e.id + ': ' + e.formattedValue + ' in country: ' + e.indexValue}
                         />
                     </div>
                 </div>

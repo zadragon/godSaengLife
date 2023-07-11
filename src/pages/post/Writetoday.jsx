@@ -87,11 +87,6 @@ function Writetoday() {
     // 탭
     const [activeTab, setActiveTab] = useState('condition');
 
-    const handleTabClick = tab => {
-        setActiveTab(tab);
-        setShowHomeButton(tab === 'condition');
-    };
-
     const handleNextClick = () => {
         handleTabClick('result');
     };
@@ -154,9 +149,27 @@ function Writetoday() {
         });
     }, [makeShot]);
 
-    // useEffect(() => {
-    //     fire();
-    // }, []);
+    const [tabStae, setTabState] = useState([
+        { tabName: '나의 컨디션', tabNameEng: 'condition', active: true },
+        { tabName: '건강한 음식', tabNameEng: 'healthyFood', active: false },
+        { tabName: '운동', tabNameEng: 'exercise', active: false },
+        { tabName: '꿀잠', tabNameEng: 'goodSleep', active: false },
+        { tabName: '사진 선택', tabNameEng: 'photo', active: false },
+        { tabName: '선택 결과', tabNameEng: 'result', active: false },
+    ]);
+
+    const handleTabClick = tab => {
+        setActiveTab(tab);
+        setShowHomeButton(tab === 'condition');
+        setTabState(
+            tabStae.map(item => {
+                return {
+                    ...item,
+                    active: item.tabNameEng == tab && true,
+                };
+            })
+        );
+    };
 
     return (
         <div>
@@ -189,6 +202,19 @@ function Writetoday() {
             </C.PageHeader>
             <P.PostTab>
                 <ul className="flex justify-around">
+                    {tabStae.map(item => {
+                        return (
+                            <li
+                                className={`menu-tab ${item.active ? 'active' : ''}`}
+                                onClick={() => handleTabClick(item.tabNameEng)}
+                                key={item.tabName}
+                            >
+                                <span className="hidden">{item.tabName}</span>
+                            </li>
+                        );
+                    })}
+                </ul>
+                {/* <ul className="flex justify-around">
                     <li
                         className={`menu-tab ${activeTab === 'condition' ? 'active' : ''}`}
                         onClick={() => handleTabClick('condition')}
@@ -210,7 +236,7 @@ function Writetoday() {
                     <li className={`menu-tab`} onClick={() => handleTabClick('result')}>
                         <span className="hidden">선택 결과</span>
                     </li>
-                </ul>
+                </ul> */}
             </P.PostTab>
             {activeTab === 'condition' && (
                 <P.SelectCondition>
