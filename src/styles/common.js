@@ -69,6 +69,13 @@ export const PageHeader = styled.div`
         height: 24px;
         background: url('/images/icons/icon-delete.svg') no-repeat center;
     }
+    .btnCommon {
+        position: absolute;
+        top: 17px;
+        right: 16px;
+        font-size: 14px;
+        font-family: 'Pretendard-Medium';
+    }
 `;
 
 export const GnbBar = styled.nav`

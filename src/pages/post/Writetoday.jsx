@@ -155,7 +155,6 @@ function Writetoday() {
         { tabName: '운동', tabNameEng: 'exercise', active: false },
         { tabName: '꿀잠', tabNameEng: 'goodSleep', active: false },
         { tabName: '사진 선택', tabNameEng: 'photo', active: false },
-        { tabName: '선택 결과', tabNameEng: 'result', active: false },
     ]);
 
     const handleTabClick = tab => {
@@ -179,13 +178,17 @@ function Writetoday() {
                 </button>
                 <h2>하루 기록</h2>
                 {activeTab === 'photo' && (
-                    <div>
+                    <>
                         {selectedImg.length > 0 ? (
-                            <button onClick={handleNextClick}>다음으로</button>
+                            <button className="btnCommon" onClick={handleNextClick}>
+                                다음으로
+                            </button>
                         ) : (
-                            <button onClick={handleNextClick}>건너뛰기</button>
+                            <button className="btnCommon" onClick={handleNextClick}>
+                                건너뛰기
+                            </button>
                         )}
-                    </div>
+                    </>
                 )}
                 {showHomeButton && (
                     <button className="btnHome" onClick={handleHomeClick}>
@@ -193,54 +196,35 @@ function Writetoday() {
                     </button>
                 )}
                 {activeTab === 'result' && (
-                    <div>
-                        <button className="save-button" onClick={handleSave}>
+                    <>
+                        <button className="btnCommon save-button" onClick={handleSave}>
                             저장
                         </button>
-                    </div>
+                    </>
                 )}
             </C.PageHeader>
-            <P.PostTab>
-                <ul className="flex justify-around">
-                    {tabStae.map(item => {
-                        return (
-                            <li
-                                className={`menu-tab ${item.active ? 'active' : ''}`}
-                                onClick={() => handleTabClick(item.tabNameEng)}
-                                key={item.tabName}
-                            >
-                                <span className="hidden">{item.tabName}</span>
-                            </li>
-                        );
-                    })}
-                </ul>
-                {/* <ul className="flex justify-around">
-                    <li
-                        className={`menu-tab ${activeTab === 'condition' ? 'active' : ''}`}
-                        onClick={() => handleTabClick('condition')}
-                    >
-                        <span className="hidden">나의 컨디션</span>
-                    </li>
-                    <li className={`menu-tab`} onClick={() => handleTabClick('healthyFood')}>
-                        <span className="hidden">건강한 음식</span>
-                    </li>
-                    <li className={`menu-tab`} onClick={() => handleTabClick('exercise')}>
-                        <span className="hidden">운동</span>
-                    </li>
-                    <li className={`menu-tab`} onClick={() => handleTabClick('goodSleep')}>
-                        <span className="hidden">꿀잠</span>
-                    </li>
-                    <li className={`menu-tab`} onClick={() => handleTabClick('photo')}>
-                        <span className="hidden">사진 선택</span>
-                    </li>
-                    <li className={`menu-tab`} onClick={() => handleTabClick('result')}>
-                        <span className="hidden">선택 결과</span>
-                    </li>
-                </ul> */}
-            </P.PostTab>
+            {activeTab !== 'result' && (
+                <P.PostTab>
+                    <ul className={`${tabStae.find(item => item.active).tabNameEng}`}>
+                        {tabStae.map(item => {
+                            return (
+                                <li
+                                    className={`menu-tab ${item.active ? 'active' : ''}`}
+                                    onClick={() => handleTabClick(item.tabNameEng)}
+                                    key={item.tabName}
+                                >
+                                    <span className="hidden">{item.tabName}</span>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </P.PostTab>
+            )}
+
             {activeTab === 'condition' && (
                 <P.SelectCondition>
                     <h3>오늘 하루 컨디션은?</h3>
+                    <p> </p>
                     <div className="selectArea">
                         <button
                             id="happy"
@@ -284,6 +268,7 @@ function Writetoday() {
             {activeTab === 'healthyFood' && (
                 <P.SelectCondition>
                     <h3>오늘 먹은 음식은?</h3>
+                    <p>건강한 음식 위주로 섭취했을까요?</p>
                     <div className="selectArea">
                         <button
                             id="howEatO"
@@ -305,6 +290,7 @@ function Writetoday() {
             {activeTab === 'exercise' && (
                 <P.SelectCondition>
                     <h3>오늘 운동 완료?</h3>
+                    <p>체력관리를 위한 꾸준한 운동은 필수!</p>
                     <div className="selectArea">
                         <button
                             id="didGymO"
@@ -326,6 +312,7 @@ function Writetoday() {
             {activeTab === 'goodSleep' && (
                 <P.SelectCondition>
                     <h3>오늘 꿀잠자고 일어난 날?</h3>
+                    <p>수면의 질이 하루 컨디션을 좌우하기도 해요!</p>
                     <div className="selectArea">
                         <button
                             id="goodSleepO"
@@ -347,19 +334,17 @@ function Writetoday() {
             {activeTab === 'photo' && (
                 <P.SelectCondition>
                     <h3>오늘 먹은 음식 올리기</h3>
-                    <div>나의 갓생 식단을 기록해봅시다!(다섯 장까지 가능)</div>
-                    <P.PhotoInput>
-                        <P.FileIcon src="images/icons/icon-camera.svg" alt="파일 선택" />
-                        <P.FileInput type="file" name="images" multiple onChange={setImgFile} accept="image/*" />
-                    </P.PhotoInput>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '10px' }}>
+                    <p>나의 갓생 식단을 기록해봅시다!(다섯 장까지 가능)</p>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '56px', gap: '16px' }}>
+                        <P.PhotoInput>
+                            <P.FileIcon src="images/icons/icon-camera.svg" alt="파일 선택" />
+                            <P.FileInput type="file" name="images" multiple onChange={setImgFile} accept="image/*" />
+                        </P.PhotoInput>
+
                         {selectedImg.map((image, index) => (
-                            <img
-                                key={index}
-                                alt={`미리보기 ${index}`}
-                                src={URL.createObjectURL(image)}
-                                style={{ maxWidth: '100px', marginRight: '10px', marginBottom: '10px' }}
-                            />
+                            <P.ImgTool key={index}>
+                                <img alt={`미리보기 ${index}`} src={URL.createObjectURL(image)} />
+                            </P.ImgTool>
                         ))}
                     </div>
                 </P.SelectCondition>
