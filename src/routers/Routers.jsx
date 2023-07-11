@@ -3,15 +3,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import Layout from '../pages/Layout';
 import Analysis from '../pages/analysis/Analysis';
-import Mypage from '../pages/mypage/Mypage';
 import { JoinDone, Login, Signup } from '../pages/member/';
 import { EditFeed, AllImgList, Writetoday } from '../pages/post';
-import Setting from '../pages/mypage/Setting';
-import AddArticle from '../pages/community/AddArticle';
-import Badge from '../pages/mypage/Badge';
-import ChangePw from '../pages/mypage/ChangePw';
-import CommunityList from '../pages/community/CommunityList';
-import CommunityDetail from '../pages/community/CommunityDetail';
+import { Mypage, Setting, Badge, ChangePw } from '../pages/mypage';
+import { AddArticle, CommunityList, CommunityDetail } from '../pages/community';
 
 const Routers = () => {
     return (

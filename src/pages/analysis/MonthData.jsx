@@ -5,6 +5,7 @@ import { analysis } from '../../shared/api';
 import { useQuery } from '@tanstack/react-query';
 import Calendar from 'react-calendar';
 import moment from 'moment';
+import Loading from '../../components/common/Loading';
 
 const MonthData = () => {
     const [monthState, setMonthState] = useState(0);
@@ -91,7 +92,7 @@ const MonthData = () => {
 
     const handleMonthClick = () => {};
 
-    if (isLoadingM) return <div>...로딩중</div>;
+    if (isLoadingM) return <Loading />;
     if (isErrorM) return <div>...에러발생</div>;
 
     return (

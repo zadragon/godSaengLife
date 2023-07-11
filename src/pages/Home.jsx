@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { styled } from 'styled-components';
 import { MainApi, PostApi } from '../shared/api';
-import { useCookies } from 'react-cookie';
 import { useQuery } from '@tanstack/react-query';
+import { useCookies } from 'react-cookie';
 import moment from 'moment';
 import Calendar from 'react-calendar';
 import OverlayImg from '../components/picture/OverlayImg';
 import * as C from '../styles/common';
 import * as H from '../styles/home';
 import 'react-calendar/dist/Calendar.css';
+import Loading from '../components/common/Loading';
 
 function Home() {
-    //const [cookies] = useCookies();
+    const [cookies] = useCookies();
     const [value, onChange] = useState(new Date());
-    //const [today, setToday] = useState(moment(new Date()).format('YYYY-MM-DD'));
     const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getMain'], () => MainApi.getMain());
-    //const navigate = useNavigate();
     const [calendarData, setCalendarData] = useState([]);
     const [selectDate, setSelectDate] = useState([]);
     const [feedImgs, setFeedImgs] = useState([]);
@@ -31,7 +29,6 @@ function Home() {
                 })
             );
     }, [data]);
-    console.log(data);
 
     useEffect(() => {
         data?.data?.feeds &&
@@ -67,7 +64,7 @@ function Home() {
                 //console.log('피드:', response.data);
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
             });
     }, []);
 
@@ -76,7 +73,7 @@ function Home() {
         setImgViewUrl({ ...imgViewUrl, view: true, url: imgUrl, imageId: imageId });
     };
 
-    //console.log(selectDate);
+    if (isLoading) return <Loading />;
 
     return (
         <div>
@@ -220,9 +217,15 @@ function Home() {
             <H.MainAlbum>
                 <div>
                     <h2>식단 사진첩</h2>
-                    <Link to="/everyImgList" className="linkMore">
-                        전체보기 &nbsp;＞
-                    </Link>
+                    {cookies.Authorization ? (
+                        <Link to="/everyImgList" className="linkMore">
+                            전체보기 &nbsp;＞
+                        </Link>
+                    ) : (
+                        <Link className="linkMore" onClick={() => alert('로그인이 필요한 서비스입니다.')}>
+                            전체보기 &nbsp;＞
+                        </Link>
+                    )}
                 </div>
                 <div className={`albumList col${latestImgs.length}`}>
                     {latestImgs.length === 0 ? (
@@ -246,11 +249,5 @@ function Home() {
         </div>
     );
 }
-
-const Markers = styled.div`
-    width: 5px;
-    height: 5px;
-    background-color: blue;
-`;
 
 export default Home;

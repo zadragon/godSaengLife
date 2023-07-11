@@ -6,6 +6,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import ToggleSwitch from '../../components/ToggleSwitch';
 import { communityApi } from '../../shared/api';
 import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
+import Loading from '../../components/common/Loading';
+import Done from '../../components/common/Done';
 
 const AddArticle = () => {
     const navigate = useNavigate();
@@ -66,30 +68,9 @@ const AddArticle = () => {
         // console.log(result);
     };
 
-    if (isLoading)
-        return (
-            <C.Loading>
-                <img src="/images/common/loading.gif" alt="" />
-            </C.Loading>
-        );
+    if (isLoading) return <Loading />;
     if (error) return <div>...에러발생</div>;
-    if (isSuccess)
-        return (
-            <S.AddArticleDone>
-                <div>
-                    <strong>등록 완료!</strong>
-                    <p>내가 쓴 글도 확인하고, 다른 갓생러 글도 보러가요~</p>
-                    <ul>
-                        <li>
-                            <Link to="/"> 홈으로</Link>
-                        </li>
-                        <li>
-                            <Link to="/communityList"> 나도 갓생</Link>
-                        </li>
-                    </ul>
-                </div>
-            </S.AddArticleDone>
-        );
+    if (isSuccess) return <Done />;
     return (
         <div>
             <C.PageHeader>
