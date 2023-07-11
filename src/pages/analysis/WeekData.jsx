@@ -67,8 +67,6 @@ const WeekData = () => {
             );
     }, [dataG]);
 
-    console.log('dataG', dataG?.periodData);
-
     const handleCapture = () => {
         html2canvas(captureRef.current).then(canvas => {
             // 캡처된 이미지를 사용하여 원하는 작업을 수행합니다.

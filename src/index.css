@@ -77,15 +77,23 @@ body {
 /* 500px 이상인 경우에만 적용될 스타일 */
 @media screen and (min-width: 400px) {
     html {
-        background-color: rgb(243, 243, 243);
+        background: url('../public/images/desktop/bg-desktop.svg') no-repeat center center;
+        background-size: cover;
+        padding: 35px 0;
+        background-attachment: fixed;
     }
     body {
         background-color: #fff;
         width: 400px;
-        height: 100vh;
+        height: 100%;
         margin: 0 auto;
     }
     .section {
         background-color: #fff;
+    }
+    .wrapper {
+        height: calc(100vh - 70px);
+        overflow-y: scroll;
+        border-radius: 8px;
     }
 }

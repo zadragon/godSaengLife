@@ -11,8 +11,9 @@ export const PostTab = styled.div`
             width: 20%;
             height: 6px;
             border-radius: 4px;
-            background: var(--neutral-900, #21242e);
+
             &.active {
+                background: var(--neutral-900, #21242e);
             }
         }
     }

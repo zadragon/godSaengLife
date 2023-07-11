@@ -30,9 +30,11 @@ const theme = createTheme({
 
 function App() {
     return (
-        <ThemeProvider theme={theme}>
-            <Routers />
-        </ThemeProvider>
+        <div className="wrapper">
+            <ThemeProvider theme={theme}>
+                <Routers />
+            </ThemeProvider>
+        </div>
     );
 }
 
