@@ -47,7 +47,7 @@ export const PageHeader = styled.div`
     }
     .btnClose {
         position: absolute;
-        top: 20px;
+        top: 17px;
         right: 16px;
         width: 24px;
         height: 24px;
@@ -55,7 +55,7 @@ export const PageHeader = styled.div`
     }
     .btnPrev {
         position: absolute;
-        top: 20px;
+        top: 17px;
         left: 16px;
         width: 24px;
         height: 24px;
@@ -63,7 +63,7 @@ export const PageHeader = styled.div`
     }
     .btnDel {
         position: absolute;
-        top: 20px;
+        top: 17px;
         right: 16px;
         width: 24px;
         height: 24px;
@@ -130,6 +130,7 @@ export const GnbBar = styled.nav`
     @media screen and (min-width: 400px) {
         width: 400px;
         margin: 0 auto;
+        bottom: 35px;
         left: 50%;
         margin-left: -200px;
     }
@@ -159,6 +160,7 @@ export const AddPost = styled.div`
     /* 500px 이상인 경우에만 적용될 스타일 */
     @media screen and (min-width: 400px) {
         left: 50%;
+        bottom: 110px;
         margin-left: 133px;
     }
 `;

@@ -33,14 +33,12 @@ const AllPopLayer = ({ allPopActive, setAllPopActive, selectItem }) => {
     }, []);
 
     const deleteImg = showImgIdx => {
-        console.log(showImgIdx);
         PostApi.deleteOneImg(showImgIdx);
         setFeedImg(prev => prev.filter(item => item.imageId !== showImgIdx));
         setPopActive(false);
     };
 
     const handleSlideChange = swiper => {
-        console.log(feedImg[swiper.visibleSlidesIndexes]);
         // 스와이프 직후에 실행되는 코드
         setShowImgIdx(feedImg[swiper.visibleSlidesIndexes].imageId);
         // 추가적인 로직을 여기에 작성할 수 있습니다.
