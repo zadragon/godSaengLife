@@ -335,7 +335,7 @@ function Writetoday() {
                 <P.SelectCondition>
                     <h3>오늘 먹은 음식 올리기</h3>
                     <p>나의 갓생 식단을 기록해봅시다!(다섯 장까지 가능)</p>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '56px', gap: '16px' }}>
+                    <P.pictureTool>
                         <P.PhotoInput>
                             <P.FileIcon src="images/icons/icon-camera.svg" alt="파일 선택" />
                             <P.FileInput type="file" name="images" multiple onChange={setImgFile} accept="image/*" />
@@ -346,7 +346,7 @@ function Writetoday() {
                                 <img alt={`미리보기 ${index}`} src={URL.createObjectURL(image)} />
                             </P.ImgTool>
                         ))}
-                    </div>
+                    </P.pictureTool>
                 </P.SelectCondition>
             )}
             {activeTab === 'result' && (
