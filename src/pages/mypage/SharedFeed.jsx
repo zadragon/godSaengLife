@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useCookies } from 'react-cookie';
 import { MypageApi, AuthApi } from '../../shared/api';
 import LvImg from '../../components/common/LvImg';
-import LvNumber from '../LvNumber';
+import LvNumber from '../../components/common/LvNumber';
 
 function SharedFeed() {
     const navigate = useNavigate();

@@ -8,7 +8,7 @@ import { MypageApi, AuthApi } from '../../shared/api';
 import { useCookies } from 'react-cookie';
 import { useState } from 'react';
 import LvImg from '../../components/common/LvImg';
-import LvNumber from '../LvNumber';
+import LvNumber from '../../components/common/LvNumber';
 
 function Mypage() {
     const navigate = useNavigate();
