@@ -96,13 +96,13 @@ const AllPopLayer = ({ allPopActive, setAllPopActive, selectItem }) => {
                     })}
                 </Swiper>
             </SwiperArea>
-            <div className={`tool ${popActive ? 'active' : ''}`}>
+            <C.ConfirmLayer className={`tool ${popActive ? 'active' : ''}`}>
                 <p>이 사진을 정말로 삭제하시겠어요?</p>
                 <button onClick={() => setPopActive(false)} className="black">
                     취소
                 </button>
                 <button onClick={() => deleteImg(showImgIdx)}>삭제하기</button>
-            </div>
+            </C.ConfirmLayer>
         </PopLayer>
     );
 };
@@ -123,10 +123,10 @@ const PopLayer = styled.div`
     }
 
     .tool {
-        position: absolute;
+        position: fixed;
         z-index: 100;
         left: 0;
-        bottom: -60px;
+        bottom: 0;
         transform: translateY(100%);
         width: 100%;
         padding: 32px 16px 24px 16px;

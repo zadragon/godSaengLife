@@ -23,6 +23,7 @@ const Routers = () => {
                 {/* 피드관련 */}
                 <Route path="/everyImgList" element={<AllImgList />} />
                 <Route path="/writetoday" element={<Writetoday />} />
+                <Route path="/feed/:feedId" element={<EditFeed />} />
 
                 {/* 분석 */}
                 <Route path="/analysis" element={<Analysis />} />
@@ -43,8 +44,6 @@ const Routers = () => {
                     {/* main */}
                     <Route path="/" element={<Home />} />
                     <Route path="/image/latest" element={<Home />} />
-
-                    <Route path="/feed/:feedId" element={<EditFeed />} />
                 </Route>
             </Routes>
         </BrowserRouter>

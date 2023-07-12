@@ -173,13 +173,13 @@ const AllImgList = () => {
             {allPopActive && (
                 <AllPopLayer allPopActive={allPopActive} setAllPopActive={setAllPopActive} selectItem={selectItem} />
             )}
-            <ToolPop className={`tool ${toolPopActive ? 'active' : ''}`}>
+            {/* <ToolPop className={`tool ${toolPopActive ? 'active' : ''}`}>
                 <p>이 사진을 정말로 삭제하시겠어요?</p>
                 <button onClick={() => setToolPopActive(false)} className="black">
                     취소
                 </button>
                 <button onClick={() => allImgDel()}>삭제하기</button>
-            </ToolPop>
+            </ToolPop> */}
         </div>
     );
 };

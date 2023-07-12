@@ -335,7 +335,7 @@ function Writetoday() {
                 <P.SelectCondition>
                     <h3>오늘 먹은 음식 올리기</h3>
                     <p>나의 갓생 식단을 기록해봅시다!(다섯 장까지 가능)</p>
-                    <P.pictureTool>
+                    <P.PictureTool>
                         <P.PhotoInput>
                             <P.FileIcon src="images/icons/icon-camera.svg" alt="파일 선택" />
                             <P.FileInput type="file" name="images" multiple onChange={setImgFile} accept="image/*" />
@@ -346,12 +346,12 @@ function Writetoday() {
                                 <img alt={`미리보기 ${index}`} src={URL.createObjectURL(image)} />
                             </P.ImgTool>
                         ))}
-                    </P.pictureTool>
+                    </P.PictureTool>
                 </P.SelectCondition>
             )}
             {activeTab === 'result' && (
                 <P.SelectCondition>
-                    <div>
+                    <div className="lastpage">
                         <h3>오늘 하루 컨디션은?</h3>
                         {selectedButtons.emotion === 'happy' && (
                             <p>
@@ -422,12 +422,13 @@ function Writetoday() {
                         <h3>오늘 먹은 음식 올리기</h3>
                         <div className="image-container">
                             {selectedImg.map((image, index) => (
-                                <img
-                                    key={index}
-                                    alt={`미리보기 ${index}`}
-                                    src={URL.createObjectURL(image)}
-                                    className="preview-image"
-                                />
+                                <div className="imgTool" key={image}>
+                                    <img
+                                        alt={`미리보기 ${index}`}
+                                        src={URL.createObjectURL(image)}
+                                        className="preview-image"
+                                    />
+                                </div>
                             ))}
                         </div>
                     </div>

@@ -228,3 +228,55 @@ export const Loading = styled.div`
         height: 124px;
     }
 `;
+
+export const ConfirmLayer = styled.div`
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    bottom: 0;
+    transform: translateY(100%);
+    width: 100%;
+    padding: 32px 16px 24px 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    background-color: #fff;
+    border-radius: 8px;
+    transition: transform 0.15s ease;
+    p {
+        color: #000;
+        /* Paragraph/Small Bold */
+        font-size: 14px;
+        font-family: Pretendard;
+        font-weight: 700;
+        line-height: 20px;
+        text-align: center;
+        display: block;
+        margin-bottom: 24px;
+    }
+    &.active {
+        transform: translateY(0);
+    }
+    button {
+        width: 100%;
+        height: 44px;
+        color: #f44336;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-family: Pretendard;
+        font-weight: 700;
+        line-height: 20px;
+        border-radius: 8px;
+        &.black {
+            background-color: #21242e;
+            color: #fff;
+        }
+    }
+    /* 500px 이상인 경우에만 적용될 스타일 */
+    @media screen and (min-width: 400px) {
+        width: 400px;
+    }
+`;
