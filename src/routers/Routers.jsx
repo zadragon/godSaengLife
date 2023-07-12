@@ -7,6 +7,8 @@ import { JoinDone, Login, Signup } from '../pages/member/';
 import { EditFeed, AllImgList, Writetoday } from '../pages/post';
 import { Mypage, Setting, Badge, ChangePw } from '../pages/mypage';
 import { AddArticle, CommunityList, CommunityDetail } from '../pages/community';
+import SharedFeed from '../pages/mypage/SharedFeed';
+import LikedFeed from '../pages/mypage/LikedFeed';
 
 const Routers = () => {
     return (
@@ -38,6 +40,8 @@ const Routers = () => {
                 <Route path="/mypage/nickname" element={<Setting />} />
                 <Route path="/mypage/badge" element={<Badge />} />
                 <Route path="/mypage/password" element={<ChangePw />} />
+                <Route path="/mypage/sharedfeed" element={<SharedFeed />} />
+                <Route path="/mypage/likedfeed" element={<LikedFeed />} />
 
                 {/* 공통영역(상단 gnb메뉴)을 위한 Layout  */}
                 <Route element={<Layout />}>
