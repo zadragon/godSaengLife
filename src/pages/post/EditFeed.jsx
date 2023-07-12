@@ -6,6 +6,7 @@ import { PutApi, PostApi } from '../../shared/api';
 import * as P from '../../styles/post';
 import * as C from '../../styles/common';
 import styled from 'styled-components';
+import Loading from '../../components/common/Loading';
 
 function EditFeed({ onUpdate }) {
     const { feedId, imageId } = useParams();
@@ -201,7 +202,7 @@ function EditFeed({ onUpdate }) {
         ],
     };
 
-    //if (isLoadingFeed) return <Loading />;
+    //if (isLoading) return <Loading />;
     return (
         <div>
             <div>

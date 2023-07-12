@@ -81,13 +81,7 @@ function Home() {
                 <Calendar
                     onChange={onChange}
                     value={value}
-                    // tileClassName={({ date, view }) => {
-                    //     if (calendarData?.find(x => x.isImg && x.date === moment(date).format('YYYY-MM-DD'))) {
-                    //         return 'article picture';
-                    //     } else if (calendarData?.find(x => x.date === moment(date).format('YYYY-MM-DD'))) {
-                    //         return 'article';
-                    //     }
-                    // }}
+                    calendarType="US"
                     tileContent={({ date }) => {
                         if (calendarData?.find(x => x.isImg && x.date === moment(date).format('YYYY-MM-DD'))) {
                             return (

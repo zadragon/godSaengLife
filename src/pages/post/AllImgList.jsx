@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import AllPopLayer from '../../components/picture/AllPopLayer';
 import Gnb from '../../components/Gnb';
 import { styled } from 'styled-components';
+import Loading from '../../components/common/Loading';
 
 const AllImgList = () => {
     //const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -110,6 +111,8 @@ const AllImgList = () => {
         });
         setToolPopActive(false);
     };
+
+    if (isLoading) return <Loading />;
 
     return (
         <div className="relative">

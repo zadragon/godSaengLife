@@ -15,7 +15,7 @@ const MonthData = () => {
         isError: isErrorM,
         refetch: moveMonth,
     } = useQuery(['getMonthData', monthState], () => analysis.getMonthData(monthState));
-    //console.log(dataM);
+
     const [chartM, setChartM] = useState([
         {
             country: 0,
@@ -146,6 +146,7 @@ const MonthData = () => {
                     <Calendar
                         value={dataM?.periodData[0].date}
                         onClickMonth={handleMonthClick}
+                        calendarType="US"
                         tileContent={({ date, view }) => {
                             const todayEmotion = dataM?.periodData?.filter(
                                 x => x.date && moment(x.date).format('MM/DD/YYYY') == moment(date).format('MM/DD/YYYY')

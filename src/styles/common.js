@@ -278,5 +278,13 @@ export const ConfirmLayer = styled.div`
     /* 500px 이상인 경우에만 적용될 스타일 */
     @media screen and (min-width: 400px) {
         width: 400px;
+        left: 50%;
+        
+        margin-left: -200px;
+        &.active {
+            bottom: 35px;
+            
+        }
+    }
     }
 `;

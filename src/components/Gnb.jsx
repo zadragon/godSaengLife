@@ -27,7 +27,7 @@ const Gnb = () => {
                     {cookies.Authorization ? (
                         <Link to="/mypage">마이페이지</Link>
                     ) : (
-                        <Link onClick={() => alert('로그인이 필요한 서비스입니다.')}>분석</Link>
+                        <Link onClick={() => alert('로그인이 필요한 서비스입니다.')}>마이페이지</Link>
                     )}
                 </li>
             </ul>

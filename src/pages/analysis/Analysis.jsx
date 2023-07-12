@@ -6,6 +6,7 @@ import WeekData from './WeekData';
 import MonthData from './MonthData';
 import { useNavigate } from 'react-router-dom';
 import PointInfoPop from '../../components/PointInfoPop';
+import GradePop from '../../components/GradePop';
 
 const Analysis = () => {
     const navigate = useNavigate();
@@ -35,6 +36,7 @@ const Analysis = () => {
 
             {dataCont === 'week' ? <WeekData /> : <MonthData />}
 
+            {/* <GradePop /> */}
             <Gnb />
         </div>
     );

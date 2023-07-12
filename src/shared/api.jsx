@@ -240,4 +240,17 @@ export const communityApi = {
 
         return res.data;
     },
+
+    getCommunityArticle: async id => {
+        const res = await api
+            .get(`/share/1`)
+            .then(response => {
+                console.log(response);
+                return response;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        return res.data;
+    },
 };

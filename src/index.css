@@ -123,6 +123,5 @@ body {
         position: relative;
         height: calc(100vh - 70px);
         overflow-y: scroll;
-        border-radius: 8px;
     }
 }
