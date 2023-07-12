@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { MypageApi, AuthApi } from '../../shared/api';
 import { useCookies } from 'react-cookie';
 import { useState } from 'react';
-import LvImg from '../LvImg';
+import LvImg from '../../components/common/LvImg';
 import LvNumber from '../LvNumber';
 
 function Mypage() {
