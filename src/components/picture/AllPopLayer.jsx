@@ -38,11 +38,12 @@ const AllPopLayer = ({ allPopActive, setAllPopActive, selectItem }) => {
     };
 
     //삭제 한후 보여줄 이미지 아이디 상태값 업데이트
-    useEffect(() => {
-        feedImg && setShowImgIdx(feedImg[0]?.imageId);
-    }, [feedImg]);
+    // useEffect(() => {
+    //     feedImg && setShowImgIdx(feedImg[0]?.imageId);
+    // }, [feedImg]);
 
     const handleSlideChange = swiper => {
+        console.log(swiper);
         // 스와이프 직후에 실행되는 코드
         setShowImgIdx(feedImg[swiper.visibleSlidesIndexes].imageId);
         // 추가적인 로직을 여기에 작성할 수 있습니다.
