@@ -23,7 +23,7 @@ const Gnb = () => {
                 <li className={`community ${location.pathname == '/communityList' && 'active'} `}>
                     <Link to="/communityList">나도갓생</Link>
                 </li>
-                <li className="mypage">
+                <li className={`mypage ${location.pathname == '/mypage' && 'active'} `}>
                     {cookies.Authorization ? (
                         <Link to="/mypage">마이페이지</Link>
                     ) : (
