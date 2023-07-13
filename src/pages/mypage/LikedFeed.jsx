@@ -7,6 +7,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useCookies } from 'react-cookie';
 import { MypageApi, AuthApi } from '../../shared/api';
+import LvImg from '../../components/common/LvImg';
+import LvNumber from '../../components/common/LvNumber';
 
 function LikedFeed() {
     const navigate = useNavigate();
@@ -15,6 +17,20 @@ function LikedFeed() {
     const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getMypage'], () =>
         MypageApi.getMypage(cookies.Authorization)
     );
+
+    const calculateTimeDifference = createdAt => {
+        const currentTime = new Date();
+        const createdAtTime = new Date(createdAt);
+        const timeDifferenceInHours = Math.floor((currentTime - createdAtTime) / (1000 * 60 * 60));
+
+        if (timeDifferenceInHours < 24) {
+            return `${timeDifferenceInHours}시간 전`;
+        } else {
+            const timeDifferenceInDays = Math.floor(timeDifferenceInHours / 24);
+            return `${timeDifferenceInDays}일 전`;
+        }
+    };
+
     return (
         <div>
             <C.PageHeader>
@@ -23,12 +39,12 @@ function LikedFeed() {
                 </button>
                 <h2>좋아요한 피드</h2>
             </C.PageHeader>
-            {data?.data.likedShares.map((item, index) => (
-                // <img key={index} src={item.imagePath} style={{ width: '100%', height: '100%' }} />
-                // <p key={index}>{item.title}</p>
-                <S.CommList key={index}>
-                    <ul>
-                        <li>
+            <S.CommList style={{ paddingBottom: '100px' }}>
+                <ul style={{ display: 'flex', gap: '12px', flexDirection: 'column', marginTop: '12px' }}>
+                    {data?.data.likedShares.map((item, index) => (
+                        // <img key={index} src={item.imagePath} style={{ width: '100%', height: '100%' }} />
+                        // <p key={index}>{item.title}</p>
+                        <li key={index}>
                             <Link to="/articleDetail">
                                 <div className="bg-neutral-100 rounded-lg p-4 flex flex-col gap-0 items-start justify-start shrink-0 w-full relative">
                                     <div className="flex flex-row items-start justify-between shrink-0 w-full relative">
@@ -47,7 +63,7 @@ function LikedFeed() {
                                                                 font: "var(--paragraph-mid-bold, 700 16px/24px 'Pretendard', sans-serif)",
                                                             }}
                                                         >
-                                                            <p>{item.shareName}</p>
+                                                            <p>{item.Share.shareId}</p>
                                                         </div>
                                                     </div>
 
@@ -69,12 +85,14 @@ function LikedFeed() {
                                                         font: "var(--paragraph-small-medium, 500 14px/20px 'Pretendard', sans-serif)",
                                                     }}
                                                 >
-                                                    <p>{item.title}</p>
+                                                    <p>{item.Share.title}</p>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <img src={item.imagePath} style={{ width: '84px', height: '84px' }} />
+                                        {item.Share.imagePath !== null && (
+                                            <img src={item.Share.imagePath} style={{ width: '84px', height: '84px' }} />
+                                        )}
+                                        {/* <img src={item.Share.imagePath} style={{ width: '84px', height: '84px' }} /> */}
                                     </div>
 
                                     <div className="flex flex-row gap-2 items-start justify-start self-stretch shrink-0 relative">
@@ -171,16 +189,16 @@ function LikedFeed() {
                                                     font: "var(--description-bold, 700 12px/16px 'Pretendard', sans-serif)",
                                                 }}
                                             >
-                                                1시간 전
+                                                {calculateTimeDifference(item.Share.createdAt)}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </Link>
                         </li>
-                    </ul>
-                </S.CommList>
-            ))}
+                    ))}
+                </ul>
+            </S.CommList>
             <Gnb />
         </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 
 function LvImg({ totalPointScore, style }) {
-    console.log(style);
+    // console.log(style);
     return (
         <div>
             <img
