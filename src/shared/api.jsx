@@ -253,4 +253,30 @@ export const communityApi = {
             });
         return res.data;
     },
+
+    addLike: async id => {
+        const res = await api
+            .put(`/likes/${id}`)
+            .then(response => {
+                console.log(response);
+                return response;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        return res.data;
+    },
+
+    removeLike: async id => {
+        const res = await api
+            .delete(`/likes/${id}`)
+            .then(response => {
+                console.log(response);
+                return response;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        return res.data;
+    },
 };

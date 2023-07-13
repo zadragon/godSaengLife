@@ -50,15 +50,22 @@ export const Wrapper = styled.div`
             position: absolute;
             top: 0;
             right: 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
             color: var(--neutral-500, #727580);
-
-            /* Paragraph/Small Medium */
+            font-family: 'Pretendard-Medium';
             font-size: 14px;
-            font-family: Pretendard;
-            font-style: normal;
-            font-weight: 500;
             line-height: 20px;
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                background: url('/images/icons/ico-share.svg');
+            }
         }
+
         h3 {
             color: var(--neutral-900, #21242e);
             /* Paragraph/Mid Bold */
@@ -66,6 +73,9 @@ export const Wrapper = styled.div`
             font-size: 16px;
             font-weight: 700;
             line-height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
     }
     .recordWrap {
@@ -113,34 +123,46 @@ export const Wrapper = styled.div`
             font-weight: 700;
             line-height: 24px;
         }
-        .pointArea {
-            display: flex;
-            width: 100%;
-            margin-top: 8px;
-            padding: 8px 24px;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 2px;
-            border-radius: 8px;
-            background: #fff;
-            strong {
-                color: var(--neutral-900, #21242e);
-
-                /* Paragraph/Mid Bold */
-                font-size: 16px;
-                font-family: Pretendard;
-                font-weight: 700;
-                line-height: 24px;
+        .btnHelpPoint {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 24px;
+            height: 24px;
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 24px;
+                height: 24px;
+                background: url('/images/icons/icon-help.svg');
             }
-            p {
-                color: var(--neutral-400, #aaacb3);
+        }
+    }
+    .pointArea {
+        display: flex;
+        width: 100%;
+        margin-top: 8px;
+        padding: 8px 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        border-radius: 8px;
+        background: var(--neutral-900, #21242e);
+        strong {
+            color: var(--primary-500, #c7f860);
+            font-family: 'Pretendard-bold';
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: normal;
+        }
+        p {
+            color: var(--neutral-400, #e3e3e6);
 
-                /* Description/Medium */
-                font-size: 12px;
-                font-family: Pretendard;
-                font-weight: 500;
-                line-height: 20px;
-            }
+            /* Description/Medium */
+            font-size: 12px;
+            font-family: Pretendard;
+            font-weight: 500;
+            line-height: 20px;
         }
     }
     .calendarArea {
@@ -159,9 +181,8 @@ export const Wrapper = styled.div`
         overflow-y: auto;
         padding-bottom: 10px;
 
-        .chartArea {
-            width: '1000px';
-            height: '400px';
+        .barChartArea {
+            width: 1000px;
         }
     }
     .barChartArea {

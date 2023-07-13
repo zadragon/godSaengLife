@@ -110,6 +110,7 @@ export const GnbBar = styled.nav`
                 transition: 0.5s;
                 a {
                     color: #393e4f;
+                    font-family: 'Pretendard-Medium';
                 }
             }
             &.home {
@@ -125,10 +126,16 @@ export const GnbBar = styled.nav`
                 }
             }
             &.community {
-                background: url('/images/gnb/menu-home.svg') no-repeat center 5px;
+                background: url('/images/gnb/menu-community.svg') no-repeat center 5px;
+                &.active {
+                    background: url('/images/gnb/menu-community-active.svg') no-repeat center 5px;
+                }
             }
             &.mypage {
                 background: url('/images/gnb/menu-user.svg') no-repeat center 5px;
+                &.active {
+                    background: url('/images/gnb/menu-user-active.svg') no-repeat center 5px;
+                }
             }
         }
     }

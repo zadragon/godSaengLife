@@ -7,7 +7,7 @@ import Calendar from 'react-calendar';
 import moment from 'moment';
 import Loading from '../../components/common/Loading';
 
-const MonthData = () => {
+const MonthData = ({ setShowTooltip }) => {
     const [monthState, setMonthState] = useState(0);
     const {
         data: dataM,
@@ -32,16 +32,13 @@ const MonthData = () => {
         dataM?.periodData &&
             setChartM(
                 dataM?.periodData?.map((item, idx) => {
-                    let d = new Date();
-                    let sel_day = -idx; //일자를 조절하시면 됩니다. -1이면 하루전/ +1이면 내일
-                    d.setDate(d.getDate() + sel_day);
-
                     const howEat = item.howEat == false || item.howEat == null ? 0 : 1;
                     const didGym = item.didGym == false || item.howEat == null ? 0 : 1;
                     const goodSleep = item.goodSleep == false || item.howEat == null ? 0 : 1;
 
                     return {
-                        country: d.getDate(),
+                        id: idx + 1,
+                        country: idx + 1,
                         건강식: howEat,
                         건강식Color: 'hsl(46, 70%, 50%)',
                         운동: didGym,
@@ -223,124 +220,54 @@ const MonthData = () => {
                         </div>
                     </div>
                     <div className="scrollBar">
-                        <div className="chartArea">
+                        <div className="barChartArea" style={{ height: '190px' }}>
                             <ResponsiveBar
+                                minHeight={300}
                                 data={chartM}
                                 keys={['건강식', '운동', '꿀잠']}
                                 indexBy="country"
-                                margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
-                                padding={0.3}
-                                valueScale={{ type: 'linear' }}
-                                indexScale={{ type: 'band', round: true }}
-                                colors={{ scheme: 'nivo' }}
-                                defs={[
-                                    {
-                                        id: 'dots',
-                                        type: 'patternDots',
-                                        background: 'inherit',
-                                        color: '#38bcb2',
-                                        size: 4,
-                                        padding: 1,
-                                        stagger: true,
-                                    },
-                                    {
-                                        id: 'lines',
-                                        type: 'patternLines',
-                                        background: 'inherit',
-                                        color: '#eed312',
-                                        rotation: -45,
-                                        lineWidth: 6,
-                                        spacing: 10,
-                                    },
-                                ]}
-                                fill={[
-                                    {
-                                        match: {
-                                            id: 'fries',
-                                        },
-                                        id: 'dots',
-                                    },
-                                    {
-                                        match: {
-                                            id: 'sandwich',
-                                        },
-                                        id: 'lines',
-                                    },
-                                ]}
-                                borderColor={{
-                                    from: 'color',
-                                    modifiers: [['darker', 1.6]],
-                                }}
-                                axisTop={null}
-                                axisRight={null}
+                                margin={{ top: 0, right: 0, bottom: 25, left: 0 }}
+                                padding={0.5}
+                                colors={['#DDFF85', '#E2D9FF', '#FEF58C']}
+                                borderRadius={5}
+                                innerPadding={3}
+                                axisLeft={null}
+                                labelSkipWidth={12}
+                                labelSkipHeight={12}
+                                enableGridY={true}
+                                gridYValues={[0]}
+                                enableLabel={false}
+                                role="application"
+                                ariaLabel="Nivo bar chart demo"
                                 axisBottom={{
-                                    tickSize: 5,
+                                    tickSize: 0,
                                     tickPadding: 5,
                                     tickRotation: 0,
                                     legend: 'country',
                                     legendPosition: 'middle',
                                     legendOffset: 32,
                                 }}
-                                axisLeft={{
-                                    tickSize: 5,
-                                    tickPadding: 5,
-                                    tickRotation: 0,
-                                    legend: 'food',
-                                    legendPosition: 'middle',
-                                    legendOffset: -40,
-                                }}
-                                labelSkipWidth={12}
-                                labelSkipHeight={12}
-                                labelTextColor={{
-                                    from: 'color',
-                                    modifiers: [['darker', 1.6]],
-                                }}
-                                legends={[
-                                    {
-                                        dataFrom: 'keys',
-                                        anchor: 'bottom-right',
-                                        direction: 'column',
-                                        justify: false,
-                                        translateX: 120,
-                                        translateY: 0,
-                                        itemsSpacing: 2,
-                                        itemWidth: 100,
-                                        itemHeight: 20,
-                                        itemDirection: 'left-to-right',
-                                        itemOpacity: 0.85,
-                                        symbolSize: 20,
-                                        effects: [
-                                            {
-                                                on: 'hover',
-                                                style: {
-                                                    itemOpacity: 1,
-                                                },
-                                            },
-                                        ],
-                                    },
-                                ]}
-                                role="application"
-                                ariaLabel="Nivo bar chart demo"
-                                barAriaLabel={e => e.id + ': ' + e.formattedValue + ' in country: ' + e.indexValue}
                             />
                         </div>
                     </div>
                 </div>
-                <div className="pointBox">
-                    <h3>
-                        현재 갓생 포인트 <img src="/images/chart/icon-medal.svg" alt="" />
-                    </h3>
-                    <div className="pointArea">
-                        <div className="w-full flex justify-between">
-                            <div className="row">
-                                기록을 시작한지 : <strong> {dataM?.totalFeedDays} 일</strong>
-                            </div>
-                            <div className="row">
-                                나의 갓생 포인트는? <strong>{dataM?.totalPointScore} 점</strong>
-                            </div>
-                        </div>
 
-                        <p>기록시 1점, 사진 업로드시 2점 | 하루 최대 5점</p>
+                <div className="pointBox relative">
+                    <h3>현재 갓생 포인트</h3>
+                    <button className="btnHelpPoint" onClick={() => setShowTooltip(prev => !prev)}>
+                        <span className="hidden">갓생포인트 정보</span>
+                    </button>
+                </div>
+                <div className="pointArea">
+                    <div className="w-full flex justify-between flex-col gap-4">
+                        <div className="row">
+                            <strong>{dataM?.totalPointScore} 점</strong>
+                            <p>기록시 1점, 사진 업로드시 2점 | 하루 최대 5점</p>
+                        </div>
+                        <div className="row">
+                            <strong> {dataM?.totalFeedDays} 일</strong>
+                            <p>기록을 시작한지</p>
+                        </div>
                     </div>
                 </div>
             </A.Wrapper>

@@ -1,17 +1,21 @@
 import React from 'react';
 import { styled } from 'styled-components';
 
-const GradePop = () => {
+const GradePop = ({ setShowTooltip }) => {
+    const popClose = e => {
+        (e.target.classList.contains('dimmed') || e.target.classList.contains('btnClose')) && setShowTooltip(false);
+    };
     return (
-        <PointInfo>
+        <PointInfo onClick={e => popClose(e)} className="dimmed">
             <div
-                className="bg-neutral-100 rounded-2xl w-[343px] relative overflow-hidden"
+                className=" bg-neutral-100 rounded-2xl w-[343px] relative overflow-hidden"
                 style={{
                     position: 'fixed',
                     top: '50%',
                     left: '50%',
                     height: '500px',
                     transform: 'translate(-50%, -50%)',
+                    background: '#F8F8F9',
                 }}
             >
                 <div
@@ -19,7 +23,7 @@ const GradePop = () => {
                     style={{ borderWidth: '0px 0px 0.3px 0px' }}
                 >
                     <div
-                        className="text-[#000000] text-left absolute left-[126px] top-6"
+                        className="text-[#000000] text-left absolute left-[115px] top-6"
                         style={{
                             font: "var(--paragraph-large-bold, 700 20px/32px 'Pretendard', sans-serif)",
                         }}
@@ -28,7 +32,7 @@ const GradePop = () => {
                     </div>
 
                     <svg
-                        className="absolute left-[303px] top-6 overflow-visible"
+                        className="btnClose cursor-pointer absolute left-[303px] top-6 overflow-visible"
                         style={{}}
                         width="24"
                         height="24"
@@ -47,11 +51,11 @@ const GradePop = () => {
                 </div>
                 <div
                     className="flex flex-col gap-3 items-start justify-start absolute left-[calc(50%_-_155.5px)] top-[100px]"
-                    style={{ height: '480px', 'overflow-y': 'scroll' }}
+                    style={{ height: '480px', overflowY: 'scroll', paddingBottom: '10px' }}
                 >
-                    <div className="bg-neutral-000 rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
+                    <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="profile-pic-1.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv1.png" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
@@ -74,7 +78,10 @@ const GradePop = () => {
                             </div>
                         </div>
 
-                        <div className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative">
+                        <div
+                            className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative"
+                            style={{ background: '#D6F78180', color: '#393E4F' }}
+                        >
                             <div
                                 className="text-neutral-700 text-center relative"
                                 style={{
@@ -86,9 +93,9 @@ const GradePop = () => {
                         </div>
                     </div>
 
-                    <div className="bg-neutral-000 rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
+                    <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="profile-pic-2.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv2.png" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
@@ -111,7 +118,10 @@ const GradePop = () => {
                             </div>
                         </div>
 
-                        <div className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative">
+                        <div
+                            className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative"
+                            style={{ background: '#D6F78180', color: '#393E4F' }}
+                        >
                             <div
                                 className="text-neutral-700 text-center relative"
                                 style={{
@@ -123,9 +133,9 @@ const GradePop = () => {
                         </div>
                     </div>
 
-                    <div className="bg-neutral-000 rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
+                    <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="profile-pic-3.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv3.png" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
@@ -148,7 +158,10 @@ const GradePop = () => {
                             </div>
                         </div>
 
-                        <div className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative">
+                        <div
+                            className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative"
+                            style={{ background: '#D6F78180', color: '#393E4F' }}
+                        >
                             <div
                                 className="text-neutral-700 text-center relative"
                                 style={{
@@ -160,9 +173,9 @@ const GradePop = () => {
                         </div>
                     </div>
 
-                    <div className="bg-neutral-000 rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
+                    <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="profile-pic-4.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv4.png" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
@@ -185,7 +198,10 @@ const GradePop = () => {
                             </div>
                         </div>
 
-                        <div className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative">
+                        <div
+                            className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative"
+                            style={{ background: '#D6F78180', color: '#393E4F' }}
+                        >
                             <div
                                 className="text-neutral-700 text-center relative"
                                 style={{
@@ -197,9 +213,9 @@ const GradePop = () => {
                         </div>
                     </div>
 
-                    <div className="bg-neutral-000 rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
+                    <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="profile-pic-5.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv5.png" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
@@ -222,7 +238,10 @@ const GradePop = () => {
                             </div>
                         </div>
 
-                        <div className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative">
+                        <div
+                            className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative"
+                            style={{ background: '#D6F78180', color: '#393E4F' }}
+                        >
                             <div
                                 className="text-neutral-700 text-center relative"
                                 style={{
@@ -234,9 +253,9 @@ const GradePop = () => {
                         </div>
                     </div>
 
-                    <div className="bg-neutral-000 rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
+                    <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="profile-pic-7.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv6.png" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
@@ -259,7 +278,10 @@ const GradePop = () => {
                             </div>
                         </div>
 
-                        <div className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative">
+                        <div
+                            className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative"
+                            style={{ background: '#D6F78180', color: '#393E4F' }}
+                        >
                             <div
                                 className="text-neutral-700 text-center relative"
                                 style={{
@@ -271,9 +293,9 @@ const GradePop = () => {
                         </div>
                     </div>
 
-                    <div className="bg-neutral-000 rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
+                    <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="profile-pic-6.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv7.png" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
@@ -296,7 +318,10 @@ const GradePop = () => {
                             </div>
                         </div>
 
-                        <div className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative">
+                        <div
+                            className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative"
+                            style={{ background: '#D6F78180', color: '#393E4F' }}
+                        >
                             <div
                                 className="text-neutral-700 text-center relative"
                                 style={{
@@ -308,9 +333,9 @@ const GradePop = () => {
                         </div>
                     </div>
 
-                    <div className="bg-neutral-000 rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
+                    <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="profile-pic-8.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv1.png" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
@@ -333,7 +358,10 @@ const GradePop = () => {
                             </div>
                         </div>
 
-                        <div className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative">
+                        <div
+                            className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative"
+                            style={{ background: '#D6F78180', color: '#393E4F' }}
+                        >
                             <div
                                 className="text-neutral-700 text-center relative"
                                 style={{
@@ -353,7 +381,7 @@ const GradePop = () => {
 };
 
 const PointInfo = styled.div`
-    position: absolute;
+    position: fixed;
     z-index: 110;
     top: 0;
     left: 0;

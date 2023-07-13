@@ -55,6 +55,7 @@ const AllImgList = () => {
 
     useEffect(() => {
         data?.data.feeds.map(item => {
+            //피드 데이터중에 이미지없는 피드 갯수 카운트
             item.FeedImages.length == 0 && setEmptyCheck(prev => prev + 1);
         });
     }, [data]);
@@ -146,7 +147,7 @@ const AllImgList = () => {
                 <button onClick={() => selectDelImgMode()}>{selectDelMode ? '취소' : '삭제 선택'}</button>
             </A.btnUtilArea>
             <A.AlbumList>
-                {emptyCheck == data?.data.feeds.length ? ( //이미지 배열이 없는 숫자와 게시물 숫자 비교
+                {emptyCheck == data?.data.feeds.length ? ( //이미지 배열이 없는 숫자와 총 게시물 숫자가 같으면 이미지가 없습니다
                     <div className="w-full flex justify-center py-20">이미지가 없습니다.</div>
                 ) : (
                     data?.data.feeds.map(item => {
@@ -158,6 +159,7 @@ const AllImgList = () => {
                             }
 
                             return (
+                                // 이미지 갯수가 두개이상 있으면 썸네일에 카드표시
                                 <div
                                     className={`img ${item.FeedImages.length > 1 ? 'cards' : ''} ${
                                         delFeedId?.some(selectItem => selectItem == item.feedId) ? 'active' : ''
@@ -176,13 +178,6 @@ const AllImgList = () => {
             {allPopActive && (
                 <AllPopLayer allPopActive={allPopActive} setAllPopActive={setAllPopActive} selectItem={selectItem} />
             )}
-            {/* <ToolPop className={`tool ${toolPopActive ? 'active' : ''}`}>
-                <p>이 사진을 정말로 삭제하시겠어요?</p>
-                <button onClick={() => setToolPopActive(false)} className="black">
-                    취소
-                </button>
-                <button onClick={() => allImgDel()}>삭제하기</button>
-            </ToolPop> */}
         </div>
     );
 };

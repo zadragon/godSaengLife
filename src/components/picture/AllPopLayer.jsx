@@ -12,7 +12,6 @@ import 'swiper/css/thumbs';
 
 // import required modules
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
-import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import moment from 'moment';
 import { PostApi } from '../../shared/api';
@@ -24,8 +23,8 @@ const AllPopLayer = ({ allPopActive, setAllPopActive, selectItem }) => {
     const [popActive, setPopActive] = useState(false); // 삭제 묻는 툴팁 팝업
 
     useEffect(() => {
-        allPopActive && setFeedImg(selectItem.FeedImages);
-        allPopActive && setShowImgIdx(selectItem?.FeedImages[0].imageId);
+        allPopActive && setFeedImg(selectItem.FeedImages); //피드사진 아이템들 초기화
+        allPopActive && setShowImgIdx(selectItem?.FeedImages[0].imageId); //피드 이미지 배열 중 처음 보여줄 사진세팅
     }, [allPopActive]);
 
     useEffect(() => {
@@ -37,6 +36,11 @@ const AllPopLayer = ({ allPopActive, setAllPopActive, selectItem }) => {
         setFeedImg(prev => prev.filter(item => item.imageId !== showImgIdx));
         setPopActive(false);
     };
+
+    //삭제 한후 보여줄 이미지 아이디 상태값 업데이트
+    useEffect(() => {
+        feedImg && setShowImgIdx(feedImg[0]?.imageId);
+    }, [feedImg]);
 
     const handleSlideChange = swiper => {
         // 스와이프 직후에 실행되는 코드
