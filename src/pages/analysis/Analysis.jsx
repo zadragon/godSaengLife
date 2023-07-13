@@ -11,6 +11,7 @@ import GradePop from '../../components/GradePop';
 const Analysis = () => {
     const navigate = useNavigate();
     const [dataCont, setDataCont] = useState('week');
+    const [showTooltip, setShowTooltip] = useState(false);
     const dataToggle = e => {
         if (e.target.classList.contains('week')) {
             setDataCont('week');
@@ -34,9 +35,13 @@ const Analysis = () => {
                 <button className={`month ${dataCont === 'month' ? 'active' : ''}`}>월간</button>
             </C.TabInner>
 
-            {dataCont === 'week' ? <WeekData /> : <MonthData />}
+            {dataCont === 'week' ? (
+                <WeekData setShowTooltip={setShowTooltip} />
+            ) : (
+                <MonthData setShowTooltip={setShowTooltip} />
+            )}
 
-            {/* <GradePop /> */}
+            {showTooltip && <GradePop setShowTooltip={setShowTooltip} />}
             <Gnb />
         </div>
     );

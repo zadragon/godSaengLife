@@ -92,7 +92,7 @@ export const CommList = styled.div`
 `;
 
 export const CommDetail = styled.div`
-    padding: 16px;
+    padding: 0 16px 16px;
 `;
 
 export const AddArticleDone = styled.div`
@@ -150,4 +150,65 @@ export const AddArticleDone = styled.div`
             }
         }
     }
+`;
+
+export const Title = styled.div`
+    color: var(--neutral-900, #21242e);
+    font-size: 20px;
+    line-height: 32px;
+    font-family: 'Pretendard-Bold';
+    display: flex;
+    padding: 8px 0px;
+    align-items: flex-start;
+    gap: 8px;
+    border-bottom: 0.3px solid var(--neutral-300, #d5d6d9);
+`;
+
+export const btnLike = styled.button`
+    width: 100%;
+    padding: 16px 0px;
+    gap: 8px;
+    border-bottom: 4px solid var(--neutral-300, #d5d6d9);
+    background: var(--primary-100, #f7ffe2);
+    font-family: 'Pretendard-Bold';
+    color: var(--neutral-900, #21242e);
+    font-size: 14px;
+    line-height: 16px;
+    p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        &:after {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: url('/images/community/icon-heart.svg') no-repeat;
+        }
+    }
+    &.active {
+        p:after {
+            background: url('/images/community/icon-heart-active.svg') no-repeat;
+        }
+    }
+`;
+
+export const Count = styled.div`
+    color: var(--neutral-500, #727580);
+    font-size: 12px;
+    line-height: 16px;
+`;
+
+export const UserNickName = styled.div`
+    color: var(--neutral-700, #393e4f);
+    font-family: 'Pretendard-Bold';
+    font-size: 16px;
+    line-height: 24px;
+`;
+
+export const CreateAt = styled.div`
+    color: var(--neutral-500, #727580);
+    font-size: 12px;
+    line-height: 16px;
 `;

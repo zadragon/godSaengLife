@@ -2,15 +2,44 @@ import React, { useEffect, useState } from 'react';
 import Gnb from '../../components/Gnb';
 import * as C from '../../styles/common';
 import * as S from '../../styles/community';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { communityApi } from '../../shared/api';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import LvImg from '../../components/common/LvImg';
+import LvNumber from '../../components/common/LvNumber';
+import { styled } from 'styled-components';
 
 const CommunityDetail = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const shareId = location.pathname.split('/')[2];
 
+    const queryClient = useQueryClient();
     const { data, isLoading, isError, refetch } = useQuery(['getCommunityArticle'], () =>
         communityApi.getCommunityArticle()
+    );
+
+    console.log(location.pathname.split('/')[2]);
+
+    const {
+        data: likeData,
+        isLoading: likeLoading,
+        error,
+        isSuccess,
+        mutate: addLike,
+    } = useMutation(
+        async payload => {
+            return await communityApi.addLike(payload);
+        },
+        {
+            onSuccess: () => {
+                // Invalidate and refresh
+                // 이렇게 하면, todos라는 이름으로 만들었던 query를
+                // invalidate 할 수 있어요.
+                queryClient.invalidateQueries({ queryKey: ['getCommunityArticle'] });
+                // getCommentRefetch();
+            },
+        }
     );
 
     const [state, setState] = useState();
@@ -31,12 +60,12 @@ const CommunityDetail = () => {
             return formattedDate;
         };
         const newDate = dateSet(data?.data.createdAt);
-        console.log(newDate);
         setDate(newDate);
     }, [data]);
 
-    console.log(state);
-
+    const likeToggle = () => {
+        addLike(shareId);
+    };
     return (
         <>
             <C.PageHeader>
@@ -46,34 +75,36 @@ const CommunityDetail = () => {
                 <h2>갓생 분석</h2>
             </C.PageHeader>
             <S.CommDetail>
-                <div>{state?.title}</div>
+                <S.Title>{state?.title}</S.Title>
                 <div className="pt-4 pr-0 pb-4 pl-0 flex flex-row items-start justify-between shrink-0 w-full relative">
                     <div className="flex flex-row gap-2 items-center justify-start shrink-0 relative">
-                        <img className="shrink-0 w-10 h-10 relative" src="profile-pic-2.png" />
+                        <LvImg
+                            totalPointScore={state?.totalPointScore}
+                            style={{
+                                width: '40px',
+                                height: '40px',
+                                boxShadow: '2px 4px 8px 0px rgba(0, 0, 0, 0.25)',
+                                borderRadius: '50%',
+                            }}
+                        />
 
                         <div className="flex flex-col gap-0 items-start justify-start shrink-0 relative">
                             <div className="flex flex-col gap-0 items-start justify-start shrink-0 relative">
                                 <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
                                     <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
-                                        <div
-                                            className="text-neutral-700 text-left relative"
-                                            style={{
-                                                font: "var(--paragraph-mid-bold, 700 16px/24px 'Pretendard', sans-serif)",
-                                            }}
-                                        >
+                                        <S.UserNickName>
                                             {state?.anonymous ? state?.shareName : state?.User.nickname}
-                                        </div>
+                                        </S.UserNickName>
                                     </div>
 
                                     <div className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative">
-                                        <div
+                                        <LvNumber
+                                            totalPointScore={state?.totalPointScore}
                                             className="text-neutral-700 text-center relative"
                                             style={{
                                                 font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
                                             }}
-                                        >
-                                            Lv.2
-                                        </div>
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +113,6 @@ const CommunityDetail = () => {
                                 <div className="flex flex-row gap-1 items-center justify-start shrink-0 relative">
                                     <svg
                                         className="shrink-0 relative overflow-visible"
-                                        style={{}}
                                         width="16"
                                         height="16"
                                         viewBox="0 0 16 16"
@@ -99,14 +129,7 @@ const CommunityDetail = () => {
                                         />
                                     </svg>
 
-                                    <div
-                                        className="text-neutral-500 text-left relative"
-                                        style={{
-                                            font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
-                                        }}
-                                    >
-                                        {state?.viewCount}
-                                    </div>
+                                    <S.Count>{state?.viewCount}</S.Count>
                                 </div>
 
                                 <div className="flex flex-row gap-[3px] items-center justify-center shrink-0 relative">
@@ -127,39 +150,28 @@ const CommunityDetail = () => {
                                         />
                                     </svg>
 
-                                    <div
-                                        className="text-neutral-500 text-left relative"
-                                        style={{
-                                            font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
-                                        }}
-                                    >
-                                        {state?.likeCount}
-                                    </div>
+                                    <S.Count>{state?.likeCount}</S.Count>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div className="flex flex-row gap-2 items-start justify-end shrink-0 relative">
-                        <div
-                            className="text-neutral-500 text-left relative"
-                            style={{
-                                font: "var(--description-bold, 700 12px/16px 'Pretendard', sans-serif)",
-                            }}
-                        >
-                            {date}
-                        </div>
+                        <S.CreateAt>{date}</S.CreateAt>
                     </div>
                 </div>
                 <div
                     className="text-neutral-900 text-left relative flex-1"
                     style={{
-                        font: "var(--paragraph-small-medium, 500 14px/20px 'Pretendard', sans-serif)",
+                        fontFamily: 'Pretendard-Medium',
                     }}
                 >
                     {state?.content}
                 </div>
             </S.CommDetail>
+            <S.btnLike onClick={() => likeToggle()}>
+                <p>이 글 좋았나요?</p>
+            </S.btnLike>
             <div
                 className="bg-primary-100 border-solid border-neutral-300 pt-4 pr-0 pb-4 pl-0 flex flex-row gap-2 items-center justify-center shrink-0 w-[375px] relative"
                 style={{ borderWidth: '0px 0px 4px 0px' }}
@@ -169,9 +181,7 @@ const CommunityDetail = () => {
                     style={{
                         font: "var(--paragraph-small-bold, 700 14px/16px 'Pretendard', sans-serif)",
                     }}
-                >
-                    이 글 좋았나요?
-                </div>
+                ></div>
             </div>
 
             <div className="flex flex-col gap-8 items-start justify-start shrink-0 relative">

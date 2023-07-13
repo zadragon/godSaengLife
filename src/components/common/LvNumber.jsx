@@ -1,8 +1,8 @@
 import React from 'react';
 
-function LvNumber({ totalPointScore }) {
+function LvNumber({ totalPointScore, style }) {
     return (
-        <div>
+        <div style={style}>
             {totalPointScore === undefined
                 ? 'Lv.? ＞'
                 : totalPointScore <= 25
