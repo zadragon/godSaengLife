@@ -241,9 +241,9 @@ export const communityApi = {
         return res.data;
     },
 
-    getCommunityArticle: async id => {
+    getCommunityArticle: async shareId => {
         const res = await api
-            .get(`/share/1`)
+            .get(`/share/${shareId}`)
             .then(response => {
                 console.log(response);
                 return response;
@@ -267,9 +267,9 @@ export const communityApi = {
         return res;
     },
 
-    addLike: async id => {
+    addLike: async shareId => {
         const res = await api
-            .put(`/likes/${id}`)
+            .post(`/likes/${shareId}`)
             .then(response => {
                 console.log(response);
                 return response;
