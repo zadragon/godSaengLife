@@ -371,7 +371,7 @@ function Writetoday() {
                                 피곤함
                             </p>
                         )}
-                        {selectedButtons.emotion === 'good' && (
+                        {selectedButtons.emotion === 'bad' && (
                             <p>
                                 <img src="images/emoji/bad.png" />
                                 안좋음
