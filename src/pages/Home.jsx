@@ -144,6 +144,24 @@ function Home() {
                         ) : (
                             <div className="conditionList">
                                 {selectDate?.map(item => {
+                                    let emojiSrc;
+                                    let conditiontxt;
+                                    if (item.emotion === 'happy') {
+                                        emojiSrc = '/images/emoji/happy.png';
+                                        conditiontxt = '아주 상쾌함';
+                                    } else if (item.emotion === 'soso') {
+                                        emojiSrc = '/images/emoji/soso.png';
+                                        conditiontxt = '그냥 그럼';
+                                    } else if (item.emotion === 'tired') {
+                                        emojiSrc = '/images/emoji/tired.png';
+                                        conditiontxt = '피곤함';
+                                    } else if (item.emotion === 'good') {
+                                        emojiSrc = '/images/emoji/bad.png';
+                                        conditiontxt = '안좋음';
+                                    } else if (item.emotion === 'stress') {
+                                        emojiSrc = '/images/emoji/stress.png';
+                                        conditiontxt = '나쁨';
+                                    }
                                     return (
                                         <div key={item.feedId}>
                                             <div className="btnArea">
@@ -159,7 +177,11 @@ function Home() {
                                             <div>
                                                 <div>
                                                     <ul>
-                                                        <li>😁 {item.emotion}</li>
+                                                        <li style={{ display: 'flex' }}>
+                                                            {item.emotion && <img src={emojiSrc} alt={item.emotion} />}
+                                                            &nbsp;
+                                                            {item.emotion && <p>{conditiontxt}</p>}
+                                                        </li>
                                                         <li>
                                                             {item.didGym ? '✅ 오늘 진짜 운동 잘됨' : '✅ 운동못함ㅜㅜ'}
                                                         </li>
