@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import Layout from '../pages/Layout';
 import Analysis from '../pages/analysis/Analysis';
-import { JoinDone, Login, Signup } from '../pages/member/';
+import { JoinDone, Login, Signup, Splash } from '../pages/member/';
 import { EditFeed, AllImgList, Writetoday } from '../pages/post';
 import { Mypage, Setting, Badge, ChangePw } from '../pages/mypage';
 import { AddArticle, CommunityList, CommunityDetail } from '../pages/community';
@@ -15,7 +15,7 @@ const Routers = () => {
         <BrowserRouter>
             <Routes>
                 {/* default */}
-                <Route path="/splash" element={<Login />} />
+                <Route path="/splash" element={<Splash />} />
 
                 {/* auth */}
                 <Route path="/signup" element={<Signup />} />
