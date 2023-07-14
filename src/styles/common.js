@@ -110,6 +110,7 @@ export const GnbBar = styled.nav`
                 transition: 0.5s;
                 a {
                     color: #393e4f;
+                    font-family: 'Pretendard-Medium';
                 }
             }
             &.home {
@@ -125,10 +126,16 @@ export const GnbBar = styled.nav`
                 }
             }
             &.community {
-                background: url('/images/gnb/menu-home.svg') no-repeat center 5px;
+                background: url('/images/gnb/menu-community.svg') no-repeat center 5px;
+                &.active {
+                    background: url('/images/gnb/menu-community-active.svg') no-repeat center 5px;
+                }
             }
             &.mypage {
                 background: url('/images/gnb/menu-user.svg') no-repeat center 5px;
+                &.active {
+                    background: url('/images/gnb/menu-user-active.svg') no-repeat center 5px;
+                }
             }
         }
     }
@@ -279,12 +286,48 @@ export const ConfirmLayer = styled.div`
     @media screen and (min-width: 400px) {
         width: 400px;
         left: 50%;
-        
+
         margin-left: -200px;
         &.active {
             bottom: 35px;
-            
         }
     }
+`;
+
+export const BtnOnBoarding = styled.button`
+    position: absolute;
+    bottom: 44px;
+    left: 16px;
+    width: calc(100% - 32px);
+    display: flex;
+    padding: 16px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    background: var(--primary-500, #c7f860);
+    z-index: 100;
+    font-family: 'Pretendard-Bold';
+    color: #21242e;
+    &.bgEmpty {
+        background: none;
+        color: #727580;
+    }
+`;
+
+export const BtnOnBoardingWrap = styled.div`
+    position: absolute;
+    bottom: 44px;
+    left: 16px;
+    gap: 12px;
+    width: calc(100% - 32px);
+    display: flex;
+    flex-direction: column;
+    padding: 16px 24px;
+    justify-content: center;
+    align-items: center;
+    ${BtnOnBoarding} {
+        position: static;
+        width: 100%;
     }
 `;

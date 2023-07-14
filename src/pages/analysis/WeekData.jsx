@@ -10,7 +10,7 @@ import { setGraphImg } from '../../redux/modules/community';
 import moment from 'moment';
 import Loading from '../../components/common/Loading';
 
-const WeekData = () => {
+const WeekData = ({ setShowTooltip }) => {
     const navigate = useNavigate();
     const captureRef = useRef(null);
     const dispatch = useDispatch();
@@ -89,6 +89,7 @@ const WeekData = () => {
         },
     };
 
+    // 이전/이후 주간 데이터 옮기기
     const btnWeekMove = move => {
         if (move == 'prev') {
             setWeekState(weekState => --weekState);
@@ -98,7 +99,6 @@ const WeekData = () => {
         moveWeek(weekState);
     };
 
-    //console.log(conditionInfo.emotionImg);
     if (isLoading) return <Loading />;
     if (isError) return <div>...에러발생</div>;
 
@@ -226,21 +226,24 @@ const WeekData = () => {
                         />
                     </div>
                 </div>
-                <div className="pointBox">
-                    <h3>
-                        현재 갓생 포인트 <img src="/images/chart/icon-medal.svg" alt="" />
-                    </h3>
-                    <div className="pointArea">
-                        <div className="w-full flex justify-between">
-                            <div className="row">
-                                기록을 시작한지 : <strong> {dataG?.totalFeedDays} 일</strong>
-                            </div>
-                            <div className="row">
-                                나의 갓생 포인트는? <strong>{dataG?.totalPointScore} 점</strong>
-                            </div>
-                        </div>
 
-                        <p>기록시 1점, 사진 업로드시 2점 | 하루 최대 5점</p>
+                <div className="pointBox relative">
+                    <h3>갓생 포인트</h3>
+                    <button className="btnHelpPoint" onClick={() => setShowTooltip(prev => !prev)}>
+                        <span className="hidden">갓생포인트 정보</span>
+                    </button>
+                </div>
+
+                <div className="pointArea">
+                    <div className="w-full flex justify-between flex-col gap-4">
+                        <div className="row">
+                            <strong>{dataG?.totalPointScore} 점</strong>
+                            <p>기록시 1점, 사진 업로드시 2점 | 하루 최대 5점</p>
+                        </div>
+                        <div className="row">
+                            <strong> {dataG?.totalFeedDays} 일</strong>
+                            <p>기록을 시작한지</p>
+                        </div>
                     </div>
                 </div>
             </A.Wrapper>
