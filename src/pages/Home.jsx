@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { MainApi, PostApi } from '../shared/api';
 import { useQuery } from '@tanstack/react-query';
 import { useCookies } from 'react-cookie';
@@ -234,12 +234,14 @@ function Home() {
                 </div>
             </H.MainAlbum>
 
-            <C.AddPost>
-                <Link to="/writetoday">
-                    <span>+</span>
-                    <span className="hidden">오늘 하루 기록하기</span>
-                </Link>
-            </C.AddPost>
+            {cookies.Authorization && (
+                <C.AddPost>
+                    <Link to="/writetoday">
+                        <span>+</span>
+                        <span className="hidden">오늘 하루 기록하기</span>
+                    </Link>
+                </C.AddPost>
+            )}
         </div>
     );
 }
