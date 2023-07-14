@@ -83,7 +83,6 @@ function ChangePw() {
                     <span className="hidden">뒤로가기</span>
                 </button>
                 <h2>비밀번호 변경</h2>
-                <Gnb />
             </C.PageHeader>
             <M.Container>
                 <M.SubjectFont style={{ marginTop: '12px' }}>새 비밀번호</M.SubjectFont>
@@ -100,10 +99,11 @@ function ChangePw() {
                     value={emailCode}
                     onChange={e => setEmailCode(e.target.value)}
                 ></M.Input>
-                <M.ButtonEditNickname style={{ marginTop: '292px' }} onClick={editPasswordBtn}>
+                <M.ButtonEditNickname style={{ marginTop: '242px' }} onClick={editPasswordBtn}>
                     <M.BadgeFont style={{ color: 'var(--neutral-400, #AAACB3)' }}>수정</M.BadgeFont>
                 </M.ButtonEditNickname>
             </M.Container>
+            <Gnb />
         </div>
     );
 }
