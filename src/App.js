@@ -33,7 +33,7 @@ function App() {
     // 아래 useEffect 추가
     useEffect(() => {
         if (process.env.NODE_ENV !== 'development') {
-            hotjar.initialize(process.env.HJID, process.env.HJSV);
+            hotjar.initialize(3573560, 6);
         }
     }, []);
 
