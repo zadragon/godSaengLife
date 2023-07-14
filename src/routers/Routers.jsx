@@ -32,7 +32,7 @@ const Routers = () => {
 
                 {/* 나도갓생 커뮤니티 */}
                 <Route path="/communityList" element={<CommunityList />} />
-                <Route path="/articleDetail/:shareId" element={<CommunityDetail />} />
+                <Route path="/share/:shareId" element={<CommunityDetail />} />
                 <Route path="/addArticle" element={<AddArticle />} />
 
                 {/*마이페이지*/}
