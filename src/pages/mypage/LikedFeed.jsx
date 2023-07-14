@@ -89,10 +89,14 @@ function LikedFeed() {
                                                 </div>
                                             </div>
                                         </div>
-                                        {item.Share.imagePath !== null && (
+                                        {/* {item.Share.imagePath !== null && (
                                             <img src={item.Share.imagePath} style={{ width: '84px', height: '84px' }} />
-                                        )}
-                                        {/* <img src={item.Share.imagePath} style={{ width: '84px', height: '84px' }} /> */}
+                                        )} */}
+                                        {item.Share.imagePath !== '' &&
+                                        item.Share.imagePath !== 'null' &&
+                                        item.Share.imagePath !== null ? (
+                                            <img src={item.Share.imagePath} style={{ width: '84px', height: '84px' }} />
+                                        ) : null}
                                     </div>
 
                                     <div className="flex flex-row gap-2 items-start justify-start self-stretch shrink-0 relative">
