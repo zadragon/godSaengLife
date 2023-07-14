@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Routers from './routers/Routers';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { hotjar } from 'react-hotjar';
 
 const theme = createTheme({
     palette: {
@@ -29,6 +30,13 @@ const theme = createTheme({
 });
 
 function App() {
+    // 아래 useEffect 추가
+    useEffect(() => {
+        if (process.env.NODE_ENV !== 'development') {
+            hotjar.initialize(3573560, 6);
+        }
+    }, []);
+
     return (
         <div className="wrapper">
             <ThemeProvider theme={theme}>
