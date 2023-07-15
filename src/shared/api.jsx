@@ -293,25 +293,22 @@ export const communityApi = {
         return res.data;
     },
 
-    addComment: async id => {
-        const res = await api
-            .post(`/comment/${id}`)
+    addComment: (id, payload) => {
+        api.post(`/comment/${id}`, payload)
             .then(response => {
-                console.log(response);
+                console.log('댓글추가', response);
                 return response;
             })
             .catch(error => {
                 console.log(error);
             });
-        return res.data;
     },
 
     getComments: async id => {
-        console.log(id);
         const res = await api
             .get(`/comment/${id}`)
             .then(response => {
-                console.log(response);
+                //console.log('댓글 가져오기', response);
                 return response;
             })
             .catch(error => {

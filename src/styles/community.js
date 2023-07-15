@@ -214,7 +214,8 @@ export const CreateAt = styled.div`
 `;
 
 export const CommentAddArea = styled.div`
-    position: absolute;
+    position: fixed;
+    width: 100%;
     bottom: 60px;
     left: 0;
     border-top: 0.3px solid #d5d6d9;
@@ -256,5 +257,13 @@ export const CommentAddArea = styled.div`
             height: 24px;
             background: url('/images/community/icon-send-active.svg');
         }
+    }
+
+    /* 400px 이상인 경우에만 적용될 스타일 */
+    @media screen and (min-width: 400px) {
+        width: 400px;
+        left: 50%;
+        bottom: 95px;
+        margin-left: -200px;
     }
 `;
