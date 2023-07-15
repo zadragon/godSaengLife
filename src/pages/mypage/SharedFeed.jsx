@@ -18,6 +18,27 @@ function SharedFeed() {
         MypageApi.getMypage(cookies.Authorization)
     );
 
+    const calculateTimeDifference = createdAt => {
+        const currentTime = new Date();
+        const createdAtTime = new Date(createdAt);
+        const timeDifferenceInSeconds = Math.floor((currentTime - createdAtTime) / 1000);
+
+        if (timeDifferenceInSeconds < 60) {
+            return `방금 전`;
+        } else if (timeDifferenceInSeconds < 3600) {
+            const timeDifferenceInMinutes = Math.floor(timeDifferenceInSeconds / 60);
+            return `${timeDifferenceInMinutes}분 전`;
+        } else {
+            const timeDifferenceInHours = Math.floor(timeDifferenceInSeconds / 3600);
+            if (timeDifferenceInHours < 24) {
+                return `${timeDifferenceInHours}시간 전`;
+            } else {
+                const timeDifferenceInDays = Math.floor(timeDifferenceInHours / 24);
+                return `${timeDifferenceInDays}일 전`;
+            }
+        }
+    };
+
     console.log('공유피드조회a:', data);
     return (
         <div>
@@ -29,7 +50,7 @@ function SharedFeed() {
             </C.PageHeader>
             <S.CommList style={{ paddingBottom: '100px' }}>
                 <ul style={{ display: 'flex', gap: '12px', flexDirection: 'column', marginTop: '12px' }}>
-                    {data?.data.sharedShares.map((item, index) => (
+                    {data?.data?.sharedShares.map((item, index) => (
                         // <img key={index} src={item.imagePath} style={{ width: '100%', height: '100%' }} />
                         // <p key={index}>{item.title}</p>
                         <li key={index}>
@@ -174,7 +195,7 @@ function SharedFeed() {
                                                     font: "var(--description-bold, 700 12px/16px 'Pretendard', sans-serif)",
                                                 }}
                                             >
-                                                1시간 전
+                                                {calculateTimeDifference(item.createdAt)}
                                             </div>
                                         </div>
                                     </div>
