@@ -11,7 +11,7 @@ const Gnb = () => {
         <C.GnbBar>
             <ul>
                 <li className={`home ${location.pathname == '/' && 'active'} `}>
-                    <Link to="/">홈</Link>
+                    <Link to="/main">홈</Link>
                 </li>
                 <li className={`analyse ${location.pathname == '/analysis' && 'active'} `}>
                     {cookies.Authorization ? (

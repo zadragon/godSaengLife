@@ -15,7 +15,7 @@ const Routers = () => {
         <BrowserRouter>
             <Routes>
                 {/* default */}
-                <Route path="/splash" element={<Splash />} />
+                <Route path="/" element={<Splash />} />
 
                 {/* auth */}
                 <Route path="/signup" element={<Signup />} />
@@ -46,7 +46,7 @@ const Routers = () => {
                 {/* 공통영역(상단 gnb메뉴)을 위한 Layout  */}
                 <Route element={<Layout />}>
                     {/* main */}
-                    <Route path="/" element={<Home />} />
+                    <Route path="/main" element={<Home />} />
                     <Route path="/image/latest" element={<Home />} />
                 </Route>
             </Routes>

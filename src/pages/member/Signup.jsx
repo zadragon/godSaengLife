@@ -6,6 +6,7 @@ import { AuthApi } from '../../shared/api';
 import * as M from '../../styles/member';
 import * as C from '../../styles/common';
 import { TextField } from '@mui/material';
+import TermsPop from '../../components/TermsPop';
 
 // 닉네임 정규식
 const nicknameRegex = /[^ㄱ-ㅎ가-힣a-zA-Z]/g;
@@ -27,6 +28,7 @@ const alertMessage = {
 
 function Signup() {
     const navigate = useNavigate();
+    const [showTooltip, setShowTooltip] = useState(false);
     const [inputs, setInputs] = useState({
         payload: {
             nickname: '',
@@ -178,12 +180,13 @@ function Signup() {
                 </div>
                 <div className="txtTerms">
                     아래 버튼을 선택함으로써 <br /> 개인정보 제공 및 이용 에 동의합니다.
-                    <span> 내용보기</span>
+                    <span onClick={() => setShowTooltip(true)}> 내용보기</span>
                 </div>
                 <M.BtnJoinArea>
                     <M.BtnJoin onClick={onSubmitHandler}>회원가입</M.BtnJoin>
                 </M.BtnJoinArea>
             </M.Inputs>
+            {showTooltip && <TermsPop setShowTooltip={setShowTooltip} />}
         </div>
     );
 }

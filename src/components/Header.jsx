@@ -12,7 +12,7 @@ const Header = () => {
     const logout = () => {
         removeCookie('Authorization');
         //AuthApi.signout(removeCookie);
-        navigate('/splash');
+        navigate('/');
     };
 
     const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getProfile'], () => MainApi.getProfile());
@@ -32,12 +32,6 @@ const Header = () => {
                     로그인 하러가기
                 </Link>
             )}
-
-            {/* <div className="imsi">
-                <h1>
-                    <Link to="/">홈으로 가기</Link>
-                </h1>
-            </div> */}
         </C.Header>
     );
 };
