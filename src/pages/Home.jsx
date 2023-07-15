@@ -204,7 +204,7 @@ function Home() {
                                                                     <p>오늘 운동 완료</p>
                                                                 </div>
                                                             ) : (
-                                                                <div>
+                                                                <div style={{ display: 'flex' }}>
                                                                     <img
                                                                         src="/images/icons/icon-x.png"
                                                                         style={{ width: '20px', height: '20px' }}
@@ -228,7 +228,7 @@ function Home() {
                                                                     <p>꿀잠 자고 일어남</p>
                                                                 </div>
                                                             ) : (
-                                                                <div>
+                                                                <div style={{ display: 'flex' }}>
                                                                     <img
                                                                         src="/images/icons/icon-x.png"
                                                                         style={{ width: '20px', height: '20px' }}
@@ -252,7 +252,7 @@ function Home() {
                                                                     <p>80% 이상 건강하게 먹음</p>
                                                                 </div>
                                                             ) : (
-                                                                <div>
+                                                                <div style={{ display: 'flex' }}>
                                                                     <img
                                                                         src="/images/icons/icon-x.png"
                                                                         style={{ width: '20px', height: '20px' }}
