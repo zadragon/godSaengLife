@@ -229,7 +229,7 @@ function SharedFeed() {
                                                     font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
                                                 }}
                                             >
-                                                {item.commentsCount}
+                                                {item.commentCount}
                                             </div>
                                         </div>
 
