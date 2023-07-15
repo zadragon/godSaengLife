@@ -17,6 +17,8 @@ function SharedFeed() {
     const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getMypage'], () =>
         MypageApi.getMypage(cookies.Authorization)
     );
+
+    console.log('공유피드조회a:', data);
     return (
         <div>
             <C.PageHeader>
@@ -39,7 +41,7 @@ function SharedFeed() {
                                                 <div className="flex flex-row gap-2 items-center justify-start self-stretch shrink-0 relative">
                                                     <LvImg
                                                         style={{ width: '24px', height: '24px' }}
-                                                        totalPointScore={data?.data.totalPointScore}
+                                                        totalPointScore={item.totalPointScore}
                                                     />
                                                     <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                                         <div
@@ -59,7 +61,7 @@ function SharedFeed() {
                                                                 font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
                                                             }}
                                                         >
-                                                            <LvNumber totalPointScore={data?.data.totalPointScore} />
+                                                            <LvNumber totalPointScore={item.totalPointScore} />
                                                         </div>
                                                     </div>
                                                 </div>

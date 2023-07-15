@@ -45,7 +45,7 @@ function LikedFeed() {
                         // <img key={index} src={item.imagePath} style={{ width: '100%', height: '100%' }} />
                         // <p key={index}>{item.title}</p>
                         <li key={index}>
-                            <Link to="/articleDetail">
+                            <Link to={`/share/${item.shareId}`}>
                                 <div className="bg-neutral-100 rounded-lg p-4 flex flex-col gap-0 items-start justify-start shrink-0 w-full relative">
                                     <div className="flex flex-row items-start justify-between shrink-0 w-full relative">
                                         <div className="flex flex-col gap-3 items-start justify-start shrink-0 w-[210px] h-[100px] relative">
