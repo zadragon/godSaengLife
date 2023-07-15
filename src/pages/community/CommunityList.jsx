@@ -4,7 +4,7 @@ import * as M from '../../styles/mypage';
 import * as S from '../../styles/community';
 import Gnb from '../../components/Gnb';
 import { Link, useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import { communityApi, AuthApi } from '../../shared/api';
 import LvImg from '../../components/common/LvImg';
 import LvNumber from '../../components/common/LvNumber';
