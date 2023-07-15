@@ -62,7 +62,7 @@ function SharedFeed() {
                                                 <div className="flex flex-row gap-2 items-center justify-start self-stretch shrink-0 relative">
                                                     <LvImg
                                                         style={{ width: '24px', height: '24px' }}
-                                                        totalPointScore={item.totalPointScore}
+                                                        totalPointScore={data?.data.user.totalPointScore}
                                                     />
                                                     <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                                         <div
@@ -82,7 +82,9 @@ function SharedFeed() {
                                                                 font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
                                                             }}
                                                         >
-                                                            <LvNumber totalPointScore={item.totalPointScore} />
+                                                            <LvNumber
+                                                                totalPointScore={data?.data.user.totalPointScore}
+                                                            />
                                                         </div>
                                                     </div>
                                                 </div>
