@@ -215,8 +215,18 @@ export const TabInner = styled.div`
             }
         }
     }
+    &.tabInner {
+        button:first-child.active:after {
+            content: '';
+            background: var(--secondary-500, #c7f860);
+        }
+    }
     &.gapTop {
         margin-top: 12px;
+        button.active:after {
+            content: '';
+            background: none;
+        }
     }
 `;
 
