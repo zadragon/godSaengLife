@@ -11,8 +11,11 @@ const graphImgSlice = createSlice({
         setGraphImg: (state, action) => {
             return { ...state, graphImg: action.payload };
         },
+        initGraphImg: () => {
+            return { ...initialState };
+        },
     },
 });
 
-export const { setGraphImg } = graphImgSlice.actions;
+export const { setGraphImg, initGraphImg } = graphImgSlice.actions;
 export default graphImgSlice.reducer;

@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useRef } from 'react';
-import { AuthApi, MainApi } from '../shared/api';
+import React from 'react';
+import { MainApi } from '../shared/api';
 import { useCookies } from 'react-cookie';
-import ReactCanvasConfetti from 'react-canvas-confetti';
 import { Link, useNavigate } from 'react-router-dom';
 import * as C from '../styles/common';
 import { useQuery } from '@tanstack/react-query';
@@ -11,7 +10,6 @@ const Header = () => {
     const navigate = useNavigate();
     const logout = () => {
         removeCookie('Authorization');
-        //AuthApi.signout(removeCookie);
         navigate('/');
     };
 
