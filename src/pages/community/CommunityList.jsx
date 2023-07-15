@@ -4,7 +4,7 @@ import * as M from '../../styles/mypage';
 import * as S from '../../styles/community';
 import Gnb from '../../components/Gnb';
 import { Link, useNavigate } from 'react-router-dom';
-import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { communityApi, AuthApi } from '../../shared/api';
 import LvImg from '../../components/common/LvImg';
 import LvNumber from '../../components/common/LvNumber';
@@ -23,13 +23,21 @@ function SharedFeed() {
     const calculateTimeDifference = createdAt => {
         const currentTime = new Date();
         const createdAtTime = new Date(createdAt);
-        const timeDifferenceInHours = Math.floor((currentTime - createdAtTime) / (1000 * 60 * 60));
+        const timeDifferenceInSeconds = Math.floor((currentTime - createdAtTime) / 1000);
 
-        if (timeDifferenceInHours < 24) {
-            return `${timeDifferenceInHours}시간 전`;
+        if (timeDifferenceInSeconds < 60) {
+            return `방금 전`;
+        } else if (timeDifferenceInSeconds < 3600) {
+            const timeDifferenceInMinutes = Math.floor(timeDifferenceInSeconds / 60);
+            return `${timeDifferenceInMinutes}분 전`;
         } else {
-            const timeDifferenceInDays = Math.floor(timeDifferenceInHours / 24);
-            return `${timeDifferenceInDays}일 전`;
+            const timeDifferenceInHours = Math.floor(timeDifferenceInSeconds / 3600);
+            if (timeDifferenceInHours < 24) {
+                return `${timeDifferenceInHours}시간 전`;
+            } else {
+                const timeDifferenceInDays = Math.floor(timeDifferenceInHours / 24);
+                return `${timeDifferenceInDays}일 전`;
+            }
         }
     };
 
