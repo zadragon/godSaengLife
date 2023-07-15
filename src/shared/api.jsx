@@ -241,9 +241,9 @@ export const communityApi = {
         return res.data;
     },
 
-    getCommunityArticle: async id => {
+    getCommunityArticle: async shareId => {
         const res = await api
-            .get(`/share/1`)
+            .get(`/share/${shareId}`)
             .then(response => {
                 console.log(response);
                 return response;
@@ -254,9 +254,22 @@ export const communityApi = {
         return res.data;
     },
 
-    addLike: async id => {
+    getAllCommunity: async page => {
         const res = await api
-            .post(`/likes/${id}`)
+            .get(`/share/list?page=${page}`) // 페이지 번호를 쿼리 파라미터로 추가
+            .then(response => {
+                console.log(response);
+                return response;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        return res;
+    },
+
+    addLike: async shareId => {
+        const res = await api
+            .post(`/likes/${shareId}`)
             .then(response => {
                 console.log(response);
                 return response;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Gnb from '../../components/Gnb';
 import * as C from '../../styles/common';
 import * as S from '../../styles/community';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { communityApi } from '../../shared/api';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import LvImg from '../../components/common/LvImg';
@@ -13,15 +13,16 @@ import CommentArea from '../../components/community/CommentArea';
 const CommunityDetail = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const shareId = location.pathname.split('/')[2];
+    // const shareId = location.pathname.split('/')[2];
+    const { shareId } = useParams();
 
     const queryClient = useQueryClient();
-    const { data, isLoading, isError, refetch } = useQuery(['getCommunityArticle'], () =>
-        communityApi.getCommunityArticle()
+    const { data, isLoading, isError, refetch } = useQuery(['getCommunityArticle', shareId], () =>
+        communityApi.getCommunityArticle(shareId)
     );
 
-    console.log(location.pathname.split('/')[2]);
-
+    // console.log(location.pathname.split('/')[2]);
+    console.log('공유상세data:', data);
     const {
         data: likeData,
         isLoading: likeLoading,
@@ -73,7 +74,7 @@ const CommunityDetail = () => {
                 <button className="btnPrev" onClick={() => navigate(-1)}>
                     <span className="hidden">뒤로가기</span>
                 </button>
-                <h2>갓생 분석</h2>
+                <h2>나도갓생</h2>
             </C.PageHeader>
             <S.CommDetail>
                 <S.Title>{state?.title}</S.Title>
