@@ -84,6 +84,8 @@ function SharedFeed() {
         }
     };
 
+    console.log('커뮤니티', dataList);
+
     return (
         <div>
             <MetaTag title="나도 갓생 :: 갓생러" description="습관기록 서비스" keywords="습관기록, 커뮤니티, 갓생러" />
@@ -105,7 +107,7 @@ function SharedFeed() {
                                                 <div className="flex flex-row gap-2 items-center justify-start self-stretch shrink-0 relative">
                                                     <LvImg
                                                         style={{ width: '24px', height: '24px' }}
-                                                        totalPointScore={item.totalPointScore}
+                                                        totalPointScore={item.User.totalPointScore}
                                                     />
                                                     <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                                         <div
@@ -125,7 +127,7 @@ function SharedFeed() {
                                                                 font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
                                                             }}
                                                         >
-                                                            <LvNumber totalPointScore={item.totalPointScore} />
+                                                            <LvNumber totalPointScore={item.User.totalPointScore} />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -201,6 +203,34 @@ function SharedFeed() {
                                                 {item.likeCount}
                                             </div>
                                             {/* <S.Count>{item.likeCount}</S.Count> */}
+                                        </div>
+
+                                        <div className="flex flex-row gap-[3px] items-center justify-start shrink-0 relative">
+                                            <svg
+                                                className="shrink-0 relative overflow-visible"
+                                                style={{}}
+                                                width="16"
+                                                height="16"
+                                                viewBox="0 0 16 16"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M5.58747 10.9924C5.8041 11.6074 6.15169 12.168 6.60621 12.6354C7.06073 13.1029 7.61134 13.4661 8.21999 13.6999C8.82863 13.9337 9.48078 14.0325 10.1314 13.9896C10.782 13.9467 11.4155 13.763 11.9881 13.4512L13.855 13.9843C13.9193 14.0027 13.9874 14.0036 14.0522 13.9868C14.117 13.9701 14.1761 13.9363 14.2234 13.889C14.2707 13.8416 14.3045 13.7825 14.3213 13.7177C14.338 13.653 14.3371 13.5849 14.3187 13.5205L13.7856 11.6537C14.1493 10.9866 14.3382 10.2382 14.3347 9.47843C14.3311 8.71862 14.1352 7.97208 13.7653 7.30841C13.3953 6.64475 12.8633 6.08556 12.2189 5.683C11.5745 5.28043 10.8387 5.04758 10.08 5.00617M1.81247 10.9843C1.74815 11.0027 1.68006 11.0036 1.61528 10.9868C1.5505 10.9701 1.49138 10.9363 1.44407 10.889C1.39675 10.8416 1.36296 10.7825 1.34619 10.7177C1.32943 10.653 1.3303 10.5849 1.34872 10.5205L1.88185 8.65367C1.3639 7.70344 1.20575 6.59836 1.43639 5.541C1.66703 4.48363 2.271 3.54479 3.13761 2.89656C4.00423 2.24833 5.07542 1.93412 6.15488 2.01153C7.23434 2.08894 8.24974 2.55277 9.015 3.31803C9.78025 4.08328 10.2441 5.09868 10.3215 6.17814C10.3989 7.2576 10.0847 8.3288 9.43646 9.19541C8.78823 10.062 7.84939 10.666 6.79203 10.8966C5.73466 11.1273 4.62959 10.9691 3.67935 10.4512L1.81247 10.9843Z"
+                                                    stroke="#21242E"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                />
+                                            </svg>
+
+                                            <div
+                                                className="text-neutral-500 text-left relative"
+                                                style={{
+                                                    font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
+                                                }}
+                                            >
+                                                {item.commentsCount}
+                                            </div>
                                         </div>
 
                                         {/* <div className="flex flex-row gap-[3px] items-center justify-start shrink-0 relative">
