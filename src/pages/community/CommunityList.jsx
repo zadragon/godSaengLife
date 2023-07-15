@@ -18,7 +18,7 @@ function SharedFeed() {
     const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getAllCommunity', page], () =>
         communityApi.getAllCommunity(page)
     );
-    console.log('커뮤니티data', data?.data);
+    console.log('커뮤니티data', data);
 
     const calculateTimeDifference = createdAt => {
         const currentTime = new Date();
@@ -193,8 +193,9 @@ function SharedFeed() {
                                                     font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
                                                 }}
                                             >
-                                                223
+                                                {item.likeCount}
                                             </div>
+                                            {/* <S.Count>{item.likeCount}</S.Count> */}
                                         </div>
 
                                         <div className="flex flex-row gap-[3px] items-center justify-start shrink-0 relative">

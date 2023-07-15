@@ -170,6 +170,9 @@ const CommunityDetail = () => {
                 >
                     {state?.content}
                 </div>
+                {state?.imagePath !== '' && state?.imagePath !== 'null' ? (
+                    <img src={state?.imagePath} style={{ marginTop: '24px', width: '343px', height: '280px' }} />
+                ) : null}
             </S.CommDetail>
             <S.btnLike onClick={() => likeToggle()}>
                 <p>이 글 좋았나요?</p>
