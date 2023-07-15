@@ -21,13 +21,21 @@ function LikedFeed() {
     const calculateTimeDifference = createdAt => {
         const currentTime = new Date();
         const createdAtTime = new Date(createdAt);
-        const timeDifferenceInHours = Math.floor((currentTime - createdAtTime) / (1000 * 60 * 60));
+        const timeDifferenceInSeconds = Math.floor((currentTime - createdAtTime) / 1000);
 
-        if (timeDifferenceInHours < 24) {
-            return `${timeDifferenceInHours}시간 전`;
+        if (timeDifferenceInSeconds < 60) {
+            return `방금 전`;
+        } else if (timeDifferenceInSeconds < 3600) {
+            const timeDifferenceInMinutes = Math.floor(timeDifferenceInSeconds / 60);
+            return `${timeDifferenceInMinutes}분 전`;
         } else {
-            const timeDifferenceInDays = Math.floor(timeDifferenceInHours / 24);
-            return `${timeDifferenceInDays}일 전`;
+            const timeDifferenceInHours = Math.floor(timeDifferenceInSeconds / 3600);
+            if (timeDifferenceInHours < 24) {
+                return `${timeDifferenceInHours}시간 전`;
+            } else {
+                const timeDifferenceInDays = Math.floor(timeDifferenceInHours / 24);
+                return `${timeDifferenceInDays}일 전`;
+            }
         }
     };
 
@@ -45,7 +53,7 @@ function LikedFeed() {
                         // <img key={index} src={item.imagePath} style={{ width: '100%', height: '100%' }} />
                         // <p key={index}>{item.title}</p>
                         <li key={index}>
-                            <Link to={`/share/${item.shareId}`}>
+                            <Link to={`/share/${item.Share.shareId}`}>
                                 <div className="bg-neutral-100 rounded-lg p-4 flex flex-col gap-0 items-start justify-start shrink-0 w-full relative">
                                     <div className="flex flex-row items-start justify-between shrink-0 w-full relative">
                                         <div className="flex flex-col gap-3 items-start justify-start shrink-0 w-[210px] h-[100px] relative">
@@ -63,7 +71,7 @@ function LikedFeed() {
                                                                 font: "var(--paragraph-mid-bold, 700 16px/24px 'Pretendard', sans-serif)",
                                                             }}
                                                         >
-                                                            <p>{item.Share.shareId}</p>
+                                                            <p>{item.Share.shareName}</p>
                                                         </div>
                                                     </div>
 
@@ -126,7 +134,7 @@ function LikedFeed() {
                                                     font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
                                                 }}
                                             >
-                                                112
+                                                {item.Share.viewCount}
                                             </div>
                                         </div>
 
@@ -154,7 +162,7 @@ function LikedFeed() {
                                                     font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
                                                 }}
                                             >
-                                                223
+                                                {item.Share.likeCount}
                                             </div>
                                         </div>
 
@@ -182,7 +190,7 @@ function LikedFeed() {
                                                     font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
                                                 }}
                                             >
-                                                19
+                                                {item.Share.commentsCount}
                                             </div>
                                         </div>
 

@@ -98,7 +98,11 @@ function SharedFeed() {
                                             </div>
                                         </div>
 
-                                        <img src={item.imagePath} style={{ width: '84px', height: '84px' }} />
+                                        {item.imagePath !== '' &&
+                                        item.imagePath !== 'null' &&
+                                        item.imagePath !== null ? (
+                                            <img src={item.imagePath} style={{ width: '84px', height: '84px' }} />
+                                        ) : null}
                                     </div>
 
                                     <div className="flex flex-row gap-2 items-start justify-start self-stretch shrink-0 relative">
@@ -128,7 +132,7 @@ function SharedFeed() {
                                                     font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
                                                 }}
                                             >
-                                                112
+                                                {item.viewCount}
                                             </div>
                                         </div>
 
@@ -156,7 +160,7 @@ function SharedFeed() {
                                                     font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
                                                 }}
                                             >
-                                                223
+                                                {item.likeCount}
                                             </div>
                                         </div>
 
@@ -184,7 +188,7 @@ function SharedFeed() {
                                                     font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
                                                 }}
                                             >
-                                                19
+                                                {item.commentsCount}
                                             </div>
                                         </div>
 
