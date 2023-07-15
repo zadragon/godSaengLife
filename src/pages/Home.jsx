@@ -82,6 +82,8 @@ function Home() {
                     onChange={onChange}
                     value={value}
                     calendarType="US"
+                    minDetail="month" // 상단 네비게이션에서 '월' 단위만 보이게 설정
+                    maxDetail="month" // 상단 네비게이션에서 '월' 단위만 보이게 설정
                     tileContent={({ date }) => {
                         if (calendarData?.find(x => x.isImg && x.date === moment(date).format('YYYY-MM-DD'))) {
                             return (
