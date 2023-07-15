@@ -256,7 +256,7 @@ export const communityApi = {
 
     addLike: async id => {
         const res = await api
-            .put(`/likes/${id}`)
+            .post(`/likes/${id}`)
             .then(response => {
                 console.log(response);
                 return response;
@@ -270,6 +270,33 @@ export const communityApi = {
     removeLike: async id => {
         const res = await api
             .delete(`/likes/${id}`)
+            .then(response => {
+                console.log(response);
+                return response;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        return res.data;
+    },
+
+    addComment: async id => {
+        const res = await api
+            .post(`/comment/${id}`)
+            .then(response => {
+                console.log(response);
+                return response;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        return res.data;
+    },
+
+    getComments: async id => {
+        console.log(id);
+        const res = await api
+            .get(`/comment/${id}`)
             .then(response => {
                 console.log(response);
                 return response;

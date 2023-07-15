@@ -8,6 +8,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import LvImg from '../../components/common/LvImg';
 import LvNumber from '../../components/common/LvNumber';
 import { styled } from 'styled-components';
+import CommentArea from '../../components/community/CommentArea';
 
 const CommunityDetail = () => {
     const navigate = useNavigate();
@@ -26,7 +27,7 @@ const CommunityDetail = () => {
         isLoading: likeLoading,
         error,
         isSuccess,
-        mutate: addLike,
+        mutate: addLikeMutation,
     } = useMutation(
         async payload => {
             return await communityApi.addLike(payload);
@@ -64,7 +65,7 @@ const CommunityDetail = () => {
     }, [data]);
 
     const likeToggle = () => {
-        addLike(shareId);
+        addLikeMutation(shareId);
     };
     return (
         <>
@@ -135,7 +136,6 @@ const CommunityDetail = () => {
                                 <div className="flex flex-row gap-[3px] items-center justify-center shrink-0 relative">
                                     <svg
                                         className="shrink-0 relative overflow-visible"
-                                        style={{}}
                                         width="16"
                                         height="16"
                                         viewBox="0 0 16 16"
@@ -172,140 +172,8 @@ const CommunityDetail = () => {
             <S.btnLike onClick={() => likeToggle()}>
                 <p>이 글 좋았나요?</p>
             </S.btnLike>
-            <div
-                className="bg-primary-100 border-solid border-neutral-300 pt-4 pr-0 pb-4 pl-0 flex flex-row gap-2 items-center justify-center shrink-0 w-[375px] relative"
-                style={{ borderWidth: '0px 0px 4px 0px' }}
-            >
-                <div
-                    className="text-neutral-900 text-left relative"
-                    style={{
-                        font: "var(--paragraph-small-bold, 700 14px/16px 'Pretendard', sans-serif)",
-                    }}
-                ></div>
-            </div>
+            <CommentArea shareId={shareId} />
 
-            <div className="flex flex-col gap-8 items-start justify-start shrink-0 relative">
-                <div
-                    className="text-neutral-900 text-left relative"
-                    style={{
-                        font: "var(--paragraph-mid-bold, 700 16px/24px 'Pretendard', sans-serif)",
-                    }}
-                >
-                    댓글 3
-                </div>
-
-                <div className="flex flex-col gap-8 items-start justify-start shrink-0 relative">
-                    <div className="flex flex-row gap-3 items-start justify-start shrink-0 relative">
-                        <img className="shrink-0 w-6 h-6 relative" src="profile-pic-1.png" />
-
-                        <div className="flex flex-col gap-2 items-start justify-start shrink-0 relative">
-                            <div className="flex flex-row items-start justify-between shrink-0 w-[307px] relative">
-                                <div
-                                    className="text-neutral-900 text-left relative"
-                                    style={{
-                                        font: "var(--description-bold, 700 12px/16px 'Pretendard', sans-serif)",
-                                    }}
-                                >
-                                    익명의 갓생별1234
-                                </div>
-
-                                <div
-                                    className="text-neutral-400 text-right relative"
-                                    style={{
-                                        font: "var(--description-bold, 700 12px/16px 'Pretendard', sans-serif)",
-                                    }}
-                                >
-                                    23.07.02
-                                </div>
-                            </div>
-
-                            <div
-                                className="text-neutral-900 text-left relative w-[307px]"
-                                style={{
-                                    font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
-                                }}
-                            >
-                                불면증이 있는 걸까요? 왜이렇게 잠을 못주무셨는지.. 원인을 찾는게 중요할 것 같아요.
-                                식단은 건강하게 챙겼지만, 카페인을 많이 섭취하신 것일 수도 있고..
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="flex flex-row gap-3 items-start justify-start shrink-0 relative">
-                        <img className="shrink-0 w-6 h-6 relative" src="profile-pic-1.png" />
-
-                        <div className="flex flex-col gap-2 items-start justify-start shrink-0 relative">
-                            <div className="flex flex-row items-start justify-between shrink-0 w-[307px] relative">
-                                <div
-                                    className="text-neutral-900 text-left relative"
-                                    style={{
-                                        font: "var(--description-bold, 700 12px/16px 'Pretendard', sans-serif)",
-                                    }}
-                                >
-                                    익명의 갓생별1234
-                                </div>
-
-                                <div
-                                    className="text-neutral-400 text-right relative"
-                                    style={{
-                                        font: "var(--description-bold, 700 12px/16px 'Pretendard', sans-serif)",
-                                    }}
-                                >
-                                    23.07.02
-                                </div>
-                            </div>
-
-                            <div
-                                className="text-neutral-900 text-left relative w-[307px]"
-                                style={{
-                                    font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
-                                }}
-                            >
-                                불면증이 있는 걸까요? 왜이렇게 잠을 못주무셨는지.. 원인을 찾는게 중요할 것 같아요.
-                                식단은 건강하게 챙겼지만, 카페인을 많이 섭취하신 것일 수도 있고..
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="flex flex-row gap-3 items-start justify-start shrink-0 relative">
-                        <img className="shrink-0 w-6 h-6 relative" src="profile-pic-1.png" />
-
-                        <div className="flex flex-col gap-2 items-start justify-start shrink-0 relative">
-                            <div className="flex flex-row items-start justify-between shrink-0 w-[307px] relative">
-                                <div
-                                    className="text-neutral-900 text-left relative"
-                                    style={{
-                                        font: "var(--description-bold, 700 12px/16px 'Pretendard', sans-serif)",
-                                    }}
-                                >
-                                    익명의 갓생별1234
-                                </div>
-
-                                <div
-                                    className="text-neutral-400 text-right relative"
-                                    style={{
-                                        font: "var(--description-bold, 700 12px/16px 'Pretendard', sans-serif)",
-                                    }}
-                                >
-                                    23.07.02
-                                </div>
-                            </div>
-
-                            <div
-                                className="text-neutral-900 text-left relative w-[307px]"
-                                style={{
-                                    font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
-                                }}
-                            >
-                                불면증이 있는 걸까요? 왜이렇게 잠을 못주무셨는지.. 원인을 찾는게 중요할 것 같아요.
-                                식단은 건강하게 챙겼지만, 카페인을 많이 섭취하신 것일 수도 있고..
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="flex flex-row gap-3 items-start justify-start shrink-0 w-[343px] h-[120px] relative"></div>
-                </div>
-            </div>
             <Gnb />
         </>
     );
