@@ -212,3 +212,49 @@ export const CreateAt = styled.div`
     font-size: 12px;
     line-height: 16px;
 `;
+
+export const CommentAddArea = styled.div`
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    border-top: 0.3px solid #d5d6d9;
+    padding: 8px 16px 12px;
+    width: 100%;
+    background-color: #fff;
+    input {
+        padding: 0 16px;
+        width: 100%;
+        height: 48px;
+        border-radius: 8px;
+        background: #f8f8f9;
+        color: var(--neutral-400, #393e4f);
+        font-size: 14px;
+        font-family: 'Pretendard-Medium';
+        &::placeholder {
+            color: var(--neutral-400, #aaacb3);
+            font-size: 14px;
+            font-family: 'Pretendard-Medium';
+        }
+        &:focus {
+            border: 1px solid var(--neutral-500, #727580);
+            background-color: #fff;
+            outline: 0;
+        }
+    }
+    .btnSend {
+        position: absolute;
+        top: 19px;
+        right: 26px;
+        width: 24px;
+        height: 24px;
+        background: url('/images/community/icon-send.svg');
+    }
+
+    &.active {
+        .btnSend {
+            width: 24px;
+            height: 24px;
+            background: url('/images/community/icon-send-active.svg');
+        }
+    }
+`;

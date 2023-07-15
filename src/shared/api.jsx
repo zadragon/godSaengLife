@@ -292,4 +292,31 @@ export const communityApi = {
             });
         return res.data;
     },
+
+    addComment: async id => {
+        const res = await api
+            .post(`/comment/${id}`)
+            .then(response => {
+                console.log(response);
+                return response;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        return res.data;
+    },
+
+    getComments: async id => {
+        console.log(id);
+        const res = await api
+            .get(`/comment/${id}`)
+            .then(response => {
+                console.log(response);
+                return response;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        return res.data;
+    },
 };
