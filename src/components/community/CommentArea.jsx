@@ -7,8 +7,29 @@ import LvImg from '../common/LvImg';
 import { styled } from 'styled-components';
 
 const CommentArea = ({ shareId }) => {
-    console.log('shareId', shareId);
     const queryClient = useQueryClient();
+    const {
+        data: addCommentData,
+        isLoading: addCommentLoading,
+        error,
+        isSuccess: addCommentSuccess,
+        mutate: addCommentMutation,
+    } = useMutation(
+        payload => {
+            communityApi.addComment(shareId, payload);
+        },
+        {
+            onSuccess: () => {
+                // Invalidate and refresh
+                // 이렇게 하면, todos라는 이름으로 만들었던 query를
+                // invalidate 할 수 있어요.
+                refetch();
+                queryClient.invalidateQueries({ queryKey: ['getComments'] });
+                // getCommentRefetch();
+            },
+        }
+    );
+
     const {
         data: commentList,
         isLoading,
@@ -17,26 +38,6 @@ const CommentArea = ({ shareId }) => {
         refetch,
     } = useQuery(['getComments'], () => communityApi.getComments(shareId));
     console.log(commentList);
-    const {
-        data: addCommentData,
-        isLoading: addCommentLoading,
-        error,
-        isSuccess: addCommentSuccess,
-        mutate: addCommentMutation,
-    } = useMutation(
-        async payload => {
-            return await communityApi.addComment(payload);
-        },
-        {
-            onSuccess: () => {
-                // Invalidate and refresh
-                // 이렇게 하면, todos라는 이름으로 만들었던 query를
-                // invalidate 할 수 있어요.
-                queryClient.invalidateQueries({ queryKey: ['getComments'] });
-                // getCommentRefetch();
-            },
-        }
-    );
 
     const dateMutation = item => {
         const date = new Date(item);
@@ -51,32 +52,19 @@ const CommentArea = ({ shareId }) => {
         return formattedDate;
     };
 
-    const [inputs, setInputs] = useState({
-        payload: {
-            nickname: '',
-            email: '',
-            password: '',
-        },
-    });
-
-    const addCommentAction = e => {
-        const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
-
-        setInputs({
-            ...inputs, // 기존의 input 객체를 복사한 뒤
-            payload: {
-                ...inputs.payload,
-                [name]: value, // name 키를 가진 값을 value 로 설정
-            },
-        });
-
+    const [inputs, setInputs] = useState({ content: '' });
+    const commentChange = e => {
+        setInputs({ content: e.target.value });
+    };
+    const addCommentAction = () => {
         addCommentMutation(inputs);
+        setInputs({ content: '' });
     };
 
     return (
         <>
             <CommentWrap>
-                <CommentCount>댓글 3</CommentCount>
+                <CommentCount>댓글 {commentList?.data.length}</CommentCount>
 
                 <CommentList>
                     {commentList &&
@@ -84,10 +72,10 @@ const CommentArea = ({ shareId }) => {
                             return (
                                 <div
                                     key={item.commentId}
-                                    className="flex flex-row gap-3 items-start justify-start shrink-0 relative"
+                                    className="flex flex-row gap-1 items-start justify-between shrink-0 relative"
                                 >
                                     <LvImg
-                                        totalPointScore={item.totalPointScore}
+                                        totalPointScore={item.User.totalPointScore}
                                         style={{
                                             width: '24px',
                                             height: '24px',
@@ -96,15 +84,21 @@ const CommentArea = ({ shareId }) => {
                                         }}
                                     />
 
-                                    <div className="flex flex-col gap-2 items-start justify-start shrink-0 relative">
-                                        <div className="flex flex-row items-start justify-between shrink-0 w-[307px] relative">
+                                    <div
+                                        className="flex flex-col gap-2 items-start justify-start shrink-0 relative"
+                                        style={{ width: 'calc(100% - 36px)' }}
+                                    >
+                                        <div
+                                            className="flex flex-row items-start justify-between shrink-0 relative"
+                                            style={{ width: '100%' }}
+                                        >
                                             <div
                                                 className="text-neutral-900 text-left relative"
                                                 style={{
                                                     font: "var(--description-bold, 700 12px/16px 'Pretendard', sans-serif)",
                                                 }}
                                             >
-                                                {item.User.nickname}
+                                                {item.commentName}
                                             </div>
 
                                             <div
@@ -131,9 +125,14 @@ const CommentArea = ({ shareId }) => {
                         })}
                 </CommentList>
             </CommentWrap>
-            <S.CommentAddArea>
-                <input type="text" placeholder="댓글을 입력해주세요." onClick={e => addCommentAction(e)} />
-                <button className="btnSend">
+            <S.CommentAddArea className={inputs.content !== '' ? 'active' : ''}>
+                <input
+                    type="text"
+                    placeholder="댓글을 입력해주세요."
+                    value={inputs.content}
+                    onChange={e => commentChange(e)}
+                />
+                <button className="btnSend" onClick={e => addCommentAction(e)}>
                     <span className="hidden">보내기</span>
                 </button>
             </S.CommentAddArea>
@@ -143,6 +142,8 @@ const CommentArea = ({ shareId }) => {
 
 const CommentWrap = styled.div`
     padding: 24px 16px;
+    height: calc(100vh - 480px);
+    overflow-y: scroll;
 `;
 
 const CommentCount = styled.div`
@@ -152,7 +153,10 @@ const CommentCount = styled.div`
 `;
 
 const CommentList = styled.div`
+    display: flex;
+    flex-direction: column;
     margin-top: 32px;
+    gap: 32px;
 `;
 
 export default CommentArea;

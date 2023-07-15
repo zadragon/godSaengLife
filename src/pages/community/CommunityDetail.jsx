@@ -16,13 +16,6 @@ const CommunityDetail = () => {
     // const shareId = location.pathname.split('/')[2];
     const { shareId } = useParams();
 
-    const queryClient = useQueryClient();
-    const { data, isLoading, isError, refetch } = useQuery(['getCommunityArticle', shareId], () =>
-        communityApi.getCommunityArticle(shareId)
-    );
-
-    // console.log(location.pathname.split('/')[2]);
-    console.log('공유상세data:', data);
     const {
         data: likeData,
         isLoading: likeLoading,
@@ -42,6 +35,11 @@ const CommunityDetail = () => {
                 // getCommentRefetch();
             },
         }
+    );
+
+    const queryClient = useQueryClient();
+    const { data, isLoading, isError, refetch } = useQuery(['getCommunityArticle', shareId], () =>
+        communityApi.getCommunityArticle(shareId)
     );
 
     const [state, setState] = useState();
@@ -101,7 +99,7 @@ const CommunityDetail = () => {
 
                                     <div className="bg-primary-500-50 rounded pt-0 pr-1 pb-0 pl-1 flex flex-row gap-1 items-center justify-start shrink-0 relative">
                                         <LvNumber
-                                            totalPointScore={state?.totalPointScore}
+                                            totalPointScore={state?.User.totalPointScore}
                                             className="text-neutral-700 text-center relative"
                                             style={{
                                                 font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
@@ -168,9 +166,15 @@ const CommunityDetail = () => {
                     }}
                 >
                     {state?.content}
+
+                    {state?.imagePath !== 'null' ? (
+                        <div style={{ marginTop: '20px' }}>
+                            <img src={state?.imagePath} />{' '}
+                        </div>
+                    ) : null}
                 </div>
             </S.CommDetail>
-            <S.btnLike onClick={() => likeToggle()}>
+            <S.btnLike className={state?.likers !== null ? 'active' : ''} onClick={() => likeToggle()}>
                 <p>이 글 좋았나요?</p>
             </S.btnLike>
             <CommentArea shareId={shareId} />
