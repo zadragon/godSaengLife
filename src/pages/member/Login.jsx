@@ -32,6 +32,8 @@ const Login = () => {
 
             if (response.code === 200) {
                 navigate('/');
+            } else if (response.code === 412) {
+                alert('이메일 또는 패스워드를 확인해주세요.');
             }
         } catch (error) {
             console.log(error);
