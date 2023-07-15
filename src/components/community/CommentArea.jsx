@@ -141,9 +141,7 @@ const CommentArea = ({ shareId }) => {
 };
 
 const CommentWrap = styled.div`
-    padding: 24px 16px;
-    height: calc(100vh - 480px);
-    overflow-y: scroll;
+    padding: 24px 16px 160px;
 `;
 
 const CommentCount = styled.div`
