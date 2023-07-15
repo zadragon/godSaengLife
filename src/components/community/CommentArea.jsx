@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import * as C from '../../styles/common';
+import React, { useState } from 'react';
 import * as S from '../../styles/community';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { communityApi } from '../../shared/api';
-import LvImg from '../common/LvImg';
 import { styled } from 'styled-components';
+import LvImg from '../common/LvImg';
+import { useCookies } from 'react-cookie';
 
 const CommentArea = ({ shareId }) => {
+    const [cookies] = useCookies();
     const queryClient = useQueryClient();
     const {
         data: addCommentData,
@@ -89,7 +90,7 @@ const CommentArea = ({ shareId }) => {
                                         style={{ width: 'calc(100% - 36px)' }}
                                     >
                                         <div
-                                            className="flex flex-row items-start justify-between shrink-0 relative"
+                                            className="flex flex-row items-center justify-between shrink-0 relative"
                                             style={{ width: '100%' }}
                                         >
                                             <div
@@ -101,14 +102,7 @@ const CommentArea = ({ shareId }) => {
                                                 {item.commentName}
                                             </div>
 
-                                            <div
-                                                className="text-neutral-400 text-right relative"
-                                                style={{
-                                                    font: "var(--description-bold, 700 12px/16px 'Pretendard', sans-serif)",
-                                                }}
-                                            >
-                                                {dateMutation(item.createdAt)}
-                                            </div>
+                                            <WriteDate>{dateMutation(item.createdAt)}</WriteDate>
                                         </div>
 
                                         <div
@@ -125,12 +119,14 @@ const CommentArea = ({ shareId }) => {
                         })}
                 </CommentList>
             </CommentWrap>
+
             <S.CommentAddArea className={inputs.content !== '' ? 'active' : ''}>
                 <input
                     type="text"
                     placeholder="댓글을 입력해주세요."
                     value={inputs.content}
                     onChange={e => commentChange(e)}
+                    disabled={cookies.Authorization ? false : true}
                 />
                 <button className="btnSend" onClick={e => addCommentAction(e)}>
                     <span className="hidden">보내기</span>
@@ -139,6 +135,11 @@ const CommentArea = ({ shareId }) => {
         </>
     );
 };
+
+const WriteDate = styled.div`
+    font-size: 12px;
+    color: var(--neutral-400, #aaacb3);
+`;
 
 const CommentWrap = styled.div`
     padding: 24px 16px 160px;
