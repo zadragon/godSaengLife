@@ -63,7 +63,9 @@ const CommunityDetail = () => {
         setDate(newDate);
     }, [data]);
 
+    console.log(state);
     const likeToggle = () => {
+        //state?.likers !== null
         addLikeMutation(shareId);
     };
 
@@ -169,15 +171,12 @@ const CommunityDetail = () => {
                 >
                     {state?.content}
 
-                    {state?.imagePath !== 'null' ? (
+                    {state?.imagePath !== '' && state?.imagePath !== 'null' ? (
                         <div style={{ marginTop: '20px' }}>
                             <img src={state?.imagePath} />{' '}
                         </div>
                     ) : null}
                 </div>
-                {state?.imagePath !== '' && state?.imagePath !== 'null' ? (
-                    <img src={state?.imagePath} style={{ marginTop: '24px', width: '343px', height: '280px' }} />
-                ) : null}
             </S.CommDetail>
             <S.btnLike className={state?.likers !== null ? 'active' : ''} onClick={() => likeToggle()}>
                 <p>이 글 좋았나요?</p>

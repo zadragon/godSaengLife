@@ -8,9 +8,11 @@ import { useQuery } from '@tanstack/react-query';
 import { communityApi, AuthApi } from '../../shared/api';
 import LvImg from '../../components/common/LvImg';
 import LvNumber from '../../components/common/LvNumber';
+import { useCookies } from 'react-cookie';
 
 function SharedFeed() {
     const navigate = useNavigate();
+    const [cookies] = useCookies();
     const containerRef = useRef(null);
     const [page, setPage] = useState(1);
     const [dataList, setDataList] = useState([]);
@@ -252,6 +254,14 @@ function SharedFeed() {
                 </ul>
                 <div ref={containerRef} style={{ height: '10px' }} />
             </S.CommList>
+            {cookies.Authorization && (
+                <C.AddPost>
+                    <Link to="/addArticle">
+                        <span>+</span>
+                        <span className="hidden">나도 갓생 글쓰기</span>
+                    </Link>
+                </C.AddPost>
+            )}
             <Gnb />
         </div>
     );

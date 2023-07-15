@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as C from '../../styles/common';
 import * as S from '../../styles/community';
 import { Link, useNavigate } from 'react-router-dom';
 import ToggleSwitch from '../../components/ToggleSwitch';
 import { communityApi } from '../../shared/api';
-import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Loading from '../../components/common/Loading';
 import Done from '../../components/common/Done';
+import { initGraphImg } from '../../redux/modules/community';
 
 const AddArticle = () => {
     const navigate = useNavigate();
     const graphImgState = useSelector(state => state.graphImgState);
+    const dispatch = useDispatch();
     const [articlePost, setArticlePost] = useState({
         title: '',
         content: '',
@@ -64,6 +66,13 @@ const AddArticle = () => {
         }
 
         addArticleData(articlePost);
+        setArticlePost({
+            title: '',
+            content: '',
+            anonymous: false,
+            base64: '',
+        });
+        dispatch(initGraphImg());
         // const result = await communityApi.addCommunityArticle(articlePost);
         // console.log(result);
     };

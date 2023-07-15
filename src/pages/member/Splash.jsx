@@ -3,7 +3,7 @@ import OnBoarding from '../../components/onBoarding/OnBoarding';
 import { useState } from 'react';
 import * as C from '../../styles/common';
 import { styled } from 'styled-components';
-import { useNavigate, redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 const Splash = () => {
@@ -19,6 +19,15 @@ const Splash = () => {
 
     return (
         <SplashWrap>
+            <div className="image star2">
+                <img src="/images/onboarding/Star_3.png" alt="star" />
+            </div>
+            <div className="image star1">
+                <img src="/images/onboarding/Star_2.png" alt="star" />
+            </div>
+            <div className="image star3">
+                <img src="/images/onboarding/Star_2.png" alt="star" />
+            </div>
             <C.BtnOnBoardingWrap>
                 <C.BtnOnBoarding onClick={() => navigate('/login')}>로그인</C.BtnOnBoarding>
                 <C.BtnOnBoarding className="bgEmpty" onClick={() => navigate('/main')}>
@@ -38,6 +47,85 @@ const SplashWrap = styled.div`
     /* 400px 이상인 경우에만 적용될 스타일 */
     @media screen and (min-width: 400px) {
         height: calc(100vh - 70px);
+    }
+
+    .image {
+        position: absolute;
+
+        width: 120px;
+        height: 120px;
+        &.star1 {
+            width: 39px;
+            height: 42px;
+            top: 10%;
+            left: 30%;
+        }
+        &.star2 {
+            width: 65px;
+            height: 84px;
+            top: 50%;
+            left: 10%;
+        }
+
+        &.star3 {
+            width: 39px;
+            height: 42px;
+            top: 40%;
+            right: 10%;
+        }
+
+        -webkit-animation-name: spin;
+        -webkit-animation-duration: 4000ms;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+
+        -moz-animation-name: spin;
+        -moz-animation-duration: 4000ms;
+        -moz-animation-iteration-count: infinite;
+        -moz-animation-timing-function: linear;
+
+        -ms-animation-name: spin;
+        -ms-animation-duration: 4000ms;
+        -ms-animation-iteration-count: infinite;
+        -ms-animation-timing-function: linear;
+
+        animation-name: spin;
+        animation-duration: 4000ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+
+        @-ms-keyframes spin {
+            from {
+                -ms-transform: rotate(0deg);
+            }
+            to {
+                -ms-transform: rotate(360deg);
+            }
+        }
+        @-moz-keyframes spin {
+            from {
+                -moz-transform: rotate(0deg);
+            }
+            to {
+                -moz-transform: rotate(360deg);
+            }
+        }
+        @-webkit-keyframes spin {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
     }
 `;
 
