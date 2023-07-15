@@ -83,7 +83,7 @@ function Setting() {
                     value={newNickname}
                     onChange={e => setNewNickname(e.target.value)}
                 ></M.Input>
-                <M.ButtonEditNickname style={{ marginTop: '292px' }} onClick={editNicknameBtn}>
+                <M.ButtonEditNickname style={{ marginTop: '192px' }} onClick={editNicknameBtn}>
                     <M.BadgeFont style={{ color: 'var(--neutral-400, #AAACB3)' }}>수정</M.BadgeFont>
                 </M.ButtonEditNickname>
             </M.Container>
