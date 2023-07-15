@@ -26,9 +26,7 @@ const Login = () => {
             };
 
             const response = await AuthApi.signin(payload);
-            console.log(response);
             setCookies('Authorization', response.data.Authorization);
-            //localStorage.setItem('Token', response.headers.authorization);
 
             if (response.code === 200) {
                 navigate('/');
@@ -37,7 +35,6 @@ const Login = () => {
             }
         } catch (error) {
             console.log(error);
-            //setMessage(error.response.data.message);
         }
     };
 
@@ -72,12 +69,6 @@ const Login = () => {
                             />
                         </div>
                         <div className="row inputpassword">
-                            {/* <label>비밀번호</label>
-                        <input
-                            type="password"
-                            className={!message ? 'inputLogin' : 'err_password'}
-                            placeholder="비밀번호를 입력해주세요"
-                        /> */}
                             <TextField
                                 onChange={e => {
                                     setPassword(e.target.value);
@@ -96,8 +87,6 @@ const Login = () => {
                             로그인
                         </button>
                         <div className="loginUtil">
-                            {/* <span>이메일 찾기</span>
-                        <span>비밀번호찾기 찾기</span> */}
                             <Link to="/signup" className="btnJoin">
                                 회원가입
                             </Link>

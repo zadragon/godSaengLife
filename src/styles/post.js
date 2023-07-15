@@ -246,7 +246,7 @@ export const PhotoInput = styled.label`
     border-radius: 8px;
     background: #21242e;
     display: flex;
-    width: 112px;
+    width: 31%;
     height: 112px;
     padding: 32px;
     justify-content: center;
@@ -268,11 +268,11 @@ export const PictureTool = styled.div`
     display: flex;
     flex-wrap: wrap;
     margin-top: 56px;
-    gap: 11px;
+    gap: 9px;
 `;
 
 export const ImgTool = styled.div`
-    width: 108px;
+    width: 31%;
     height: 112px;
     overflow: hidden;
     border-radius: 8px;
