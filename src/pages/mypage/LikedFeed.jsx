@@ -59,9 +59,9 @@ function LikedFeed() {
                                         <div className="flex flex-col gap-3 items-start justify-start shrink-0 w-[210px] h-[100px] relative">
                                             <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
                                                 <div className="flex flex-row gap-2 items-center justify-start self-stretch shrink-0 relative">
-                                                    <img
-                                                        className="shrink-0 w-6 h-6 relative"
-                                                        src="/images/profile/lv1.png"
+                                                    <LvImg
+                                                        style={{ width: '24px', height: '24px' }}
+                                                        totalPointScore={item.Share.User.totalPointScore}
                                                     />
 
                                                     <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
@@ -82,7 +82,9 @@ function LikedFeed() {
                                                                 font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
                                                             }}
                                                         >
-                                                            Lv.1
+                                                            <LvNumber
+                                                                totalPointScore={item.Share.User.totalPointScore}
+                                                            />
                                                         </div>
                                                     </div>
                                                 </div>
