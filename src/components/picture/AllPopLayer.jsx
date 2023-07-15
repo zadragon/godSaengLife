@@ -45,7 +45,7 @@ const AllPopLayer = ({ allPopActive, setAllPopActive, selectItem }) => {
     const handleSlideChange = swiper => {
         console.log(swiper);
         // 스와이프 직후에 실행되는 코드
-        setShowImgIdx(feedImg[swiper.visibleSlidesIndexes].imageId);
+        setShowImgIdx(feedImg[swiper.realIndex].imageId);
         // 추가적인 로직을 여기에 작성할 수 있습니다.
     };
 
@@ -176,7 +176,16 @@ const PopLayer = styled.div`
     }
     /* 500px 이상인 경우에만 적용될 스타일 */
     @media screen and (min-width: 400px) {
+        height: calc(100vh - 130px);
         width: 400px;
+        .tool {
+            width: 400px;
+            left: 50%;
+            margin-left: -200px;
+            &.active {
+                bottom: 35px;
+            }
+        }
     }
 `;
 
