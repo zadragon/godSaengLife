@@ -99,7 +99,8 @@ export const GnbBar = styled.nav`
             font-size: 11px;
             color: #393e4f;
             justify-content: center;
-            a {
+            a,
+            span {
                 display: block;
                 width: 100%;
                 padding-top: 22px;

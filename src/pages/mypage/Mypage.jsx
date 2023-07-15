@@ -9,6 +9,7 @@ import { useCookies } from 'react-cookie';
 import { useState } from 'react';
 import LvImg from '../../components/common/LvImg';
 import LvNumber from '../../components/common/LvNumber';
+import MetaTag from '../../components/MetaTag';
 
 function Mypage() {
     const navigate = useNavigate();
@@ -32,6 +33,7 @@ function Mypage() {
     console.log('마이페이지data:', data);
     return (
         <div>
+            <MetaTag title="마이페이지 :: 갓생러" description="습관기록 서비스" keywords="습관기록, 커뮤니티, 갓생러" />
             <C.PageHeader>
                 <button className="btnPrev" onClick={() => navigate('/')}>
                     <span className="hidden">뒤로가기</span>

@@ -10,6 +10,7 @@ import * as C from '../styles/common';
 import * as H from '../styles/home';
 import 'react-calendar/dist/Calendar.css';
 import Loading from '../components/common/Loading';
+import MetaTag from '../components/MetaTag';
 
 function Home() {
     const [cookies] = useCookies();
@@ -77,6 +78,7 @@ function Home() {
 
     return (
         <div>
+            <MetaTag title="홈 :: 갓생러" description="습관기록 서비스" keywords="습관기록, 커뮤니티, 갓생러" />
             <div className="calendarArea">
                 <Calendar
                     onChange={onChange}
