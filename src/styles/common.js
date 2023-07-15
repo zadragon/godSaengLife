@@ -99,7 +99,8 @@ export const GnbBar = styled.nav`
             font-size: 11px;
             color: #393e4f;
             justify-content: center;
-            a {
+            a,
+            span {
                 display: block;
                 width: 100%;
                 padding-top: 22px;
@@ -214,8 +215,18 @@ export const TabInner = styled.div`
             }
         }
     }
+    &.tabInner {
+        button:first-child.active:after {
+            content: '';
+            background: var(--secondary-500, #c7f860);
+        }
+    }
     &.gapTop {
         margin-top: 12px;
+        button.active:after {
+            content: '';
+            background: none;
+        }
     }
 `;
 

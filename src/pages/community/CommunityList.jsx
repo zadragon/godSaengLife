@@ -9,6 +9,7 @@ import { communityApi, AuthApi } from '../../shared/api';
 import LvImg from '../../components/common/LvImg';
 import LvNumber from '../../components/common/LvNumber';
 import { useCookies } from 'react-cookie';
+import MetaTag from '../../components/MetaTag';
 
 function SharedFeed() {
     const navigate = useNavigate();
@@ -90,6 +91,7 @@ function SharedFeed() {
 
     return (
         <div>
+            <MetaTag title="나도 갓생 :: 갓생러" description="습관기록 서비스" keywords="습관기록, 커뮤니티, 갓생러" />
             <C.PageHeader>
                 <button className="btnPrev" onClick={() => navigate('/')}>
                     <span className="hidden">뒤로가기</span>
@@ -152,7 +154,6 @@ function SharedFeed() {
                                         <div className="flex flex-row gap-1 items-center justify-start shrink-0 relative">
                                             <svg
                                                 className="shrink-0 relative overflow-visible"
-                                                style={{}}
                                                 width="16"
                                                 height="16"
                                                 viewBox="0 0 16 16"
@@ -182,7 +183,6 @@ function SharedFeed() {
                                         <div className="flex flex-row gap-[3px] items-center justify-center shrink-0 relative">
                                             <svg
                                                 className="shrink-0 relative overflow-visible"
-                                                style={{}}
                                                 width="16"
                                                 height="16"
                                                 viewBox="0 0 16 16"
@@ -208,10 +208,9 @@ function SharedFeed() {
                                             {/* <S.Count>{item.likeCount}</S.Count> */}
                                         </div>
 
-                                        <div className="flex flex-row gap-[3px] items-center justify-start shrink-0 relative">
+                                        {/* <div className="flex flex-row gap-[3px] items-center justify-start shrink-0 relative">
                                             <svg
                                                 className="shrink-0 relative overflow-visible"
-                                                style={{}}
                                                 width="16"
                                                 height="16"
                                                 viewBox="0 0 16 16"
@@ -234,7 +233,7 @@ function SharedFeed() {
                                             >
                                                 {item.commentCount}
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                         <div className="flex flex-row gap-2 items-start justify-end flex-1 relative">
                                             <div

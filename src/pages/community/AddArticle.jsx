@@ -9,6 +9,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Loading from '../../components/common/Loading';
 import Done from '../../components/common/Done';
 import { initGraphImg } from '../../redux/modules/community';
+import MetaTag from '../../components/MetaTag';
 
 const AddArticle = () => {
     const navigate = useNavigate();
@@ -82,6 +83,11 @@ const AddArticle = () => {
     if (isSuccess) return <Done />;
     return (
         <div>
+            <MetaTag
+                title="나도 갓생 글쓰기 :: 갓생러"
+                description="습관기록 서비스"
+                keywords="습관기록, 커뮤니티, 갓생러"
+            />
             <C.PageHeader>
                 <h2>글쓰기</h2>
                 <button className="btnClose" onClick={() => navigate('/')}>

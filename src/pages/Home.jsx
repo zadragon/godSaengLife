@@ -10,6 +10,7 @@ import * as C from '../styles/common';
 import * as H from '../styles/home';
 import 'react-calendar/dist/Calendar.css';
 import Loading from '../components/common/Loading';
+import MetaTag from '../components/MetaTag';
 
 function Home() {
     const [cookies] = useCookies();
@@ -77,6 +78,7 @@ function Home() {
 
     return (
         <div>
+            <MetaTag title="홈 :: 갓생러" description="습관기록 서비스" keywords="습관기록, 커뮤니티, 갓생러" />
             <div className="calendarArea">
                 <Calendar
                     onChange={onChange}
@@ -180,19 +182,31 @@ function Home() {
                                                 <div>
                                                     <ul>
                                                         <li style={{ display: 'flex' }}>
-                                                            {item.emotion && <img src={emojiSrc} alt={item.emotion} />}
-                                                            &nbsp;
+                                                            {item.emotion && (
+                                                                <img
+                                                                    src={emojiSrc}
+                                                                    alt={item.emotion}
+                                                                    width="20px"
+                                                                    height="20px"
+                                                                />
+                                                            )}
                                                             {item.emotion && <p>{conditiontxt}</p>}
                                                         </li>
                                                         <li>
-                                                            {item.didGym ? '✅ 오늘 진짜 운동 잘됨' : '✅ 운동못함ㅜㅜ'}
+                                                            {item.didGym
+                                                                ? '✅ 오늘 운동 완료'
+                                                                : '❌ 오늘 운동 실패.. 내일은 꼭 해야지!'}
                                                         </li>
                                                         <li>
                                                             {item.goodSleep
-                                                                ? '🙌🏻 꿀잠 자고 개운한 날'
-                                                                : '🙌🏻 잠못자서 두드려맞은듯 ㅜㅜ'}
+                                                                ? '🙌🏻 꿀잠 자고 일어남'
+                                                                : '❌ 꿀잠 못잠.. 왜지?'}
                                                         </li>
-                                                        <li>{item.howEat ? '😁 건강하게 먹음!!' : '😁 주워먹음'}</li>
+                                                        <li>
+                                                            {item.howEat
+                                                                ? '😁 80% 이상 건강하게 먹음'
+                                                                : '❌ 오늘은 갓생 보류..'}
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>

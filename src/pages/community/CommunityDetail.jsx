@@ -9,6 +9,7 @@ import LvImg from '../../components/common/LvImg';
 import LvNumber from '../../components/common/LvNumber';
 import { styled } from 'styled-components';
 import CommentArea from '../../components/community/CommentArea';
+import MetaTag from '../../components/MetaTag';
 
 const CommunityDetail = () => {
     const navigate = useNavigate();
@@ -25,6 +26,26 @@ const CommunityDetail = () => {
     } = useMutation(
         async payload => {
             return await communityApi.addLike(payload);
+        },
+        {
+            onSuccess: () => {
+                // Invalidate and refresh
+                // 이렇게 하면, todos라는 이름으로 만들었던 query를
+                // invalidate 할 수 있어요.
+                queryClient.invalidateQueries({ queryKey: ['getCommunityArticle'] });
+                // getCommentRefetch();
+            },
+        }
+    );
+
+    const {
+        data: removelikeData,
+        isLoading: removelikeLoading,
+
+        mutate: removeLikeMutation,
+    } = useMutation(
+        async payload => {
+            return await communityApi.removeLike(payload);
         },
         {
             onSuccess: () => {
@@ -64,14 +85,20 @@ const CommunityDetail = () => {
     }, [data]);
 
     console.log(state);
-    const likeToggle = () => {
-        //state?.likers !== null
+    const addLike = () => {
         addLikeMutation(shareId);
+        refetch();
+    };
+
+    const removeLike = () => {
+        removeLikeMutation(state.likers.likeId);
+        refetch();
     };
 
     console.log('상세목록조회', state);
     return (
         <>
+            <MetaTag title="나도 갓생 :: 갓생러" description="습관기록 서비스" keywords="습관기록, 커뮤니티, 갓생러" />
             <C.PageHeader>
                 <button className="btnPrev" onClick={() => navigate(-1)}>
                     <span className="hidden">뒤로가기</span>
@@ -178,8 +205,12 @@ const CommunityDetail = () => {
                     ) : null}
                 </div>
             </S.CommDetail>
-            <S.btnLike className={state?.likers !== null ? 'active' : ''} onClick={() => likeToggle()}>
-                <p>이 글 좋았나요?</p>
+            <S.btnLike className={state?.likers !== null ? 'active' : ''}>
+                {state?.likers !== null ? (
+                    <p onClick={() => removeLike()}>이 글 좋았나요?</p>
+                ) : (
+                    <p onClick={() => addLike()}>이 글 좋았나요?</p>
+                )}
             </S.btnLike>
             <CommentArea shareId={shareId} />
 

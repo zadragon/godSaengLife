@@ -7,6 +7,7 @@ import MonthData from './MonthData';
 import { useNavigate } from 'react-router-dom';
 import PointInfoPop from '../../components/PointInfoPop';
 import GradePop from '../../components/GradePop';
+import MetaTag from '../../components/MetaTag';
 
 const Analysis = () => {
     const navigate = useNavigate();
@@ -22,6 +23,7 @@ const Analysis = () => {
 
     return (
         <div style={{ background: '#F8F8F9' }}>
+            <MetaTag title="분석 :: 갓생러" description="습관기록 서비스" keywords="습관기록, 커뮤니티, 갓생러" />
             {/* <PointInfoPop /> */}
             <C.PageHeader>
                 <button className="btnPrev" onClick={() => navigate(-1)}>

@@ -96,7 +96,8 @@
     margin-left: -14px;
     width: 28px;
     height: 28px;
-    border: 1px solid #c7f860;
+    border: 1px solid var(--neutral-500, #727580);
+
     border-radius: 50%;
 }
 

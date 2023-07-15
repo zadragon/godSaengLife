@@ -276,6 +276,7 @@ export const communityApi = {
             })
             .catch(error => {
                 console.log(error);
+                alert(error.response.data.message);
             });
         return res.data;
     },
