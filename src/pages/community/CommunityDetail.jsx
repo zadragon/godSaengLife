@@ -66,6 +66,8 @@ const CommunityDetail = () => {
     const likeToggle = () => {
         addLikeMutation(shareId);
     };
+
+    console.log('상세목록조회', state);
     return (
         <>
             <C.PageHeader>
@@ -79,7 +81,7 @@ const CommunityDetail = () => {
                 <div className="pt-4 pr-0 pb-4 pl-0 flex flex-row items-start justify-between shrink-0 w-full relative">
                     <div className="flex flex-row gap-2 items-center justify-start shrink-0 relative">
                         <LvImg
-                            totalPointScore={state?.totalPointScore}
+                            totalPointScore={state?.User.totalPointScore}
                             style={{
                                 width: '40px',
                                 height: '40px',
