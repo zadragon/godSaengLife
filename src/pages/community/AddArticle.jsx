@@ -78,6 +78,17 @@ const AddArticle = () => {
         // console.log(result);
     };
 
+    const onClose = () => {
+        navigate('/');
+        setArticlePost({
+            title: '',
+            content: '',
+            anonymous: false,
+            base64: '',
+        });
+        dispatch(initGraphImg());
+    };
+
     if (isLoading) return <Loading />;
     if (error) return <div>...에러발생</div>;
     if (isSuccess) return <Done />;
@@ -90,7 +101,7 @@ const AddArticle = () => {
             />
             <C.PageHeader>
                 <h2>글쓰기</h2>
-                <button className="btnClose" onClick={() => navigate('/')}>
+                <button className="btnClose" onClick={() => onClose()}>
                     <span className="hidden">닫기</span>
                 </button>
             </C.PageHeader>
