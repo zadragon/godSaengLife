@@ -4,7 +4,7 @@ import * as M from '../../styles/mypage';
 import * as S from '../../styles/community';
 import Gnb from '../../components/Gnb';
 import { Link, useNavigate } from 'react-router-dom';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { communityApi, AuthApi } from '../../shared/api';
 import LvImg from '../../components/common/LvImg';
 import LvNumber from '../../components/common/LvNumber';
@@ -17,22 +17,44 @@ function SharedFeed() {
     const containerRef = useRef(null);
     const [page, setPage] = useState(1);
     const [dataList, setDataList] = useState([]);
-    const [loading, setLoading] = useState(false);
 
-    const getList = async page => {
-        const res = await communityApi.getAllCommunity(page);
-        console.log('data', res);
-        setDataList(prev => [...prev, ...res.data.data]);
-        setLoading(true);
+    const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getAllCommunity', page], () =>
+        communityApi.getAllCommunity(page)
+    );
+    console.log('커뮤니티data', data);
+
+    const calculateTimeDifference = createdAt => {
+        const currentTime = new Date();
+        const createdAtTime = new Date(createdAt);
+        const timeDifferenceInSeconds = Math.floor((currentTime - createdAtTime) / 1000);
+
+        if (timeDifferenceInSeconds < 60) {
+            return `방금 전`;
+        } else if (timeDifferenceInSeconds < 3600) {
+            const timeDifferenceInMinutes = Math.floor(timeDifferenceInSeconds / 60);
+            return `${timeDifferenceInMinutes}분 전`;
+        } else {
+            const timeDifferenceInHours = Math.floor(timeDifferenceInSeconds / 3600);
+            if (timeDifferenceInHours < 24) {
+                return `${timeDifferenceInHours}시간 전`;
+            } else {
+                const timeDifferenceInDays = Math.floor(timeDifferenceInHours / 24);
+                return `${timeDifferenceInDays}일 전`;
+            }
+        }
+    };
+
+    const loadMore = () => {
+        if (data?.data.data.length > 0) {
+            setPage(prev => prev + 1);
+        }
     };
 
     useEffect(() => {
-        getList(page);
-    }, [page]);
-
-    const loadMore = () => {
-        setPage(prev => prev + 1);
-    };
+        if (isSuccess && data?.data.data) {
+            setDataList(prevDataList => [...prevDataList, ...data.data.data]);
+        }
+    }, [data, isSuccess]);
 
     useEffect(() => {
         const options = {
@@ -61,28 +83,11 @@ function SharedFeed() {
                 observer.unobserve(containerRef.current);
             }
         };
-    }, [loading]);
+    }, [containerRef.current]);
 
-    const calculateTimeDifference = createdAt => {
-        const currentTime = new Date();
-        const createdAtTime = new Date(createdAt);
-        const timeDifferenceInSeconds = Math.floor((currentTime - createdAtTime) / 1000);
-
-        if (timeDifferenceInSeconds < 60) {
-            return `방금 전`;
-        } else if (timeDifferenceInSeconds < 3600) {
-            const timeDifferenceInMinutes = Math.floor(timeDifferenceInSeconds / 60);
-            return `${timeDifferenceInMinutes}분 전`;
-        } else {
-            const timeDifferenceInHours = Math.floor(timeDifferenceInSeconds / 3600);
-            if (timeDifferenceInHours < 24) {
-                return `${timeDifferenceInHours}시간 전`;
-            } else {
-                const timeDifferenceInDays = Math.floor(timeDifferenceInHours / 24);
-                return `${timeDifferenceInDays}일 전`;
-            }
-        }
-    };
+    // useEffect(() => {
+    //     refetch(); // `page` 값이 변경될 때마다 데이터를 다시 가져옵니다.
+    // }, [page, refetch]);
 
     return (
         <div>
