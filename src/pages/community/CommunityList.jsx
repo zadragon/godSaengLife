@@ -17,12 +17,6 @@ function SharedFeed() {
     const containerRef = useRef(null);
     const [page, setPage] = useState(1);
     const [dataList, setDataList] = useState([]);
-    // const queryClient = useQueryClient();
-    // const { data, isLoading, isError, isSuccess, refetch } = useQuery(
-    //     ['getAllCommunity', page],
-    //     async () => await communityApi.getAllCommunity(page)
-    // );
-
     const [loading, setLoading] = useState(false);
 
     const getList = async page => {

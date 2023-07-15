@@ -30,7 +30,7 @@ function Mypage() {
             console.log('탈퇴 성공');
         }
     };
-    console.log('마이페이지data:', data);
+    console.log('마이페이지:', data);
     return (
         <div>
             <MetaTag title="마이페이지 :: 갓생러" description="습관기록 서비스" keywords="습관기록, 커뮤니티, 갓생러" />
@@ -51,7 +51,7 @@ function Mypage() {
                         <M.FlexContainer style={{ marginBottom: '12px' }}>
                             <LvImg
                                 style={{ width: '48px', height: '48px' }}
-                                totalPointScore={data?.data.totalPointScore}
+                                totalPointScore={data?.data.user.totalPointScore}
                             />
                             <M.NicknameFont>{data?.data.user.nickname}</M.NicknameFont>
                         </M.FlexContainer>
@@ -70,7 +70,7 @@ function Mypage() {
                                 className="settings"
                                 style={{ color: 'var(--neutral-700, #393e4f)' }}
                             >
-                                <LvNumber totalPointScore={data?.data.totalPointScore} />
+                                <LvNumber totalPointScore={data?.data.user.totalPointScore} />
                             </Link>
                         </M.Font>
                     </M.Between>
@@ -83,21 +83,12 @@ function Mypage() {
                             <div>＞</div>
                         </M.Between>
                     </Link>
-
-                    {
-                        data?.data.sharedShares.length === 0 || data === undefined ? (
-                            <M.Graybg>
-                                <img src="/images/icons/img-noPictures.png" style={{ width: '48px', height: '48px' }} />
-                                <M.Font style={{ color: 'var(--neutral-400, #aaacb3)' }}>피드가 없어요</M.Font>
-                            </M.Graybg>
-                        ) : null
-                        // <div>
-                        //     {data?.data.sharedShares.slice(0, 3).map((item, index) => (
-                        //         // <img key={index} src={item.imagePath} style={{ width: '100%', height: '100%' }} />
-                        //         <p key={index}>{item.title}</p>
-                        //     ))}
-                        // </div>
-                    }
+                    {data?.data.sharedShares.length === 0 || data === undefined ? (
+                        <M.Graybg>
+                            <img src="/images/icons/img-noPictures.png" style={{ width: '48px', height: '48px' }} />
+                            <M.Font style={{ color: 'var(--neutral-400, #aaacb3)' }}>피드가 없어요</M.Font>
+                        </M.Graybg>
+                    ) : null}
                 </div>
                 <div>
                     <Link to="/mypage/likedfeed" className="settings">
@@ -148,7 +139,6 @@ function Mypage() {
                     </M.Between>
                 </M.ContainerBottom>
             </M.Container>
-
             <Gnb />
         </div>
     );

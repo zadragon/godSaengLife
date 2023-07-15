@@ -191,22 +191,80 @@ function Home() {
                                                                     height="20px"
                                                                 />
                                                             )}
+                                                            &nbsp;
                                                             {item.emotion && <p>{conditiontxt}</p>}
                                                         </li>
                                                         <li>
-                                                            {item.didGym
+                                                            {item.didGym ? (
+                                                                <div style={{ display: 'flex' }}>
+                                                                    <img
+                                                                        src="/images/icons/icon-didGym.png"
+                                                                        style={{ width: '20px', height: '20px' }}
+                                                                    />
+                                                                    &nbsp;
+                                                                    <p>오늘 운동 완료</p>
+                                                                </div>
+                                                            ) : (
+                                                                <div style={{ display: 'flex' }}>
+                                                                    <img
+                                                                        src="/images/icons/icon-x.png"
+                                                                        style={{ width: '20px', height: '20px' }}
+                                                                    />
+                                                                    &nbsp;
+                                                                    <p>오늘 운동 실패.. 내일은 꼭 해야지!</p>
+                                                                </div>
+                                                            )}
+                                                            {/* {item.didGym
                                                                 ? '✅ 오늘 운동 완료'
-                                                                : '❌ 오늘 운동 실패.. 내일은 꼭 해야지!'}
+                                                                : '❌ 오늘 운동 실패.. 내일은 꼭 해야지!'} */}
                                                         </li>
                                                         <li>
-                                                            {item.goodSleep
+                                                            {item.goodSleep ? (
+                                                                <div style={{ display: 'flex' }}>
+                                                                    <img
+                                                                        src="/images/icons/icon-goodSleep.png"
+                                                                        style={{ width: '20px', height: '20px' }}
+                                                                    />
+                                                                    &nbsp;
+                                                                    <p>꿀잠 자고 일어남</p>
+                                                                </div>
+                                                            ) : (
+                                                                <div style={{ display: 'flex' }}>
+                                                                    <img
+                                                                        src="/images/icons/icon-x.png"
+                                                                        style={{ width: '20px', height: '20px' }}
+                                                                    />
+                                                                    &nbsp;
+                                                                    <p>꿀잠 못잠.. 왜지?</p>
+                                                                </div>
+                                                            )}
+                                                            {/* {item.goodSleep
                                                                 ? '🙌🏻 꿀잠 자고 일어남'
-                                                                : '❌ 꿀잠 못잠.. 왜지?'}
+                                                                : '❌ 꿀잠 못잠.. 왜지?'} */}
                                                         </li>
                                                         <li>
-                                                            {item.howEat
+                                                            {item.howEat ? (
+                                                                <div style={{ display: 'flex' }}>
+                                                                    <img
+                                                                        src="/images/icons/icon-howEat.png"
+                                                                        style={{ width: '20px', height: '20px' }}
+                                                                    />
+                                                                    &nbsp;
+                                                                    <p>80% 이상 건강하게 먹음</p>
+                                                                </div>
+                                                            ) : (
+                                                                <div style={{ display: 'flex' }}>
+                                                                    <img
+                                                                        src="/images/icons/icon-x.png"
+                                                                        style={{ width: '20px', height: '20px' }}
+                                                                    />
+                                                                    &nbsp;
+                                                                    <p>오늘은 갓생 보류..</p>
+                                                                </div>
+                                                            )}
+                                                            {/* {item.howEat
                                                                 ? '😁 80% 이상 건강하게 먹음'
-                                                                : '❌ 오늘은 갓생 보류..'}
+                                                                : '❌ 오늘은 갓생 보류..'} */}
                                                         </li>
                                                     </ul>
                                                 </div>
