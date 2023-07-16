@@ -34,7 +34,7 @@ const Login = () => {
                 alert('이메일 또는 패스워드를 확인해주세요.');
             }
         } catch (error) {
-            console.log(error);
+            alert(error.response.data.message);
         }
     };
 

@@ -276,10 +276,20 @@ export const ImgTool = styled.div`
     height: 112px;
     overflow: hidden;
     border-radius: 8px;
+    position: relative;
     img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+    button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 15px;
+        height: 15px;
+        background: url(/images/icons/icon-delete.svg) center center no-repeat;
+        background-size: 100%;
     }
 `;
 
