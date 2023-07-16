@@ -163,7 +163,8 @@ export const AddPost = styled.div`
     text-align: center;
     line-height: 56px;
     z-index: 100;
-    a {
+    a,
+    button {
         display: block;
         width: 100%;
         height: 100%;

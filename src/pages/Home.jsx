@@ -75,6 +75,9 @@ function Home() {
         setImgViewUrl({ ...imgViewUrl, view: true, url: imgUrl, imageId: imageId });
     };
 
+    console.log('selectDate', selectDate);
+    console.log('calendarData', calendarData);
+
     if (isLoading) return <Loading />;
 
     return (
@@ -333,10 +336,17 @@ function Home() {
 
             {cookies.Authorization && (
                 <C.AddPost>
-                    <Link to="/writetoday">
-                        <span>+</span>
-                        <span className="hidden">오늘 하루 기록하기</span>
-                    </Link>
+                    {selectDate.length > 0 ? (
+                        <button onClick={() => alert('기록은 하루에 한번만 가능합니다😅')}>
+                            <span>+</span>
+                            <span className="hidden">오늘 하루 기록하기</span>
+                        </button>
+                    ) : (
+                        <Link to="/writetoday">
+                            <span>+</span>
+                            <span className="hidden">오늘 하루 기록하기</span>
+                        </Link>
+                    )}
                 </C.AddPost>
             )}
         </div>
