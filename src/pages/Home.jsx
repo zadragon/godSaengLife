@@ -74,10 +74,6 @@ function Home() {
     const viewDetail = (imgUrl, imageId) => {
         setImgViewUrl({ ...imgViewUrl, view: true, url: imgUrl, imageId: imageId });
     };
-
-    console.log('selectDate', selectDate);
-    console.log('calendarData', calendarData);
-
     if (isLoading) return <Loading />;
 
     return (
