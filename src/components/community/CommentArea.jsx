@@ -59,7 +59,14 @@ const CommentArea = ({ shareId }) => {
     };
     const addCommentAction = () => {
         addCommentMutation(inputs);
+        console.log('action');
         setInputs({ content: '' });
+    };
+    const handleKeyDown = event => {
+        if (event.key === 'Enter') {
+            // 엔터 키가 눌렸을 때 처리할 로직
+            addCommentAction();
+        }
     };
 
     return (
@@ -127,6 +134,7 @@ const CommentArea = ({ shareId }) => {
                     value={inputs.content}
                     onChange={e => commentChange(e)}
                     disabled={cookies.Authorization ? false : true}
+                    onKeyPress={handleKeyDown}
                 />
                 <button className="btnSend" onClick={e => addCommentAction(e)}>
                     <span className="hidden">보내기</span>

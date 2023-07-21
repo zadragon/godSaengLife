@@ -72,8 +72,8 @@ function Writetoday() {
 
     const setImgFile = e => {
         let files = e.target.files;
-        setSelectedImg([...files]);
-
+        setSelectedImg([...selectedImg, ...files]);
+        console.log(selectedImg);
         var reader = new FileReader();
         reader.onload = function (event) {
             setMainImg(event.target.result);
@@ -168,6 +168,10 @@ function Writetoday() {
                 };
             })
         );
+    };
+
+    const imgDel = idx => {
+        setSelectedImg(selectedImg.filter((item, i) => i !== idx));
     };
 
     return (
@@ -344,6 +348,9 @@ function Writetoday() {
                         {selectedImg.map((image, index) => (
                             <P.ImgTool key={index}>
                                 <img alt={`미리보기 ${index}`} src={URL.createObjectURL(image)} />
+                                <button onClick={() => imgDel(index)}>
+                                    <span className="hidden">삭제</span>
+                                </button>
                             </P.ImgTool>
                         ))}
                     </P.PictureTool>
