@@ -78,6 +78,7 @@ export const btnAreaFixed = styled.div`
     @media screen and (min-width: 400px) {
         width: 400px;
         margin: 0 auto;
+        bottom: 35px;
         left: 50%;
         margin-left: -200px;
     }
