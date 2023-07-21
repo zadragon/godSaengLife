@@ -354,6 +354,7 @@ function Writetoday() {
                             </P.ImgTool>
                         ))}
                     </P.PictureTool>
+                    {selectedImg.length > 5 && <p>사진은 다섯 장까지만 선택해야 피드가 등록됩니다!</p>}
                 </P.SelectCondition>
             )}
             {activeTab === 'result' && (
