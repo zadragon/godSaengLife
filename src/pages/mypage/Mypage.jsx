@@ -83,12 +83,6 @@ function Mypage() {
                             <div>＞</div>
                         </M.Between>
                     </Link>
-                    {data?.data.sharedShares.length === 0 || data === undefined ? (
-                        <M.Graybg>
-                            <img src="/images/icons/img-noPictures.png" style={{ width: '48px', height: '48px' }} />
-                            <M.Font style={{ color: 'var(--neutral-400, #aaacb3)' }}>피드가 없어요</M.Font>
-                        </M.Graybg>
-                    ) : null}
                 </div>
                 <div>
                     <Link to="/mypage/likedfeed" className="settings">
@@ -97,24 +91,6 @@ function Mypage() {
                             <div>＞</div>
                         </M.Between>
                     </Link>
-                    {/* <M.Graybg style={{ marginBottom: '20px' }}>
-                        <img src="/images/icons/img-noPictures.png" style={{ width: '48px', height: '48px' }} />
-                        <M.Font style={{ color: 'var(--neutral-400, #aaacb3)' }}>피드가 없어요</M.Font>
-                    </M.Graybg> */}
-                    {data?.data.likedShares.length === 0 || data === undefined ? (
-                        <M.Graybg>
-                            <img src="/images/icons/img-noPictures.png" style={{ width: '48px', height: '48px' }} />
-                            <M.Font style={{ color: 'var(--neutral-400, #aaacb3)' }}>피드가 없어요</M.Font>
-                        </M.Graybg>
-                    ) : (
-                        <div></div>
-                        // <div>
-                        //     {data?.data.sharedShares.slice(0, 3).map((item, index) => (
-                        //         // <img key={index} src={item.imagePath} style={{ width: '100%', height: '100%' }} />
-                        //         <p key={index}>{item.title}</p>
-                        //     ))}
-                        // </div>
-                    )}
                 </div>
                 <M.ContainerBottom>
                     <div style={{ borderTop: '0.3px solid var(--neutral-300, #D5D6D9)' }}>

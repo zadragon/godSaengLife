@@ -151,7 +151,7 @@ function Signup() {
                         variant="outlined"
                         fullWidth
                         onChange={onChangeHandler}
-                        placeholder="god@godSaeng.com"
+                        placeholder="네이버, 다음, 구글 이메일만 가능합니다."
                         helperText={emailErrorMsg}
                     />
                 </div>

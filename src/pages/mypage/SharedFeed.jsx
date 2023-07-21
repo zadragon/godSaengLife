@@ -50,6 +50,12 @@ function SharedFeed() {
             </C.PageHeader>
             <S.CommList style={{ paddingBottom: '100px' }}>
                 <ul style={{ display: 'flex', gap: '12px', flexDirection: 'column', marginTop: '12px' }}>
+                    {data?.data.sharedShares.length === 0 || data === undefined ? (
+                        <M.Graybg>
+                            <img src="/images/icons/img-noPictures.png" style={{ width: '48px', height: '48px' }} />
+                            <M.Font style={{ color: 'var(--neutral-400, #aaacb3)' }}>피드가 없어요</M.Font>
+                        </M.Graybg>
+                    ) : null}
                     {data?.data?.sharedShares.map((item, index) => (
                         // <img key={index} src={item.imagePath} style={{ width: '100%', height: '100%' }} />
                         // <p key={index}>{item.title}</p>
