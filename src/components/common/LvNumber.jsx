@@ -4,22 +4,22 @@ function LvNumber({ totalPointScore, style }) {
     return (
         <div style={style}>
             {totalPointScore === undefined
-                ? 'Lv.? ＞'
+                ? 'Lv.?'
                 : totalPointScore <= 25
-                ? 'Lv.1 ＞'
+                ? 'Lv.1'
                 : totalPointScore <= 75
-                ? 'Lv.2 ＞'
+                ? 'Lv.2'
                 : totalPointScore <= 125
-                ? 'Lv.3 ＞'
+                ? 'Lv.3'
                 : totalPointScore <= 175
-                ? 'Lv.4 ＞'
+                ? 'Lv.4'
                 : totalPointScore <= 225
-                ? 'Lv.5 ＞'
+                ? 'Lv.5'
                 : totalPointScore <= 275
-                ? 'Lv.6 ＞'
+                ? 'Lv.6'
                 : totalPointScore <= 350
-                ? 'Lv.7 ＞'
-                : 'Lv.8 ＞'}
+                ? 'Lv.7'
+                : 'Lv.8'}
         </div>
     );
 }

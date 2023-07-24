@@ -111,6 +111,8 @@ export const Between = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    cursor: pointer;
+    background: url('/images/icons/icon-arrow-right2.svg') no-repeat right 7px center;
 `;
 
 export const Graybg = styled.div`
