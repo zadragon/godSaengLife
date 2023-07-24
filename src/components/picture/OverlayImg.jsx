@@ -107,7 +107,7 @@ const OverLayArea = styled.div`
         transform: translate(-50%, -50%);
         border-radius: 8px;
         overflow: hidden;
-        width: 85%;
+        width: 300px;
         img {
             width: 100%;
             height: auto;

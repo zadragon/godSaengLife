@@ -146,6 +146,11 @@ export const ButtonEditNickname = styled.button`
     gap: 8px;
     border-radius: 8px;
     background: var(--primary-50050, rgba(214, 247, 129, 0.5));
+    transition: 0.5s;
+    &.active {
+        background: #c7f860;
+        color: #21242e;
+    }
 `;
 
 export const BadgeContainer = styled.div`

@@ -99,8 +99,12 @@ function ChangePw() {
                     value={emailCode}
                     onChange={e => setEmailCode(e.target.value)}
                 ></M.Input>
-                <M.ButtonEditNickname style={{ marginTop: '242px' }} onClick={editPasswordBtn}>
-                    <M.BadgeFont style={{ color: '#21242E' }}>수정</M.BadgeFont>
+                <M.ButtonEditNickname
+                    style={{ marginTop: '242px' }}
+                    className={`${newPassword !== '' && emailCode !== '' ? 'active' : ''}`}
+                    onClick={editPasswordBtn}
+                >
+                    <M.BadgeFont>수정</M.BadgeFont>
                 </M.ButtonEditNickname>
             </M.Container>
             <Gnb />
