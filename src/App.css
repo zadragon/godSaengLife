@@ -170,3 +170,7 @@
 .calendarArea.analysis .react-calendar__month-view__days__day--neighboringMonth .imoji {
     opacity: 0.2;
 }
+.swiper-wrapper .swiper-slide {
+    display: flex;
+    justify-content: center;
+}
