@@ -75,7 +75,7 @@ function Signup() {
             if (!passwordRegex.test(value)) {
                 setErrMsg({
                     ...errMsg,
-                    pwErrorMsg: '숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!',
+                    pwErrorMsg: '숫자+영문자+특수문자(@$!%*?&) 조합으로 8자리 이상 입력해주세요!',
                 });
             } else {
                 setErrMsg(initErrorMsg);
@@ -163,7 +163,7 @@ function Signup() {
                         variant="outlined"
                         fullWidth
                         onChange={onChangeHandler}
-                        placeholder="숫자+영문+특수문자 조합으로 8자리 이상"
+                        placeholder="숫자+영문+특수문자(@$!%*?&) 8자리 이상"
                         helperText={pwErrorMsg}
                     />
                 </div>
