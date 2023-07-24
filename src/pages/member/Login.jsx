@@ -7,6 +7,10 @@ import TextField from '@mui/material/TextField';
 import * as M from '../../styles/member';
 import * as C from '../../styles/common';
 
+const replaceWhitespace = str => {
+    return str.replace(/\s+/g, '');
+};
+
 const Login = () => {
     const navigate = useNavigate();
 
@@ -20,9 +24,12 @@ const Login = () => {
         e.preventDefault();
 
         try {
+            const trimmedEmail = replaceWhitespace(email);
+            const trimmedPassword = replaceWhitespace(password);
+
             const payload = {
-                email: email,
-                password: password,
+                email: trimmedEmail,
+                password: trimmedPassword,
             };
 
             const response = await AuthApi.signin(payload);

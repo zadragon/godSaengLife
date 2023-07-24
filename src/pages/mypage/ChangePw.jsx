@@ -100,7 +100,7 @@ function ChangePw() {
                     onChange={e => setEmailCode(e.target.value)}
                 ></M.Input>
                 <M.ButtonEditNickname style={{ marginTop: '242px' }} onClick={editPasswordBtn}>
-                    <M.BadgeFont style={{ color: 'var(--neutral-400, #AAACB3)' }}>수정</M.BadgeFont>
+                    <M.BadgeFont style={{ color: '#21242E' }}>수정</M.BadgeFont>
                 </M.ButtonEditNickname>
             </M.Container>
             <Gnb />
