@@ -19,6 +19,7 @@ function Home() {
     const [calendarData, setCalendarData] = useState([]);
     const [selectDate, setSelectDate] = useState([]);
     const [feedImgs, setFeedImgs] = useState([]);
+    const [today, setToday] = useState(false);
 
     useEffect(() => {
         data?.data?.feeds &&
@@ -39,6 +40,7 @@ function Home() {
                     return moment(item.createdAt).format('YYYY-MM-DD') == moment(value).format('YYYY-MM-DD');
                 })
             );
+        setToday(moment(value).format('YYYY-MM-DD') == moment(new Date()).format('YYYY-MM-DD'));
     }, [value, data]);
 
     useEffect(() => {
@@ -330,7 +332,7 @@ function Home() {
                 </div>
             </H.MainAlbum>
 
-            {cookies.Authorization && (
+            {cookies.Authorization && today ? (
                 <C.AddPost>
                     {selectDate.length > 0 ? (
                         <button onClick={() => alert('기록은 하루에 한번만 가능합니다😅')}>
@@ -344,7 +346,7 @@ function Home() {
                         </Link>
                     )}
                 </C.AddPost>
-            )}
+            ) : null}
         </div>
     );
 }

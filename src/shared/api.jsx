@@ -73,7 +73,7 @@ export const PostApi = {
     },
     saveData: formData => {
         for (let key of formData.keys()) {
-            console.log(key, ':', formData.get(key));
+            //console.log(key, ':', formData.get(key));
         }
 
         api.post('/feed/write', formData, {

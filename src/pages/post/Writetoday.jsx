@@ -72,6 +72,7 @@ function Writetoday() {
 
     const setImgFile = e => {
         let files = e.target.files;
+
         setSelectedImg([...selectedImg, ...files]);
         console.log(selectedImg);
         var reader = new FileReader();
@@ -88,6 +89,10 @@ function Writetoday() {
     const [activeTab, setActiveTab] = useState('condition');
 
     const handleNextClick = () => {
+        if (selectedImg.length > 5) {
+            alert(`사진은 5장까지만 등록할수 있습니다. 현재 ${selectedImg.length}장`);
+            return;
+        }
         handleTabClick('result');
     };
 
@@ -337,8 +342,14 @@ function Writetoday() {
             )}
             {activeTab === 'photo' && (
                 <P.SelectCondition>
-                    <h3>오늘 먹은 음식 올리기</h3>
+                    <h3>
+                        오늘 먹은 음식 올리기{' '}
+                        <strong style={{ fontWeight: 'normal' }}>
+                            <small>현재 {selectedImg.length}장</small>
+                        </strong>
+                    </h3>
                     <p>나의 갓생 식단을 기록해봅시다!(다섯 장까지 가능)</p>
+                    <p></p>
                     <P.PictureTool>
                         <P.PhotoInput>
                             <P.FileIcon src="images/icons/icon-camera.svg" alt="파일 선택" />

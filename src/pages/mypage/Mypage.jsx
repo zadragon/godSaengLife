@@ -50,25 +50,32 @@ function Mypage() {
                     <M.Between>
                         <M.FlexContainer style={{ marginBottom: '12px' }}>
                             <LvImg
-                                style={{ width: '48px', height: '48px' }}
+                                style={{ width: '48px', height: '48px', boxShadow: 'none' }}
                                 totalPointScore={data?.data.user.totalPointScore}
                             />
                             <M.NicknameFont>{data?.data.user.nickname}</M.NicknameFont>
                         </M.FlexContainer>
                         <M.Font
                             style={{
-                                width: '65px',
+                                width: 'auto',
                                 height: '36px',
                                 backgroundColor: '#F7FFE2',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
+                                padding: '0 8px 0 10px',
+                                borderRadius: '4px',
                             }}
                         >
                             <Link
                                 to="/mypage/badge"
                                 className="settings"
-                                style={{ color: 'var(--neutral-700, #393e4f)' }}
+                                style={{
+                                    width: '100%',
+                                    color: '#393e4f',
+                                    paddingRight: '15px',
+                                    background: "url('/images/icons/icon-arrow-right1.svg') no-repeat right center",
+                                }}
                             >
                                 <LvNumber totalPointScore={data?.data.user.totalPointScore} />
                             </Link>
@@ -80,7 +87,6 @@ function Mypage() {
                     <Link to="/mypage/sharedfeed" className="settings">
                         <M.Between style={{ marginBottom: '12px' }}>
                             <M.SubjectFont>커뮤니티에 올린 피드</M.SubjectFont>
-                            <div>＞</div>
                         </M.Between>
                     </Link>
                 </div>
@@ -88,7 +94,6 @@ function Mypage() {
                     <Link to="/mypage/likedfeed" className="settings">
                         <M.Between style={{ marginBottom: '12px' }}>
                             <M.SubjectFont>좋아요한 피드</M.SubjectFont>
-                            <div>＞</div>
                         </M.Between>
                     </Link>
                 </div>
@@ -101,17 +106,14 @@ function Mypage() {
                         <Link to="/mypage/password">
                             <M.Between>
                                 <M.SubjectFont>비밀번호 변경</M.SubjectFont>
-                                <div>＞</div>
                             </M.Between>
                         </Link>
                     </div>
-                    <M.Between>
+                    <M.Between onClick={() => alert('준비중입니다.')}>
                         <M.SubjectFont>의견 보내기</M.SubjectFont>
-                        <div>＞</div>
                     </M.Between>
                     <M.Between onClick={handleWithdrawal}>
                         <M.SubjectFont>탈퇴하기</M.SubjectFont>
-                        <div>＞</div>
                     </M.Between>
                 </M.ContainerBottom>
             </M.Container>
