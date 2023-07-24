@@ -97,7 +97,8 @@ function EditFeed({ onUpdate }) {
                 navigate('/');
             })
             .catch(error => {
-                console.log('피드 수정 실패', error);
+                // console.log('피드 수정 실패', error);
+                alert('피드 수정 실패'(error));
             });
     };
 
@@ -109,7 +110,8 @@ function EditFeed({ onUpdate }) {
                 await PostApi.deleteFeed(feedId, cookies.Authorization);
                 navigate('/');
             } catch (error) {
-                console.log('피드 삭제 실패', error);
+                // console.log('피드 삭제 실패', error);
+                alert('피드 수정 실패'(error));
             }
         }
     };
@@ -122,7 +124,18 @@ function EditFeed({ onUpdate }) {
         try {
             await PostApi.deleteAllImg(feedId, cookies.Authorization);
         } catch (error) {
-            console.log('전체 이미지 삭제 실패', error);
+            if (error.response) {
+                const { status } = error.response;
+                if (status === 403) {
+                    alert('이미지 삭제 권한이 없습니다.');
+                } else if (status === 500) {
+                    alert('피드 이미지 전체 삭제에 실패했습니다.');
+                } else {
+                    alert('알 수 없는 오류가 발생했습니다.');
+                }
+            } else {
+                alert('네트워크 오류');
+            }
         }
         setPopActive(false);
     };
