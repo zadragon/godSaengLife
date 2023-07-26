@@ -55,7 +55,6 @@ const AddArticle = () => {
             [name]: value,
         });
     };
-    console.log(articlePost);
 
     const addPost = async () => {
         if (articlePost.title == '') {
@@ -74,8 +73,6 @@ const AddArticle = () => {
             base64: '',
         });
         dispatch(initGraphImg());
-        // const result = await communityApi.addCommunityArticle(articlePost);
-        // console.log(result);
     };
 
     const onClose = () => {

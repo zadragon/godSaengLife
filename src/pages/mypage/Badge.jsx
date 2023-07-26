@@ -14,7 +14,6 @@ function Badge() {
     const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getMypage'], () =>
         MypageApi.getMypage(cookies.Authorization)
     );
-    console.log('마이페이지badge:', data);
 
     return (
         <div>
@@ -158,7 +157,14 @@ function Badge() {
                             </M.BadgeContent>
                         </div>
                         <M.LvFontBg>
-                            <M.LvFont style={{ color: 'var(--neutral-700, #393E4F)' }}>Lv.1</M.LvFont>
+                            <M.LvFont
+                                style={{
+                                    color: 'var(--neutral-700, #393E4F)',
+                                    font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
+                                }}
+                            >
+                                Lv.1
+                            </M.LvFont>
                         </M.LvFontBg>
                     </M.FlexContainer>
                 </M.BadgeContentContainer>
@@ -183,7 +189,14 @@ function Badge() {
                             </M.BadgeContent>
                         </div>
                         <M.LvFontBg>
-                            <M.LvFont style={{ color: 'var(--neutral-700, #393E4F)' }}>Lv.2</M.LvFont>
+                            <M.LvFont
+                                style={{
+                                    color: 'var(--neutral-700, #393E4F)',
+                                    font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
+                                }}
+                            >
+                                Lv.2
+                            </M.LvFont>
                         </M.LvFontBg>
                     </M.FlexContainer>
                 </M.BadgeContentContainer>
@@ -208,7 +221,14 @@ function Badge() {
                             </M.BadgeContent>
                         </div>
                         <M.LvFontBg>
-                            <M.LvFont style={{ color: 'var(--neutral-700, #393E4F)' }}>Lv.3</M.LvFont>
+                            <M.LvFont
+                                style={{
+                                    color: 'var(--neutral-700, #393E4F)',
+                                    font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
+                                }}
+                            >
+                                Lv.3
+                            </M.LvFont>
                         </M.LvFontBg>
                     </M.FlexContainer>
                 </M.BadgeContentContainer>
@@ -233,7 +253,14 @@ function Badge() {
                             </M.BadgeContent>
                         </div>
                         <M.LvFontBg>
-                            <M.LvFont style={{ color: 'var(--neutral-700, #393E4F)' }}>Lv.4</M.LvFont>
+                            <M.LvFont
+                                style={{
+                                    color: 'var(--neutral-700, #393E4F)',
+                                    font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
+                                }}
+                            >
+                                Lv.4
+                            </M.LvFont>
                         </M.LvFontBg>
                     </M.FlexContainer>
                 </M.BadgeContentContainer>
@@ -258,7 +285,14 @@ function Badge() {
                             </M.BadgeContent>
                         </div>
                         <M.LvFontBg>
-                            <M.LvFont style={{ color: 'var(--neutral-700, #393E4F)' }}>Lv.5</M.LvFont>
+                            <M.LvFont
+                                style={{
+                                    color: 'var(--neutral-700, #393E4F)',
+                                    font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
+                                }}
+                            >
+                                Lv.5
+                            </M.LvFont>
                         </M.LvFontBg>
                     </M.FlexContainer>
                 </M.BadgeContentContainer>
@@ -283,7 +317,14 @@ function Badge() {
                             </M.BadgeContent>
                         </div>
                         <M.LvFontBg>
-                            <M.LvFont style={{ color: 'var(--neutral-700, #393E4F)' }}>Lv.6</M.LvFont>
+                            <M.LvFont
+                                style={{
+                                    color: 'var(--neutral-700, #393E4F)',
+                                    font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
+                                }}
+                            >
+                                Lv.6
+                            </M.LvFont>
                         </M.LvFontBg>
                     </M.FlexContainer>
                 </M.BadgeContentContainer>
@@ -308,7 +349,14 @@ function Badge() {
                             </M.BadgeContent>
                         </div>
                         <M.LvFontBg>
-                            <M.LvFont style={{ color: 'var(--neutral-700, #393E4F)' }}>Lv.7</M.LvFont>
+                            <M.LvFont
+                                style={{
+                                    color: 'var(--neutral-700, #393E4F)',
+                                    font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
+                                }}
+                            >
+                                Lv.7
+                            </M.LvFont>
                         </M.LvFontBg>
                     </M.FlexContainer>
                 </M.BadgeContentContainer>
@@ -333,7 +381,14 @@ function Badge() {
                             </M.BadgeContent>
                         </div>
                         <M.LvFontBg>
-                            <M.LvFont style={{ color: 'var(--neutral-700, #393E4F)' }}>Lv.8</M.LvFont>
+                            <M.LvFont
+                                style={{
+                                    color: 'var(--neutral-700, #393E4F)',
+                                    font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
+                                }}
+                            >
+                                Lv.8
+                            </M.LvFont>
                         </M.LvFontBg>
                     </M.FlexContainer>
                 </M.BadgeContentContainer>

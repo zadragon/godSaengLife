@@ -54,7 +54,6 @@ function Signup() {
 
         if (name == 'nickname') {
             if (value.length < 1 || value.length > 8) {
-                //console.log('닉네임은 4글자 이상 9글자 이하로 입력해주세요!');
                 setErrMsg({
                     ...errMsg,
                     nickErrorMsg: '닉네임은 1글자 이상 8글자 이하로 입력해주세요!',
@@ -89,8 +88,6 @@ function Signup() {
                 [name]: value, // name 키를 가진 값을 value 로 설정
             },
         });
-
-        console.log(inputs);
     };
 
     const onChangePwConfirmHandler = e => {

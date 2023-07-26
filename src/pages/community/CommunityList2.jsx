@@ -21,7 +21,6 @@ function SharedFeed() {
     const { data, isLoading, isError, isSuccess, refetch } = useQuery(['getAllCommunity', page], () =>
         communityApi.getAllCommunity(page)
     );
-    console.log('커뮤니티data', data);
 
     const calculateTimeDifference = createdAt => {
         const currentTime = new Date();

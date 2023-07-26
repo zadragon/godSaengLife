@@ -12,7 +12,6 @@ const OverlayImg = ({ imgUrl, imageId, setImgViewUrl }) => {
     };
 
     const closeDimmed = e => {
-        console.log(e.target.id);
         e.target.id == 'dimmed' && setImgViewUrl({ view: false, url: '', feedId: '' });
     };
 

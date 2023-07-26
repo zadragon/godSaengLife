@@ -24,7 +24,6 @@ function ChangePw() {
             alert('비밀번호가 변경되었습니다.');
             navigate('/mypage');
         } catch (error) {
-            console.log('비밀번호 변경 실패', error);
             if (error.response) {
                 const statusCode = error.response.status;
                 let errorMessage = '';
@@ -54,7 +53,6 @@ function ChangePw() {
             await MypageApi.sendEmailCode({ password: newPassword });
             alert('가입하신 이메일로 인증코드를 전송했습니다.');
         } catch (error) {
-            console.log('인증코드 전송 실패', error);
             if (error.response) {
                 const statusCode = error.response.status;
                 let errorMessage = '';

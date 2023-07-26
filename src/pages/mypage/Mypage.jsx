@@ -27,10 +27,8 @@ function Mypage() {
             alert('회원에서 탈퇴하셨습니다.');
             removeCookie('Authorization');
             navigate('/');
-            console.log('탈퇴 성공');
         }
     };
-    console.log('마이페이지:', data);
     return (
         <div>
             <MetaTag title="마이페이지 :: 갓생러" description="습관기록 서비스" keywords="습관기록, 커뮤니티, 갓생러" />
@@ -77,7 +75,12 @@ function Mypage() {
                                     background: "url('/images/icons/icon-arrow-right1.svg') no-repeat right center",
                                 }}
                             >
-                                <LvNumber totalPointScore={data?.data.user.totalPointScore} />
+                                <LvNumber
+                                    style={{
+                                        font: "var(--description-medium, 500 12px/16px 'Pretendard', sans-serif)",
+                                    }}
+                                    totalPointScore={data?.data.user.totalPointScore}
+                                />
                             </Link>
                         </M.Font>
                     </M.Between>
