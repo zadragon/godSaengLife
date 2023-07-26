@@ -5,6 +5,7 @@ import * as C from '../../styles/common';
 import { styled } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import MetaTag from '../../components/MetaTag';
 
 const Splash = () => {
     const [showOnBoard, setShowOnBoard] = useState(false);
@@ -18,24 +19,27 @@ const Splash = () => {
     }, []);
 
     return (
-        <SplashWrap>
-            <div className="image star2">
-                <img src="/images/onboarding/Star_3.png" alt="star" />
-            </div>
-            <div className="image star1">
-                <img src="/images/onboarding/Star_2.png" alt="star" />
-            </div>
-            <div className="image star3">
-                <img src="/images/onboarding/Star_2.png" alt="star" />
-            </div>
-            <C.BtnOnBoardingWrap>
-                <C.BtnOnBoarding onClick={() => navigate('/login')}>로그인</C.BtnOnBoarding>
-                <C.BtnOnBoarding className="bgEmpty" onClick={() => navigate('/main')}>
-                    둘러보기
-                </C.BtnOnBoarding>
-            </C.BtnOnBoardingWrap>
-            {showOnBoard && <OnBoarding setShowOnBoard={setShowOnBoard} />}
-        </SplashWrap>
+        <>
+            <MetaTag title="둘러보기 :: 갓생러" description="습관기록 서비스" keywords="습관기록, 커뮤니티, 갓생러" />
+            <SplashWrap>
+                <div className="image star2">
+                    <img src="/images/onboarding/Star_3.png" alt="star" />
+                </div>
+                <div className="image star1">
+                    <img src="/images/onboarding/Star_2.png" alt="star" />
+                </div>
+                <div className="image star3">
+                    <img src="/images/onboarding/Star_2.png" alt="star" />
+                </div>
+                <C.BtnOnBoardingWrap>
+                    <C.BtnOnBoarding onClick={() => navigate('/login')}>로그인</C.BtnOnBoarding>
+                    <C.BtnOnBoarding className="bgEmpty" onClick={() => navigate('/main')}>
+                        둘러보기
+                    </C.BtnOnBoarding>
+                </C.BtnOnBoardingWrap>
+                {showOnBoard && <OnBoarding setShowOnBoard={setShowOnBoard} />}
+            </SplashWrap>
+        </>
     );
 };
 

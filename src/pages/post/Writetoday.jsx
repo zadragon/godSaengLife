@@ -240,7 +240,7 @@ function Writetoday() {
                             className={`${selectedButtons['emotion'] === 'happy' ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'happy')}
                         >
-                            <img src="images/emoji/happy.png" /> 아주 상쾌함
+                            <img src="images/emoji/happy.svg" /> 아주 상쾌함
                         </button>
 
                         <button
@@ -248,28 +248,28 @@ function Writetoday() {
                             className={`${selectedButtons['emotion'] === 'soso' ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'soso')}
                         >
-                            <img src="images/emoji/soso.png" /> 그냥 그럼
+                            <img src="images/emoji/soso.svg" /> 그냥 그럼
                         </button>
                         <button
                             id="tired"
                             className={`${selectedButtons['emotion'] === 'tired' ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'tired')}
                         >
-                            <img src="images/emoji/tired.png" /> 피곤함
+                            <img src="images/emoji/tired.svg" /> 피곤함
                         </button>
                         <button
                             id="good"
                             className={`${selectedButtons['emotion'] === 'good' ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'good')}
                         >
-                            <img src="images/emoji/bad.png" /> 안좋음
+                            <img src="images/emoji/bad.svg" /> 안좋음
                         </button>
                         <button
                             id="stress"
                             className={`${selectedButtons['emotion'] === 'stress' ? 'bg-gray-300' : ''}`}
                             onClick={() => handleButtonClick('emotion', 'stress')}
                         >
-                            <img src="images/emoji/stress.png" /> 나쁨
+                            <img src="images/emoji/stress.svg" /> 나쁨
                         </button>
                     </div>
                 </P.SelectCondition>
@@ -374,31 +374,31 @@ function Writetoday() {
                         <h3>오늘 하루 컨디션은?</h3>
                         {selectedButtons.emotion === 'happy' && (
                             <p>
-                                <img src="images/emoji/happy.png" />
+                                <img src="images/emoji/happy.svg" />
                                 아주 상쾌함
                             </p>
                         )}
                         {selectedButtons.emotion === 'soso' && (
                             <p>
-                                <img src="images/emoji/soso.png" />
+                                <img src="images/emoji/soso.svg" />
                                 그냥 그럼
                             </p>
                         )}
                         {selectedButtons.emotion === 'tired' && (
                             <p>
-                                <img src="images/emoji/tired.png" />
+                                <img src="images/emoji/tired.svg" />
                                 피곤함
                             </p>
                         )}
                         {selectedButtons.emotion === 'bad' && (
                             <p>
-                                <img src="images/emoji/bad.png" />
+                                <img src="images/emoji/bad.svg" />
                                 안좋음
                             </p>
                         )}
                         {selectedButtons.emotion === 'stress' && (
                             <p>
-                                <img src="images/emoji/stress.png" />
+                                <img src="images/emoji/stress.svg" />
                                 나쁨
                             </p>
                         )}

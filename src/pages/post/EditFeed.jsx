@@ -156,27 +156,27 @@ function EditFeed({ onUpdate }) {
             {
                 state: 'happy',
                 stateKor: '아주 상쾌함',
-                imgSrc: '/images/emoji/happy.png',
+                imgSrc: '/images/emoji/happy.svg',
             },
             {
                 state: 'soso',
                 stateKor: '그냥 그럼',
-                imgSrc: '/images/emoji/soso.png',
+                imgSrc: '/images/emoji/soso.svg',
             },
             {
                 state: 'tired',
                 stateKor: '피곤함',
-                imgSrc: '/images/emoji/tired.png',
+                imgSrc: '/images/emoji/tired.svg',
             },
             {
                 state: 'good',
                 stateKor: '안좋음',
-                imgSrc: '/images/emoji/bad.png',
+                imgSrc: '/images/emoji/bad.svg',
             },
             {
                 state: 'stress',
                 stateKor: '나쁨',
-                imgSrc: '/images/emoji/stress.png',
+                imgSrc: '/images/emoji/stress.svg',
             },
         ],
         howEat: [

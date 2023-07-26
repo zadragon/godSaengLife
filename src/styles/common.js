@@ -151,6 +151,21 @@ export const GnbBar = styled.nav`
     }
 `;
 
+export const BtnTop = styled.button`
+    position: fixed;
+    bottom: 70px;
+    right: 10px;
+    /* 500px 이상인 경우에만 적용될 스타일 */
+    @media screen and (min-width: 400px) {
+        width: 56px;
+        height: 30px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        left: 50%;
+        bottom: 175px;
+        margin-left: 133px;
+    }
+`;
 export const AddPost = styled.div`
     position: fixed;
     bottom: 70px;

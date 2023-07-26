@@ -53,27 +53,27 @@ const MonthData = ({ setShowTooltip }) => {
     const [emotionFilter, setEmotionFilter] = useState([
         {
             emotion: 'happy',
-            imgSrc: '/images/emoji/happy.png',
+            imgSrc: '/images/emoji/happy.svg',
             emotionKr: '아주 상쾌함',
         },
         {
             emotion: 'good',
-            imgSrc: '/images/emoji/soso.png',
+            imgSrc: '/images/emoji/soso.svg',
             emotionKr: '편안한 날',
         },
         {
             emotion: 'soso',
-            imgSrc: '/images/emoji/tired.png',
+            imgSrc: '/images/emoji/tired.svg',
             emotionKr: '그냥 그럼',
         },
         {
             emotion: 'tired',
-            imgSrc: '/images/emoji/bad.png',
+            imgSrc: '/images/emoji/bad.svg',
             emotionKr: '피곤함',
         },
         {
             emotion: 'stress',
-            imgSrc: '/images/emoji/stress.png',
+            imgSrc: '/images/emoji/stress.svg',
             emotionKr: '안좋음',
         },
     ]);

@@ -9,6 +9,7 @@ import { Mypage, Setting, Badge, ChangePw } from '../pages/mypage';
 import { AddArticle, CommunityList, CommunityDetail } from '../pages/community';
 import SharedFeed from '../pages/mypage/SharedFeed';
 import LikedFeed from '../pages/mypage/LikedFeed';
+import NotFound from '../pages/NotFound';
 
 const Routers = () => {
     return (
@@ -46,6 +47,7 @@ const Routers = () => {
                 {/* 공통영역(상단 gnb메뉴)을 위한 Layout  */}
                 <Route element={<Layout />}>
                     {/* main */}
+                    <Route path="*" element={<NotFound />} />
                     <Route path="/main" element={<Home />} />
                     <Route path="/image/latest" element={<Home />} />
                 </Route>

@@ -48,7 +48,7 @@ function Mypage() {
                         </Link>
                     </M.RightAligned>
                     <M.Between>
-                        <M.FlexContainer style={{ marginBottom: '12px' }}>
+                        <M.FlexContainer style={{ marginBottom: '12px', gap: '8px' }}>
                             <LvImg
                                 style={{ width: '48px', height: '48px', boxShadow: 'none' }}
                                 totalPointScore={data?.data.user.totalPointScore}

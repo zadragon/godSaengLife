@@ -55,7 +55,7 @@ const GradePop = ({ setShowTooltip }) => {
                 >
                     <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv1.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv1.svg" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
@@ -95,7 +95,7 @@ const GradePop = ({ setShowTooltip }) => {
 
                     <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv2.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv2.svg" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
@@ -135,7 +135,7 @@ const GradePop = ({ setShowTooltip }) => {
 
                     <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv3.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv3.svg" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
@@ -175,7 +175,7 @@ const GradePop = ({ setShowTooltip }) => {
 
                     <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv4.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv4.svg" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
@@ -215,7 +215,7 @@ const GradePop = ({ setShowTooltip }) => {
 
                     <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv5.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv5.svg" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
@@ -255,7 +255,7 @@ const GradePop = ({ setShowTooltip }) => {
 
                     <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv6.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv6.svg" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
@@ -295,7 +295,7 @@ const GradePop = ({ setShowTooltip }) => {
 
                     <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv7.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv7.svg" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
@@ -335,7 +335,7 @@ const GradePop = ({ setShowTooltip }) => {
 
                     <div className="bg-white rounded-lg p-4 flex flex-row items-start justify-between shrink-0 w-[311px] relative">
                         <div className="flex flex-row gap-2 items-start justify-start shrink-0 relative">
-                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv1.png" />
+                            <img className="shrink-0 w-6 h-6 relative" src="/images/profile/lv1.svg" />
 
                             <div className="flex flex-col gap-1 items-start justify-start shrink-0 relative">
                                 <div
