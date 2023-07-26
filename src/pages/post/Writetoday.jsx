@@ -186,7 +186,7 @@ function Writetoday() {
                     <span className="hidden">뒤로가기</span>
                 </button>
                 <h2>하루 기록</h2>
-                {activeTab === 'photo' && (
+                {activeTab === 'photo' && selectedImg.length <= 5 && (
                     <>
                         {selectedImg.length > 0 ? (
                             <button className="btnCommon" onClick={handleNextClick}>
