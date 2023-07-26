@@ -55,7 +55,7 @@ export const PostTab = styled.div`
 
 export const SelectCondition = styled.div`
     margin-top: 24px;
-    padding: 0 16px;
+    padding: 0 16px 72px;
     h3 {
         color: var(--neutral-900, #21242e);
         /* Paragraph/Large Bold */

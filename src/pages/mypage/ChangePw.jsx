@@ -90,7 +90,9 @@ function ChangePw() {
                     onChange={e => setNewPassword(e.target.value)}
                     type="password"
                 ></M.Input>
-                <button onClick={sendEmailCodeBtn}>인증코드 전송</button>
+                <button onClick={sendEmailCodeBtn}>
+                    <img src="/images/mypage/send-code.png" style={{ width: '141px', height: 'auto' }} />
+                </button>
                 <M.SubjectFont style={{ marginTop: '12px' }}>인증코드 입력</M.SubjectFont>
                 <M.Input
                     placeholder="인증코드를 입력해주세요"
