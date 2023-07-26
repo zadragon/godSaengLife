@@ -82,7 +82,7 @@ function ChangePw() {
                 </button>
                 <h2>비밀번호 변경</h2>
             </C.PageHeader>
-            <M.Container>
+            <M.Container style={{ marginBottom: '72px' }}>
                 <M.SubjectFont style={{ marginTop: '12px' }}>새 비밀번호</M.SubjectFont>
                 <M.Input
                     placeholder="새 비밀번호를 입력해주세요"
@@ -104,6 +104,7 @@ function ChangePw() {
                 >
                     <M.BadgeFont>수정</M.BadgeFont>
                 </M.ButtonEditNickname>
+                <div style={{ marginBottom: '72px' }}></div>
             </M.Container>
             <Gnb />
         </div>
