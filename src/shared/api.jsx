@@ -9,12 +9,8 @@ export const AuthApi = {
                 response.data.code == 201 && navigate('/joinDone');
             })
             .catch(error => {
-<<<<<<< HEAD
                 console.log(error);
                 alert(error.response.data.errorMessage);
-=======
-                alert(error.response.data.message);
->>>>>>> a3f67c07adc981a5a4fa65e9583f97f520850eca
             });
     },
     signin: async payload => {
