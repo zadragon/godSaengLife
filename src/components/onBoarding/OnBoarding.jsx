@@ -21,7 +21,6 @@ const OnBoarding = ({ setShowOnBoard }) => {
     const handleSlideChange = swiper => {
         // 스와이프 직후에 실행되는 코드
         // 추가적인 로직을 여기에 작성할 수 있습니다.
-        console.log(swiper.isEnd);
         swiper.isEnd ? setLastPage(true) : setLastPage(false);
     };
 

@@ -45,10 +45,6 @@ function Writetoday() {
         selectedImg.forEach((images, index) => {
             formData.append('images', images);
         });
-        // console.log(formData.getAll('images')); // Prints an array of appended files
-        // for (let entry of formData.entries()) {
-        //     console.log(entry); // Prints each key-value pair in the FormData
-        // }
         if (activeTab === 'result') {
             console.log(selectedResults);
             // Render the selected results in the desired format

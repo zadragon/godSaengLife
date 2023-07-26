@@ -77,7 +77,6 @@ const WeekData = ({ setShowTooltip }) => {
         navigate('/addArticle');
     };
 
-    //console.log(dataG?.periodData);
     const conditionInfo = {
         dayName: ['월', '화', '수', '목', '금', '토', '일'],
         emotionImg: {
