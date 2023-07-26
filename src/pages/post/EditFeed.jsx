@@ -22,7 +22,9 @@ function EditFeed({ onUpdate }) {
         isLoading,
         error,
         refetch,
-    } = useQuery(['getFeed'], () => PostApi.getFeed(location.state.feedId));
+    } = useQuery(['getFeed'], () => PostApi.getFeed(location.state.feedId), {
+        refetchOnWindowFocus: false,
+    });
 
     const [showHomeButton, setShowHomeButton] = useState(false);
     const [selectedButtons, setSelectedButtons] = useState({
