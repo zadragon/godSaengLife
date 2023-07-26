@@ -87,23 +87,23 @@ export const Filter = styled.div`
                 background: #f8f8f9;
             }
             &.type01 {
-                background: #f8f8f9 url('/images/emoji/happy.png') no-repeat 8px center;
+                background: #f8f8f9 url('/images/emoji/happy.svg') no-repeat 8px center;
                 background-size: 20px;
             }
             &.type02 {
-                background: #f8f8f9 url('/images/emoji/soso.png') no-repeat 8px center;
+                background: #f8f8f9 url('/images/emoji/soso.svg') no-repeat 8px center;
                 background-size: 20px;
             }
             &.type03 {
-                background: #f8f8f9 url('/images/emoji/tired.png') no-repeat 8px center;
+                background: #f8f8f9 url('/images/emoji/tired.svg') no-repeat 8px center;
                 background-size: 20px;
             }
             &.type04 {
-                background: #f8f8f9 url('/images/emoji/bad.png') no-repeat 8px center;
+                background: #f8f8f9 url('/images/emoji/bad.svg') no-repeat 8px center;
                 background-size: 20px;
             }
             &.type05 {
-                background: #f8f8f9 url('/images/emoji/stress.png') no-repeat 8px center;
+                background: #f8f8f9 url('/images/emoji/stress.svg') no-repeat 8px center;
                 background-size: 20px;
             }
             img {

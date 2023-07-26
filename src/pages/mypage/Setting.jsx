@@ -47,21 +47,21 @@ function Setting() {
         }
     };
 
-    let profileImgSrc = '/images/profile/lv1.png';
+    let profileImgSrc = '/images/profile/lv1.svg';
     if (data?.data.totalPointScore >= 26 && data?.data.totalPointScore <= 75) {
-        profileImgSrc = '/images/profile/lv2.png';
+        profileImgSrc = '/images/profile/lv2.svg';
     } else if (data?.data.totalPointScore >= 76 && data?.data.totalPointScore <= 125) {
-        profileImgSrc = '/images/profile/lv3.png';
+        profileImgSrc = '/images/profile/lv3.svg';
     } else if (data?.data.totalPointScore >= 126 && data?.data.totalPointScore <= 175) {
-        profileImgSrc = '/images/profile/lv4.png';
+        profileImgSrc = '/images/profile/lv4.svg';
     } else if (data?.data.totalPointScore >= 176 && data?.data.totalPointScore <= 225) {
-        profileImgSrc = '/images/profile/lv5.png';
+        profileImgSrc = '/images/profile/lv5.svg';
     } else if (data?.data.totalPointScore >= 226 && data?.data.totalPointScore <= 275) {
-        profileImgSrc = '/images/profile/lv6.png';
+        profileImgSrc = '/images/profile/lv6.svg';
     } else if (data?.data.totalPointScore >= 276 && data?.data.totalPointScore <= 350) {
-        profileImgSrc = '/images/profile/lv7.png';
+        profileImgSrc = '/images/profile/lv7.svg';
     } else if (data?.data.totalPointScore >= 351) {
-        profileImgSrc = '/images/profile/lv7.png';
+        profileImgSrc = '/images/profile/lv7.svg';
     }
     return (
         <div>

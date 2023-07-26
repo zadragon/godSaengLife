@@ -153,19 +153,19 @@ function Home() {
                                     let emojiSrc;
                                     let conditiontxt;
                                     if (item.emotion === 'happy') {
-                                        emojiSrc = '/images/emoji/happy.png';
+                                        emojiSrc = '/images/emoji/happy.svg';
                                         conditiontxt = '아주 상쾌함';
                                     } else if (item.emotion === 'soso') {
-                                        emojiSrc = '/images/emoji/soso.png';
+                                        emojiSrc = '/images/emoji/soso.svg';
                                         conditiontxt = '그냥 그럼';
                                     } else if (item.emotion === 'tired') {
-                                        emojiSrc = '/images/emoji/tired.png';
+                                        emojiSrc = '/images/emoji/tired.svg';
                                         conditiontxt = '피곤함';
                                     } else if (item.emotion === 'good') {
-                                        emojiSrc = '/images/emoji/bad.png';
+                                        emojiSrc = '/images/emoji/bad.svg';
                                         conditiontxt = '안좋음';
                                     } else if (item.emotion === 'stress') {
-                                        emojiSrc = '/images/emoji/stress.png';
+                                        emojiSrc = '/images/emoji/stress.svg';
                                         conditiontxt = '나쁨';
                                     }
                                     return (

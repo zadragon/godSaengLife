@@ -254,6 +254,13 @@ function SharedFeed() {
                     </Link>
                 </C.AddPost>
             )}
+            <C.BtnTop
+                onClick={() => {
+                    document.querySelector('.wrapper').scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+            >
+                맨위로
+            </C.BtnTop>
             <Gnb />
         </div>
     );

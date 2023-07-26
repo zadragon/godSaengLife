@@ -112,7 +112,6 @@ const CommunityDetail = () => {
                             style={{
                                 width: '40px',
                                 height: '40px',
-                                boxShadow: '2px 4px 8px 0px rgba(0, 0, 0, 0.25)',
                                 borderRadius: '50%',
                             }}
                         />

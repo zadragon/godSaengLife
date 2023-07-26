@@ -27,115 +27,115 @@ function Badge() {
                 <M.BadgeContainer>
                     {data?.data.user.totalPointScore === undefined && (
                         <>
-                            <img src="/images/profile/lv1gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv2gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv3gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv4gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv5gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv6gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv7gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv8gray.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv1gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv2gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv3gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv4gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv5gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv6gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv7gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv8gray.svg" style={{ width: '84px', height: '84px' }} />
                         </>
                     )}
                     {data?.data.user.totalPointScore <= 25 && (
                         <>
-                            <img src="/images/profile/lv1.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv2gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv3gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv4gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv5gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv6gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv7gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv8gray.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv1.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv2gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv3gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv4gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv5gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv6gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv7gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv8gray.svg" style={{ width: '84px', height: '84px' }} />
                         </>
                     )}
                     {data?.data.user.totalPointScore >= 26 && data?.data.user.totalPointScore <= 75 && (
                         <>
-                            <img src="/images/profile/lv1.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv2.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv3gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv4gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv5gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv6gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv7gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv8gray.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv1.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv2.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv3gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv4gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv5gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv6gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv7gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv8gray.svg" style={{ width: '84px', height: '84px' }} />
                         </>
                     )}
                     {data?.data.user.totalPointScore >= 76 && data?.data.user.totalPointScore <= 125 && (
                         <>
-                            <img src="/images/profile/lv1.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv2.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv3.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv4gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv5gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv6gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv7gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv8gray.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv1.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv2.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv3.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv4gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv5gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv6gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv7gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv8gray.svg" style={{ width: '84px', height: '84px' }} />
                         </>
                     )}
                     {data?.data.user.totalPointScore >= 125 && data?.data.user.totalPointScore <= 175 && (
                         <>
-                            <img src="/images/profile/lv1.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv2.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv3.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv4.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv5gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv6gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv7gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv8gray.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv1.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv2.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv3.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv4.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv5gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv6gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv7gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv8gray.svg" style={{ width: '84px', height: '84px' }} />
                         </>
                     )}
                     {data?.data.user.totalPointScore >= 176 && data?.data.user.totalPointScore <= 225 && (
                         <>
-                            <img src="/images/profile/lv1.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv2.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv3.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv4.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv5.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv6gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv7gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv8gray.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv1.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv2.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv3.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv4.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv5.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv6gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv7gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv8gray.svg" style={{ width: '84px', height: '84px' }} />
                         </>
                     )}
                     {data?.data.user.totalPointScore >= 226 && data?.data.user.totalPointScore <= 275 && (
                         <>
-                            <img src="/images/profile/lv1.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv2.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv3.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv4.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv5.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv6.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv7gray.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv8gray.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv1.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv2.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv3.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv4.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv5.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv6.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv7gray.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv8gray.svg" style={{ width: '84px', height: '84px' }} />
                         </>
                     )}
                     {data?.data.user.totalPointScore >= 276 && data?.data.user.totalPointScore <= 350 && (
                         <>
-                            <img src="/images/profile/lv1.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv2.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv3.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv4.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv5.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv6.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv7.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv8gray.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv1.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv2.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv3.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv4.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv5.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv6.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv7.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv8gray.svg" style={{ width: '84px', height: '84px' }} />
                         </>
                     )}
                     {data?.data.user.totalPointScore >= 351 && (
                         <>
-                            <img src="/images/profile/lv1.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv2.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv3.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv4.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv5.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv6.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv7.png" style={{ width: '84px', height: '84px' }} />
-                            <img src="/images/profile/lv8.png" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv1.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv2.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv3.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv4.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv5.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv6.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv7.svg" style={{ width: '84px', height: '84px' }} />
+                            <img src="/images/profile/lv8.svg" style={{ width: '84px', height: '84px' }} />
                         </>
                     )}
                 </M.BadgeContainer>
             </M.Container>
-            <M.Container>
+            <M.Container style={{ paddingBottom: '72px' }}>
                 <M.BadgeContentContainer
                     className="1"
                     style={
@@ -147,7 +147,7 @@ function Badge() {
                     <M.FlexContainer style={{ justifyContent: 'space-between' }}>
                         <div>
                             <M.FlexContainer>
-                                <img src="/images/profile/lv1.png" style={{ width: '24px', height: '24px' }} />
+                                <img src="/images/profile/lv1.svg" style={{ width: '24px', height: '24px' }} />
                                 <M.BadgeFont style={{ marginLeft: '8px', color: 'var(--neutral-700, #393e4f)' }}>
                                     갓생별
                                 </M.BadgeFont>
@@ -179,7 +179,7 @@ function Badge() {
                     <M.FlexContainer style={{ justifyContent: 'space-between' }}>
                         <div>
                             <M.FlexContainer>
-                                <img src="/images/profile/lv2.png" style={{ width: '24px', height: '24px' }} />
+                                <img src="/images/profile/lv2.svg" style={{ width: '24px', height: '24px' }} />
                                 <M.BadgeFont style={{ marginLeft: '8px', color: 'var(--neutral-700, #393e4f)' }}>
                                     화성으로 이사
                                 </M.BadgeFont>
@@ -211,7 +211,7 @@ function Badge() {
                     <M.FlexContainer style={{ justifyContent: 'space-between' }}>
                         <div>
                             <M.FlexContainer>
-                                <img src="/images/profile/lv3.png" style={{ width: '24px', height: '24px' }} />
+                                <img src="/images/profile/lv3.svg" style={{ width: '24px', height: '24px' }} />
                                 <M.BadgeFont style={{ marginLeft: '8px', color: 'var(--neutral-700, #393e4f)' }}>
                                     지구 정복
                                 </M.BadgeFont>
@@ -243,7 +243,7 @@ function Badge() {
                     <M.FlexContainer style={{ justifyContent: 'space-between' }}>
                         <div>
                             <M.FlexContainer>
-                                <img src="/images/profile/lv4.png" style={{ width: '24px', height: '24px' }} />
+                                <img src="/images/profile/lv4.svg" style={{ width: '24px', height: '24px' }} />
                                 <M.BadgeFont style={{ marginLeft: '8px', color: 'var(--neutral-700, #393e4f)' }}>
                                     금성에서 정착
                                 </M.BadgeFont>
@@ -275,7 +275,7 @@ function Badge() {
                     <M.FlexContainer style={{ justifyContent: 'space-between' }}>
                         <div>
                             <M.FlexContainer>
-                                <img src="/images/profile/lv5.png" style={{ width: '24px', height: '24px' }} />
+                                <img src="/images/profile/lv5.svg" style={{ width: '24px', height: '24px' }} />
                                 <M.BadgeFont style={{ marginLeft: '8px', color: 'var(--neutral-700, #393e4f)' }}>
                                     갓생성 탐구
                                 </M.BadgeFont>
@@ -307,7 +307,7 @@ function Badge() {
                     <M.FlexContainer style={{ justifyContent: 'space-between' }}>
                         <div>
                             <M.FlexContainer>
-                                <img src="/images/profile/lv6.png" style={{ width: '24px', height: '24px' }} />
+                                <img src="/images/profile/lv6.svg" style={{ width: '24px', height: '24px' }} />
                                 <M.BadgeFont style={{ marginLeft: '8px', color: 'var(--neutral-700, #393e4f)' }}>
                                     갓생성 출발
                                 </M.BadgeFont>
@@ -339,7 +339,7 @@ function Badge() {
                     <M.FlexContainer style={{ justifyContent: 'space-between' }}>
                         <div>
                             <M.FlexContainer>
-                                <img src="/images/profile/lv7.png" style={{ width: '24px', height: '24px' }} />
+                                <img src="/images/profile/lv7.svg" style={{ width: '24px', height: '24px' }} />
                                 <M.BadgeFont style={{ marginLeft: '8px', color: 'var(--neutral-700, #393e4f)' }}>
                                     갓생성 도착
                                 </M.BadgeFont>
@@ -371,7 +371,7 @@ function Badge() {
                     <M.FlexContainer style={{ justifyContent: 'space-between' }}>
                         <div>
                             <M.FlexContainer>
-                                <img src="/images/profile/lv8.png" style={{ width: '24px', height: '24px' }} />
+                                <img src="/images/profile/lv8.svg" style={{ width: '24px', height: '24px' }} />
                                 <M.BadgeFont style={{ marginLeft: '8px', color: 'var(--neutral-700, #393e4f)' }}>
                                     갓생성 정복자
                                 </M.BadgeFont>
