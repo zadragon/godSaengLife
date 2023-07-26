@@ -38,7 +38,6 @@ const CommentArea = ({ shareId }) => {
         isSuccess,
         refetch,
     } = useQuery(['getComments'], () => communityApi.getComments(shareId));
-    console.log(commentList);
 
     const dateMutation = item => {
         const date = new Date(item);
@@ -59,7 +58,6 @@ const CommentArea = ({ shareId }) => {
     };
     const addCommentAction = () => {
         addCommentMutation(inputs);
-        console.log('action');
         setInputs({ content: '' });
     };
     const handleKeyDown = event => {

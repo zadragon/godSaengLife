@@ -43,7 +43,6 @@ const AllPopLayer = ({ allPopActive, setAllPopActive, selectItem }) => {
     // }, [feedImg]);
 
     const handleSlideChange = swiper => {
-        console.log(swiper);
         // 스와이프 직후에 실행되는 코드
         setShowImgIdx(feedImg[swiper.realIndex].imageId);
         // 추가적인 로직을 여기에 작성할 수 있습니다.

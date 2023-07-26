@@ -99,7 +99,6 @@ function EditFeed({ onUpdate }) {
                 navigate('/');
             })
             .catch(error => {
-                // console.log('피드 수정 실패', error);
                 alert('피드 수정 실패'(error));
             });
     };
@@ -112,7 +111,6 @@ function EditFeed({ onUpdate }) {
                 await PostApi.deleteFeed(feedId, cookies.Authorization);
                 navigate('/');
             } catch (error) {
-                // console.log('피드 삭제 실패', error);
                 alert('피드 수정 실패'(error));
             }
         }

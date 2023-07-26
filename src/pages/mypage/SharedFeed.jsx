@@ -38,8 +38,6 @@ function SharedFeed() {
             }
         }
     };
-
-    console.log('공유피드조회a:', data);
     return (
         <div>
             <C.PageHeader>

@@ -84,7 +84,6 @@ const CommunityDetail = () => {
         setDate(newDate);
     }, [data]);
 
-    console.log(state);
     const addLike = () => {
         addLikeMutation(shareId);
         refetch();
@@ -95,7 +94,6 @@ const CommunityDetail = () => {
         refetch();
     };
 
-    console.log('상세목록조회', state);
     return (
         <>
             <MetaTag title="나도 갓생 :: 갓생러" description="습관기록 서비스" keywords="습관기록, 커뮤니티, 갓생러" />

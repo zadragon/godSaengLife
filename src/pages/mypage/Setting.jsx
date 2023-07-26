@@ -23,7 +23,6 @@ function Setting() {
             alert('닉네임이 수정되었습니다.');
             navigate('/mypage');
         } catch (error) {
-            console.log('닉네임 수정 실패', error);
             if (error.response) {
                 const statusCode = error.response.status;
                 let errorMessage = '';

@@ -21,7 +21,6 @@ function SharedFeed() {
 
     const getList = async page => {
         const res = await communityApi.getAllCommunity(page);
-        console.log('data', res);
         setDataList(prev => [...prev, ...res.data.data]);
         setLoading(true);
     };
@@ -200,7 +199,6 @@ function SharedFeed() {
                                             >
                                                 {item.likeCount}
                                             </div>
-                                            {/* <S.Count>{item.likeCount}</S.Count> */}
                                         </div>
 
                                         <div className="flex flex-row gap-[3px] items-center justify-start shrink-0 relative">

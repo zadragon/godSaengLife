@@ -24,7 +24,6 @@ function ChangePw() {
             alert('비밀번호가 변경되었습니다.');
             navigate('/mypage');
         } catch (error) {
-            console.log('비밀번호 변경 실패', error);
             if (error.response) {
                 const statusCode = error.response.status;
                 let errorMessage = '';
@@ -54,7 +53,6 @@ function ChangePw() {
             await MypageApi.sendEmailCode({ password: newPassword });
             alert('가입하신 이메일로 인증코드를 전송했습니다.');
         } catch (error) {
-            console.log('인증코드 전송 실패', error);
             if (error.response) {
                 const statusCode = error.response.status;
                 let errorMessage = '';
@@ -84,7 +82,7 @@ function ChangePw() {
                 </button>
                 <h2>비밀번호 변경</h2>
             </C.PageHeader>
-            <M.Container>
+            <M.Container style={{ marginBottom: '72px' }}>
                 <M.SubjectFont style={{ marginTop: '12px' }}>새 비밀번호</M.SubjectFont>
                 <M.Input
                     placeholder="새 비밀번호를 입력해주세요"
@@ -92,7 +90,9 @@ function ChangePw() {
                     onChange={e => setNewPassword(e.target.value)}
                     type="password"
                 ></M.Input>
-                <button onClick={sendEmailCodeBtn}>인증코드 전송</button>
+                <button onClick={sendEmailCodeBtn}>
+                    <img src="/images/mypage/send-code.png" style={{ width: '141px', height: 'auto' }} />
+                </button>
                 <M.SubjectFont style={{ marginTop: '12px' }}>인증코드 입력</M.SubjectFont>
                 <M.Input
                     placeholder="인증코드를 입력해주세요"
@@ -106,6 +106,7 @@ function ChangePw() {
                 >
                     <M.BadgeFont>수정</M.BadgeFont>
                 </M.ButtonEditNickname>
+                <div style={{ marginBottom: '72px' }}></div>
             </M.Container>
             <Gnb />
         </div>

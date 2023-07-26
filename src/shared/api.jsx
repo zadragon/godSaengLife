@@ -6,12 +6,15 @@ export const AuthApi = {
         const url = '/signup';
         api.post(url, payload)
             .then(response => {
-                console.log(response);
                 response.data.code == 201 && navigate('/joinDone');
             })
             .catch(error => {
+<<<<<<< HEAD
                 console.log(error);
                 alert(error.response.data.errorMessage);
+=======
+                alert(error.response.data.message);
+>>>>>>> a3f67c07adc981a5a4fa65e9583f97f520850eca
             });
     },
     signin: async payload => {
@@ -20,26 +23,14 @@ export const AuthApi = {
     },
     signout: removeCookie => {
         api.post('/logout')
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                // console.log(error);
-            });
+            .then(response => {})
+            .catch(error => {});
     },
     withdrawal: async () => {
         const response = await api.delete('/mypage/userdel');
         return response.data;
     },
-    //회원 탈퇴
 };
-
-// export const MainApi = {
-//     getMain: async () => {
-//         const data = await api.get('/main');
-//         return data;
-//     },
-// };
 
 export const MainApi = {
     getMain: () => {
@@ -48,9 +39,7 @@ export const MainApi = {
             .then(response => {
                 return response;
             })
-            .catch(error => {
-                //console.log(error);
-            });
+            .catch(error => {});
     },
     getProfile: () => {
         return api
@@ -58,9 +47,7 @@ export const MainApi = {
             .then(response => {
                 return response;
             })
-            .catch(error => {
-                //console.log(error);
-            });
+            .catch(error => {});
     },
 };
 
@@ -123,7 +110,6 @@ export const PostApi = {
             .get(`/feed/${feedId}`)
             .then(response => {
                 return response;
-                //console.log(response);
             })
             .catch(error => {
                 console.log(error);
@@ -215,11 +201,9 @@ export const MypageApi = {
         return api
             .put('/mypage/mailcode', formData) // Pass newNickname as request data
             .then(response => {
-                console.log(response.data);
                 return response.data; // Return the response data if needed
             })
             .catch(error => {
-                console.log(error);
                 throw error; // Throw the error to be handled by the calling component
             });
     },
@@ -230,7 +214,6 @@ export const communityApi = {
         const res = await api
             .post('/share', payload)
             .then(response => {
-                console.log(response);
                 response.data.code == 201 && response;
                 return response;
             })
@@ -245,7 +228,6 @@ export const communityApi = {
         const res = await api
             .get(`/share/${shareId}`)
             .then(response => {
-                console.log(response);
                 return response;
             })
             .catch(error => {
