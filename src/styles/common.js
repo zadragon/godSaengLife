@@ -153,17 +153,25 @@ export const GnbBar = styled.nav`
 
 export const BtnTop = styled.button`
     position: fixed;
-    bottom: 70px;
+    bottom: 135px;
     right: 10px;
+    width: 56px;
+    height: 56px;
+    background: url('/images/community/btn-top.svg');
+    border-radius: 50%;
+    &.noLogin {
+        bottom: 70px;
+    }
     /* 500px 이상인 경우에만 적용될 스타일 */
     @media screen and (min-width: 400px) {
-        width: 56px;
-        height: 30px;
         background-color: #fff;
         border: 1px solid #ddd;
         left: 50%;
         bottom: 175px;
         margin-left: 133px;
+        &.noLogin {
+            bottom: 110px;
+        }
     }
 `;
 export const AddPost = styled.div`
