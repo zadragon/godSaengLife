@@ -254,12 +254,14 @@ function SharedFeed() {
                     </Link>
                 </C.AddPost>
             )}
+
             <C.BtnTop
+                className={`${cookies.Authorization ? '' : 'noLogin'}`}
                 onClick={() => {
                     document.querySelector('.wrapper').scrollTo({ top: 0, behavior: 'smooth' });
                 }}
             >
-                맨위로
+                <span className="hidden">맨위로</span>
             </C.BtnTop>
             <Gnb />
         </div>
